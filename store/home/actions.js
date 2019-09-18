@@ -3,7 +3,7 @@ import {state} from './mutations'
 
 export default{
 	getAnnount:({commit})=>{
-		httpUtils.get('http://cxx.99qupai.com/apis/console/subsystem/announce').then(res=>{
+		httpUtils.get('https://tmk.rvsii.com/apis/console/subsystem/announce').then(res=>{
 			commit('ANNOUNT',res)
 		})
 	}
