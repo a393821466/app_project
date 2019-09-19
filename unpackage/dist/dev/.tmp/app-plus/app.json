@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/search/search",
-    "pages/my/my"
+    "pages/market/market",
+    "pages/news/news",
+    "pages/my/my",
+    "pages/trade/trade"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -11,28 +13,40 @@
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
-    "color": "#bfbfbf",
-    "selectedColor": "#076abe",
+    "color": "#999999",
+    "selectedColor": "#6989ff",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "static/tabBarIco/index.png",
-        "selectedIconPath": "static/tabBarIco/index_sel.png"
+        "iconPath": "static/tabBarIco/home.png",
+        "selectedIconPath": "static/tabBarIco/home_sel.png"
       },
       {
-        "pagePath": "pages/search/search",
-        "text": "搜索",
-        "iconPath": "static/tabBarIco/search.png",
-        "selectedIconPath": "static/tabBarIco/search_sel.png"
+        "pagePath": "pages/market/market",
+        "text": "行情",
+        "iconPath": "static/tabBarIco/market.png",
+        "selectedIconPath": "static/tabBarIco/market_sel.png"
+      },
+      {
+        "pagePath": "pages/trade/trade",
+        "text": "交易",
+        "iconPath": "static/tabBarIco/trade.png",
+        "selectedIconPath": "static/tabBarIco/trade_sel.png"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "资讯",
+        "iconPath": "static/tabBarIco/news.png",
+        "selectedIconPath": "static/tabBarIco/news_sel.png"
       },
       {
         "pagePath": "pages/my/my",
         "text": "我的",
-        "iconPath": "static/tabBarIco/me.png",
-        "selectedIconPath": "static/tabBarIco/me_sel.png"
+        "iconPath": "static/tabBarIco/my.png",
+        "selectedIconPath": "static/tabBarIco/my_sel.png"
       }
     ]
   },

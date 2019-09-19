@@ -1,11 +1,11 @@
 export const state={
 	token:'',
-	annountData:''
+	annount:[]
 }
 
 export const mutations={
 	['ANNOUNT'](state,val){
-		console.log(val);
+		state.annount=val.data.data.content
 	}
 }
 

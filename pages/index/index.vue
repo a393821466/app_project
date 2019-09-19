@@ -8,6 +8,7 @@
 				<image src="../../static/carousel/spiderman.png" mode="" class="banner"></image>
 			</swiper-item>
 		</swiper>
+		{{getAnnountList}}
 	</view>
 </template>
 
@@ -19,8 +20,14 @@
 				names:'dada'
 			}
 		},
+		computed:{
+			...mapGetters(['annount']),
+			getAnnountList(){
+				return this.annount;
+			}
+		},
 		onLoad(){
-			this.$store.dispatch('getAnnount')
+			this.getAnnount()
 		},
 		methods:{
 			...mapActions(['getAnnount'])

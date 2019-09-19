@@ -963,13 +963,13 @@ __WXML_GLOBAL__.debuginfo_set = __WXML_GLOBAL__.debuginfo_set || {};
 var debugInfo=__WXML_GLOBAL__.debuginfo_set.$gwx || [];
 if ( !__WXML_GLOBAL__.ops_init.$gwx){
 (function(z){var a=11;function Z(ops){z.push(ops)}
-Z([3,'page']);debugInfo.push(['./pages/index/index.wxml',1,12]);Z([1,true]);debugInfo.push(['./pages/index/index.wxml',1,77]);Z([3,'banner']);debugInfo.push(['./pages/index/index.wxml',1,33]);Z([1,500]);debugInfo.push(['./pages/index/index.wxml',1,117]);Z(z[1]);debugInfo.push(['./pages/index/index.wxml',1,57]);Z([1,5000]);debugInfo.push(['./pages/index/index.wxml',1,97]);Z(z[2]);debugInfo.push(['./pages/index/index.wxml',1,153]);Z([3,'../../static/carousel/batmanvssuperman.png']);debugInfo.push(['./pages/index/index.wxml',1,166]);Z(z[2]);debugInfo.push(['./pages/index/index.wxml',1,264]);Z([3,'../../static/carousel/spiderman.png']);debugInfo.push(['./pages/index/index.wxml',1,277]);Z([3,'我的']);debugInfo.push(['./pages/my/my.wxml',1,6]);Z([3,'搜索']);debugInfo.push(['./pages/search/search.wxml',1,6]);})(z);__WXML_GLOBAL__.ops_set.$gwx=z;
+Z([3,'page']);debugInfo.push(['./pages/index/index.wxml',1,12]);Z([1,true]);debugInfo.push(['./pages/index/index.wxml',1,77]);Z([3,'banner']);debugInfo.push(['./pages/index/index.wxml',1,33]);Z([1,500]);debugInfo.push(['./pages/index/index.wxml',1,117]);Z(z[1]);debugInfo.push(['./pages/index/index.wxml',1,57]);Z([1,5000]);debugInfo.push(['./pages/index/index.wxml',1,97]);Z(z[2]);debugInfo.push(['./pages/index/index.wxml',1,153]);Z([3,'../../static/carousel/batmanvssuperman.png']);debugInfo.push(['./pages/index/index.wxml',1,166]);Z(z[2]);debugInfo.push(['./pages/index/index.wxml',1,264]);Z([3,'../../static/carousel/spiderman.png']);debugInfo.push(['./pages/index/index.wxml',1,277]);Z([a,[[2,'+'],[[2,'+'],[1,''],[[7],[3,'getAnnountList']]],[1,'']]]);debugInfo.push(['./pages/index/index.wxml',1,351]);Z([3,'行情']);debugInfo.push(['./pages/market/market.wxml',1,6]);Z([3,'我的']);debugInfo.push(['./pages/my/my.wxml',1,6]);Z([3,'资讯']);debugInfo.push(['./pages/news/news.wxml',1,6]);Z([3,'搜索']);debugInfo.push(['./pages/search/search.wxml',1,6]);Z([3,'交易']);debugInfo.push(['./pages/trade/trade.wxml',1,6]);})(z);__WXML_GLOBAL__.ops_set.$gwx=z;
 __WXML_GLOBAL__.ops_init.$gwx=true;
 __WXML_GLOBAL__.debuginfo_set.$gwx=debugInfo;
 }
 var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);throw e;}
 }}}()
-var x=['./pages/index/index.wxml','./pages/my/my.wxml','./pages/search/search.wxml'];d_[x[0]]={}
+var x=['./pages/index/index.wxml','./pages/market/market.wxml','./pages/my/my.wxml','./pages/news/news.wxml','./pages/search/search.wxml','./pages/trade/trade.wxml'];d_[x[0]]={}
 var m0=function(e,s,r,gg){
 var oB=_n('view')
 _r(oB,'class',0,e,s,gg)
@@ -983,28 +983,57 @@ var hG=_m('image',['mode',-1,'class',8,'src',1],[],e,s,gg)
 _(cF,hG)
 _(xC,cF)
 _(oB,xC)
+var oH=_o(10,e,s,gg)
+_(oB,oH)
 _(r,oB)
 return r
 }
 e_[x[0]]={f:m0,j:[],i:[],ti:[],ic:[]}
 d_[x[1]]={}
 var m1=function(e,s,r,gg){
-var cI=_n('view')
-var oJ=_o(10,e,s,gg)
-_(cI,oJ)
-_(r,cI)
+var oJ=_n('view')
+var lK=_o(11,e,s,gg)
+_(oJ,lK)
+_(r,oJ)
 return r
 }
 e_[x[1]]={f:m1,j:[],i:[],ti:[],ic:[]}
 d_[x[2]]={}
 var m2=function(e,s,r,gg){
-var aL=_n('view')
-var tM=_o(11,e,s,gg)
-_(aL,tM)
-_(r,aL)
+var tM=_n('view')
+var eN=_o(12,e,s,gg)
+_(tM,eN)
+_(r,tM)
 return r
 }
 e_[x[2]]={f:m2,j:[],i:[],ti:[],ic:[]}
+d_[x[3]]={}
+var m3=function(e,s,r,gg){
+var oP=_n('view')
+var xQ=_o(13,e,s,gg)
+_(oP,xQ)
+_(r,oP)
+return r
+}
+e_[x[3]]={f:m3,j:[],i:[],ti:[],ic:[]}
+d_[x[4]]={}
+var m4=function(e,s,r,gg){
+var fS=_n('view')
+var cT=_o(14,e,s,gg)
+_(fS,cT)
+_(r,fS)
+return r
+}
+e_[x[4]]={f:m4,j:[],i:[],ti:[],ic:[]}
+d_[x[5]]={}
+var m5=function(e,s,r,gg){
+var oV=_n('view')
+var cW=_o(15,e,s,gg)
+_(oV,cW)
+_(r,oV)
+return r
+}
+e_[x[5]]={f:m5,j:[],i:[],ti:[],ic:[]}
 if(path&&e_[path]){
 window.__wxml_comp_version__=0.02
 return function(env,dd,global){$gwxc=0;var root={"tag":"wx-page"};root.children=[]
@@ -1114,11 +1143,20 @@ __wxAppCode__['app.wxml']=$gwx('./app.wxml');
 __wxAppCode__['pages/index/index.wxss']=setCssToHead([".",[1],"banner{ width:100%; height:",[0,440],"; }\n",]);    
 __wxAppCode__['pages/index/index.wxml']=$gwx('./pages/index/index.wxml');
 
+__wxAppCode__['pages/market/market.wxss']=undefined;    
+__wxAppCode__['pages/market/market.wxml']=$gwx('./pages/market/market.wxml');
+
 __wxAppCode__['pages/my/my.wxss']=undefined;    
 __wxAppCode__['pages/my/my.wxml']=$gwx('./pages/my/my.wxml');
 
+__wxAppCode__['pages/news/news.wxss']=undefined;    
+__wxAppCode__['pages/news/news.wxml']=$gwx('./pages/news/news.wxml');
+
 __wxAppCode__['pages/search/search.wxss']=undefined;    
 __wxAppCode__['pages/search/search.wxml']=$gwx('./pages/search/search.wxml');
+
+__wxAppCode__['pages/trade/trade.wxss']=undefined;    
+__wxAppCode__['pages/trade/trade.wxml']=$gwx('./pages/trade/trade.wxml');
 
 ;var __pageFrameEndTime__ = Date.now();
 (function() {
