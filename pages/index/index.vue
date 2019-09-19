@@ -1,14 +1,16 @@
 <template>
 	<view class="page">
-		<swiper :indicator-dots="true" :autoplay="true" :interval="5000" :duration="500" class="banner">
+		<swiper :indicator-dots="true" :circular='true' indicator-active-color="#ffffff" indicator-color="rgba(255, 255, 255, .3)" :autoplay="true" :interval="5000" :duration="500" class="banner">
 			<swiper-item>
-				<image src="../../static/carousel/batmanvssuperman.png" mode="" class="banner"></image>
+				<image src="http://n.sinaimg.cn/sinacn20111/765/w1067h498/20190823/be7d-icqznha0469343.jpg" class="banner"></image>
 			</swiper-item>
 			<swiper-item>
-				<image src="../../static/carousel/spiderman.png" mode="" class="banner"></image>
+				<image src="http://img5.imgtn.bdimg.com/it/u=538384195,3019699462&fm=26&gp=0.jpg" class="banner"></image>
 			</swiper-item>
 		</swiper>
-		{{getAnnountList}}
+		<view class="service">
+			
+		</view>
 	</view>
 </template>
 
@@ -27,6 +29,9 @@
 			}
 		},
 		onLoad(){
+			uni.setNavigationBarTitle({
+			    title: '首页'
+			});
 			this.getAnnount()
 		},
 		methods:{

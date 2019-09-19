@@ -2,7 +2,7 @@ import request from './request';
 
 // 设置全局配置, 只能配置静态数据
 request.prototype.setConfig({
-    url: 'https://easy-mock.com/mock/',  // 基地址
+    url: 'http://66520.wang/mock/',  // 基地址
     // contentType: 'json',
     header: {
         // uid: 'xxxx'

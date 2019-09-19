@@ -6,6 +6,7 @@
     url('//at.alicdn.com/t/font_1426017_rid454qdj2f.ttf') format('truetype'),
     url('//at.alicdn.com/t/font_1426017_rid454qdj2f.svg#iconfont') format('svg');
 }
+
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
@@ -13,37 +14,48 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .icon-tubiao103:before {
-  content: "\E62A";
+  content: "\e62a";
 }
+
 .icon-tubiao104:before {
-  content: "\E62B";
+  content: "\e62b";
 }
+
 .icon-chongzhi:before {
-  content: "\E68B";
+  content: "\e68b";
 }
+
 .icon-tixian:before {
-  content: "\E68C";
+  content: "\e68c";
 }
+
 .icon-jifen:before {
-  content: "\E659";
+  content: "\e659";
 }
+
 .icon-jifenguizeguankong2:before {
-  content: "\E671";
+  content: "\e671";
 }
+
 .icon-kefu:before {
-  content: "\E60B";
+  content: "\e60b";
 }
+
 .icon-shouru:before {
-  content: "\E701";
+  content: "\e701";
 }
+
 .icon-monizhiyuantianbaos:before {
-  content: "\E623";
+  content: "\e623";
 }
+
 .icon-weiwangguanicon-defuben-:before {
-  content: "\E66E";
+  content: "\e66e";
 }
+
 .icon-qianbao:before {
-  content: "\E611";
+  content: "\e611";
 }
 

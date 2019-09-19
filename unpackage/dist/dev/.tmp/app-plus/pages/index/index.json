@@ -1,4 +1,5 @@
 {
-  "titleNView": false,
+  "navigationBarBackgroundColor": "#2580EF",
+  "navigationBarTextStyle": "white",
   "usingComponents": {}
 }

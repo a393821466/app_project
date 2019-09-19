@@ -11,14 +11,12 @@ var __WXML_GLOBAL__ = {
 };
 var $gwx;
 
-/*v0.6vv_20180111_fbi*/
-window.__wcc_version__='v0.6vv_20180111_fbi'
-window.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true}
+/*v0.5vv_20190312_syb_scopedata*/window.__wcc_version__='v0.5vv_20190312_syb_scopedata';window.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
 var $gwxc
 var $gaic={}
 $gwx=function(path,global){
-if(typeof global === 'undefined') global={};
-if(typeof __WXML_GLOBAL__ === 'undefined') __WXML_GLOBAL__={};
+if(typeof global === 'undefined') global={};if(typeof __WXML_GLOBAL__ === 'undefined') {__WXML_GLOBAL__={};
+}__WXML_GLOBAL__.modules = __WXML_GLOBAL__.modules || {};
 function _(a,b){if(typeof(b)!='undefined')a.children.push(b);}
 function _v(k){if(typeof(k)!='undefined')return {tag:'virtual','wxKey':k,children:[]};return {tag:'virtual',children:[]};}
 function _n(tag){$gwxc++;if($gwxc>=16000){throw 'Dom limit exceeded, please check if there\'s any mistake you\'ve made.'};return {tag:'wx-'+tag,attr:{},children:[],n:[],raw:{},generics:{}}}
@@ -423,9 +421,12 @@ e.message = e.message.replace(/nv_/g,"");
 e.stack = e.stack.substring(0,e.stack.indexOf("\n", e.stack.lastIndexOf("at nv_")));
 e.stack = e.stack.replace(/\snv_/g," "); 
 e.stack = $gstack(e.stack);	
-if("undefined"!==typeof debugInfo)
-e.stack += "\n "+" "+" "+" at "+debugInfo[g.opindex][0]+":"+debugInfo[g.opindex][1]+":"+debugInfo[g.opindex][2];
-throw e;
+if(g.debugInfo)
+{
+e.stack += "\n "+" "+" "+" at "+g.debugInfo[0]+":"+g.debugInfo[1]+":"+g.debugInfo[2];
+console.error(e);
+}
+_r = undefined;
 }
 return should_pass_type_info && (_tb || _ta) ? wh.nh( _r, 'f' ) : _r;
 }
@@ -445,7 +446,20 @@ return _a;
 }
 }
 }
-return rev;
+function wrapper( ops, e, s, g, o, newap )
+{
+if( ops[0] == '11182016' )
+{
+g.debugInfo = ops[2];
+return rev( ops[1], e, s, g, o, newap );
+}
+else
+{
+g.debugInfo = null;
+return rev( ops, e, s, g, o, newap );
+}
+}
+return wrapper;
 }
 gra=$gwrt(true); 
 grb=$gwrt(false); 
@@ -637,33 +651,54 @@ return false;
 function _da( node, attrname, opindex, raw, o )
 {
 var isaffected = false;
+var value = $gdc( raw, "", 2 );
+if ( o.ap && value && value.constructor===Function ) 
+{
+attrname = "$wxs:" + attrname; 
+node.attr["$gdc"] = $gdc;
+}
 if ( o.is_affected || _ca(raw) ) 
 {
 node.n.push( attrname );
 node.raw[attrname] = raw;
-var value = $gdc( raw, "" );
-return value;
 }
-else
-{
-return raw;
-}
+node.attr[attrname] = value;
 }
 function _r( node, attrname, opindex, env, scope, global ) 
 {
 global.opindex=opindex;
 var o = {}, _env;
 var a = grb( z[opindex], env, scope, global, o );
-a = _da( node, attrname, opindex, a, o );
-node.attr[attrname] = a;
+_da( node, attrname, opindex, a, o );
+}
+function _rz( z, node, attrname, opindex, env, scope, global ) 
+{
+global.opindex=opindex;
+var o = {}, _env;
+var a = grb( z[opindex], env, scope, global, o );
+_da( node, attrname, opindex, a, o );
 }
 function _o( opindex, env, scope, global )
 {
 global.opindex=opindex;
 var nothing = {};
-return grb( z[opindex], env, scope, global, nothing );
+var r = grb( z[opindex], env, scope, global, nothing );
+return (r&&r.constructor===Function) ? undefined : r;
+}
+function _oz( z, opindex, env, scope, global )
+{
+global.opindex=opindex;
+var nothing = {};
+var r = grb( z[opindex], env, scope, global, nothing );
+return (r&&r.constructor===Function) ? undefined : r;
 }
 function _1( opindex, env, scope, global, o )
+{
+var o = o || {};
+global.opindex=opindex;
+return gra( z[opindex], env, scope, global, o );
+}
+function _1z( z, opindex, env, scope, global, o )
 {
 var o = o || {};
 global.opindex=opindex;
@@ -673,6 +708,12 @@ function _2( opindex, func, env, scope, global, father, itemname, indexname, key
 {
 var o = {};
 var to_iter = _1( opindex, env, scope, global );
+wfor( to_iter, func, env, scope, global, father, itemname, indexname, keyname );
+}
+function _2z( z, opindex, func, env, scope, global, father, itemname, indexname, keyname )
+{
+var o = {};
+var to_iter = _1z( z, opindex, env, scope, global );
 wfor( to_iter, func, env, scope, global, father, itemname, indexname, keyname );
 }
 
@@ -690,6 +731,38 @@ tmp.attr[attrs[i]]=true;
 else
 {
 _r(tmp,attrs[i],base+attrs[i+1],env,scope,global);
+if(base===0)base=attrs[i+1];
+}
+}
+for(var i=0;i<generics.length;i+=2)
+{
+if(base+generics[i+1]<0)
+{
+tmp.generics[generics[i]]="";
+}
+else
+{
+var $t=grb(z[base+generics[i+1]],env,scope,global);
+if ($t!="") $t="wx-"+$t;
+tmp.generics[generics[i]]=$t;
+if(base===0)base=generics[i+1];
+}
+}
+return tmp;
+}
+function _mz(z,tag,attrs,generics,env,scope,global)
+{
+var tmp=_n(tag);
+var base=0;
+for(var i = 0 ; i < attrs.length ; i+=2 )
+{
+if(base+attrs[i+1]<0)
+{
+tmp.attr[attrs[i]]=true;
+}
+else
+{
+_rz(z, tmp,attrs[i],base+attrs[i+1],env,scope,global);
 if(base===0)base=attrs[i+1];
 }
 }
@@ -925,7 +998,8 @@ if(o.multiline) f+="m";
 return (new RegExp(o.source,f));
 }
 if(r&&o.constructor===Function){
-return r===1 ? $gdc(o(),undefined,2) : o;
+if ( r == 1 ) return $gdc(o(),undefined, 2);
+if ( r == 2 ) return o;
 }
 return null;
 }
@@ -940,6 +1014,10 @@ var t=JSON.parse(o);
 return $gdc(t,'nv_');
 }
 
+function _af(p, a, c){
+p.extraAttr = {"t_action": a, "t_cid": c};
+}
+
 function _gv( )
 {if( typeof( window.__webview_engine_version__) == 'undefined' ) return 0.0;
 return window.__webview_engine_version__;}
@@ -949,41 +1027,105 @@ function _gd(p,c,e,d){if(!c)return;if(d[p][c])return d[p][c];for(var x=e[p].i.le
 function _gapi(e,p){if(!p)return [];if($gaic[p]){return $gaic[p]};var ret=[],q=[],h=0,t=0,put={},visited={};q.push(p);visited[p]=true;t++;while(h<t){var a=q[h++];for(var i=0;i<e[a].ic.length;i++){var nd=e[a].ic[i];var np=_grp(nd,e,a);if(np&&!visited[np]){visited[np]=true;q.push(np);t++;}}for(var i=0;a!=p&&i<e[a].ti.length;i++){var ni=e[a].ti[i];var nm=_grp(ni,e,a);if(nm&&!put[nm]){put[nm]=true;ret.push(nm);}}}$gaic[p]=ret;return ret;}
 var $ixc={};function _ic(p,ent,me,e,s,r,gg){var x=_grp(p,ent,me);ent[me].j.push(x);if(x){if($ixc[x]){_wp('-1:include:-1:-1: `'+p+'` is being included in a loop, will be stop.');return;}$ixc[x]=true;try{ent[x].f(e,s,r,gg)}catch(e){}$ixc[x]=false;}else{_wp(me+':include:-1:-1: Included path `'+p+'` not found from `'+me+'`.')}}
 function _w(tn,f,line,c){_wp(f+':template:'+line+':'+c+': Template `'+tn+'` not found.');}function _ev(dom){var changed=false;delete dom.properities;delete dom.n;if(dom.children){do{changed=false;var newch = [];for(var i=0;i<dom.children.length;i++){var ch=dom.children[i];if( ch.tag=='virtual'){changed=true;for(var j=0;ch.children&&j<ch.children.length;j++){newch.push(ch.children[j]);}}else { newch.push(ch); } } dom.children = newch; }while(changed);for(var i=0;i<dom.children.length;i++){_ev(dom.children[i]);}} return dom; }
+function _tsd( root )
+{
+if( root.tag == "wx-wx-scope" ) 
+{
+root.tag = "virtual";
+root.wxCkey = "11";
+root['wxScopeData'] = root.attr['wx:scope-data'];
+delete root.n;
+delete root.raw;
+delete root.generics;
+delete root.attr;
+}
+for( var i = 0 ; root.children && i < root.children.length ; i++ )
+{
+_tsd( root.children[i] );
+}
+return root;
+}
+
 var e_={}
 if(typeof(global.entrys)==='undefined')global.entrys={};e_=global.entrys;
 var d_={}
 if(typeof(global.defines)==='undefined')global.defines={};d_=global.defines;
 var f_={}
-if(typeof(global.modules)==='undefined')global.modules={};f_=global.modules;
+if(typeof(global.modules)==='undefined')global.modules={};f_=global.modules || {};
 var p_={}
+__WXML_GLOBAL__.ops_cached = __WXML_GLOBAL__.ops_cached || {}
 __WXML_GLOBAL__.ops_set = __WXML_GLOBAL__.ops_set || {};
 __WXML_GLOBAL__.ops_init = __WXML_GLOBAL__.ops_init || {};
 var z=__WXML_GLOBAL__.ops_set.$gwx || [];
-__WXML_GLOBAL__.debuginfo_set = __WXML_GLOBAL__.debuginfo_set || {};
-var debugInfo=__WXML_GLOBAL__.debuginfo_set.$gwx || [];
-if ( !__WXML_GLOBAL__.ops_init.$gwx){
+function gz$gwx_1(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_1)return __WXML_GLOBAL__.ops_cached.$gwx_1
+__WXML_GLOBAL__.ops_cached.$gwx_1=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
-Z([3,'page']);debugInfo.push(['./pages/index/index.wxml',1,12]);Z([1,true]);debugInfo.push(['./pages/index/index.wxml',1,77]);Z([3,'banner']);debugInfo.push(['./pages/index/index.wxml',1,33]);Z([1,500]);debugInfo.push(['./pages/index/index.wxml',1,117]);Z(z[1]);debugInfo.push(['./pages/index/index.wxml',1,57]);Z([1,5000]);debugInfo.push(['./pages/index/index.wxml',1,97]);Z(z[2]);debugInfo.push(['./pages/index/index.wxml',1,153]);Z([3,'../../static/carousel/batmanvssuperman.png']);debugInfo.push(['./pages/index/index.wxml',1,166]);Z(z[2]);debugInfo.push(['./pages/index/index.wxml',1,264]);Z([3,'../../static/carousel/spiderman.png']);debugInfo.push(['./pages/index/index.wxml',1,277]);Z([a,[[2,'+'],[[2,'+'],[1,''],[[7],[3,'getAnnountList']]],[1,'']]]);debugInfo.push(['./pages/index/index.wxml',1,351]);Z([3,'行情']);debugInfo.push(['./pages/market/market.wxml',1,6]);Z([3,'我的']);debugInfo.push(['./pages/my/my.wxml',1,6]);Z([3,'资讯']);debugInfo.push(['./pages/news/news.wxml',1,6]);Z([3,'搜索']);debugInfo.push(['./pages/search/search.wxml',1,6]);Z([3,'交易']);debugInfo.push(['./pages/trade/trade.wxml',1,6]);})(z);__WXML_GLOBAL__.ops_set.$gwx=z;
-__WXML_GLOBAL__.ops_init.$gwx=true;
-__WXML_GLOBAL__.debuginfo_set.$gwx=debugInfo;
+Z([3,'page'])
+Z([1,true])
+Z(z[1])
+Z([3,'banner'])
+Z([1,500])
+Z([3,'#ffffff'])
+Z([3,'rgba(255, 255, 255, .3)'])
+Z(z[1])
+Z([1,5000])
+Z(z[3])
+Z([3,'http://n.sinaimg.cn/sinacn20111/765/w1067h498/20190823/be7d-icqznha0469343.jpg'])
+Z(z[3])
+Z([3,'http://img5.imgtn.bdimg.com/it/u\x3d538384195,3019699462\x26fm\x3d26\x26gp\x3d0.jpg'])
+Z([3,'service'])
+})(__WXML_GLOBAL__.ops_cached.$gwx_1);return __WXML_GLOBAL__.ops_cached.$gwx_1
 }
-var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);throw e;}
+function gz$gwx_2(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_2)return __WXML_GLOBAL__.ops_cached.$gwx_2
+__WXML_GLOBAL__.ops_cached.$gwx_2=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'行情'])
+})(__WXML_GLOBAL__.ops_cached.$gwx_2);return __WXML_GLOBAL__.ops_cached.$gwx_2
+}
+function gz$gwx_3(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_3)return __WXML_GLOBAL__.ops_cached.$gwx_3
+__WXML_GLOBAL__.ops_cached.$gwx_3=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'我的'])
+})(__WXML_GLOBAL__.ops_cached.$gwx_3);return __WXML_GLOBAL__.ops_cached.$gwx_3
+}
+function gz$gwx_4(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_4)return __WXML_GLOBAL__.ops_cached.$gwx_4
+__WXML_GLOBAL__.ops_cached.$gwx_4=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'资讯'])
+})(__WXML_GLOBAL__.ops_cached.$gwx_4);return __WXML_GLOBAL__.ops_cached.$gwx_4
+}
+function gz$gwx_5(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_5)return __WXML_GLOBAL__.ops_cached.$gwx_5
+__WXML_GLOBAL__.ops_cached.$gwx_5=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'交易'])
+})(__WXML_GLOBAL__.ops_cached.$gwx_5);return __WXML_GLOBAL__.ops_cached.$gwx_5
+}
+__WXML_GLOBAL__.ops_set.$gwx=z;
+__WXML_GLOBAL__.ops_init.$gwx=true;
+var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);console.error(e);}
 }}}()
-var x=['./pages/index/index.wxml','./pages/market/market.wxml','./pages/my/my.wxml','./pages/news/news.wxml','./pages/search/search.wxml','./pages/trade/trade.wxml'];d_[x[0]]={}
+var x=['./pages/index/index.wxml','./pages/market/market.wxml','./pages/my/my.wxml','./pages/news/news.wxml','./pages/trade/trade.wxml'];d_[x[0]]={}
 var m0=function(e,s,r,gg){
+var z=gz$gwx_1()
 var oB=_n('view')
-_r(oB,'class',0,e,s,gg)
-var xC=_m('swiper',['autoplay',1,'class',1,'duration',2,'indicatorDots',3,'interval',4],[],e,s,gg)
+_rz(z,oB,'class',0,e,s,gg)
+var xC=_mz(z,'swiper',['autoplay',1,'circular',1,'class',2,'duration',3,'indicatorActiveColor',4,'indicatorColor',5,'indicatorDots',6,'interval',7],[],e,s,gg)
 var oD=_n('swiper-item')
-var fE=_m('image',['mode',-1,'class',6,'src',1],[],e,s,gg)
+var fE=_mz(z,'image',['class',9,'src',1],[],e,s,gg)
 _(oD,fE)
 _(xC,oD)
 var cF=_n('swiper-item')
-var hG=_m('image',['mode',-1,'class',8,'src',1],[],e,s,gg)
+var hG=_mz(z,'image',['class',11,'src',1],[],e,s,gg)
 _(cF,hG)
 _(xC,cF)
 _(oB,xC)
-var oH=_o(10,e,s,gg)
+var oH=_n('view')
+_rz(z,oH,'class',13,e,s,gg)
 _(oB,oH)
 _(r,oB)
 return r
@@ -991,8 +1133,9 @@ return r
 e_[x[0]]={f:m0,j:[],i:[],ti:[],ic:[]}
 d_[x[1]]={}
 var m1=function(e,s,r,gg){
+var z=gz$gwx_2()
 var oJ=_n('view')
-var lK=_o(11,e,s,gg)
+var lK=_oz(z,0,e,s,gg)
 _(oJ,lK)
 _(r,oJ)
 return r
@@ -1000,8 +1143,9 @@ return r
 e_[x[1]]={f:m1,j:[],i:[],ti:[],ic:[]}
 d_[x[2]]={}
 var m2=function(e,s,r,gg){
+var z=gz$gwx_3()
 var tM=_n('view')
-var eN=_o(12,e,s,gg)
+var eN=_oz(z,0,e,s,gg)
 _(tM,eN)
 _(r,tM)
 return r
@@ -1009,8 +1153,9 @@ return r
 e_[x[2]]={f:m2,j:[],i:[],ti:[],ic:[]}
 d_[x[3]]={}
 var m3=function(e,s,r,gg){
+var z=gz$gwx_4()
 var oP=_n('view')
-var xQ=_o(13,e,s,gg)
+var xQ=_oz(z,0,e,s,gg)
 _(oP,xQ)
 _(r,oP)
 return r
@@ -1018,22 +1163,14 @@ return r
 e_[x[3]]={f:m3,j:[],i:[],ti:[],ic:[]}
 d_[x[4]]={}
 var m4=function(e,s,r,gg){
+var z=gz$gwx_5()
 var fS=_n('view')
-var cT=_o(14,e,s,gg)
+var cT=_oz(z,0,e,s,gg)
 _(fS,cT)
 _(r,fS)
 return r
 }
 e_[x[4]]={f:m4,j:[],i:[],ti:[],ic:[]}
-d_[x[5]]={}
-var m5=function(e,s,r,gg){
-var oV=_n('view')
-var cW=_o(15,e,s,gg)
-_(oV,cW)
-_(r,oV)
-return r
-}
-e_[x[5]]={f:m5,j:[],i:[],ti:[],ic:[]}
 if(path&&e_[path]){
 window.__wxml_comp_version__=0.02
 return function(env,dd,global){$gwxc=0;var root={"tag":"wx-page"};root.children=[]
@@ -1045,6 +1182,7 @@ env=window.__mergeData__(env,dd);
 }
 try{
 main(env,{},root,global);
+_tsd(root)
 if(typeof(window.__webview_engine_version__)=='undefined'|| window.__webview_engine_version__+1e-6<0.01+1e-6){return _ev(root);}
 }catch(err){
 console.log(err)
@@ -1059,10 +1197,10 @@ var BASE_DEVICE_WIDTH = 750;
 var isIOS=navigator.userAgent.match("iPhone");
 var deviceWidth = window.screen.width || 375;
 var deviceDPR = window.devicePixelRatio || 2;
-function checkDeviceWidth() {
+var checkDeviceWidth = window.__checkDeviceWidth__ || function() {
 var newDeviceWidth = window.screen.width || 375
 var newDeviceDPR = window.devicePixelRatio || 2
-const newDeviceHeight = window.screen.height || 375
+var newDeviceHeight = window.screen.height || 375
 if (window.screen.orientation && /^landscape/.test(window.screen.orientation.type || '')) newDeviceWidth = newDeviceHeight
 if (newDeviceWidth !== deviceWidth || newDeviceDPR !== deviceDPR) {
 deviceWidth = newDeviceWidth
@@ -1071,9 +1209,9 @@ deviceDPR = newDeviceDPR
 }
 checkDeviceWidth()
 var eps = 1e-4;
-function transformRPX(number) {
+var transformRPX = window.__transformRpx__ || function(number, newDeviceWidth) {
 if ( number === 0 ) return 0;
-number = number / BASE_DEVICE_WIDTH * deviceWidth;
+number = number / BASE_DEVICE_WIDTH * ( newDeviceWidth || deviceWidth );
 number = Math.floor(number + eps);
 if (number === 0) {
 if (deviceDPR === 1 || !isIOS) {
@@ -1084,10 +1222,12 @@ return 0.5;
 }
 return number;
 }
-var setCssToHead = function(file, _xcInvalid) {
+var setCssToHead = function(file, _xcInvalid, info) {
 var Ca = {};
-var _C= [[[2,1],],[".",[1],"page{ width:100%; height:100%; background:#f8f8f8; position:absolute; }\n",],];
-function makeup(file, suffix) {
+var css_id;
+var info = info || {};
+var _C= [[],];
+function makeup(file, opt) {
 var _n = typeof(file) === "number";
 if ( _n && Ca.hasOwnProperty(file)) return "";
 if ( _n ) Ca[file] = 1;
@@ -1099,20 +1239,22 @@ if (typeof(content) === "object")
 {
 var op = content[0];
 if ( op == 0 )
-res = transformRPX(content[1]) + "px" + res;
+res = transformRPX(content[1], opt.deviceWidth) + "px" + res;
 else if ( op == 1)
-res = suffix + res;
+res = opt.suffix + res;
 else if ( op == 2 ) 
-res = makeup(content[1], suffix) + res;
+res = makeup(content[1], opt) + res;
 }
 else
 res = content + res
 }
 return res;
 }
-return function(suffix, opt){
-if ( typeof suffix === "undefined" ) suffix = "";
-if ( opt && opt.allowIllegalSelector != undefined && _xcInvalid != undefined )
+var rewritor = function(suffix, opt, style){
+opt = opt || {};
+suffix = suffix || "";
+opt.suffix = suffix;
+if ( opt.allowIllegalSelector != undefined && _xcInvalid != undefined )
 {
 if ( opt.allowIllegalSelector )
 console.warn( "For developer:" + _xcInvalid );
@@ -1123,24 +1265,37 @@ return;
 }
 }
 Ca={};
-css = makeup(file, suffix);
-var style = document.createElement('style');
+css = makeup(file, opt);
+if ( !style ) 
+{
 var head = document.head || document.getElementsByTagName('head')[0];
+window.__rpxRecalculatingFuncs__ = window.__rpxRecalculatingFuncs__ || [];
+style = document.createElement('style');
 style.type = 'text/css';
+style.setAttribute( "wxss:path", info.path );
+head.appendChild(style);
+window.__rpxRecalculatingFuncs__.push(function(size){
+opt.deviceWidth = size.width;
+rewritor(suffix, opt, style);
+});
+}
 if (style.styleSheet) {
 style.styleSheet.cssText = css;
 } else {
+if ( style.childNodes.length == 0 )
 style.appendChild(document.createTextNode(css));
+else 
+style.childNodes[0].nodeValue = css;
 }
-head.appendChild(style);
 }
+return rewritor;
 }
-setCssToHead([])();setCssToHead([[2,0]])();
+setCssToHead([])();setCssToHead([[2,0]],undefined,{path:"./app.wxss"})();
 
-__wxAppCode__['app.wxss']=setCssToHead([[2,0]]);    
+__wxAppCode__['app.wxss']=setCssToHead([[2,0]],undefined,{path:"./app.wxss"});    
 __wxAppCode__['app.wxml']=$gwx('./app.wxml');
 
-__wxAppCode__['pages/index/index.wxss']=setCssToHead([".",[1],"banner{ width:100%; height:",[0,440],"; }\n",]);    
+__wxAppCode__['pages/index/index.wxss']=setCssToHead([".",[1],"banner{ width:100%; height:",[0,320],"; }\n",],undefined,{path:"./pages/index/index.wxss"});    
 __wxAppCode__['pages/index/index.wxml']=$gwx('./pages/index/index.wxml');
 
 __wxAppCode__['pages/market/market.wxss']=undefined;    
@@ -1151,9 +1306,6 @@ __wxAppCode__['pages/my/my.wxml']=$gwx('./pages/my/my.wxml');
 
 __wxAppCode__['pages/news/news.wxss']=undefined;    
 __wxAppCode__['pages/news/news.wxml']=$gwx('./pages/news/news.wxml');
-
-__wxAppCode__['pages/search/search.wxss']=undefined;    
-__wxAppCode__['pages/search/search.wxml']=$gwx('./pages/search/search.wxml');
 
 __wxAppCode__['pages/trade/trade.wxss']=undefined;    
 __wxAppCode__['pages/trade/trade.wxml']=$gwx('./pages/trade/trade.wxml');

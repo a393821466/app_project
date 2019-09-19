@@ -2,9 +2,11 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"app-plus": {
-				"titleNView": false
-			}
+			"navigationBarBackgroundColor":"#2580EF",
+			"navigationBarTextStyle":"#fff"
+			// "app-plus": {
+			// 	"titleNView": false
+			// }
 		}
 	}, {
 		"path": "pages/market/market",
@@ -22,13 +24,13 @@
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "电影预告",
+		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
 		"color": "#999999",
-		"selectedColor": "#6989ff",
+		"selectedColor": "#2580EF",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{

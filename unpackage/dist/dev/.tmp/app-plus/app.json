@@ -8,13 +8,13 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "电影预告",
+    "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#6989ff",
+    "selectedColor": "#2580EF",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
