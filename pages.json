@@ -1,12 +1,8 @@
 {
 	"pages": [{
 		"path": "pages/index/index",
-		"style": {
-			"navigationBarBackgroundColor":"#2580EF",
-			"navigationBarTextStyle":"#fff"
-			// "app-plus": {
-			// 	"titleNView": false
-			// }
+		"style":{
+			"navigationBarBackgroundColor":"#2580EF"
 		}
 	}, {
 		"path": "pages/market/market",
@@ -23,7 +19,7 @@
     }
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"

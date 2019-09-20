@@ -1,10 +1,6 @@
-@font-face {font-family: "iconfont";
-  src: url('//at.alicdn.com/t/font_1426017_rid454qdj2f.eot');
-    src: url('//at.alicdn.com/t/font_1426017_rid454qdj2f.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_1426017_rid454qdj2f.woff2') format('woff2'),
-    url('//at.alicdn.com/t/font_1426017_rid454qdj2f.woff') format('woff'),
-    url('//at.alicdn.com/t/font_1426017_rid454qdj2f.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_1426017_rid454qdj2f.svg#iconfont') format('svg');
+@font-face {
+	font-family: 'iconfont';
+	src: url('https://at.alicdn.com/t/font_1426017_yva89zrk5ej.ttf') format('truetype');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -40,10 +36,85 @@
 .icon-monizhiyuantianbaos:before {
   content: "\E623";
 }
+.icon-shouye:before {
+  content: "\E617";
+}
+.icon-shouye1:before {
+  content: "\E61A";
+}
+.icon-home_line:before {
+  content: "\E625";
+}
+.icon-home:before {
+  content: "\E626";
+}
 .icon-weiwangguanicon-defuben-:before {
   content: "\E66E";
 }
+.icon-42:before {
+  content: "\E600";
+}
 .icon-qianbao:before {
   content: "\E611";
+}
+.icon-Graph:before {
+  content: "\E61F";
+}
+.icon-Graph1:before {
+  content: "\E635";
+}
+.icon-baoguandanguanli:before {
+  content: "\E603";
+}
+.icon-bangzhuzhongxin:before {
+  content: "\E604";
+}
+.icon-bangzhuzhongxin1:before {
+  content: "\E605";
+}
+.icon-dingdanguanli:before {
+  content: "\E606";
+}
+.icon-dingdanguanli1:before {
+  content: "\E607";
+}
+.icon-jiesuanguanli:before {
+  content: "\E608";
+}
+.icon-baoguandanguanli1:before {
+  content: "\E609";
+}
+.icon-kehuguanli:before {
+  content: "\E60A";
+}
+.icon-qiyeshezhi:before {
+  content: "\E60C";
+}
+.icon-qiyeshezhi1:before {
+  content: "\E60D";
+}
+.icon-kehuguanli1:before {
+  content: "\E60E";
+}
+.icon-xiaoxizhongxin:before {
+  content: "\E60F";
+}
+.icon-xiaoxizhongxin1:before {
+  content: "\E610";
+}
+.icon-zaixianzixun:before {
+  content: "\E612";
+}
+.icon-zaixianzixun1:before {
+  content: "\E613";
+}
+.icon-renwuzhongxin:before {
+  content: "\E614";
+}
+.icon-jiesuanguanli1:before {
+  content: "\E615";
+}
+.icon-renwuzhongxin1:before {
+  content: "\E616";
 }
 

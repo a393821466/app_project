@@ -1,11 +1,19 @@
 export const state={
 	token:'',
-	annount:[]
+	notice:[],
+	temList:[]
 }
 
 export const mutations={
-	['ANNOUNT'](state,val){
-		state.annount=val.data.data.content
+	['NOTICE'](state,val){
+		if(val.status){
+			state.notice=val.data.content
+		}
+	},
+	['TEMPLATELIST'](state,val){
+		if(val.status){
+			state.temList=val.data
+		}
 	}
 }
 

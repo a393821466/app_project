@@ -1,6 +1,7 @@
 import {state} from './mutations'
  const getters={
-	annount:state=>state.annount
+	notice:state=>state.notice,
+	temList:state=>state.temList
 }
 
 export default getters
