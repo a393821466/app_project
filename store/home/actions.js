@@ -1,10 +1,17 @@
-import httpUtils from '../../config/http_service';
-import address from '../../config/address.config'
+import httpUtils from '@/common/http/http_service';
+import address from '@/common/http/address.config'
 import {state} from './mutations'
 
 export default{
 	async getNotice({commit}){
-		const res=await httpUtils.get(address.common.announce);
+		const res=await httpUtils.get(address.common.announce,{
+			options:{
+				header:{
+					'token':''
+				}
+			}
+		}
+		);
 		commit('NOTICE',res.data)
 		return res;
 	},

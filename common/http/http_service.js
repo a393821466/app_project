@@ -1,10 +1,8 @@
-import request from '../components/pocky-request/index.js';
-
+import request from '@/components/pocky-request/index.js';
 const instance=new request();
-
-instance.addInterceptors.request(config => {
+instance.interceptors.scoped.request.use(config => {
 	console.log('📑 request config: ', config)
-
+	
 	return config;
 	// return false;
 },err=>{
@@ -12,14 +10,17 @@ instance.addInterceptors.request(config => {
 })
 
 // 局部响应拦截器
-instance.addInterceptors.response(res => {
-	console.log(`📧 response result`, res)
-	// return res.data
+instance.interceptors.scoped.response.use((res, config) => {
+	console.log('is scoped response')
+
 	return res;
 	// return false;
-},err=>{
-	Promise.reject(err)
-})
+	// return Promise.reject('xxx')
+}, err => {
+	console.error('scoped response: ', err)
+
+	return Promise.reject(err)
+});
 
 const mathQuery = options => {
   const newOptions = {
@@ -39,11 +40,12 @@ const mathQuery = options => {
 
 export default {
 	// GET请求
-	get:(url, params = {}, config = {}) => {
+	get:(url, params = {}) => {
 		const {
-		  query
+		  query,
+		  options
 		} = params
-		return instance.get({url:url,data:query,config});
+		return instance.get({url:url,data:query,options});
 	},
 	// POST请求
 	post:(url, params = {}) => {

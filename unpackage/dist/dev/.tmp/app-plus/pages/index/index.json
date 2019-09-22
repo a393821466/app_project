@@ -1,6 +1,16 @@
 {
   "navigationBarBackgroundColor": "#2580EF",
-  "usingComponents": {
-    "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar"
-  }
+  "enablePullDownRefresh": true,
+  "bounce": "none",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "登陆",
+        "fontSize": "14",
+        "float": "right",
+        "color": "#fff"
+      }
+    ]
+  },
+  "usingComponents": {}
 }
