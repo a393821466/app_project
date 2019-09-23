@@ -1,0 +1,126 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* 滚动
+*/
+.test {
+	font-family: iconfont;
+	margin-left: 20rpx;
+}
+.noticeBox {
+    padding:0 20rpx;
+    position: relative;
+    text-align: left;
+  height: 80rpx;
+  margin-bottom:20rpx;
+}
+.notice_box{
+	  width:100%;
+	  background:#eee;
+	  overflow: hidden;
+	  height: 80rpx;
+	  display:-webkit-box;
+	  display:-webkit-flex;
+	  display:-ms-flexbox;
+	  display:flex;
+	  -webkit-box-orient: horizontal;
+	  -webkit-box-direction: normal;
+	  -webkit-flex-direction: row;
+	      -ms-flex-direction: row;
+	          flex-direction: row;
+	  border-radius:10rpx;
+}
+.notice_icon{
+	  width:80rpx;
+	  text-align:center;
+	  padding-top:18rpx;
+	  font-size:32rpx;
+}
+.notice{
+	  width: 620rpx;
+	  -o-text-overflow: ellipsis;
+	     text-overflow: ellipsis;
+	  white-space: nowrap; 
+	  overflow: hidden;
+}
+.text {
+    width: 100%;
+	font-size:28rpx;
+	line-height:80rpx;
+}
+.slide-enter-active, .slide-leave-active {
+    -webkit-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+.slide-enter{
+    opacity: 1;
+}
+.slide-leave-to {
+    opacity: 0;
+}
+

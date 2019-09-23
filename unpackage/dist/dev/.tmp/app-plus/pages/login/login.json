@@ -1,3 +1,15 @@
 {
+  "navigationBarBackgroundColor": "#2580EF",
+  "navigationBarTitleText": "登陆",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "注册",
+        "fontSize": "14",
+        "float": "right",
+        "color": "#fff"
+      }
+    ]
+  },
   "usingComponents": {}
 }

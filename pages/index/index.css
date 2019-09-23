@@ -3,7 +3,9 @@
 .category_home,.news_prople,.hot_activity {
 	padding: 0 20rpx;
 }
-
+.page{
+	background:#ffffff;
+}
 .test {
 	font-family: iconfont;
 	margin-left: 20rpx;
@@ -42,52 +44,6 @@
 	color: #2580EF;
 	line-height: 45rpx;
 }
-
-/**
-* 滚动
-*/
-.textBox {
-    padding:0 20rpx;
-    position: relative;
-    text-align: left;
-  height: 80rpx;
-  margin-bottom:20rpx;
-  }
-  .notice_box{
-	  width:100%;
-	  background:#eee;
-	  overflow: hidden;
-	  height: 80rpx;
-	  display:flex;
-	  flex-direction: row;
-	  border-radius:10rpx;
-  }
-  .notice_icon{
-	  width:80rpx;
-	  text-align:center;
-	  padding-top:18rpx;
-	  font-size:32rpx;
-  }
-  .notice{
-	  width: 620rpx;
-	  text-overflow: ellipsis;
-	  white-space: nowrap; 
-	  overflow: hidden;
-  }
-  .text {
-    width: 100%;
-	font-size:28rpx;
-	line-height:80rpx;
-  }
-  .slide-enter-active, .slide-leave-active {
-    transition: all 0.5s linear;
-  }
-  .slide-enter{
-    opacity: 1;
-  }
-  .slide-leave-to {
-    opacity: 0;
-  }
 /**
  * 分类
  */

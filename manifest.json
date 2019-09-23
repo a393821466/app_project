@@ -67,11 +67,11 @@
 	/* H5跨域处理*/
 	"h5":{
 		"devServer":{
-			"port":8080,
+			"port":8082,
 			"disableHostCheck":true,
 			"proxy":{
 				"/apis":{
-					"target":"http://cxx.99qupai.com",
+					"target":"https://tmk.rvsii.com",
 					"changeOrigin":true,
 					"secure":false
 				}

@@ -18,7 +18,7 @@
 			</view>
 		</view>
 		<!--公告-->
-		<view class="textBox">
+		<!-- <view class="noticeBox">
 		  <view class="notice_box">
 			  <view class="notice_icon">
 				  <text class="test">&#xe690;</text>
@@ -29,7 +29,8 @@
 				  </transition>
 			  </view>
 		  </view>
-		</view>
+		</view> -->
+		<notice :noticeListData='getAnnountList' ref='eventNotice'></notice>
 		<!--分类导航-->
 		<view class="category_home">
 			<view class="category_list" v-for="(item,idx) in temList" :key="item.id" :class="idx===temList.length-1&&temList.length%2==1?'upside_list_class':''"
@@ -86,13 +87,11 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
+	import notice from './notice/notice'
 	import {h5Toast,showActionSheet} from '@/common/utils/dialog.config';
-	const totalDuration = 2000;
 	export default {
 		data() {
 			return {
-				number: 0,
-				timer:null,
 				activityArr:[
 					{	
 						id:1,
@@ -146,16 +145,19 @@
 					return ['暂无内容...'];
 				}
 			},
-			// 公告显示
-			text() {
-				return {
-					id: this.number,
-					val: this.getAnnountList[this.number]
-				}
-			}
 		},
-		onUnload() {
-			console.log('监听卸载');
+		onShow(){
+			// #ifndef APP-PLUS
+			if(!this.$refs.eventNotice){
+				return;
+			}
+			this.$refs.eventNotice.startMove()
+			// #endif
+		},
+		onHide(){
+			// #ifndef APP-PLUS
+			this.$refs.eventNotice.closeTimer()
+			// #endif
 		},
 		onLoad() {
 			console.log('首次');
@@ -164,11 +166,6 @@
 			});
 			this.getNoticeData()
 			this.getTemplateData()
-		},
-		onShow(){
-			// 开启计时器
-			this.startMove()
-			console.log(111)
 		},
 		methods: {
 			/*
@@ -180,24 +177,16 @@
 				this.getNotice().then(res => {
 					
 				}).catch(err=>{
-					console.log(err);
+					return err;
 				})
 			},
 			// 获取模板
 			getTemplateData() {
-				this.getTemplate().then(res => {})
-			},
-			// 公告轮播
-			startMove () {
-			  // eslint-disable-next-line
-			  this.timer = setTimeout(() => {
-				if (this.number === this.getAnnountList.length-1) {
-				  this.number = 0;
-				} else {
-				  this.number += 1;
-				}
-				this.startMove();
-			  }, 3000); // 滚动不需要停顿则将2000改成动画持续时间
+				this.getTemplate().then(res => {
+					if(res.status){
+						uni.stopPullDownRefresh();
+					}
+				})
 			},
 			// 去活动详情
 			goTask(){
@@ -223,25 +212,20 @@
 		},
 		// 右边按钮
 		onNavigationBarButtonTap(val){
-			this.$openPage({
-				name: 'login',
-				query: {id: 123}
-			})
-			// 关闭计时器
-			if(this.timer){
-				console.log(222)
-				clearTimeout(this.timer)
-				this.timer=null;
-			}
+			this.$openPage('login')
 		},
 		// 下拉刷新
 		onPullDownRefresh(){
-			setTimeout(()=>{
-				uni.stopPullDownRefresh();
-				console.log('刷新成功');
-			},3000);
+			this.getNoticeData()
+			this.getTemplateData()
+			// setTimeout(()=>{
+			// 	uni.stopPullDownRefresh();
+			// 	console.log('刷新成功');
+			// },3000);
 		},
-		components: {}
+		components: {
+			notice
+		}
 	}
 </script>
 

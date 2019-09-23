@@ -12,5 +12,7 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {
+    "notice": "/pages/index/notice/notice"
+  }
 }

@@ -5,12 +5,12 @@ import {state} from './mutations'
 export default{
 	async getNotice({commit}){
 		const res=await httpUtils.get(address.common.announce);
-		commit('NOTICE',res.data)
+		commit('NOTICE',res)
 		return res;
 	},
 	async getTemplate({commit}){
 		const res=await httpUtils.get(address.common.templateBox);
-		commit('TEMPLATELIST',res.data)
+		commit('TEMPLATELIST',res)
 		return res;
 	}
 }
