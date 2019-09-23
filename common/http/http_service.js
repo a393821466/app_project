@@ -12,7 +12,7 @@ instance.interceptors.scoped.request.use(config => {
 // 局部响应拦截器
 instance.interceptors.scoped.response.use((res, config) => {
 	console.log('is scoped response')
-
+	config.header={token:'asdasdas'}
 	return res;
 	// return false;
 	// return Promise.reject('xxx')

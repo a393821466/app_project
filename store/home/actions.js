@@ -4,14 +4,7 @@ import {state} from './mutations'
 
 export default{
 	async getNotice({commit}){
-		const res=await httpUtils.get(address.common.announce,{
-			options:{
-				header:{
-					'token':''
-				}
-			}
-		}
-		);
+		const res=await httpUtils.get(address.common.announce);
 		commit('NOTICE',res.data)
 		return res;
 	},
