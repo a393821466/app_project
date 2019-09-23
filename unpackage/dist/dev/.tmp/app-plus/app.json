@@ -4,7 +4,8 @@
     "pages/market/market",
     "pages/news/news",
     "pages/my/my",
-    "pages/trade/trade"
+    "pages/trade/trade",
+    "pages/login/login"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -50,6 +51,10 @@
       }
     ]
   },
+  "networkTimeout": {
+    "request": 15000,
+    "uploadFile": 15000
+  },
   "nvueCompiler": "weex",
   "renderer": "auto",
   "splashscreen": {
@@ -58,5 +63,7 @@
   },
   "appname": "uni_video",
   "compilerVersion": "2.2.2",
-  "usingComponents": {}
+  "usingComponents": {
+    "page-link": "/components/page-link/page-link"
+  }
 }

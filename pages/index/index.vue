@@ -86,7 +86,7 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
-	import {h5Toast,promtModel} from '@/common/utils/dialog.config';
+	import {h5Toast,showActionSheet} from '@/common/utils/dialog.config';
 	const totalDuration = 2000;
 	export default {
 		data() {
@@ -165,13 +165,10 @@
 			this.getNoticeData()
 			this.getTemplateData()
 		},
-		onHide(){
-			// 关闭计时器
-			clearInterval(this.timer);
-		},
 		onShow(){
 			// 开启计时器
 			this.startMove()
+			console.log(111)
 		},
 		methods: {
 			/*
@@ -200,12 +197,16 @@
 				  this.number += 1;
 				}
 				this.startMove();
-			  }, 2000); // 滚动不需要停顿则将2000改成动画持续时间
+			  }, 3000); // 滚动不需要停顿则将2000改成动画持续时间
 			},
 			// 去活动详情
 			goTask(){
 				// #ifdef H5
-				h5Toast('成功');
+				showActionSheet('',(res)=>{
+					console.log(res);
+				},(err)=>{
+					console.log(err);
+				})
 				// #endif
 				
 				// #ifdef APP-PLUS
@@ -222,7 +223,16 @@
 		},
 		// 右边按钮
 		onNavigationBarButtonTap(val){
-			console.log(val);
+			this.$openPage({
+				name: 'login',
+				query: {id: 123}
+			})
+			// 关闭计时器
+			if(this.timer){
+				console.log(222)
+				clearTimeout(this.timer)
+				this.timer=null;
+			}
 		},
 		// 下拉刷新
 		onPullDownRefresh(){

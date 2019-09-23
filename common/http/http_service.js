@@ -1,26 +1,38 @@
-import request from '@/components/pocky-request/index.js';
-const instance=new request();
-instance.interceptors.scoped.request.use(config => {
-	console.log('📑 request config: ', config)
-	
-	return config;
-	// return false;
-},err=>{
-	Promise.reject(err)
+import http from './request.config';
+
+// 发送请求前的拦截器
+http.interceptor.request((config, cancel) => { 
+    config.header = {
+        ...config.header,
+		Authorization:'null'
+    }
+	console.log('This is config:'+JSON.stringify(config));
+    return config;
 })
 
-// 局部响应拦截器
-instance.interceptors.scoped.response.use((res, config) => {
-	console.log('is scoped response')
-	config.header={token:'asdasdas'}
-	return res;
-	// return false;
-	// return Promise.reject('xxx')
-}, err => {
-	console.error('scoped response: ', err)
+// 相应的拦截器
+http.interceptor.response((response) => {
+    console.log(response);
+    return response;
+}, (err) => {
+       console.log(err);
+       return err;
+})
 
-	return Promise.reject(err)
-});
+// 验证器
+http.validateStatus = (response) => {
+	console.log(response);
+    return response.statusCode === 200
+}
+
+http.validateStatus = (response) => {
+/** http 状态码为200 并且服务器返回状态码也是200， 则进入响应拦截器响应成功函数和http.get().then(() => {满足条件进入这里}).catch(() => {没有满足进入这里}) */
+    return response.statusCode === 200 && response.data.code === 200
+}
+
+http.validateStatus = (response) => {
+   return response.statusCode >= 200 && response.statusCode < 300
+}
 
 const mathQuery = options => {
   const newOptions = {
@@ -40,12 +52,14 @@ const mathQuery = options => {
 
 export default {
 	// GET请求
-	get:(url, params = {}) => {
-		const {
-		  query,
-		  options
-		} = params
-		return instance.get({url:url,data:query,options});
+	get:(url, options) => {
+		options={
+			params:{},
+			header:{
+			},
+			dataType:'json'
+		}
+		return http.get(url, options)
 	},
 	// POST请求
 	post:(url, params = {}) => {
@@ -54,7 +68,7 @@ export default {
 			options
 		} = params
 		const config=mathQuery(options);
-		return instance.post({url:url,data:data,config});
+		return http.post({url:url,data:data,config});
 	},
 	// PUT请求
 	put:(url, params = {})=>{
@@ -63,21 +77,21 @@ export default {
 			options
 		} = params
 		const config=mathQuery(options);
-		return instance.put({url:url,data:data,config});
+		return http.put({url:url,data:data,config});
 	},
 	// DELETE请求
 	del:(url,params={},config={})=>{
 		const {
 		  query
 		} = params
-		return instance.delete({url:url,data:query,config});
+		return http.delete({url:url,data:query,config});
 	},
 	// 上传
 	upload:(url,name,filePath,formData)=>{
-		return instance.upload({url:url,name:name,filePath:filePath,formData:formData});
+		return http.upload({url:url,name:name,filePath:filePath,formData:formData});
 	},
 	// 下载
 	dowload:(url)=>{
-		return instance.dowload({url:url});
+		return http.dowload({url:url});
 	}
 }

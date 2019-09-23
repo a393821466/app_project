@@ -1,13 +1,35 @@
+import http from './request.config';
+
 let basicUrl=''
 if(process.env.NODE_ENV==='development'){
-	// basicUrl='https://cxx.99qupai.com'
-	basicUrl='https://tmk.rvsii.com'
+	// #ifdef H5
+	basicUrl='/apis'
+	// #endif
+	
+	// #ifndef H5
+	basicUrl='https://tmk.rvsii.com/apis'
+	// #endif
 }else{
-	basicUrl='https://cxx.99qupai.com'
+	// #ifdef H5
+	basicUrl='/apis'
+	// #endif
+	
+	// #ifndef H5
+	basicUrl='https://tmk.rvsii.com/apis'
+	// #endif
 }
+
+// 设置http请求地址
+http.setConfig((config) => { /* config 为默认全局配置*/
+    config.baseUrl = basicUrl /* 根域名 */
+    config.header = {
+	}
+    return config
+})
+
 export default{
 	common:{
-		announce:`${basicUrl}/apis/console/subsystem/announce`,
-		templateBox: `${basicUrl}/apis/getHomeTemplate`
+		announce:`/console/subsystem/announce`,
+		templateBox: `/getHomeTemplate`
 	}
 }
