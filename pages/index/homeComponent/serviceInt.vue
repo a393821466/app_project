@@ -3,7 +3,7 @@
 	<view class="service">
 		<view class="service-input">
 			<!-- <text class="test service-icon">&#xe60b;</text> -->
-			<fonts-icon type="kefu" size='20'></fonts-icon>
+			<fonts-icon type="kefu"></fonts-icon>
 			<text class="service-text">联系客服</text>
 		</view>
 	</view>

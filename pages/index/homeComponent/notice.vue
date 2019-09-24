@@ -97,8 +97,13 @@
 		  .notice_icon{
 		  	  width:80rpx;
 		  	  text-align:center;
-		  	  padding-top:16rpx;
-		  	  font-size:32rpx;
+			  position:relative;
+			  .uni-icon-laba{
+				 position:absolute;
+				 top:20rpx;
+				 left:22rpx;
+			  }
+		  	  // font-size:36rpx;
 		  }
 		  .notice{
 		  	  width: 620rpx;

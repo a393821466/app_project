@@ -5,7 +5,8 @@
     "pages/news/news",
     "pages/my/my",
     "pages/trade/trade",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/index/homeComponent/notice"
   ],
   "window": {
     "navigationBarTextStyle": "white",

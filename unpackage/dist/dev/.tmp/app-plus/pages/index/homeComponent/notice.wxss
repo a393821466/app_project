@@ -52,8 +52,12 @@
 .noticeBox .notice_box .notice_icon {
       width: 80rpx;
       text-align: center;
-      padding-top: 16rpx;
-      font-size: 32rpx;
+      position: relative;
+}
+.noticeBox .notice_box .notice_icon .uni-icon-laba {
+        position: absolute;
+        top: 20rpx;
+        left: 22rpx;
 }
 .noticeBox .notice_box .notice {
       width: 620rpx;

@@ -67,6 +67,11 @@
 .daytime .hot_activity .activity_title {
   color: #666;
 }
+/* 登陆 */
+.daytime .login_submit_int {
+  background: #2580EF !important;
+  color: #eee !important;
+}
 /* 背景颜色 */
 /* 主题颜色 */
 /* 字体颜色 */

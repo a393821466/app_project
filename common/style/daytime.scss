@@ -41,3 +41,8 @@ $fontColor:#666; /* 字体颜色 */
 .daytime .hot_activity .activity_title{
 	color:$fontColor
 }
+/* 登陆 */
+.daytime .login_submit_int{
+	background:$materColor !important;
+	color:#eee !important;
+}

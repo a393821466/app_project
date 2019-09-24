@@ -1,7 +1,8 @@
 <template>
   <view :class="'uni-icon-' + type"
-        :style="{ color: color, 'font-size': size + 'rpx' }"
+        :style="{ color: color }"
         class="uni-icon" />
+		<!-- 'font-size': size + 'rpx' -->
 </template>
 
 <script>
@@ -16,10 +17,10 @@ export default {
       type: String,
       default: '#333333'
     },
-    size: {
-      type: [Number, String],
-      default: 16
-    }
+    // size: {
+    //   type: [Number, String],
+    //   default: 32
+    // }
   },
 }
 </script>
@@ -35,7 +36,7 @@ export default {
 
 .uni-icon {
   font-family: uniicons;
-  font-size: 16px;
+  font-size: 38rpx;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
