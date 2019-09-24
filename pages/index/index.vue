@@ -1,84 +1,11 @@
 <template>
-	<view class="page">
-		<!--轮播-->
-		<swiper :indicator-dots="true" :circular='true' indicator-active-color="#ffffff" indicator-color="rgba(255, 255, 255, .3)"
-		 :autoplay="true" :interval="5000" :duration="500" class="banner">
-			<swiper-item>
-				<image src="http://n.sinaimg.cn/sinacn20111/765/w1067h498/20190823/be7d-icqznha0469343.jpg" class="banner"></image>
-			</swiper-item>
-			<swiper-item>
-				<image src="http://img5.imgtn.bdimg.com/it/u=538384195,3019699462&fm=26&gp=0.jpg" class="banner"></image>
-			</swiper-item>
-		</swiper>
-		<!--客服-->
-		<view class="service">
-			<view class="service-input">
-				<text class="test service-icon">&#xe60b;</text>
-				<text class="service-text">联系客服</text>
-			</view>
-		</view>
-		<!--公告-->
-		<!-- <view class="noticeBox">
-		  <view class="notice_box">
-			  <view class="notice_icon">
-				  <text class="test">&#xe690;</text>
-			  </view>
-			  <view class="notice">
-				  <transition name="slide">
-					<view class="text" :key="text.id">{{text.val}}</view>
-				  </transition>
-			  </view>
-		  </view>
-		</view> -->
+	<view class="page" :class="className">
+		<banner></banner>
+		<service-int></service-int>
 		<notice :noticeListData='getAnnountList' ref='eventNotice'></notice>
-		<!--分类导航-->
-		<view class="category_home">
-			<view class="category_list" v-for="(item,idx) in temList" :key="item.id" :class="idx===temList.length-1&&temList.length%2==1?'upside_list_class':''"
-			 :style='{backgroundColor:!item.color?"#999":item.color}'>
-				<text class="category_text">{{item.templateName}}</text>
-				<view :class="idx===temList.length-1&&temList.length%2==1?'img':'category_backgorund'"></view>
-			</view>
-		</view>
-		<!--新手引导-->
-		<view class="news_prople">
-			<view class="news_title">
-				<text>新手引导</text>
-			</view>
-			<view class="news_images">
-				<text class="news_text">新手引导-快速上手-日进斗金</text>
-			</view>
-		</view>
-		<!--热门活动-->
-		<view class="hot_activity">
-			<view class="activity_title">
-				<text class="activity_text">热门活动</text>
-				<view class="activity_image">
-					<text>快速上手让你盈利不停</text>
-				</view>
-			</view>
-			<view class="activity_box">
-				<view class="activity_list" v-for="(item,idx) in activityArr" :key="item.id" :style="{
-					'background-image':'url('+item.imgUrl+')'
-				}">
-					<view class="activity activity_money">
-						<text class="money_num" :style="{color:item.moneyColor}">{{item.moneyNum}}</text>
-					</view>
-					<view class="activity activity_type">
-						<view class="day_money" :style="{color:item.activityUiTextColor,backgroundColor:item.activityUiBgColor}">
-							{{item.activityType}}
-						</view>
-						<text class="box_money_unit">元</text>
-					</view>
-					<view class="activity activity_task">
-						<view class="task" v-html="item.taskText" :style="{color:item.taskTextColor}">
-						</view>
-						<view class="to_detail" @click="goTask" :style="{color:item.taskBtnColor,background:'linear-gradient(-180deg,#fdfbf6,'+item.linearColor+')'}">
-							立即参与
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
+		<category :categoryList='temList'></category>
+		<guide></guide>
+		<activity></activity>
 	</view>
 </template>
 
@@ -87,46 +14,19 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
-	import notice from './notice/notice'
-	import {h5Toast,showActionSheet} from '@/common/utils/dialog.config';
+	import banner from './homeComponent/banner'
+	import serviceInt from './homeComponent/serviceInt'
+	import notice from './homeComponent/notice'
+	import category from './homeComponent/category'
+	import guide from './homeComponent/guide'
+	import activity from './homeComponent/activity'
 	export default {
-		data() {
-			return {
-				activityArr:[
-					{	
-						id:1,
-						moneyColor:'#fce8e3',
-						moneyNum:100,
-						activityType:'日欢迎礼金',
-						activityUiBgColor:'#efd196',
-						activityUiTextColor:'#dda643',
-						taskTextColor:'#efd196',
-						taskText:'单笔充值<br/>≥2000元',
-						taskBtnColor:'#dda643',
-						linearColor:'#fbe3ad',
-						imgUrl:'../../static/images/yh1.png'
-					},
-					{
-						id:2,
-						moneyColor:'#dfe9ef',
-						moneyNum:2000,
-						activityType:'新人礼包',
-						activityUiBgColor:'#8e9ccf',
-						activityUiTextColor:'#346cba',
-						taskTextColor:'#bab1d7',
-						taskText:'实名认证<br/>注册即送',
-						taskBtnColor:'#5e3397',
-						linearColor:'#b8a0e0',
-						imgUrl:'../../static/images/yh2.png'
-					}
-				]
-			}
-		},
+		name:'index',
 		computed: {
 			/*
 			** 公告，模板数据
 			*/
-			...mapGetters(['notice', 'temList']),
+			...mapGetters(['notice', 'temList','className']),
 			// 公告的处理
 			getAnnountList() {
 				if (this.notice.length > 0) {
@@ -140,24 +40,20 @@
 						let strLen=str+(noticeText.length>20?'...':'');
 						arr.push(i + 1 + '.' + strLen);
 					}
-					return arr;
+					return arr
 				} else {
 					return ['暂无内容...'];
 				}
 			},
 		},
 		onShow(){
-			// #ifndef APP-PLUS
-			if(!this.$refs.eventNotice){
-				return;
-			}
-			this.$refs.eventNotice.startMove()
-			// #endif
+			const that=this
+			setTimeout(()=>{
+				that.$refs.eventNotice.flat=true;
+			},1000)
 		},
 		onHide(){
-			// #ifndef APP-PLUS
-			this.$refs.eventNotice.closeTimer()
-			// #endif
+			this.$refs.eventNotice.flat=false
 		},
 		onLoad() {
 			console.log('首次');
@@ -187,27 +83,6 @@
 						uni.stopPullDownRefresh();
 					}
 				})
-			},
-			// 去活动详情
-			goTask(){
-				// #ifdef H5
-				showActionSheet('',(res)=>{
-					console.log(res);
-				},(err)=>{
-					console.log(err);
-				})
-				// #endif
-				
-				// #ifdef APP-PLUS
-				promtModel('',(e)=>{
-					if(e.index==0){
-						uni.showToast({
-							title:JSON.stringify(e.value),
-							duration:2000
-						})
-					}
-				})
-				// #endif
 			}
 		},
 		// 右边按钮
@@ -218,17 +93,18 @@
 		onPullDownRefresh(){
 			this.getNoticeData()
 			this.getTemplateData()
-			// setTimeout(()=>{
-			// 	uni.stopPullDownRefresh();
-			// 	console.log('刷新成功');
-			// },3000);
 		},
 		components: {
-			notice
+			banner,
+			serviceInt,
+			category,
+			notice,
+			guide,
+			activity
 		}
 	}
 </script>
 
-<style>
-	@import url("index.css");
+<style lang="scss">
+	@import url("index.scss");
 </style>

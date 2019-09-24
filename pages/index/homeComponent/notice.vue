@@ -2,7 +2,7 @@
 	<view class="noticeBox">
 	  <view class="notice_box">
 		  <view class="notice_icon">
-			  <text class="test">&#xe690;</text>
+			  <fonts-icon type="laba"></fonts-icon>
 		  </view>
 		  <view class="notice">
 			  <transition name="slide">
@@ -14,7 +14,11 @@
 </template>
 
 <script>
+	import fontsIcon from '@/components/ui-font/'
 	export default {
+		components:{
+			fontsIcon
+		},
 		props:{
 			duration:{
 				type:Number,
@@ -29,6 +33,16 @@
 			return {
 				number: 0,
 				timer:null,
+				flat:false
+			}
+		},
+		watch:{
+			flat(news,olds){
+				if(!news){
+					this.closeTimer()
+				}else{
+					this.startMove();
+				}
 			}
 		},
 		computed:{
@@ -39,9 +53,9 @@
 				}
 			}
 		},
-		mounted(){
-			this.startMove()
-		},
+		// mounted(){
+		// 	this.startMove()
+		// },
 		methods: {
 			startMove () {
 			  // eslint-disable-next-line
@@ -56,53 +70,48 @@
 			},
 			closeTimer(){
 				// 关闭计时器
-				clearTimeout(that.timer)
-				that.timer=null
+				clearTimeout(this.timer)
+				this.timer=null
 			}
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 /**
 * 滚动
 */
-.test {
-	font-family: iconfont;
-	margin-left: 20rpx;
-}
 .noticeBox {
     padding:0 20rpx;
     position: relative;
     text-align: left;
-  height: 80rpx;
-  margin-bottom:20rpx;
-  }
-  .notice_box{
-	  width:100%;
-	  background:#eee;
-	  overflow: hidden;
-	  height: 80rpx;
-	  display:flex;
-	  flex-direction: row;
-	  border-radius:10rpx;
-  }
-  .notice_icon{
-	  width:80rpx;
-	  text-align:center;
-	  padding-top:18rpx;
-	  font-size:32rpx;
-  }
-  .notice{
-	  width: 620rpx;
-	  text-overflow: ellipsis;
-	  white-space: nowrap; 
-	  overflow: hidden;
-  }
-  .text {
-    width: 100%;
-	font-size:28rpx;
-	line-height:80rpx;
+    height: 80rpx;
+    margin-bottom:20rpx;
+	.notice_box{
+		  width:100%;
+		  overflow: hidden;
+		  height: 80rpx;
+		  display:flex;
+		  flex-direction: row;
+		  border-radius:10rpx;
+		  .notice_icon{
+		  	  width:80rpx;
+		  	  text-align:center;
+		  	  padding-top:16rpx;
+		  	  font-size:32rpx;
+		  }
+		  .notice{
+		  	  width: 620rpx;
+		  	  text-overflow: ellipsis;
+		  	  white-space: nowrap; 
+		  	  overflow: hidden;
+			  .text {
+			    width: 100%;
+			  	font-size:28rpx;
+			  	line-height:80rpx;
+			  }
+		  }
+	}
   }
   .slide-enter-active, .slide-leave-active {
     transition: all 0.5s linear;

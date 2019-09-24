@@ -39,10 +39,11 @@
 			"titleNView":{
 				"buttons": [ 
 					{
-						"text": "注册", 
+						"text": "立即注册", 
 						"fontSize":"14",
 						"float": "right",
-						"color":"#fff"
+						"color":"#fff",
+						"width":"80px"
 					}
 				]
 			}

@@ -1,0 +1,55 @@
+$bgColor:#000; /* 背景颜色 */
+$materColor:#2580EF; /* 主题颜色 */
+$fontColor:#ccc; /* 字体颜色 */ 
+
+$nodeColor:#222; /* 各部分元素的颜色 */
+
+/* 夜间模式 */
+.evening{
+	background:$bgColor;
+}
+/* 图标颜色和样式 */
+.evening .uni-icon-kefu{
+	color: $fontColor !important;
+	margin-top:2rpx;
+}
+.evening .uni-icon-laba{
+	color: $fontColor !important;
+}
+/* 首页客服字体颜色 */
+.evening .service-icon,.evening .service-text{
+	color: $fontColor;
+}
+/* 首页通知字体颜色 */
+.evening .notice_box{
+	background:$nodeColor;
+}
+.evening .text,.evening .notice_icon{
+	color:$fontColor;
+}
+/* 首页套餐分类颜色 */
+.evening .category_home .category_list{
+	opacity:0.7;
+}
+/* 新手引导字体颜色 */
+.evening .news_prople .news_images{
+	box-shadow:none;
+}
+.evening .news_prople .news_title,.evening .news_prople .news_text{
+	color:$fontColor;
+}
+/* 首页活动 */
+.evening .hot_activity .activity_title{
+	color:$fontColor;
+}
+.evening .activity_box .activity_list{
+	background-image:none !important;
+	background-color:$nodeColor;
+}
+.evening .activity_box .day_money{
+	color:$fontColor !important;
+	background-color:$nodeColor !important;
+}
+.evening .activity_box .to_detail{
+	background:none !important;
+}
