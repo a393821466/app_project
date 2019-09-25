@@ -51,6 +51,7 @@
 			setTimeout(()=>{
 				that.$refs.eventNotice.flat=true;
 			},1000)
+			this.getTemplateData()
 		},
 		onHide(){
 			this.$refs.eventNotice.flat=false
@@ -60,14 +61,14 @@
 			uni.setNavigationBarTitle({
 				title: '首页'
 			});
+			this.getMerchant()
 			this.getNoticeData()
-			this.getTemplateData()
 		},
 		methods: {
 			/*
 			** 公告，模板发送store
 			*/
-			...mapActions(['getNotice', 'getTemplate']),
+			...mapActions(['getNotice', 'getTemplate','getMerchant']),
 			// 获取公告
 			getNoticeData() {
 				this.getNotice().then(res => {
@@ -82,12 +83,13 @@
 					if(res.status){
 						uni.stopPullDownRefresh();
 					}
+				}).catch(err=>{
+					return err;
 				})
 			}
 		},
 		// 右边按钮
 		onNavigationBarButtonTap(val){
-			this.$openPage('login')
 		},
 		// 下拉刷新
 		onPullDownRefresh(){

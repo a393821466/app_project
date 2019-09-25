@@ -1,29 +1,31 @@
 <template>
 	<view class="login" :class='className'>
 		<view class="logo">
-			<image src="../../static/images/yh1.png" class="logo_img"></image>
-			<text class="logo_txt">欢迎来到期货交易通</text>
+			<image :src="merchantInfo.merchantSetting.logoUrl" class="logo_img"></image>
+			<text class="logo_txt">欢迎来到{{merchantInfo.merchantName}}</text>
 		</view>
 		<view class="login_form">
 			<view class="login_form_node login_form_userPhone">
 				<view class="loginsIcon">
 					<fonts-icon type='huiyuanzhongxin' color='#666'></fonts-icon>
 				</view>
-				<input type="number" maxlength="11" :value="ruleForm.username" placeholder="请输入手机号码" class="loginInput userPhone" />
+				<input type="number" maxlength="11" v-model="ruleForm.username" placeholder="请输入手机号码" class="loginInput userPhone" />
 			</view>
 			<view class="login_form_node login_form_userPassword">
 				<view class="loginsIcon"><fonts-icon type='suo' color='#666'></fonts-icon></view>
-				<input type="password" value="" placeholder="请输入密码" class="loginInput userPassword" />
+				<input :type="eye_type?'password':'text'" v-model="ruleForm.password" placeholder="请输入密码" class="loginInput userPassword" />
 				<view class="login_hide_pwd">
-					<fonts-icon type='yanjing1' color='#666' @click.native="onClickEye"></fonts-icon>
+					<fonts-icon :type='eye_type?"yanjing1":"yanjing"' color='#666' @click.native="onClickEye">
+					</fonts-icon>
 				</view>
 			</view>
 			<view class="login_form_forgetPassword">
-				<label class="boxCheckBoxView">
+				<label class="boxCheckBoxView" @click="submitRpassword($event)">
 					<view class="checkBoxStyle">
-						<checkbox value="" style="transform:scale(0.8)" checked />
+						<checkbox value="fs" color='#666' style="transform:scale(0.8)"
+                         :checked="optionVal" />
 					</view>
-					<view class="checkBoxText">记住密码?</view>
+					<view class="checkBoxText">记住密码</view>
 				</label>
 				<view class="forget_password">忘记密码?</view>
 			</view>
@@ -55,11 +57,18 @@
 			}
 		},
 		computed:{
-			...mapGetters(['className']),
+			...mapGetters(['className','loginKey','merchantInfo'])
+		},
+		onShow(){
+			this.getKey()
+		},
+		onLoad(){
+			this.getMerchant()
 		},
 		methods: {
+			...mapActions(['getKey','getMerchant','loginApp']),
 			onClickEye(){
-				console.log(1);
+				this.eye_type=!this.eye_type;
 			},
 			login_btn(){
 				const _that = this
@@ -67,7 +76,21 @@
 					_that.errToast('用户名或密码不能为空')
 					return false
 				}
+				this.btnLoading=true;
+				this.loginApp(this.ruleForm).then(res=>{
+					this.btnLoading=false;
+					if(res.status){
+						_that.$openPage('index')
+					}
+				}).catch(err=>{
+					this.btnLoading=false;
+				})
 			},
+			submitRpassword(e){
+				this.optionVal=!this.optionVal
+				console.log(this.optionVal);
+			},
+			// 弹窗
 			errToast(content){
 				// #ifdef APP-PLUS
 					appToast(content)

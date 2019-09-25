@@ -113,7 +113,7 @@ export const showUiModel=({
  * */
  export const appToast=(title,{
 	 timer='short',
-	 bgColor='rgba(0,0,0,0.8)',
+	 bgColor='',
 	 icon='',
 	 width='50',
 	 height='50',

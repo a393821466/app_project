@@ -106,7 +106,7 @@
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/page-link/page-link":"components/page-link/page-link","pages/index/homeComponent/activity":"pages/index/homeComponent/activity","components/ui-font/index":"components/ui-font/index","pages/index/homeComponent/banner":"pages/index/homeComponent/banner","pages/index/homeComponent/category":"pages/index/homeComponent/category","pages/index/homeComponent/guide":"pages/index/homeComponent/guide","pages/index/homeComponent/serviceInt":"pages/index/homeComponent/serviceInt"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"node-modules/uni-simple-router/component/router-link":"node-modules/uni-simple-router/component/router-link","pages/index/homeComponent/activity":"pages/index/homeComponent/activity","components/ui-font/index":"components/ui-font/index","pages/index/homeComponent/banner":"pages/index/homeComponent/banner","pages/index/homeComponent/category":"pages/index/homeComponent/category","pages/index/homeComponent/guide":"pages/index/homeComponent/guide","pages/index/homeComponent/serviceInt":"pages/index/homeComponent/serviceInt"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

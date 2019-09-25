@@ -23,13 +23,20 @@ if(process.env.NODE_ENV==='development'){
 http.setConfig((config) => { /* config 为默认全局配置*/
     config.baseUrl = basicUrl /* 根域名 */
     config.header = {
+		'Content-Type': 'application/json;charset=utf-8'
 	}
     return config
 })
 
 export default{
 	common:{
-		announce:`/console/subsystem/announce`,
-		templateBox: `/getHomeTemplate`
+		merchant: `/console/subsystem/merchant`,
+		announce: `/console/subsystem/announce`,
+		templateBox: `/getHomeTemplate`,
+		getPublicKey: `/getPublicKey`,
+		login: `/login`,
+		logout: `/logout`,
+		verifyImg: `/verifyImg`,
+		register: `/accountOpen`
 	}
 }

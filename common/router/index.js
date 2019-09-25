@@ -1,44 +1,39 @@
-import MinRouter from './router.config'
+import Vue from 'vue'
+import Router from 'uni-simple-router'
 
+Vue.use(Router)
 // 配置路由
-const router=new MinRouter({
+const router=new Router({
 	routes:[
 		{
-			path:'pages/index/index',
-			// type必须是以下的值['navigateTo', 'switchTab', 'reLaunch', 'redirectTo']
-			type:'navigateTo',
+			path:'/pages/index/index',
 			name:'index'
 		},
 		{
-			path:'pages/market/market',
-			type:'navigateTo',
+			path:'/pages/market/market',
 			name:'market'
 		},
 		{
-			path:'pages/news/news',
-			type:'navigateTo',
+			path:'/pages/news/news',
 			name:'news'
 		},
 		{
-			path:'pages/my/my',
-			type:'navigateTo',
+			path:'/pages/my/my',
 			name:'my'
 		},
 		{
 			path:'pages/trade/trade',
-			type:'navigateTo',
-			name:'my'
+			name:'trade'
 		},
 		{
 			path:'pages/login/login',
-			type:'navigateTo',
 			name:'login'
 		}
 	]
 })
 
-router.beforeEach((to,from,next)=>{
-	// console.log(to,from,next)
-})
+// router.beforeEach((to,from,next)=>{
+// 	console.log(to,from,next)
+// })
 
 export default router;

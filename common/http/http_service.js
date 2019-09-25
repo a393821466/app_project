@@ -1,6 +1,8 @@
-import http from './request.config';
+import http from './request.config'
+import utils from '../utils'
 import chache from '../utils/storage'
 import store from '@/store'
+
 import {
 	showUiToast,
 	appToast
@@ -39,7 +41,7 @@ http.interceptor.response((response) => {
 	return Promise.resolve(res)
 }, (err) => {
 	if (err.errMsg == 'request:fail timeout') {
-		errToast(apiUrl[err.config.url] + '请求超时')
+		errToast(apiUrl[err.config.url] + '超时')
 	}
 	uni.stopPullDownRefresh();
 	return err;
@@ -62,8 +64,11 @@ http.validateStatus = (response) => {
 
 // 针对API提示错误
 const apiUrl = {
-	'/console/subsystem/announce': '公告',
-	'/getHomeTemplate': '套餐'
+	'/console/subsystem/announce': '获取公告',
+	'/getHomeTemplate': '获取套餐',
+	'/getPublicKey':'获取密钥',
+	'/login':'登录',
+	'/register':'注册'
 }
 
 // token失效的时候做的事情
@@ -85,14 +90,14 @@ const errToast = (title) => {
 
 const mathQuery = options => {
 	const newOptions = {
-		headers: {}
+		header: {}
 	}
 	if (options) {
-		newOptions.headers = Object.assign(options.headers, {
-			'Content-Type': options.headers['Content-Type'] || 'application/json'
+		newOptions.header = Object.assign(options.header, {
+			'Content-Type': options.header['Content-Type'] || 'application/json'
 		})
 	} else {
-		newOptions.headers = {
+		newOptions.header = {
 			'Content-Type': 'application/json'
 		}
 	}
@@ -112,39 +117,54 @@ export default {
 	// POST请求
 	post: (url, params = {}) => {
 		const {
-			data,
-			options
+			data
 		} = params
-		const config = mathQuery(options);
-		return http.post({
-			url: url,
-			data: data,
-			config
-		});
+		let das = typeof data === 'string' ? data : JSON.stringify(data)
+		let key = store.getters.key || chache.get('key')
+		let ramdom=utils.ramdomString(16)
+		let aesPass=utils.encrypt(das,ramdom)
+		let rsaPass=utils.rsaEncrypt(key,ramdom)
+		let opt={
+			header:{
+				'Content-Type': 'application/json; charset=UTF-8',
+				'key': rsaPass,
+				'merchantCode': !chache.get('merchantInfo') ? '' : chache.get('merchantInfo').merchantCode
+			}
+		}
+		const config = mathQuery(opt);
+		return http.post(url,aesPass,config);
 	},
 	// PUT请求
 	put: (url, params = {}) => {
 		const {
-			data,
-			options
+			data
 		} = params
-		const config = mathQuery(options);
-		return http.put({
-			url: url,
-			data: data,
-			config
-		});
+		let das = typeof data === 'string' ? data : JSON.stringify(data)
+		let key = store.getters.key || chache.get('key')
+		let ramdom=utils.ramdomString(16)
+		let aesPass=utils.encrypt(das,ramdom)
+		let rsaPass=utils.rsaEncrypt(key,ramdom)
+		let opt={
+			header:{
+				'Content-Type': 'application/json; charset=UTF-8',
+				'key': rsaPass,
+				'merchantCode': !chache.get('merchantInfo') ? '' : chache.get('merchantInfo').merchantCode
+			}
+		}
+		const config = mathQuery(opt);
+		return http.put(url,aesPass,config);
 	},
 	// DELETE请求
-	del: (url, params = {}, config = {}) => {
+	del: (url, options) => {
 		const {
 			query
 		} = params
-		return http.delete({
-			url: url,
-			data: query,
-			config
-		});
+		options = {
+			params: {},
+			header: {},
+			dataType: 'json'
+		}
+		return http.delete(url, options);
 	},
 	// 上传
 	upload: (url, name, filePath, formData) => {
