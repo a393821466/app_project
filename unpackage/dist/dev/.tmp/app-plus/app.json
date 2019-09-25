@@ -64,7 +64,5 @@
   },
   "appname": "uni_video",
   "compilerVersion": "2.2.2",
-  "usingComponents": {
-    "router-link": "/node-modules/uni-simple-router/component/router-link"
-  }
+  "usingComponents": {}
 }

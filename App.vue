@@ -1,4 +1,12 @@
 <script>
+export default{
+	name:'App',
+	onLaunch(){
+		// #ifdef H5
+			this.$AppEntryController.handleH5BrowserAddressBarAuth();
+		// #endif
+	}
+}
 </script>
 
 <style lang='scss'>

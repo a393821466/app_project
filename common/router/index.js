@@ -1,39 +1,48 @@
-import Vue from 'vue'
-import Router from 'uni-simple-router'
+/* 
+ * 路由表对象：
+ * 该文件挂载在Vue原型中 $routers
+ * 作用：调用$routerConfig对象的方法 传入以下对应的路由对象，详细见common/router目录下的routerConfig.js
+ * 示例：this.$routers.push({route:this.$routerConfig.main,query:{a:1}})
+ * 注意：所有在pages目录下新建的页面都必须在"路由表"中进行声明，并且在框架的pages.json注册。
+ * 
+ * 配置参数项说明： 
+ * name:可选配置 （路由名称）
+ * path:必填配置 （路由地址）
+ * requiresAuth:可选配置 （是否权限路由）
+ */
 
-Vue.use(Router)
-// 配置路由
-const router=new Router({
-	routes:[
-		{
-			path:'/pages/index/index',
-			name:'index'
-		},
-		{
-			path:'/pages/market/market',
-			name:'market'
-		},
-		{
-			path:'/pages/news/news',
-			name:'news'
-		},
-		{
-			path:'/pages/my/my',
-			name:'my'
-		},
-		{
-			path:'pages/trade/trade',
-			name:'trade'
-		},
-		{
-			path:'pages/login/login',
-			name:'login'
-		}
-	]
-})
+export default {
+	// 权限路由
+	trade: {
+		name: "交易",
+		path: "/pages/trade/trade",
+		requiresAuth: true
+	},
+	my: {
+		name: "我的",
+		path: "/pages/my/my",
+		requiresAuth: true
+	},
 
-// router.beforeEach((to,from,next)=>{
-// 	console.log(to,from,next)
-// })
-
-export default router;
+	// 非权限路由
+	index: {
+		name: "首页",
+		path: "/pages/index/index"
+	},
+	reg: {
+		name: "行情",
+		path: "/pages/market/market"
+	},
+	news: {
+		name: "资讯",
+		path: "/pages/news/news"
+	},
+	login: {
+		name: "登录",
+		path: "/pages/login/login"
+	}
+	// reg: {
+	// 	name: "注册",
+	// 	path: "/pages/login/login"
+	// }
+}

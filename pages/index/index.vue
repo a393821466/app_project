@@ -90,6 +90,9 @@
 		},
 		// 右边按钮
 		onNavigationBarButtonTap(val){
+			uni.navigateTo({
+				url:'/pages/login/login'
+			})
 		},
 		// 下拉刷新
 		onPullDownRefresh(){

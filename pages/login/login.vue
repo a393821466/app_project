@@ -80,7 +80,7 @@
 				this.loginApp(this.ruleForm).then(res=>{
 					this.btnLoading=false;
 					if(res.status){
-						_that.$openPage('index')
+						// this.$Router.pushTab({path: '/pages/index/index', query: { userId: '110' }})
 					}
 				}).catch(err=>{
 					this.btnLoading=false;

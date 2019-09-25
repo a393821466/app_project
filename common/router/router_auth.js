@@ -1,22 +1,11 @@
-import Vue from 'vue'
-import App from './App'
-import utils from './common/utils'
-import routers from './common/router'
-import mRouter from './common/router/router.config'
-// import './common/router/router_auth'
-import chache from './common/utils/storage'
-import $AppEntryController from './common/utils/appEntryController.js'
-import store from './store'
-Vue.config.productionTip = false
-
-// 挂载路由
-Vue.prototype.$store=store;
-Vue.prototype.$routers = routers;
-Vue.prototype.$mRouter = mRouter;
-Vue.prototype.$AppEntryController = $AppEntryController;
+import routers from './index'
+import routerConfig from './router.config'
+import chache from '../utils/storage'
+import utils from '../utils'
 
 
-mRouter.beforeEach((navType, to) => {
+routerConfig.beforeEach((navType, to) => {
+	console.log(navType,to);
 	if (to.route === undefined) throw ("路由钩子函数中没有找到to.route对象，路由信息:" + JSON.stringify(to));
 	if (to.route.path === routers.login.path && chache.get('token')) {
 		uni.redirectTo({
@@ -54,10 +43,3 @@ mRouter.beforeEach((navType, to) => {
 		})
 	}
 })
-// store赋值给vue原型链
-App.mpType = 'app'
-const app = new Vue({
-    ...App,
-	store
-})
-app.$mount()

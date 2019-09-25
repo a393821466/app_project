@@ -61,7 +61,7 @@ export const hideUiLoading=()=>{
  * @params String confirmColor 确定文字的颜色
  * */
 export const showUiModel=({
-	title='标题',
+	title='提示',
 	content='这是一个h5的模态框',
 	showCancel=false,
 	cancelText='取消',
