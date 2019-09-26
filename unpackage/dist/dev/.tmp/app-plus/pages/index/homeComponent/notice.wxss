@@ -53,11 +53,13 @@
       width: 80rpx;
       text-align: center;
       position: relative;
+      padding-top: 20rpx;
 }
 .noticeBox .notice_box .notice_icon .uni-icon-laba {
         position: absolute;
         top: 20rpx;
         left: 22rpx;
+        display: block;
 }
 .noticeBox .notice_box .notice {
       width: 620rpx;

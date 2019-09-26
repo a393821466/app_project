@@ -5,6 +5,9 @@ export default{
 		// #ifdef H5
 			this.$AppEntryController.handleH5BrowserAddressBarAuth();
 		// #endif
+	},
+	onShow(){
+		console.log(111);
 	}
 }
 </script>

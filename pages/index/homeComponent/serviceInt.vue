@@ -10,12 +10,8 @@
 </template>
 
 <script>
-	import fontsIcon from '@/components/ui-font/'
 	export default{
 		name:'serviceInt',
-		components:{
-			fontsIcon
-		},
 		data(){
 			return{
 				da:''

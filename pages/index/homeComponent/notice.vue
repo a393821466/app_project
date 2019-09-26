@@ -14,11 +14,7 @@
 </template>
 
 <script>
-	import fontsIcon from '@/components/ui-font/'
 	export default {
-		components:{
-			fontsIcon
-		},
 		props:{
 			duration:{
 				type:Number,
@@ -98,10 +94,12 @@
 		  	  width:80rpx;
 		  	  text-align:center;
 			  position:relative;
+			  padding-top:20rpx;
 			  .uni-icon-laba{
 				 position:absolute;
 				 top:20rpx;
 				 left:22rpx;
+				 display:block;
 			  }
 		  	  // font-size:36rpx;
 		  }

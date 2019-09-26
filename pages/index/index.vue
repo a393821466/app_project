@@ -6,6 +6,7 @@
 		<category :categoryList='temList'></category>
 		<guide></guide>
 		<activity></activity>
+		<footer-view></footer-view>
 	</view>
 </template>
 
@@ -90,8 +91,8 @@
 		},
 		// 右边按钮
 		onNavigationBarButtonTap(val){
-			uni.navigateTo({
-				url:'/pages/login/login'
+			this.$mRouter.push({
+				route:this.$routers.register
 			})
 		},
 		// 下拉刷新

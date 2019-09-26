@@ -39,7 +39,12 @@ export default {
 	},
 	login: {
 		name: "登录",
-		path: "/pages/login/login"
+		path: "/pages/userAuth/login"
+	},
+	register: {
+		name: "注册",
+		path: "/pages/userAuth/register",
+		requiresAuth: true
 	}
 	// reg: {
 	// 	name: "注册",

@@ -80,7 +80,9 @@
 				this.loginApp(this.ruleForm).then(res=>{
 					this.btnLoading=false;
 					if(res.status){
-						// this.$Router.pushTab({path: '/pages/index/index', query: { userId: '110' }})
+						this.$mRouter.switchTab({
+							route:this.$routers.index
+						})
 					}
 				}).catch(err=>{
 					this.btnLoading=false;
@@ -105,5 +107,77 @@
 </script>
 
 <style lang="scss">
-@import './login.scss';
+.login{
+	.logo{
+		text-laign:center;
+		margin-bottom:30rpx;
+		.logo_img{
+			width:180rpx;
+			height:180rpx;
+			margin:70rpx auto 30rpx;
+			display:block;
+			border-radius:100%;
+			background:#999;
+		}
+		.logo_txt{
+			display:block;
+			text-align:center;
+			font-size:40rpx;
+			font-weight:600;
+			color:#666;
+		}
+	}
+	.login_form{
+		width:600rpx;
+		margin:120rpx auto 0;
+		.login_form_node{
+			position:relative;
+			height:80rpx;
+			margin-bottom:30rpx;
+			padding:15rpx 70rpx 0;
+			&.login_form_userPhone,&.login_form_userPassword{
+				border-bottom:1rpx solid  #ccc;
+			}
+			.loginsIcon{
+				position:absolute;
+				left:15rpx;
+				top:20rpx;
+			}
+			.loginInput{
+				width:100%;
+				height:60rpx;
+				font-size:28rpx;
+				border:none;
+				outline: none;
+			}
+			.login_hide_pwd{
+				position:absolute;
+				right:15rpx;
+				top:25rpx;
+			}
+		}
+		.login_form_forgetPassword{
+			display:flex;
+			flex-direction: row;
+			.boxCheckBoxView{
+				flex:1;
+				.checkBoxStyle,.checkBoxText{
+					display:inline-block;
+					font-size:30rpx;
+					color:#666;
+				}
+			}
+			.forget_password{
+				flex:1;
+				text-align:right;
+				font-size:30rpx;
+				color:#666;
+			}
+		}
+		.login_submit_int{
+			border-radius:100rpx;
+			margin-top:50rpx;
+		}
+	}
+}
 </style>

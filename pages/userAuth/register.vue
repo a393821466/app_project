@@ -1,23 +1,23 @@
 <template>
 	<view>
-		交易
+		注册
 	</view>
 </template>
 
 <script>
-	import {showUiToast} from '@/common/utils/dialog.config'
+	import chache from '@/common/utils/storage'
 	export default {
 		data() {
 			return {
 				
-			}
+			};
 		},
-		methods: {
-			
+		onShow(){
+			chache.clear()
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 
 </style>

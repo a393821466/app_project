@@ -1,11 +1,10 @@
 import routers from './index'
-import routerConfig from './router.config'
+import mRouter from './router.config'
 import chache from '../utils/storage'
 import utils from '../utils'
 
 
-routerConfig.beforeEach((navType, to) => {
-	console.log(navType,to);
+mRouter.beforeEach((navType, to) => {
 	if (to.route === undefined) throw ("路由钩子函数中没有找到to.route对象，路由信息:" + JSON.stringify(to));
 	if (to.route.path === routers.login.path && chache.get('token')) {
 		uni.redirectTo({
@@ -15,6 +14,7 @@ routerConfig.beforeEach((navType, to) => {
 	}
 	// 过滤需要权限的页面
 	if (to.route.requiresAuth) {
+		console.log(222)
 		if (chache.get('token')) {
 			// 已经登录
 			uni[navType]({
