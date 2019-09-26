@@ -2,9 +2,10 @@
 	<view class="footer">
 		<view class="footer_mask"></view>
 		<view class="tabbar_footer">
-			<view class="tabbar_list" v-for="(item,idx) in data" :key="item.id">
-				<fonts-icon :type="item.icon" :size='item.sized' color='#666'></fonts-icon>
-				<view class="tabbar_title">{{item.title}}</view>
+			<view class="tabbar_list" v-for="(item,idx) in data" :key="item.id" @click="tabbarNavigator(item,idx)">
+				<fonts-icon :type="currentIndex == idx?item.iconActive:item.icon" :size='item.sized' 
+				:color='currentIndex == idx?"#2580EF":"#666"'></fonts-icon>
+				<view class="tabbar_title" :style='{color:currentIndex == idx?"#2580EF":"#999"}'>{{item.title}}</view>
 			</view>
 		</view>
 	</view>
@@ -12,6 +13,10 @@
 
 <script>
 	export default {
+		name:'tabbar',
+		props:{
+			current: { type: [Number, String], default: 0 },
+		},
 		data() {
 			return {
 				data:[
@@ -50,8 +55,15 @@
 						sized:46,
 						title:'我的'
 					}
-				]
+				],
+				currentIndex:this.current
 			};
+		},
+		methods:{
+			tabbarNavigator(item,idx){
+				this.currentIndex=idx;
+				this.$emit('click', idx)
+			}
 		}
 	}
 </script>

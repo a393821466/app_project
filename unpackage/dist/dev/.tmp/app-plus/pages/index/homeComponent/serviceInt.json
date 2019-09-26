@@ -1,6 +1,6 @@
 {
+  "component": true,
   "usingComponents": {
     "fonts-icon": "/components/ui-font/index"
-  },
-  "component": true
+  }
 }

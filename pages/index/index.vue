@@ -6,7 +6,6 @@
 		<category :categoryList='temList'></category>
 		<guide></guide>
 		<activity></activity>
-		<footer-view></footer-view>
 	</view>
 </template>
 
@@ -52,18 +51,18 @@
 			setTimeout(()=>{
 				that.$refs.eventNotice.flat=true;
 			},1000)
-			this.getTemplateData()
 		},
 		onHide(){
 			this.$refs.eventNotice.flat=false
 		},
-		onLoad() {
+		mounted() {
 			console.log('首次');
 			uni.setNavigationBarTitle({
 				title: '首页'
 			});
 			this.getMerchant()
 			this.getNoticeData()
+			this.getTemplateData()
 		},
 		methods: {
 			/*
@@ -87,7 +86,7 @@
 				}).catch(err=>{
 					return err;
 				})
-			}
+			},
 		},
 		// 右边按钮
 		onNavigationBarButtonTap(val){

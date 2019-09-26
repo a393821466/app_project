@@ -81,7 +81,7 @@
         }
       }
     },
-    "arguments": "{\"name\":\"首页\",\"query\":\"\",\"id\":0,\"pathName\":\"pages/index/index\"}",
+    "arguments": "{\"name\":\"首页\",\"query\":\"\",\"id\":0,\"pathName\":\"pages/commonPage/commonPage\"}",
     "allowsInlineMediaPlayback": true,
     "uni-app": {
       "compilerVersion": "2.2.2",

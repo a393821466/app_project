@@ -9,12 +9,14 @@ import $AppEntryController from './common/utils/appEntryController.js'
 import './common/router/router_auth'
 
 import fontsIcon from './components/ui-font/'
+import HeaderView from './components/header/header.vue'
 import FooterView from './components/footer/footer.vue'
 
 Vue.config.productionTip = false
 
 Vue.component('fonts-icon',fontsIcon)
 Vue.component('footer-view',FooterView)
+Vue.component('header-view',HeaderView)
 // 挂载路由
 Vue.prototype.$store=store
 Vue.prototype.$routers = routers

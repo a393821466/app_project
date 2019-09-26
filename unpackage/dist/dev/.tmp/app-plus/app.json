@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/commonPage/commonPage",
     "pages/index/index",
     "pages/market/market",
     "pages/news/news",
@@ -12,7 +13,8 @@
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
   },
   "networkTimeout": {
     "request": 15000,
@@ -28,6 +30,7 @@
   "compilerVersion": "2.2.2",
   "usingComponents": {
     "fonts-icon": "/components/ui-font/index",
-    "footer-view": "/components/footer/footer"
+    "footer-view": "/components/footer/footer",
+    "header-view": "/components/header/header"
   }
 }

@@ -1,19 +1,5 @@
 {
-  "navigationBarBackgroundColor": "#2580EF",
-  "enablePullDownRefresh": true,
-  "bounce": "none",
-  "titleNView": {
-    "buttons": [
-      {
-        "text": "登陆",
-        "fontSize": "14",
-        "float": "right",
-        "color": "#fff"
-      }
-    ]
-  },
   "usingComponents": {
-    "footer-view": "/components/footer/footer",
     "banner": "/pages/index/homeComponent/banner",
     "service-int": "/pages/index/homeComponent/serviceInt",
     "category": "/pages/index/homeComponent/category",
