@@ -1,17 +1,21 @@
 <template>
-	<view class="footer">
+	<view class="footer" :class="className">
 		<view class="footer_mask"></view>
 		<view class="tabbar_footer">
 			<view class="tabbar_list" v-for="(item,idx) in data" :key="item.id" @click="tabbarNavigator(item,idx)">
-				<fonts-icon :type="currentIndex == idx?item.iconActive:item.icon" :size='item.sized' 
-				:color='currentIndex == idx?"#2580EF":"#666"'></fonts-icon>
-				<view class="tabbar_title" :style='{color:currentIndex == idx?"#2580EF":"#999"}'>{{item.title}}</view>
+				<fonts-icon :type="current == idx?item.iconActive:item.icon" :size='item.sized' 
+				:color='current == idx?"#2580EF":"#666"'></fonts-icon>
+				<view class="tabbar_title" :style='{color:current == idx?"#2580EF":"#999"}'>{{item.title}}</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapActions,
+		mapGetters
+	} from 'vuex'
 	export default {
 		name:'tabbar',
 		props:{
@@ -24,44 +28,46 @@
 						id:1,
 						icon:'indexHome11',
 						iconActive:'indexHome22',
-						sized:46,
+						sized:48,
 						title:'首页'
 					},
 					{
 						id:2,
 						icon:'market11',
 						iconActive:'market22',
-						sized:48,
+						sized:50,
 						title:'行情'
 					},
 					{
 						id:3,
 						icon:'trade11',
 						iconActive:'trade22',
-						sized:48,
+						sized:50,
 						title:'交易'
 					},
 					{
 						id:4,
 						icon:'zixun11',
 						iconActive:'zixun22',
-						sized:48,
+						sized:50,
 						title:'资讯'
 					},
 					{
 						id:5,
 						icon:'my11',
 						iconActive:'my22',
-						sized:46,
+						sized:48,
 						title:'我的'
 					}
 				],
 				currentIndex:this.current
 			};
 		},
+		computed:{
+			...mapGetters(['className']),
+		},
 		methods:{
 			tabbarNavigator(item,idx){
-				this.currentIndex=idx;
 				this.$emit('click', idx)
 			}
 		}
@@ -80,20 +86,17 @@
 		bottom:0;
 		left:0;
 		height:110rpx;
-		background:#fff;
-		border-top:2rpx #eee solid;
 		display:flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		.tabbar_list{
 			flex:1;
 			text-align:center;
-			padding-top:10rpx;
+			padding-top:15rpx;
 			.tabbar_title{
-				font-size:28rpx;
+				font-size:24rpx;
 				font-weight:normal;
 				color:#666;
-				padding-top:3rpx;
 			}
 		}
 	}

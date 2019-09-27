@@ -1,1 +1,0 @@
-<view class="service"><view class="service-input"><fonts-icon vue-id="1" type="kefu" bind:__l="__l"></fonts-icon><text class="service-text">联系客服</text></view></view>

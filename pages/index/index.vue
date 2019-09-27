@@ -1,10 +1,53 @@
 <template>
-	<view class="page" :class="className">
-		<banner></banner>
-		<service-int></service-int>
-		<notice :noticeListData='getAnnountList' ref='eventNotice'></notice>
-		<category :categoryList='temList'></category>
-		<guide></guide>
+	<view class="indexHome" :class="className">
+		<!--轮播-->
+		<swiper :indicator-dots="true" :circular='true' indicator-active-color="#ffffff" indicator-color="rgba(255, 255, 255, .3)"
+		 :autoplay="true" :interval="5000" :duration="500" class="banner">
+			<swiper-item>
+				<image src="http://n.sinaimg.cn/sinacn20111/765/w1067h498/20190823/be7d-icqznha0469343.jpg" class="banner"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="http://img5.imgtn.bdimg.com/it/u=538384195,3019699462&fm=26&gp=0.jpg" class="banner"></image>
+			</swiper-item>
+		</swiper>
+		<!--客服-->
+		<view class="service">
+			<view class="service-input">
+				<!-- <text class="test service-icon">&#xe60b;</text> -->
+				<fonts-icon type="kefu"></fonts-icon>
+				<text class="service-text">联系客服</text>
+			</view>
+		</view>
+		<!-- 通告 -->
+		<view class="noticeBox">
+		  <view class="notice_box">
+			  <view class="notice_icon">
+				  <fonts-icon type="laba"></fonts-icon>
+			  </view>
+			  <view class="notice">
+				  <transition name="slide">
+					<view class="text" :key="text.id">{{text.val}}</view>
+				  </transition>
+			  </view>
+		  </view>
+		</view>
+		<!--分类导航-->
+		<view class="category_home">
+			<view class="category_list" v-for="(item,idx) in categoryData" :key="item.id" :class="idx===categoryData.length-1&&categoryData.length%2==1?'upside_list_class':''"
+			 :style='{backgroundColor:!item.color?"#999":item.color}'>
+				<text class="category_text">{{item.templateName}}</text>
+				<view :class="idx===categoryData.length-1&&categoryData.length%2==1?'img':'category_backgorund'"></view>
+			</view>
+		</view>
+		<!-- 新手引导 -->
+		<view class="news_prople">
+			<view class="news_title">
+				<text>新手引导</text>
+			</view>
+			<view class="news_images">
+				<text class="news_text">新手引导-快速上手-日进斗金</text>
+			</view>
+		</view>
 		<activity></activity>
 	</view>
 </template>
@@ -14,19 +57,30 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
-	import banner from './homeComponent/banner'
-	import serviceInt from './homeComponent/serviceInt'
-	import notice from './homeComponent/notice'
-	import category from './homeComponent/category'
-	import guide from './homeComponent/guide'
 	import activity from './homeComponent/activity'
 	export default {
 		name:'index',
+		data(){
+			return {
+				number: 0,
+				timer:null,
+				flat:false
+			}
+		},
+		watch:{
+			openTimer(news,old){
+				if(news){
+					this.startMove()
+				}else{
+					this.closeTimer()
+				}
+			}
+		},
 		computed: {
 			/*
 			** 公告，模板数据
 			*/
-			...mapGetters(['notice', 'temList','className']),
+			...mapGetters(['notice', 'temList','className','openTimer']),
 			// 公告的处理
 			getAnnountList() {
 				if (this.notice.length > 0) {
@@ -45,21 +99,18 @@
 					return ['暂无内容...'];
 				}
 			},
-		},
-		onShow(){
-			const that=this
-			setTimeout(()=>{
-				that.$refs.eventNotice.flat=true;
-			},1000)
-		},
-		onHide(){
-			this.$refs.eventNotice.flat=false
+			text() {
+				return {
+					id: this.number,
+					val: this.getAnnountList[this.number]
+				}
+			},
+			categoryData(){
+				return this.temList.length>0?this.temList:[]
+			}
 		},
 		mounted() {
 			console.log('首次');
-			uni.setNavigationBarTitle({
-				title: '首页'
-			});
 			this.getMerchant()
 			this.getNoticeData()
 			this.getTemplateData()
@@ -87,29 +138,33 @@
 					return err;
 				})
 			},
+			startMove () {
+			  // eslint-disable-next-line
+			  this.timer = setTimeout(() => {
+				if (this.number === this.getAnnountList.length-1) {
+				  this.number = 0;
+				} else {
+				  this.number += 1;
+				}
+				console.log(1111);
+				this.startMove();
+			  }, 3000); // 滚动不需要停顿则将2000改成动画持续时间
+			},
+			closeTimer(){
+				// 关闭计时器
+				clearTimeout(this.timer)
+				this.timer=null
+			}
 		},
-		// 右边按钮
-		onNavigationBarButtonTap(val){
-			this.$mRouter.push({
-				route:this.$routers.register
-			})
-		},
-		// 下拉刷新
-		onPullDownRefresh(){
-			this.getNoticeData()
-			this.getTemplateData()
+		destroyed(){
+			this.closeTimer()
 		},
 		components: {
-			banner,
-			serviceInt,
-			category,
-			notice,
-			guide,
 			activity
 		}
 	}
 </script>
 
 <style lang="scss">
-	@import url("index.scss");
+	@import "./index.scss"
 </style>

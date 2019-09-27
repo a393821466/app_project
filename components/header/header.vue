@@ -1,5 +1,5 @@
 <template>
-	<view class="uni_topbar" :style="style">
+	<view class="uni_topbar" :style="style" :class="className">
 		<view class="tabbar_top" :style="[{'height': customBarH + 'px', 'padding-top': statusBarH + 'px'}]">
 		</view>
 		<view class="tabbar_navigator" :style="[{'height': customBarH + 'px'}]">
@@ -10,7 +10,9 @@
 				<view class="home_left">
 					<slot name="header_Left" v-if="headerLeft"></slot>
 					<view class="home_back_icon" @click='onBack' v-else>
-						返回
+						<view class="back_return">
+							<fonts-icon type="fanhui" color='#eee' size='32'></fonts-icon>
+						</view>
 					</view>
 				</view>
 				<view class="home_center">
@@ -26,6 +28,10 @@
 </template>
 
 <script>
+	import {
+		mapActions,
+		mapGetters
+	} from 'vuex'
 	export default {
 		name: 'tabbar',
 		data() {
@@ -53,6 +59,7 @@
 			}
 		},
 		computed: {
+			...mapGetters(['className']),
 			style() {
 				let _style = `height: ${this.customBarH}px;`
 				return _style
@@ -70,7 +77,6 @@
 <style lang="scss">
 	.tabbar_navigator {
 		position: fixed;
-		background: #2580EF;
 		width: 100%;
 		top: 0;
 		left: 0;
@@ -87,7 +93,9 @@
 			display:flex;
 			flex-direction: row;
 			width:100%;
+			/* #ifndef APP-PLUS */
 			padding:0 20rpx;
+			/* #endif */
 			.home_left{
 				width:20%;
 				flex:0 0 20%;
@@ -96,14 +104,26 @@
 				.home_back_icon{
 					position:relative;
 					font-size:30rpx;
+					/* #ifdef APP-PLUS */
+					line-height:120rpx;
+					/* #endif */
+					/* #ifndef APP-PLUS */
 					line-height:90rpx;
+					/* #endif */
 					color:#ccc;
-					.icon_Back{
-						width:20rpx;
-						height:28rpx;
+					.back_return{
 						display:block;
-						position:absolute;
-						top:10rpx;
+						.uni-icon-fanhui{
+							display:block;
+							text-align:left;
+							// text-indent:20rpx;
+							/* #ifdef APP-PLUS */
+							line-height:120rpx;
+							/* #endif */
+							/* #ifndef APP-PLUS */
+							line-height:90rpx;
+							/* #endif */
+						}
 					}
 				}
 			}
@@ -114,7 +134,12 @@
 				font-size:34rpx;
 				color:#eee;
 				font-weight:800;
+				/* #ifdef APP-PLUS */
+				line-height:120rpx;
+				/* #endif */
+				/* #ifndef APP-PLUS */
 				line-height:90rpx;
+				/* #endif */
 			}
 			.home_right{
 				width:20%;

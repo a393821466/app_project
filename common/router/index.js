@@ -25,6 +25,10 @@ export default {
 	},
 
 	// 非权限路由
+	home: {
+		name: "",
+		path: "/pages/commonPage/commonPage"
+	},
 	index: {
 		name: "首页",
 		path: "/pages/index/index"

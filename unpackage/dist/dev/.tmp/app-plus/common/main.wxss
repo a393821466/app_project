@@ -30,6 +30,16 @@
 /* 白天模式 */
 .daytime {
   background-color: #fff;
+  height: 100%;
+}
+/* 自定义头部导航颜色(白天) */
+.daytime .tabbar_navigator {
+  background-color: #2580EF;
+}
+/* 自定义tabbar颜色(白天) */
+.daytime .tabbar_footer {
+  background-color: #fff;
+  border-top: 1rpx #eee solid;
 }
 /* 图标颜色和样式 */
 .daytime .uni-icon-kefu {
@@ -79,6 +89,16 @@
 /* 夜间模式 */
 .evening {
   background: #000;
+  height: 100%;
+}
+/* 自定义头部导航颜色(夜间) */
+.evening .tabbar_navigator {
+  background-color: #000;
+}
+/* 自定义tabbar颜色(夜间) */
+.evening .tabbar_footer {
+  background-color: #000;
+  border-top: 1rpx #222 solid;
 }
 /* 图标颜色和样式 */
 .evening .uni-icon-kefu {
@@ -118,6 +138,9 @@
 .evening .activity_box .activity_list {
   background-image: none !important;
   background-color: #222;
+}
+.evening .activity_image {
+  display: none;
 }
 .evening .activity_box .day_money {
   color: #ccc !important;

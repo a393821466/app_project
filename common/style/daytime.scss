@@ -5,6 +5,16 @@ $fontColor:#666; /* 字体颜色 */
 /* 白天模式 */
 .daytime{
 	background-color:$bgColor;
+	height:100%;
+}
+/* 自定义头部导航颜色(白天) */
+.daytime .tabbar_navigator{
+	background-color:$materColor;
+}
+/* 自定义tabbar颜色(白天) */
+.daytime .tabbar_footer{
+	background-color:$bgColor;
+	border-top:1rpx #eee solid;
 }
 /* 图标颜色和样式 */
 .daytime .uni-icon-kefu{

@@ -8,30 +8,47 @@
 					"pullToRefresh": {
 						"support": true,
 						"height":"100",
+						/* #ifdef APP-PLUS */
+						"offset":"75",
+						/* #endif */
+						/* #ifdef H5 */
+						"offset":"50",
+						/* #endif */
 						"style": "circle"
 					}
-				}
+				},
+				"navigationStyle":"custom"
 			}
 		},
         {
             "path" : "pages/index/index",
-            "style" : {}
+            "style" : {
+				"navigationStyle":"custom"
+			}
         },
         {
             "path" : "pages/market/market",
-            "style" : {}
+            "style" : {
+				"navigationStyle":"custom"
+			}
         },
         {
             "path" : "pages/news/news",
-            "style" : {}
+            "style" : {
+				"navigationStyle":"custom"
+			}
         },
         {
             "path" : "pages/my/my",
-            "style" : {}
+            "style" : {
+				"navigationStyle":"custom"
+			}
         },
         {
             "path" : "pages/trade/trade",
-            "style" : {}
+            "style" : {
+				"navigationStyle":"custom"
+			}
         }
     ],
 	"subPackages": [
@@ -78,8 +95,8 @@
         "navigationBarTextStyle" : "white",
         "navigationBarTitleText" : "",
         "navigationBarBackgroundColor" : "#F8F8F8",
-        "backgroundColor" : "#F8F8F8",
-		"navigationStyle":"custom"
+        "backgroundColor" : "#F8F8F8"
+		// "navigationStyle":"custom"
     }
     // "tabBar" : {
     //     "color" : "#999999",

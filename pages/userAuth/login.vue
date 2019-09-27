@@ -78,10 +78,10 @@
 				}
 				this.btnLoading=true;
 				this.loginApp(this.ruleForm).then(res=>{
-					this.btnLoading=false;
+					_that.btnLoading=false;
 					if(res.status){
-						this.$mRouter.switchTab({
-							route:this.$routers.index
+						_that.$mRouter.push({
+							route:_that.$routers.home
 						})
 					}
 				}).catch(err=>{

@@ -99,7 +99,7 @@ export default{
 ** 热门活动
 */
 .hot_activity{
-	margin-top:20rpx;
+	margin:20rpx 0rpx;
 	.activity_title{
 		width:100%;
 		display:flex;

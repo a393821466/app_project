@@ -1,10 +1,7 @@
 {
+  "navigationStyle": "custom",
   "usingComponents": {
-    "banner": "/pages/index/homeComponent/banner",
-    "service-int": "/pages/index/homeComponent/serviceInt",
-    "category": "/pages/index/homeComponent/category",
-    "notice": "/pages/index/homeComponent/notice",
-    "guide": "/pages/index/homeComponent/guide",
+    "fonts-icon": "/components/ui-font/index",
     "activity": "/pages/index/homeComponent/activity"
   }
 }

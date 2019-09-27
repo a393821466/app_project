@@ -7,6 +7,16 @@ $nodeColor:#222; /* 各部分元素的颜色 */
 /* 夜间模式 */
 .evening{
 	background:$bgColor;
+	height:100%;
+}
+/* 自定义头部导航颜色(夜间) */
+.evening .tabbar_navigator{
+	background-color:$bgColor;
+}
+/* 自定义tabbar颜色(夜间) */
+.evening .tabbar_footer{
+	background-color:$bgColor;
+	border-top:1rpx $nodeColor solid;
 }
 /* 图标颜色和样式 */
 .evening .uni-icon-kefu{
@@ -45,6 +55,9 @@ $nodeColor:#222; /* 各部分元素的颜色 */
 .evening .activity_box .activity_list{
 	background-image:none !important;
 	background-color:$nodeColor;
+}
+.evening .activity_image{
+	display:none;
 }
 .evening .activity_box .day_money{
 	color:$fontColor !important;
