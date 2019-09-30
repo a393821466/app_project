@@ -1,8 +1,11 @@
+import Vue from 'vue'
 import routers from './index'
 import mRouter from './router.config'
 import chache from '../utils/storage'
 import utils from '../utils'
 
+Vue.prototype.$routers = routers
+Vue.prototype.$mRouter = mRouter
 
 mRouter.beforeEach((navType, to) => {
 	if (to.route === undefined) throw ("路由钩子函数中没有找到to.route对象，路由信息:" + JSON.stringify(to));
@@ -14,7 +17,6 @@ mRouter.beforeEach((navType, to) => {
 	}
 	// 过滤需要权限的页面
 	if (to.route.requiresAuth) {
-		console.log(222)
 		if (chache.get('token')) {
 			// 已经登录
 			uni[navType]({

@@ -59,17 +59,21 @@
 		computed:{
 			...mapGetters(['className','loginKey','merchantInfo'])
 		},
+		// 每次进来获取登录key
 		onShow(){
 			this.getKey()
 		},
-		onLoad(){
+		// 页面加载完成请求merchant
+		onReady(){
 			this.getMerchant()
 		},
 		methods: {
 			...mapActions(['getKey','getMerchant','loginApp']),
+			// 密码眼睛点击事件
 			onClickEye(){
 				this.eye_type=!this.eye_type;
 			},
+			// 登录点击事件
 			login_btn(){
 				const _that = this
 				if (!this.ruleForm.username || !this.ruleForm.password) {
@@ -80,14 +84,15 @@
 				this.loginApp(this.ruleForm).then(res=>{
 					_that.btnLoading=false;
 					if(res.status){
-						_that.$mRouter.push({
-							route:_that.$routers.home
+						_that.$mRouter.switchTab({
+							route:_that.$routers.index
 						})
 					}
 				}).catch(err=>{
 					this.btnLoading=false;
 				})
 			},
+			// 记住密码
 			submitRpassword(e){
 				this.optionVal=!this.optionVal
 				console.log(this.optionVal);

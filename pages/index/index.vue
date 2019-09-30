@@ -60,6 +60,8 @@
 		mapGetters
 	} from 'vuex'
 	import activity from './homeComponent/activity'
+	import {showUiModel,confirmModel} from '@/common/utils/dialog.config'
+	import chache from '@/common/utils/storage'
 	export default {
 		name:'index',
 		data(){
@@ -74,7 +76,7 @@
 			/*
 			** 公告，模板数据
 			*/
-			...mapGetters(['notice', 'temList','className']),
+			...mapGetters(['notice', 'temList','className','token']),
 			// 公告的处理
 			getAnnountList() {
 				if (this.notice.length > 0) {
@@ -125,7 +127,32 @@
 				}).catch(err=>{
 					return err;
 				})
+			},
+			// 下拉刷新
+			onPullDownRefresh(e){
+				setTimeout(() => {
+					uni.stopPullDownRefresh();
+				}, 3000);
 			}
+		},
+		onNavigationBarButtonTap(){
+			if(!this.token){
+				this.$mRouter.push({
+					route:this.$routers.login,
+					query:{
+						id:1
+					}
+				})
+			}else{
+				showUiModel({content:'您已登录,确认退出?',showCancel:true},(e)=>{
+					if(e.confirm){
+						console.log('进了这里')
+						chache.clear()
+						this.$store.dispatch('resetState')
+					}
+				})
+			}
+			
 		},
 		components: {
 			activity

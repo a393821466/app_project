@@ -102,11 +102,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/footer/footer":1,"components/header/header":1,"components/ui-font/index":1,"pages/index/homeComponent/activity":1};
+/******/ 		var cssChunks = {"components/ui-font/index":1,"pages/index/homeComponent/activity":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/footer/footer":"components/footer/footer","components/header/header":"components/header/header","components/ui-font/index":"components/ui-font/index","pages/index/homeComponent/activity":"pages/index/homeComponent/activity"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/ui-font/index":"components/ui-font/index","pages/index/homeComponent/activity":"pages/index/homeComponent/activity"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

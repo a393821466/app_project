@@ -35,5 +35,8 @@ export default{
 			commit('LOGIN',loginUser.data)
 		}
 		return loginUser;
+	},
+	resetState({commit}){
+		commit('RESETSTATE')
 	}
 }

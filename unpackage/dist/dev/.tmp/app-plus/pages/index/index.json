@@ -1,5 +1,32 @@
 {
-  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#2580EF",
+  "navigationBarTitleText": "首页",
+  "enablePullDownRefresh": true,
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "登录",
+        "fontSize": "14",
+        "float": "right",
+        "color": "#fff",
+        "width": "80px"
+      }
+    ]
+  },
+  "pullToRefresh": {
+    "support": true,
+    "color": "#ff3333",
+    "style": "default",
+    "contentdown": {
+      "caption": "下拉刷新"
+    },
+    "contentover": {
+      "caption": "释放刷新"
+    },
+    "contentrefresh": {
+      "caption": "刷新中"
+    }
+  },
   "usingComponents": {
     "fonts-icon": "/components/ui-font/index",
     "activity": "/pages/index/homeComponent/activity"

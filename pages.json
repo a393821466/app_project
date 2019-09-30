@@ -1,139 +1,137 @@
 {
-    "pages" : [
-		{
-		    "path" : "pages/commonPage/commonPage",
-			"style":{
-				"enablePullDownRefresh" : true, //开启下拉刷新
-				"app-plus": {
-					"pullToRefresh": {
-						"support": true,
-						"height":"100",
-						/* #ifdef APP-PLUS */
-						"offset":"75",
-						/* #endif */
-						/* #ifdef H5 */
-						"offset":"50",
-						/* #endif */
-						"style": "circle"
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarBackgroundColor":"#2580EF",
+			"navigationBarTitleText":"首页",
+			"enablePullDownRefresh" : true, //开启下拉刷新
+			"titleNView" : {
+				"buttons" : [
+					{
+						"text" : "登录",
+						"fontSize" : "14",
+						"float" : "right",
+						"color" : "#fff",
+						"width" : "80px"
 					}
-				},
-				"navigationStyle":"custom"
-			}
-		},
-        {
-            "path" : "pages/index/index",
-            "style" : {
-				"navigationStyle":"custom"
-			}
-        },
-        {
-            "path" : "pages/market/market",
-            "style" : {
-				"navigationStyle":"custom"
-			}
-        },
-        {
-            "path" : "pages/news/news",
-            "style" : {
-				"navigationStyle":"custom"
-			}
-        },
-        {
-            "path" : "pages/my/my",
-            "style" : {
-				"navigationStyle":"custom"
-			}
-        },
-        {
-            "path" : "pages/trade/trade",
-            "style" : {
-				"navigationStyle":"custom"
-			}
-        }
-    ],
-	"subPackages": [
-		{
-			"root": "pages/userAuth",
-			"pages": [{
-					"path" : "/login",
-					"style" : {
-						"navigationBarBackgroundColor" : "#2580EF",
-						"navigationBarTitleText" : "登陆",
-						"titleNView" : {
-							"buttons" : [
-								{
-									"text" : "立即注册",
-									"fontSize" : "14",
-									"float" : "right",
-									"color" : "#fff",
-									"width" : "80px"
-								}
-							]
-						}
-					}
-				},
-				{
-					"path" : "/register",
-					"style" : {
-						"navigationBarBackgroundColor" : "#2580EF",
-						"navigationBarTitleText" : "注册"
+				]
+			},
+			"app-plus": {
+				"pullToRefresh": {
+					"support": true,
+					"color": "#ff3333",
+					"style": "default",
+					"contentdown": {
+						"caption": "下拉刷新"
+					},
+					"contentover": {
+						"caption": "释放刷新"
+					},
+					"contentrefresh": {
+						"caption": "刷新中"
 					}
 				}
-			]
+			}
 		}
+	}, {
+		"path" : "pages/market/market",
+		"style" : {
+			"navigationBarTitleText":"行情"
+		}
+	},  {
+		"path" : "pages/news/news",
+		"style" : {
+			"navigationBarTitleText":"资讯"
+		}
+	},  {
+		"path" : "pages/my/my",
+		"style" : {
+			"navigationBarTitleText":"我的"
+		}
+	},  {
+		"path" : "pages/trade/trade",
+		"style" : {
+			"navigationBarTitleText":"交易"
+		}
+	},
+	{
+		"path" : "pages/userAuth/login",
+		"style" : {
+			"navigationBarBackgroundColor" : "#2580EF",
+			"navigationBarTitleText" : "登陆",
+			"titleNView" : {
+				"buttons" : [
+					{
+						"text" : "立即注册",
+						"fontSize" : "14",
+						"float" : "right",
+						"color" : "#fff",
+						"width" : "80px"
+					}
+				]
+			}
+		}
+	},  
+	{
+		"path" : "pages/userAuth/register",
+		"style" : {
+			"navigationBarBackgroundColor" : "#2580EF",
+			"navigationBarTitleText" : "注册"
+		}
+	}
 	],
 	"condition": {
 		//模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式（list 的索引项）
 		"list": [{
 			"name": "首页", //模式名称
-			"path": "pages/commonPage/commonPage", //启动页面，必选
+			"path": "pages/index/index", //启动页面，必选
 			"query": "" //启动参数，在页面的onLoad函数里面得到。
 		}]
 	},
     "globalStyle" : {
         "navigationBarTextStyle" : "white",
         "navigationBarTitleText" : "",
-        "navigationBarBackgroundColor" : "#F8F8F8",
-        "backgroundColor" : "#F8F8F8"
+        "navigationBarBackgroundColor" : "#2580EF",
+        "backgroundColor" : "#2580EF"
 		// "navigationStyle":"custom"
+    },
+    "tabBar" : {
+        "color" : "#999999",
+        "selectedColor" : "#2580EF",
+        "borderStyle" : "black",
+        "backgroundColor" : "#ffffff",
+        "list" : [
+            {
+                "pagePath" : "pages/index/index",
+                "text" : "首页",
+                "iconPath" : "static/tabBarIco/home.png",
+                "selectedIconPath" : "static/tabBarIco/home_sel.png"
+            },
+            {
+                "pagePath" : "pages/market/market",
+                "text" : "行情",
+                "iconPath" : "static/tabBarIco/market.png",
+                "selectedIconPath" : "static/tabBarIco/market_sel.png"
+            },
+            {
+                "pagePath" : "pages/trade/trade",
+                "text" : "交易",
+                "iconPath" : "static/tabBarIco/trade.png",
+                "selectedIconPath" : "static/tabBarIco/trade_sel.png"
+            },
+            {
+                "pagePath" : "pages/news/news",
+                "text" : "资讯",
+                "iconPath" : "static/tabBarIco/news.png",
+                "selectedIconPath" : "static/tabBarIco/news_sel.png"
+            },
+            {
+                "pagePath" : "pages/my/my",
+                "text" : "我的",
+                "iconPath" : "static/tabBarIco/my.png",
+                "selectedIconPath" : "static/tabBarIco/my_sel.png"
+            }
+        ]
     }
-    // "tabBar" : {
-    //     "color" : "#999999",
-    //     "selectedColor" : "#2580EF",
-    //     "borderStyle" : "black",
-    //     "backgroundColor" : "#ffffff",
-    //     "list" : [
-    //         {
-    //             "pagePath" : "pages/index/index",
-    //             "text" : "首页",
-    //             "iconPath" : "static/tabBarIco/home.png",
-    //             "selectedIconPath" : "static/tabBarIco/home_sel.png"
-    //         },
-    //         {
-    //             "pagePath" : "pages/market/market",
-    //             "text" : "行情",
-    //             "iconPath" : "static/tabBarIco/market.png",
-    //             "selectedIconPath" : "static/tabBarIco/market_sel.png"
-    //         },
-    //         {
-    //             "pagePath" : "pages/trade/trade",
-    //             "text" : "交易",
-    //             "iconPath" : "static/tabBarIco/trade.png",
-    //             "selectedIconPath" : "static/tabBarIco/trade_sel.png"
-    //         },
-    //         {
-    //             "pagePath" : "pages/news/news",
-    //             "text" : "资讯",
-    //             "iconPath" : "static/tabBarIco/news.png",
-    //             "selectedIconPath" : "static/tabBarIco/news_sel.png"
-    //         },
-    //         {
-    //             "pagePath" : "pages/my/my",
-    //             "text" : "我的",
-    //             "iconPath" : "static/tabBarIco/my.png",
-    //             "selectedIconPath" : "static/tabBarIco/my_sel.png"
-    //         }
-    //     ]
-    // }
 }
