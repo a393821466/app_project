@@ -1,7 +1,7 @@
 <template>
 	<view class="footer" :class="className">
-		<view class="footer_mask"></view>
-		<view class="tabbar_footer">
+		<view class="footer_mask" :style="footerStyle"></view>
+		<view class="tabbar_footer" :style="footerStyle">
 			<view class="tabbar_list" v-for="(item,idx) in data" :key="item.id" @click="tabbarNavigator(item,idx)">
 				<fonts-icon :type="current == idx?item.iconActive:item.icon" :size='item.sized' 
 				:color='current == idx?"#2580EF":"#666"'></fonts-icon>
@@ -65,6 +65,10 @@
 		},
 		computed:{
 			...mapGetters(['className']),
+			footerStyle(){
+				let _style = `height: ${this.customFooter}px;`
+				return _style
+			}
 		},
 		methods:{
 			tabbarNavigator(item,idx){
@@ -77,7 +81,6 @@
 <style lang="scss">
 .footer{
 	.footer_mask{
-		height:110rpx;
 		width:100%;
 	}
 	.tabbar_footer{
@@ -85,7 +88,6 @@
 		position:fixed;
 		bottom:0;
 		left:0;
-		height:110rpx;
 		display:flex;
 		flex-direction: row;
 		flex-wrap: nowrap;

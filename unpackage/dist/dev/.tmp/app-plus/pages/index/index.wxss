@@ -35,6 +35,9 @@
   font-family: iconfont;
   margin-left: 20rpx;
 }
+.scroll-Y {
+  height: 700rpx;
+}
 .indexHome {
   /* background:#fff; */
   /* background:#E6CEAC; */

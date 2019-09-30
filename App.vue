@@ -9,8 +9,10 @@
 					// #ifndef MP
 					if (e.platform == 'android') {
 						Vue.prototype.customBar = e.statusBarHeight + 50
+						Vue.prototype.customFooter=e.statusBarHeight+40
 					} else {
 						Vue.prototype.customBar = e.statusBarHeight + 45
+						Vue.prototype.customFooter=e.statusBarHeight+40
 					}
 					// #endif
 		
@@ -25,8 +27,10 @@
 					
 					// #ifdef H5
 					Vue.prototype.customBar = e.statusBarHeight+45
+					Vue.prototype.customFooter=e.statusBarHeight+55
 					// this.$AppEntryController.handleH5BrowserAddressBarAuth();
 					// #endif
+					// Vue.prototype.phoneHeight=e.windowHeight-(Vue.prototype.customBar+Vue.prototype.customFooter);
 				}
 			})
 		},

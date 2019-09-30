@@ -20,16 +20,18 @@
 		</view>
 		<!-- 通告 -->
 		<view class="noticeBox">
-		  <view class="notice_box">
-			  <view class="notice_icon">
-				  <fonts-icon type="laba"></fonts-icon>
-			  </view>
-			  <view class="notice">
-				  <transition name="slide">
-					<view class="text" :key="text.id">{{text.val}}</view>
-				  </transition>
-			  </view>
-		  </view>
+			<view class="notice_box">
+				<view class="notice_icon">
+					<fonts-icon type="laba"></fonts-icon>
+				</view>
+				<view class="notice">
+					<swiper autoplay="true" interval="5000"  :disable-touch="disableTouch">
+						<swiper-item v-for="(item, index) in getAnnountList" :key="index">
+							<text class="text">{{item}}</text>
+						</swiper-item>
+					</swiper>
+				</view>
+			</view>
 		</view>
 		<!--分类导航-->
 		<view class="category_home">
@@ -64,23 +66,15 @@
 			return {
 				number: 0,
 				timer:null,
-				flat:false
-			}
-		},
-		watch:{
-			openTimer(news,old){
-				if(news){
-					this.startMove()
-				}else{
-					this.closeTimer()
-				}
+				flat:false,
+				disableTouch:true
 			}
 		},
 		computed: {
 			/*
 			** 公告，模板数据
 			*/
-			...mapGetters(['notice', 'temList','className','openTimer']),
+			...mapGetters(['notice', 'temList','className']),
 			// 公告的处理
 			getAnnountList() {
 				if (this.notice.length > 0) {
@@ -97,12 +91,6 @@
 					return arr
 				} else {
 					return ['暂无内容...'];
-				}
-			},
-			text() {
-				return {
-					id: this.number,
-					val: this.getAnnountList[this.number]
 				}
 			},
 			categoryData(){
@@ -137,27 +125,7 @@
 				}).catch(err=>{
 					return err;
 				})
-			},
-			startMove () {
-			  // eslint-disable-next-line
-			  this.timer = setTimeout(() => {
-				if (this.number === this.getAnnountList.length-1) {
-				  this.number = 0;
-				} else {
-				  this.number += 1;
-				}
-				console.log(1111);
-				this.startMove();
-			  }, 3000); // 滚动不需要停顿则将2000改成动画持续时间
-			},
-			closeTimer(){
-				// 关闭计时器
-				clearTimeout(this.timer)
-				this.timer=null
 			}
-		},
-		destroyed(){
-			this.closeTimer()
 		},
 		components: {
 			activity

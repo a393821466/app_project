@@ -3,14 +3,16 @@
 	<header-view :headerLeft="true" :title="getNavigatorName">
 		<view class="top_right" slot="header_Right" @click="goLogin">
 			注册
-		</view>
+		</view>`
 	</header-view>
-	<index-page :style="{'display':currentIndex==0?'block':'none'}" ref="goIndexPage"></index-page>
-	<market-page :style="{'display':currentIndex==1?'block':'none'}"></market-page>
-	<trade-page :style="{'display':currentIndex==2?'block':'none'}"></trade-page>
-	<news-page :style="{'display':currentIndex==3?'block':'none'}"></news-page>
-	<my-page :style="{'display':currentIndex==4?'block':'none'}"></my-page>
-	<footer-view :current='currentIndex' @click="tabClick"></footer-view>
+	<!-- <scroll-view :scroll-top="scrollTop" scroll-y="true" :style="{height:phoneHeight+'px'}" @scroll="scroll"> -->
+		<index-page v-if="currentIndex==0"></index-page>
+		<market-page v-if="currentIndex==1"></market-page>
+		<trade-page v-if="currentIndex==2"></trade-page>
+		<news-page v-if="currentIndex==3"></news-page>
+		<my-page v-if="currentIndex==4"></my-page>
+		<footer-view :current='currentIndex' @click="tabClick"></footer-view>
+	<!-- </scroll-view> -->
 </view>
 </template>
 
@@ -57,24 +59,26 @@ export default{
 				default:
 					return '我的'
 			}
+		},
+		bodyStyle(){
+			let _style = `height: ${this.phoneHeight}px;`
+			console.log(_style);
+			return _style
 		}
 	},
 	data(){
 		return {
-			currentIndex:0
+			currentIndex:0,
+			scrollTop:0,
+			old: {
+				scrollTop: 0
+			}
 		}
 	},
 	methods:{
-		...mapActions(['noticeTimer']),
 		// 索引按钮
 		tabClick(val){
 			const _that=this
-			if(val==0){
-				console.log('进入了这里')
-				this.noticeTimer(true)
-			}else{
-				this.noticeTimer(false)
-			}
 			if(val==2||val==4){
 				if(!chache.has('token')||!this.token){
 					showUiModel({content:'您还未登陆,去登陆?',showCancel:true},(e)=>{
@@ -95,6 +99,10 @@ export default{
 			this.$mRouter.push({
 				route:this.$routers.register
 			})
+		},
+		scroll(e) {
+			console.log(e.detail)
+			this.old.scrollTop = e.detail.scrollTop
 		}
 	},
 	onPullDownRefresh(e){

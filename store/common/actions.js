@@ -8,10 +8,6 @@ export default{
 	appColor({commit},name){
 		commit('CLASSNAME',name)
 	},
-	// 通知定时器是否关闭
-	noticeTimer({commit},flat){
-		commit('NOTICETIMER',flat)
-	},
 	// 获取登录Key
 	async getKey({commit}){
 		let key=await httpUtils.get(address.common.getPublicKey);
