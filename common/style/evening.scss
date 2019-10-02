@@ -30,6 +30,9 @@ $nodeColor:#222; /* 各部分元素的颜色 */
 .evening .service-icon,.evening .service-text{
 	color: $fontColor;
 }
+.evening .service-skeleton{
+	background:#999;
+}
 /* 首页通知字体颜色 */
 .evening .notice_box{
 	background:$nodeColor;
@@ -41,12 +44,21 @@ $nodeColor:#222; /* 各部分元素的颜色 */
 .evening .category_home .category_list{
 	opacity:0.7;
 }
+.evening .category_skeleton{
+	background:$nodeColor;
+}
 /* 新手引导字体颜色 */
 .evening .news_prople .news_images{
 	box-shadow:none;
 }
 .evening .news_prople .news_title,.evening .news_prople .news_text{
 	color:$fontColor;
+}
+.evening .news_skeleton{
+	background:$nodeColor
+}
+.evening .news_title_box{
+	background:#999;
 }
 /* 首页活动 */
 .evening .hot_activity .activity_title{
@@ -55,6 +67,12 @@ $nodeColor:#222; /* 各部分元素的颜色 */
 .evening .activity_box .activity_list{
 	background-image:none !important;
 	background-color:$nodeColor;
+}
+.evening .activity_image_skeleton{
+	background:#999;
+}
+.evening .activity_boxs .activity_list{
+	background:$nodeColor
 }
 .evening .activity_image{
 	display:none;

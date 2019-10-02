@@ -27,6 +27,7 @@
 /* 背景颜色 */
 /* 主题颜色 */
 /* 字体颜色 */
+/*骨架颜色*/
 /* 白天模式 */
 .daytime {
   background-color: #fff;
@@ -54,9 +55,12 @@
 .daytime .service-icon, .daytime .service-text {
   color: #2580EF;
 }
+.daytime .service-skeleton {
+  background: #d8e6f6;
+}
 /* 首页通知字体颜色 */
 .daytime .notice_box {
-  background: #ccc;
+  background: #efefef;
 }
 .daytime .text, .daytime .notice_icon {
   color: #333;
@@ -64,6 +68,9 @@
 /* 首页套餐分类颜色 */
 .daytime .category_home .category_list {
   opacity: 1;
+}
+.daytime .category_skeleton {
+  background: #efefef;
 }
 /* 新手引导字体颜色 */
 .daytime .news_prople .news_images {
@@ -73,9 +80,25 @@
 .daytime .news_prople .news_title, .daytime .news_prople .news_text {
   color: #666;
 }
+.daytime .news_title_box {
+  background: #efefef;
+}
+.daytime .news_skeleton {
+  background: #efefef;
+}
+.daytime .news_title_box {
+  background: #efefef;
+}
 /* 首页活动 */
 .daytime .hot_activity .activity_title {
   color: #666;
+}
+.daytime .activity_image_skeleton, .daytime .activity_boxs .activity_list {
+  background: #efefef;
+}
+/*行情分类*/
+.daytime .category_boxs .category_list {
+  background: #efefef;
 }
 /* 登陆 */
 .daytime .login_submit_int {
@@ -112,6 +135,9 @@
 .evening .service-icon, .evening .service-text {
   color: #ccc;
 }
+.evening .service-skeleton {
+  background: #999;
+}
 /* 首页通知字体颜色 */
 .evening .notice_box {
   background: #222;
@@ -123,6 +149,9 @@
 .evening .category_home .category_list {
   opacity: 0.7;
 }
+.evening .category_skeleton {
+  background: #222;
+}
 /* 新手引导字体颜色 */
 .evening .news_prople .news_images {
   -webkit-box-shadow: none;
@@ -131,6 +160,12 @@
 .evening .news_prople .news_title, .evening .news_prople .news_text {
   color: #ccc;
 }
+.evening .news_skeleton {
+  background: #222;
+}
+.evening .news_title_box {
+  background: #999;
+}
 /* 首页活动 */
 .evening .hot_activity .activity_title {
   color: #ccc;
@@ -138,6 +173,12 @@
 .evening .activity_box .activity_list {
   background-image: none !important;
   background-color: #222;
+}
+.evening .activity_image_skeleton {
+  background: #999;
+}
+.evening .activity_boxs .activity_list {
+  background: #222;
 }
 .evening .activity_image {
   display: none;

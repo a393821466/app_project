@@ -1,0 +1,98 @@
+<template>
+<!--分类导航-->
+<view class="category_box">
+	<view class="category_home" v-if="categoryData.length>0">
+		<view class="category_list" v-for="(item,idx) in categoryData" :key="item.id" :class="idx===categoryData.length-1&&categoryData.length%2==1?'upside_list_class':''"
+		 :style='{backgroundColor:!item.color?"#999":item.color}'>
+			<text class="category_text">{{item.templateName}}</text>
+			<view :class="idx===categoryData.length-1&&categoryData.length%2==1?'img':'category_backgorund'"></view>
+		</view>
+	</view>
+	<view class="category_home" v-else>
+		<view class="category_list category_skeleton" v-for="(item,idx) in 5" :key="idx">
+		</view>
+	</view>
+</view>
+
+</template>
+
+<script>
+export default{
+	name:'category',
+	data(){
+		return{
+			da:''
+		}
+	},
+	props:{
+		temList:{
+			type:[Array,Object],
+			required:true
+		}
+	},
+	computed:{
+		categoryData(){
+			return this.temList.length>0?this.temList:[]
+		}
+	}
+}
+</script>
+
+<style lang="scss">
+/**
+ * 分类
+ */
+.category_home {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	.category_list {
+		width: 345rpx;
+		height: 100rpx;
+		position: relative;
+		border-radius: 10rpx;
+		flex: 0 0 345rpx;
+		margin-bottom: 20rpx;
+		&:nth-child(even) {
+			margin-left: 20rpx;
+		}
+		.category_text {
+			text-align: center;
+			line-height: 100rpx;
+			font-size: 30rpx;
+			text-align: center;
+			display: block;
+			color: #fff;
+		}
+		.category_backgorund {
+			position: absolute;
+			background: url('../../../static/images/quick_bg3.png') no-repeat;
+			width: 100%;
+			height: 100%;
+			background-size: cover;
+			top: 0;
+			left: 0;
+		}
+	}
+	.upside_list_class {
+		width: 100%;
+		flex: 0 0 100%;
+		position:relative;
+		.img {
+			background: url('../../../static/images/quick_bg4.png') no-repeat;
+			position:absolute;
+			top:0;
+			left:0;
+			width:100%;
+			height:100%;
+			background-size:cover;
+		}
+	}
+	.category_skeleton{
+		&:nth-last-child(1){
+			width: 100%;
+			flex: 0 0 100%;
+		}
+	}
+}
+</style>

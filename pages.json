@@ -2,7 +2,6 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarBackgroundColor":"#2580EF",
 			"navigationBarTitleText":"首页",
 			"enablePullDownRefresh" : true, //开启下拉刷新
 			"titleNView" : {
@@ -15,33 +14,35 @@
 						"width" : "80px"
 					}
 				]
-			},
-			"app-plus": {
-				"pullToRefresh": {
-					"support": true,
-					"color": "#ff3333",
-					"style": "default",
-					"contentdown": {
-						"caption": "下拉刷新"
-					},
-					"contentover": {
-						"caption": "释放刷新"
-					},
-					"contentrefresh": {
-						"caption": "刷新中"
-					}
-				}
 			}
+			// "app-plus": {
+			// 	"pullToRefresh": {
+			// 		"support": true,
+			// 		"color": "#ff3333",
+			// 		"style": "default",
+			// 		"contentdown": {
+			// 			"caption": "下拉刷新"
+			// 		},
+			// 		"contentover": {
+			// 			"caption": "释放刷新"
+			// 		},
+			// 		"contentrefresh": {
+			// 			"caption": "刷新中"
+			// 		}
+			// 	}
+			// }
 		}
 	}, {
 		"path" : "pages/market/market",
 		"style" : {
-			"navigationBarTitleText":"行情"
+			"navigationBarTitleText":"行情",
+			"enablePullDownRefresh" : true
 		}
 	},  {
 		"path" : "pages/news/news",
 		"style" : {
 			"navigationBarTitleText":"资讯"
+			
 		}
 	},  {
 		"path" : "pages/my/my",
@@ -57,7 +58,6 @@
 	{
 		"path" : "pages/userAuth/login",
 		"style" : {
-			"navigationBarBackgroundColor" : "#2580EF",
 			"navigationBarTitleText" : "登陆",
 			"titleNView" : {
 				"buttons" : [
@@ -75,7 +75,6 @@
 	{
 		"path" : "pages/userAuth/register",
 		"style" : {
-			"navigationBarBackgroundColor" : "#2580EF",
 			"navigationBarTitleText" : "注册"
 		}
 	}
@@ -92,13 +91,13 @@
     "globalStyle" : {
         "navigationBarTextStyle" : "white",
         "navigationBarTitleText" : "",
-        "navigationBarBackgroundColor" : "#2580EF",
-        "backgroundColor" : "#2580EF"
+        "navigationBarBackgroundColor" : "#1b82d1",
+        "backgroundColor" : "#1b82d1"
 		// "navigationStyle":"custom"
     },
     "tabBar" : {
         "color" : "#999999",
-        "selectedColor" : "#2580EF",
+        "selectedColor" : "#1b82d1",
         "borderStyle" : "black",
         "backgroundColor" : "#ffffff",
         "list" : [

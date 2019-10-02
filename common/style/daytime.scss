@@ -1,6 +1,7 @@
 $bgColor:#fff; /* 背景颜色 */
 $materColor:#2580EF; /* 主题颜色 */
 $fontColor:#666; /* 字体颜色 */ 
+$skeleton:#efefef; /*骨架颜色*/
 
 /* 白天模式 */
 .daytime{
@@ -29,9 +30,12 @@ $fontColor:#666; /* 字体颜色 */
 .daytime .service-icon,.daytime .service-text{
 	color:$materColor;
 }
+.daytime .service-skeleton{
+	background:#d8e6f6;
+}
 /* 首页通知字体颜色 */
 .daytime .notice_box{
-	background:#ccc;
+	background:$skeleton;
 }
 .daytime .text,.daytime .notice_icon{
 	color:#333;
@@ -40,6 +44,9 @@ $fontColor:#666; /* 字体颜色 */
 .daytime .category_home .category_list{
 	opacity:1;
 }
+.daytime .category_skeleton{
+	background:$skeleton;
+}
 /* 新手引导字体颜色 */
 .daytime .news_prople .news_images{
 	box-shadow:0 -4rpx 3rpx 2rpx rgba(0,0,0,.05), 0 5rpx 5rpx 0 #afbae5
@@ -47,10 +54,28 @@ $fontColor:#666; /* 字体颜色 */
 .daytime .news_prople .news_title,.daytime .news_prople .news_text{
 	color:$fontColor
 }
+.daytime .news_title_box{
+	background:$skeleton
+}
+.daytime .news_skeleton{
+	background:$skeleton
+}
+.daytime .news_title_box{
+	background:$skeleton
+}
 /* 首页活动 */
 .daytime .hot_activity .activity_title{
 	color:$fontColor
 }
+.daytime .activity_image_skeleton,.daytime .activity_boxs .activity_list{
+	background:$skeleton
+}
+
+/*行情分类*/
+.daytime .category_boxs .category_list{
+	background:$skeleton
+}
+
 /* 登陆 */
 .daytime .login_submit_int{
 	background:$materColor !important;

@@ -1,5 +1,4 @@
 {
-  "navigationBarBackgroundColor": "#2580EF",
   "navigationBarTitleText": "首页",
   "enablePullDownRefresh": true,
   "titleNView": {
@@ -13,22 +12,12 @@
       }
     ]
   },
-  "pullToRefresh": {
-    "support": true,
-    "color": "#ff3333",
-    "style": "default",
-    "contentdown": {
-      "caption": "下拉刷新"
-    },
-    "contentover": {
-      "caption": "释放刷新"
-    },
-    "contentrefresh": {
-      "caption": "刷新中"
-    }
-  },
   "usingComponents": {
-    "fonts-icon": "/components/ui-font/index",
+    "banner": "/pages/index/homeComponent/banner",
+    "service": "/pages/index/homeComponent/service",
+    "notice-view": "/pages/index/homeComponent/notice",
+    "category": "/pages/index/homeComponent/category",
+    "news-person": "/pages/index/homeComponent/news_person",
     "activity": "/pages/index/homeComponent/activity"
   }
 }

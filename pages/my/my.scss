@@ -1,0 +1,134 @@
+.my_page{
+	background:#eee;
+	/*头像，实名，用户名，设置*/
+	.my_top_box{
+		height:200rpx;
+		background:#1b82d1;
+		display:flex;
+		flex-direction:row;
+		padding:0 20rpx;
+		.my_tops{
+			flex:0 0 1;
+		}
+		.avatar_top{
+			width:200rpx;
+			flex:0 0 200rpx;
+			.icon_avatar{
+				width:130rpx;
+				height:130rpx;
+				border:solid 6rpx #60a9e0;
+				border-radius:10rpx;
+				margin:20rpx;
+				position:relative;
+				.icons_single{
+					width:130rpx;
+					height:130rpx;
+					overflow:hidden;
+					border-radius:10rpx;
+					.avatar{
+						width:100%;
+						height:100%;
+					}
+				}
+				.vip{
+					position:absolute;
+					width:50rpx;
+					height:50rpx;
+					background:#fff;
+					bottom:-16rpx;right:-16rpx;
+					border-radius:50%;
+					.vip_center{
+						width:42rpx;
+						height:42rpx;
+						background:#e3ad89;
+						border-radius:50%;
+						margin:5rpx 5rpx;
+						font-size:24rpx;
+						text-align:center;
+						line-height:40rpx;
+						font-weight:bold;
+						color:#fff;
+					}
+				}
+			}
+		}
+		.userInfo{
+			width:420rpx;
+			flex:0 0 420rpx;
+			.realName{
+				margin:20rpx 0rpx 30rpx 0;
+				.goReadName,.goReadNameTwo{
+					font-size:24rpx;
+					display:inline-block;
+					border:solid 1rpx rgba(255,255,255,.3);
+					padding:8rpx;
+					color:#d5e8f7;
+					border-radius:10rpx;
+				}
+				.goReadNameTwo{
+					width:120rpx;
+					.readNameSuccess{
+						padding:0 10rpx 0;
+					}
+				}
+			}
+			.emial_userName{
+				width:220rpx;
+				height:50rpx;
+				background: rgba(255,255,255,.1);
+				padding:0 20rpx;
+				border-radius:50rpx;
+				border:2rpx solid rgba(255,255,255,.2);
+				.email{
+					font-size:28rpx;
+					display:block;
+					color:#d5e8f7;
+					line-height:50rpx;
+					text-align:center;
+				}
+			}
+		}
+		.setting{
+			width:90rpx;
+			flex:0 0 90rpx;
+			.setting_arrow{
+				width:90rpx;
+				line-height:200rpx;
+				transform: rotate(180deg);
+			}
+		}
+	}
+	/*账户余额，可用余额，冻结余额*/
+	.money_box{
+		height:140rpx;
+		padding:0 20rpx;
+		background:#1b82d1;
+		border-top:1rpx dashed rgba(255,255,255,.1);
+		display:flex;
+		flex-direction:row;
+		.money{
+			flex:1;
+			height:140rpx;
+			font-size:26rpx;
+			color:#eee;
+			text-align:center;
+			position:relative;
+			.num{
+				line-height:80rpx;
+				font-size:40rpx;
+			}
+			.rate{
+				padding-top:5rpx;
+			}
+			.right_line{
+				position:absolute;
+				right:0;
+				height:80rpx;
+				width:2rpx;
+				background:#eee;
+				top:30rpx;
+				opacity:.2;
+			}
+		}
+	}
+}

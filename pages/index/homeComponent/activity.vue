@@ -1,31 +1,43 @@
 <template>
 <!--热门活动-->
 	<view class="hot_activity">
-		<view class="activity_title">
-			<text class="activity_text">热门活动</text>
-			<view class="activity_image">
-				<text>快速上手让你盈利不停</text>
+		<view class="hot_activity_box" v-if="temList.length>0">
+			<view class="activity_title">
+				<text class="activity_text">热门活动</text>
+				<view class="activity_image">
+					<text>快速上手让你盈利不停</text>
+				</view>
+			</view>
+			<view class="activity_box">
+				<view class="activity_list" v-for="(item,idx) in activityArr" :key="item.id" :style="{
+					'background-image':'url('+item.imgUrl+')'
+				}">
+					<view class="activity activity_money">
+						<text class="money_num" :style="{color:item.moneyColor}">{{item.moneyNum}}</text>
+					</view>
+					<view class="activity activity_type">
+						<view class="day_money" :style="{color:item.activityUiTextColor,backgroundColor:item.activityUiBgColor}">
+							{{item.activityType}}
+						</view>
+						<text class="box_money_unit">元</text>
+					</view>
+					<view class="activity activity_task">
+						<view class="task" v-html="item.taskText" :style="{color:item.taskTextColor}">
+						</view>
+						<view class="to_detail" @click="goTask" :style="{color:item.taskBtnColor,background:'linear-gradient(-180deg,#fdfbf6,'+item.linearColor+')'}">
+							立即参与
+						</view>
+					</view>
+				</view>
 			</view>
 		</view>
-		<view class="activity_box">
-			<view class="activity_list" v-for="(item,idx) in activityArr" :key="item.id" :style="{
-				'background-image':'url('+item.imgUrl+')'
-			}">
-				<view class="activity activity_money">
-					<text class="money_num" :style="{color:item.moneyColor}">{{item.moneyNum}}</text>
+		<view class="hot_activity_box" v-else>
+			<view class="activity_title_skleton">
+				<view class="activity_image_skeleton">
 				</view>
-				<view class="activity activity_type">
-					<view class="day_money" :style="{color:item.activityUiTextColor,backgroundColor:item.activityUiBgColor}">
-						{{item.activityType}}
-					</view>
-					<text class="box_money_unit">元</text>
-				</view>
-				<view class="activity activity_task">
-					<view class="task" v-html="item.taskText" :style="{color:item.taskTextColor}">
-					</view>
-					<view class="to_detail" @click="goTask" :style="{color:item.taskBtnColor,background:'linear-gradient(-180deg,#fdfbf6,'+item.linearColor+')'}">
-						立即参与
-					</view>
+			</view>
+			<view class="activity_box activity_boxs">
+				<view class="activity_list" v-for="(item,idx) in 2" :key="idx">
 				</view>
 			</view>
 		</view>
@@ -33,6 +45,10 @@
 </template>
 
 <script>
+import {
+	mapActions,
+	mapGetters
+} from 'vuex'
 import {promtModel,showActionSheet} from '@/common/utils/dialog.config';
 export default{
 	name:'activity',
@@ -67,6 +83,9 @@ export default{
 				}
 			]
 		}
+	},
+	computed: {
+		...mapGetters(['temList']),
 	},
 	methods:{
 		// 去活动详情
@@ -167,6 +186,16 @@ export default{
 				margin:0 auto;
 				cursor:pointer;
 			}
+		}
+	}
+	.activity_image_skeleton{
+		width:280rpx;
+		height:40rpx;
+		border-radius:10rpx;
+	}
+	.activity_boxs{
+		.activity_list{
+			border-radius:10rpx;
 		}
 	}
 }

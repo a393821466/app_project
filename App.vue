@@ -1,7 +1,22 @@
 <script>
 	import Vue from 'vue'
+	import {
+		mapActions,
+		mapGetters
+	} from 'vuex'
 	export default {
 		name: 'App',
+		computed: {
+			/*
+			** 公告，模板数据
+			*/
+			...mapGetters(['className']),
+		},
+		watch:{
+			className(n,o){
+				console.log(n)
+			}
+		},
 		onLaunch: function() {
 		// 	uni.getSystemInfo({
 		// 		success: function(e) {

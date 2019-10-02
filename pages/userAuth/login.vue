@@ -1,7 +1,7 @@
 <template>
 	<view class="login" :class='className'>
 		<view class="logo">
-			<image :src="merchantInfo.merchantSetting.logoUrl" class="logo_img"></image>
+			<image :src="!merchantInfo?'':merchantInfo.merchantSetting.logoUrl" class="logo_img"></image>
 			<text class="logo_txt">欢迎来到{{merchantInfo.merchantName}}</text>
 		</view>
 		<view class="login_form">
