@@ -44,6 +44,53 @@
 				<view class="rate">冻结余额(元)</view>
 			</view>
 		</view>
+		<!-- 充提与钱包 -->
+		<view class="withdraw_rechange_moneyBag">
+			<view class="withdraw_rechange_title">
+				常用入口
+			</view>
+			<view class="withdraw_rechange_grid">
+				<view class="intOut">
+					<view class="icon_int rechange"><fonts-icon type="chongzhi" size='38' color='#fff'></fonts-icon></view>
+					<text class="intOutText">充值</text>
+				</view>
+				<view class="intOut">
+					<view class="icon_int moneybag"><fonts-icon type="qianbao" size='38' color='#fff'></fonts-icon></view>
+					<text class="intOutText">钱包</text>
+				</view>
+				<view class="intOut">
+					<view class="icon_int withdraw"><fonts-icon type="tixian" size='38' color='#fff'></fonts-icon></view>
+					<text class="intOutText">提现</text>
+				</view>
+			</view>
+		</view>
+		<!-- 九宫格用户和代理 -->
+		<view class="grid_box">
+			<view class="grid-title">
+				<view></view>
+				<text>会员中心</text>
+			</view>
+			<view class="grid">
+				<view class="grid-item-4" v-for="(item, index) in memberGrid" :key="index" @click="gridClick(item, index)">
+					<fonts-icon :type="item.icon" :size='item.sized' :color='item.colors'></fonts-icon>
+					<view class="item_text" v-text="item.name"></view>
+					<text v-if="showTip && item.tips" v-text="item.tips"></text>
+				</view>
+			</view>
+		</view>
+		<view class="grid_box">
+			<view class="grid-title">
+				<view></view>
+				<text>代理中心</text>
+			</view>
+			<view class="grid">
+				<view class="grid-item-4" v-for="(item, index) in agentGrid" :key="index" @click="gridClick(item, index)">
+					<fonts-icon :type="item.icon" :size='item.sized' :color='item.colors'></fonts-icon>
+					<view class="item_text" v-text="item.name"></view>
+					<text v-if="showTip && item.tips" v-text="item.tips"></text>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -51,8 +98,102 @@
 	export default {
 		data() {
 			return {
-				
+				showTip:false,
+				memberGrid: [	//格子数据列表
+					{
+						name: '银行卡',
+						icon:'yinhangqia',
+						sized:50,
+						colors:'#1b82d1',
+						tips: 19
+					},
+					{
+						name: '安全中心',
+						icon:'yanzhengma',
+						sized:50,
+						colors:'#00c1dd',
+						tips: ''
+					},
+					{
+						name: '交易明细',
+						icon:'jiaoyi-mingxichaxun',
+						sized:50,
+						colors:'#FD5E5E',
+						tips: ''
+					},
+					{
+						name: '充值记录',
+						icon:'icon-test',
+						sized:50,
+						colors:'#1b82d1',
+						tips: ''
+					},
+					{
+						name: '提现记录',
+						icon:'tixianjilu1',
+						sized:48,
+						colors:'#F5A623',
+						tips: ''
+					},
+					{
+						name: '红包',
+						icon:'red-packet_icon',
+						sized:48,
+						colors:'#d81e06',
+						tips: ''
+					},
+					{
+						name: '设置',
+						icon:'shezhi',
+						sized:48,
+						colors:'#666',
+						tips: ''
+					}
+				],
+				agentGrid:[
+					{
+						name: '开户',
+						icon:'kaihu',
+						sized:52,
+						colors:'#FD5E5E',
+						tips: ''
+					},
+					{
+						name: '推广链接',
+						icon:'youqinglianjieguanli',
+						sized:52,
+						colors:'#1b82d1',
+						tips: ''
+					},
+					{
+						name: '下级管理',
+						icon:'jinrongtubiaoxiajijigou',
+						sized:52,
+						colors:'#00c1dd',
+						tips: ''
+					},
+					{
+						name: '下级盈亏',
+						icon:'leijiyingkui',
+						sized:52,
+						colors:'#F5A623',
+						tips: ''
+					},
+					{
+						name: '订单管理',
+						icon:'dingdanguanli-',
+						sized:52,
+						colors:'#d81e06',
+						tips: ''
+					}
+				]
 			};
+		},
+		methods:{
+			gridClick (item, index) {	//格子菜单点击事件
+				console.log(item);
+				console.log(index);
+			}
 		}
 	}
 </script>

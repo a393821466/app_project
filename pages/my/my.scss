@@ -131,4 +131,107 @@
 			}
 		}
 	}
+	/*钱包与充提*/
+	.withdraw_rechange_moneyBag{
+		background:#fff;
+		margin:20rpx 0 0 0;
+		.withdraw_rechange_title{
+			padding:0 20rpx;
+			font-size:28rpx;
+			text-indent:20rpx;
+			line-height:70rpx;
+			border-bottom:1px solid #eee;
+			color:#999;
+		}
+		.withdraw_rechange_grid{
+			display:flex;
+			flex-direction:row;
+			padding:0 20rpx;
+			.intOut{
+				flex:1;
+				text-align:center;
+				margin:20rpx 0;
+				.icon_int{
+					width:74rpx;
+					height:74rpx;
+					margin:0 auto;
+					border-radius:12rpx;
+					background:#1b82d1;
+					line-height:65rpx;
+					&.rechange{
+						background:#F5A623;
+					}
+					&.withdraw{
+						background:#FD5E5E;
+					}
+				}
+				.intOutText{
+					font-size:26rpx;
+					display:block;
+					line-height:46rpx;
+					color:#999;
+				}
+			}
+		}
+	}
+	/* 九宫格布局 */
+	.grid_box{
+		background:#fff;
+		margin-top:20rpx;
+		.grid-title{
+			display: flex;
+			align-items: center;
+			font-size: 28rpx;
+			color: rgba(0,0,0,.63);
+			padding: 30rpx 40rpx;
+			// view{
+			// 	width: 8upx;
+			// 	height: 30upx;
+			// 	background-color: rgba(255,82,65,1);
+			// 	margin-right: 20upx;
+			// }
+		}
+		.grid{
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			border-top: 2rpx solid rgba(172,172,172,.2);
+			.grid-item-3,.grid-item-4{
+				box-sizing: border-box;
+				width: calc(100% / 3);
+				border-bottom: 2rpx solid rgba(172,172,172,.2);
+				border-right: 2rpx solid rgba(172,172,172,.2);
+				text-align: center;
+				padding: 40rpx 0;
+				position: relative;
+				image{
+					width: 48rpx;
+					height: 48rpx;
+				}
+				view{
+					font-size: 24rpx;
+					margin-top: 12rpx;
+					color: rgba(0,0,0,.53);
+				}
+				text{
+					display: block;
+					padding: 4rpx 8rpx;
+					text-align: center;
+					border-radius: 36rpx;
+					font-size: 24rpx;
+					background-color: rgba(255,82,65,1);
+					color: rgba(255,255,255,1);
+					position: absolute;
+					right: 6rpx;
+					top: 6rpx;
+				}
+			}
+			.grid-item-3:nth-child(3n + 3),.grid-item-4:nth-child(4n + 4){
+				border-right: none;
+			}
+			.grid-item-4{
+				width: calc(100% / 4);
+			}
+		}
+	}
 }
