@@ -1,111 +1,128 @@
 <template>
 	<view class="my_page">
-		<!--头像，实名，用户名，设置，-->
-		<view class="my_top_box">
-			<view class="my_tops avatar_top">
-				<view class="icon_avatar">
-					<view class="icons_single">
-						<image src="../../static/images/avatar.jpg" class="avatar"></image>
+		<view class="all_intOut" v-if="token">
+			<!--头像，实名，用户名，设置，-->
+			<view class="my_top_box">
+				<view class="my_tops avatar_top">
+					<view class="icon_avatar">
+						<view class="icons_single">
+							<image src="../../static/images/avatar.jpg" class="avatar"></image>
+						</view>
+						<view class="vip">
+							<view class="vip_center">V</view>
+						</view>
 					</view>
-					<view class="vip">
-						<view class="vip_center">V</view>
+				</view>
+				<view class="my_tops userInfo">
+					<view class="realName">
+						<view class="goReadNameTwo" v-if="getReadName"><fonts-icon type="shimingrenzheng" color='#eee' size='24'></fonts-icon><text class="readNameSuccess">已实名认证</text></view>
+						<text class="goReadName" v-else>您还未实名,点我去实名</text>
+						
+					</view>
+					<view class="emial_userName">
+						<text class="email">{{getUserPhone}}</text>
+					</view>
+				</view>
+				<view class="my_tops setting">
+					<view class="setting_arrow">
+						<fonts-icon type="fanhui" color='rgba(255,255,255,.5)' size='32'></fonts-icon>
 					</view>
 				</view>
 			</view>
-			<view class="my_tops userInfo">
-				<view class="realName">
-					<text class="goReadName">您还未实名,点我去实名</text>
-					<!-- <view class="goReadNameTwo"><fonts-icon type="shimingrenzheng" color='#eee' size='24'></fonts-icon><text class="readNameSuccess">已实名</text></view> -->
+			<!--账户余额，可用余额，冻结余额-->
+			<view class="money_box">
+				<view class="money">
+					<text class="num">{{!userBalance.balance?0:userBalance.balance}}</text>
+					<view class="rate">账户余额(元)</view>
+					<view class="right_line"></view>
 				</view>
-				<view class="emial_userName">
-					<text class="email">13423332323</text>
+				<view class="money">
+					<text class="num">{{!userBalance.amountUseable?0:userBalance.amountUseable}}</text>
+					<view class="rate">可提余额(元)</view>
+					<view class="right_line"></view>
 				</view>
-			</view>
-			<view class="my_tops setting">
-				<view class="setting_arrow">
-					<fonts-icon type="fanhui" color='rgba(255,255,255,.5)' size='32'></fonts-icon>
-				</view>
-			</view>
-		</view>
-		<!--账户余额，可用余额，冻结余额-->
-		<view class="money_box">
-			<view class="money">
-				<text class="num">0</text>
-				<view class="rate">账户余额(元)</view>
-				<view class="right_line"></view>
-			</view>
-			<view class="money">
-				<text class="num">0</text>
-				<view class="rate">可提余额(元)</view>
-				<view class="right_line"></view>
-			</view>
-			<view class="money">
-				<text class="num">0</text>
-				<view class="rate">冻结余额(元)</view>
-			</view>
-		</view>
-		<!-- 充提与钱包 -->
-		<view class="withdraw_rechange_moneyBag">
-			<view class="withdraw_rechange_title">
-				常用入口
-			</view>
-			<view class="withdraw_rechange_grid">
-				<view class="intOut">
-					<view class="icon_int rechange"><fonts-icon type="chongzhi" size='38' color='#fff'></fonts-icon></view>
-					<text class="intOutText">充值</text>
-				</view>
-				<view class="intOut">
-					<view class="icon_int moneybag"><fonts-icon type="qianbao" size='38' color='#fff'></fonts-icon></view>
-					<text class="intOutText">钱包</text>
-				</view>
-				<view class="intOut">
-					<view class="icon_int withdraw"><fonts-icon type="tixian" size='38' color='#fff'></fonts-icon></view>
-					<text class="intOutText">提现</text>
+				<view class="money">
+					<text class="num">{{!userBalance.amountFrozen?0:userBalance.amountFrozen}}</text>
+					<view class="rate">冻结余额(元)</view>
 				</view>
 			</view>
-		</view>
-		<!-- 九宫格用户和代理 -->
-		<view class="grid_box">
-			<view class="grid-title">
-				<view></view>
-				<text>会员中心</text>
-			</view>
-			<view class="grid">
-				<view class="grid-item-4" v-for="(item, index) in memberGrid" :key="index" @click="gridClick(item, index)">
-					<fonts-icon :type="item.icon" :size='item.sized' :color='item.colors'></fonts-icon>
-					<view class="item_text" v-text="item.name"></view>
-					<text v-if="showTip && item.tips" v-text="item.tips"></text>
+			<!-- 充提与钱包 -->
+			<view class="withdraw_rechange_moneyBag">
+				<view class="withdraw_rechange_title">
+					常用入口
+				</view>
+				<view class="withdraw_rechange_grid">
+					<view class="intOut">
+						<view class="icon_int rechange"><fonts-icon type="chongzhi" size='38' color='#fff'></fonts-icon></view>
+						<text class="intOutText">充值</text>
+					</view>
+					<view class="intOut">
+						<view class="icon_int moneybag"><fonts-icon type="qianbao" size='38' color='#fff'></fonts-icon></view>
+						<text class="intOutText">钱包</text>
+					</view>
+					<view class="intOut">
+						<view class="icon_int withdraw"><fonts-icon type="tixian" size='38' color='#fff'></fonts-icon></view>
+						<text class="intOutText">提现</text>
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="grid_box">
-			<view class="grid-title">
-				<view></view>
-				<text>代理中心</text>
-			</view>
-			<view class="grid">
-				<view class="grid-item-4" v-for="(item, index) in agentGrid" :key="index" @click="gridClick(item, index)">
-					<fonts-icon :type="item.icon" :size='item.sized' :color='item.colors'></fonts-icon>
-					<view class="item_text" v-text="item.name"></view>
-					<text v-if="showTip && item.tips" v-text="item.tips"></text>
+			<!-- 九宫格用户和代理 -->
+			<view class="grid_row_list">
+				<view class="grid_box">
+					<view class="grid-title">
+						<view></view>
+						<text>会员中心</text>
+					</view>
+					<view class="grid">
+						<view class="grid-item-4" v-for="(item, index) in memberGrid" :key="index" @click="gridClick(item, index)">
+							<fonts-icon :type="item.icon" :size='item.sized' :color='item.colors'></fonts-icon>
+							<view class="item_text" v-text="item.name"></view>
+							<text v-if="showTip && item.tips" v-text="item.tips"></text>
+						</view>
+					</view>
+				</view>
+				<view class="grid_box">
+					<view class="grid-title">
+						<view></view>
+						<text>代理中心</text>
+					</view>
+					<view class="grid">
+						<view class="grid-item-4" v-for="(item, index) in agentGrid" :key="index" @click="gridClick(item, index)">
+							<fonts-icon :type="item.icon" :size='item.sized' :color='item.colors'></fonts-icon>
+							<view class="item_text" v-text="item.name"></view>
+							<text v-if="showTip && item.tips" v-text="item.tips"></text>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
+		<no-login v-else></no-login>
 	</view>
 </template>
 
 <script>
+	import {
+		mapActions,
+		mapGetters
+	} from 'vuex'
+	import noLogin from '@/components/noLogin'
+	import chache from '@/common/utils/storage'
+	import utils from '@/common/utils'
 	export default {
+		name:'my_view',
+		components:{
+			noLogin
+		},
 		data() {
 			return {
-				showTip:false,
+				showTip:true,
 				memberGrid: [	//格子数据列表
 					{
 						name: '银行卡',
 						icon:'yinhangqia',
 						sized:50,
 						colors:'#1b82d1',
-						tips: 19
+						tips: ''
 					},
 					{
 						name: '安全中心',
@@ -140,7 +157,7 @@
 						icon:'red-packet_icon',
 						sized:48,
 						colors:'#d81e06',
-						tips: ''
+						tips: '12'
 					},
 					{
 						name: '设置',
@@ -189,10 +206,31 @@
 				]
 			};
 		},
+		computed:{
+			...mapGetters(['className','token','userBalance']),
+			// 处理手机号
+			getUserPhone(){
+				let getPhone=chache.get('userInfo');
+				return utils.hidePhone(getPhone.userPhone)
+			},
+			getReadName(){
+				let readName=chache.get('userInfo');
+				return readName.isUserVierity||chache.get('isUserVierity')?true:false
+			}
+		},
+		onShow(){
+			if(this.token){
+				this.getMines()
+			}
+		},
 		methods:{
+			...mapActions(['getMine']),
 			gridClick (item, index) {	//格子菜单点击事件
 				console.log(item);
 				console.log(index);
+			},
+			getMines(){
+				this.getMine()
 			}
 		}
 	}

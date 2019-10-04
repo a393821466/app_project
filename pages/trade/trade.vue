@@ -1,6 +1,7 @@
 <template>
-	<view>
-		交易
+	<view class="trade">
+		<view class="trade_box" v-if="token">交易</view>
+		<no-login v-else></no-login>
 	</view>
 </template>
 
@@ -9,27 +10,24 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
+	import noLogin from '@/components/noLogin'
 	import {showUiToast} from '@/common/utils/dialog.config'
 	export default {
+		name:'trade',
+		components:{
+			noLogin
+		},
 		data() {
 			return {
 				
 			}
 		},
 		computed: {
-			/*
-			** 公告，模板数据
-			*/
-			...mapGetters(['token']),
+			...mapGetters(['className','token']),
 		},
 		onShow(){
 			if(!this.token){
-				this.$mRouter.push({
-					route:this.$routers.login,
-					query:{
-						id:1
-					}
-				})
+				
 			}
 		},
 		methods: {

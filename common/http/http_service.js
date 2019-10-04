@@ -75,7 +75,12 @@ const apiUrl = {
 const reqError = (msg) => {
 	errToast(msg) 
 	chache.clear()
-	uni.reLaunch('pages/index/index')
+	store.dispatch('resetState')
+	// setTimeout(()=>{
+	// 	uni.reLaunch({
+	// 		url: '/pages/index/index'
+	// 	})
+	// },2000)
 }
 // 轻弹
 const errToast = (title) => {

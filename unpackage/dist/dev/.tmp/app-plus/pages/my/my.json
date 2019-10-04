@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "我的",
   "usingComponents": {
-    "fonts-icon": "/components/ui-font/index"
+    "fonts-icon": "/components/ui-font/index",
+    "no-login": "/components/noLogin/index"
   }
 }

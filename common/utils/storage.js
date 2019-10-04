@@ -13,7 +13,7 @@ class Storage {
     try {
       data = uni.getStorageSync(key)
     } catch (e) {
-      console.log(e)
+      console.log('找不到key')
     }
     return data
   }

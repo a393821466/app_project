@@ -1,7 +1,7 @@
 <template>
 	<view class="login" :class='className'>
 		<view class="logo">
-			<image :src="!merchantInfo?'':merchantInfo.merchantSetting.logoUrl" class="logo_img"></image>
+			<image :src="getMerchantLogo" class="logo_img"></image>
 			<text class="logo_txt">欢迎来到{{merchantInfo.merchantName}}</text>
 		</view>
 		<view class="login_form">
@@ -40,6 +40,7 @@
 	import {mapActions,mapGetters} from 'vuex'
 	import fontsIcon from '@/components/ui-font/'
 	import {showUiToast,appToast} from '@/common/utils/dialog.config'
+	import utils from '@/common/utils/'
 	export default {
 		name:'login',
 		components:{
@@ -57,7 +58,12 @@
 			}
 		},
 		computed:{
-			...mapGetters(['className','loginKey','merchantInfo'])
+			...mapGetters(['className','loginKey','merchantInfo']),
+			getMerchantLogo(){
+				if(this.merchantInfo){
+					return utils.getDomain()+'/'+this.merchantInfo.merchantSetting.logoUrl
+				}
+			}
 		},
 		// 每次进来获取登录key
 		onShow(){

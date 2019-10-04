@@ -95,6 +95,22 @@ class Tools {
 		}
 		return theRequest;
 	}
+	/*
+	* 获取域名
+	*/
+   getDomain(){
+	   const dev=process.env.NODE_ENV;
+	   const host='http://cxx.99qupai.com'
+	   return dev=='development'?host:location.origin
+   }
+   /*
+   * 手机号隐藏
+   */
+  hidePhone(phone){
+	  const strPhone=typeof phone==='string'?phone:JSON.stringify(phone);
+	  const p= '*******' + strPhone.substr(strPhone.length - 4);
+	  return p
+  }
 }
 
 

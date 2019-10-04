@@ -30,13 +30,17 @@ http.setConfig((config) => { /* config 为默认全局配置*/
 
 export default{
 	common:{
-		merchant: `/console/subsystem/merchant`,
-		announce: `/console/subsystem/announce`,
-		templateBox: `/getHomeTemplate`,
-		getPublicKey: `/getPublicKey`,
-		login: `/login`,
-		logout: `/logout`,
-		verifyImg: `/verifyImg`,
-		register: `/accountOpen`
+		merchant: `/console/subsystem/merchant`, // 品牌信息
+		announce: `/console/subsystem/announce`, // 公告
+		templateBox: `/getHomeTemplate`, // 套餐
+		getPublicKey: `/getPublicKey`, //登录key
+		login: `/login`, //登录
+		logout: `/logout`, // 登出
+		verifyImg: `/verifyImg`, // 验证码
+		register: `/accountOpen` // 注册开户
+	},
+	my:{
+		mine: `/trade/wallet/find/mine`, // 钱包余额
+		regBag: `/trade/wallet/redBag/find`  // 红包
 	}
 }
