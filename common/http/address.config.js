@@ -7,7 +7,7 @@ if(process.env.NODE_ENV==='development'){
 	// #endif
 	
 	// #ifndef H5
-	basicUrl='https://tmk.rvsii.com/apis'
+	basicUrl='http://cxx.99qupai.com/apis'
 	// #endif
 }else{
 	// #ifdef H5
@@ -31,6 +31,7 @@ http.setConfig((config) => { /* config 为默认全局配置*/
 export default{
 	common:{
 		merchant: `/console/subsystem/merchant`, // 品牌信息
+		carouselMap:`/console/subsystem/carouselMap`, // 轮播与活动
 		announce: `/console/subsystem/announce`, // 公告
 		templateBox: `/getHomeTemplate`, // 套餐
 		getPublicKey: `/getPublicKey`, //登录key

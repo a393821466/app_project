@@ -32,7 +32,7 @@ export const mutations={
 		chache.set('userInfo',val)
 	},
 	//重置state
-	['RESETSTATE'](state){
+	['RESETCOMMONSTATE'](state){
 		state.token='';
 		state.merchantInfo='';
 		state.loginKey=''

@@ -1,7 +1,7 @@
 <template>
 <!--热门活动-->
 	<view class="hot_activity">
-		<view class="hot_activity_box" v-if="temList.length>0">
+		<view class="hot_activity_box" v-if="actList.length>0">
 			<view class="activity_title">
 				<text class="activity_text">热门活动</text>
 				<view class="activity_image">
@@ -9,7 +9,10 @@
 				</view>
 			</view>
 			<view class="activity_box">
-				<view class="activity_list" v-for="(item,idx) in activityArr" :key="item.id" :style="{
+				<view class="activity_list" v-for="item in actList" :key="item.id" @click="goTask(item)">
+					<image :src="item.url" class="imgUrl"></image>
+				</view>
+				<!-- <view class="activity_list" v-for="(item,idx) in activityArr" :key="item.id" :style="{
 					'background-image':'url('+item.imgUrl+')'
 				}">
 					<view class="activity activity_money">
@@ -28,7 +31,7 @@
 							立即参与
 						</view>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<view class="hot_activity_box" v-else>
@@ -46,68 +49,35 @@
 
 <script>
 import {
-	mapActions,
-	mapGetters
+	mapActions
 } from 'vuex'
 import {promtModel,showActionSheet} from '@/common/utils/dialog.config';
 export default{
 	name:'activity',
-	data(){
-		return{
-			activityArr:[
-				{	
-					id:1,
-					moneyColor:'#fce8e3',
-					moneyNum:100,
-					activityType:'日欢迎礼金',
-					activityUiBgColor:'#efd196',
-					activityUiTextColor:'#dda643',
-					taskTextColor:'#efd196',
-					taskText:'单笔充值<br/>≥2000元',
-					taskBtnColor:'#dda643',
-					linearColor:'#fbe3ad',
-					imgUrl:require('../../../static/images/yh1.png')
-				},
-				{
-					id:2,
-					moneyColor:'#dfe9ef',
-					moneyNum:2000,
-					activityType:'新人礼包',
-					activityUiBgColor:'#8e9ccf',
-					activityUiTextColor:'#346cba',
-					taskTextColor:'#bab1d7',
-					taskText:'实名认证<br/>注册即送',
-					taskBtnColor:'#5e3397',
-					linearColor:'#b8a0e0',
-					imgUrl:require('../../../static/images/yh2.png')
-				}
-			]
+	props:{
+		actList:{
+			type:[Array,Object],
+			required:true
 		}
 	},
-	computed: {
-		...mapGetters(['temList']),
+	data(){
+		return{
+			da:''
+		}
+	},
+	computed:{
+		actData(){
+			return this.actList.length>0?this.actList:[]
+		}
 	},
 	methods:{
+		...mapActions(['sendUrl']),
 		// 去活动详情
-		goTask(){
-			// #ifdef H5
-			showActionSheet('',(res)=>{
-				console.log(res);
-			},(err)=>{
-				console.log(err);
+		goTask(item){
+			this.sendUrl(item.breakUrl)
+		    this.$mRouter.push({
+				route:this.$routers.webViewUi
 			})
-			// #endif
-			
-			// #ifdef APP-PLUS
-			promtModel('',(e)=>{
-				if(e.index==0){
-					uni.showToast({
-						title:JSON.stringify(e.value),
-						duration:2000
-					})
-				}
-			})
-			// #endif
 		}
 	}
 }
@@ -119,6 +89,15 @@ export default{
 */
 .hot_activity{
 	margin:20rpx 0rpx;
+	.activity_list{
+		width:100%;
+		height:180rpx;
+		margin-top:15rpx;
+		.imgUrl{
+			width:100%;
+			height:100%;
+		}
+	}
 	.activity_title{
 		width:100%;
 		display:flex;
@@ -138,56 +117,56 @@ export default{
 		color:#fff;
 		line-height:50rpx;
 	}
-	.activity_box{
-		.activity_list{
-			width:100%;
-			height:176rpx;
-			background-size:100% 100%;
-			margin:20rpx 0 10rpx 0;
-			display:flex;
-			flex-direction: row;
-		}
-		.activity{
-			flex:1;
-			.money_num{
-				font-size:92rpx;
-				line-height:176rpx;
-				text-align:center;
-				display:block;
-			}
-			.day_money{
-				font-size:28rpx;
-				width:160rpx;
-				text-align:center;	
-				margin-top:50rpx;
-			}
-			.box_money_unit{
-				font-size:36rpx;
-				color:#fff;
-			}
-			.task{
-				font-size:28rpx;
-				margin:20rpx 0 10rpx 0;
-				text-align:center;
-			}
-			text{
-				display:block;
-			}
-			.to_detail{
-				width:140rpx;
-				height:50rpx;
-				color: #dda643;
-				background-color: #fdfbf6;
-				border-radius:100rpx;
-				background: linear-gradient(-180deg,#fdfbf6,#fbe3ad);
-				font-size:28rpx;
-				line-height:50rpx;
-				text-align:center;
-				margin:0 auto;
-				cursor:pointer;
-			}
-		}
-	}
+	// .activity_box{
+	// 	.activity_list{
+	// 		width:100%;
+	// 		height:176rpx;
+	// 		background-size:100% 100%;
+	// 		margin:20rpx 0 10rpx 0;
+	// 		display:flex;
+	// 		flex-direction: row;
+	// 	}
+	// 	.activity{
+	// 		flex:1;
+	// 		.money_num{
+	// 			font-size:92rpx;
+	// 			line-height:176rpx;
+	// 			text-align:center;
+	// 			display:block;
+	// 		}
+	// 		.day_money{
+	// 			font-size:28rpx;
+	// 			width:160rpx;
+	// 			text-align:center;	
+	// 			margin-top:50rpx;
+	// 		}
+	// 		.box_money_unit{
+	// 			font-size:36rpx;
+	// 			color:#fff;
+	// 		}
+	// 		.task{
+	// 			font-size:28rpx;
+	// 			margin:20rpx 0 10rpx 0;
+	// 			text-align:center;
+	// 		}
+	// 		text{
+	// 			display:block;
+	// 		}
+	// 		.to_detail{
+	// 			width:140rpx;
+	// 			height:50rpx;
+	// 			color: #dda643;
+	// 			background-color: #fdfbf6;
+	// 			border-radius:100rpx;
+	// 			background: linear-gradient(-180deg,#fdfbf6,#fbe3ad);
+	// 			font-size:28rpx;
+	// 			line-height:50rpx;
+	// 			text-align:center;
+	// 			margin:0 auto;
+	// 			cursor:pointer;
+	// 		}
+	// 	}
+	// }
 	.activity_image_skeleton{
 		width:280rpx;
 		height:40rpx;

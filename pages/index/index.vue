@@ -1,11 +1,11 @@
 <template>
 	<view class="indexHome" :class="className">
-		<banner></banner>
+		<banner :bannerData='bannerData'></banner>
 		<service></service>
 		<notice-view :notice='notice'></notice-view>
 		<category :temList="temList"></category>
 		<news-person></news-person>
-		<activity></activity>
+		<activity :actList='actList'></activity>
 	</view>
 </template>
 
@@ -32,7 +32,13 @@
 			/*
 			** 公告，模板数据
 			*/
-			...mapGetters(['notice', 'temList','className','token']),
+			...mapGetters(['notice', 
+			'temList',
+			'className',
+			'token',
+			'bannerData',
+			'actList',
+			]),
 		},
 		onLoad(){
 			// uni.setNavigationBarColor({
@@ -49,17 +55,30 @@
 			this.getNoticeData()
 		},
 		onShow(){
+			this.getBanAct()
 			this.getTemplateData()
 		},
 		methods: {
 			/*
 			** 公告，模板发送store
 			*/
-			...mapActions(['getNotice', 'getTemplate','getMerchant']),
+			...mapActions(['getBannerActivity','getNotice', 'getTemplate','getMerchant']),
 			// 获取公告
 			getNoticeData() {
 				this.getNotice().then(res => {
-					
+					if(!res.status){
+						showUiModel(res.msg)
+					}
+				}).catch(err=>{
+					return err;
+				})
+			},
+			// 获取公告,活动
+			getBanAct(){
+				this.getBannerActivity().then(res=>{
+					if(!res.status){
+						showUiModel(res.msg)
+					}
 				}).catch(err=>{
 					return err;
 				})

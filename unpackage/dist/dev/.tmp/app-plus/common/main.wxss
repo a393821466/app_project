@@ -131,6 +131,10 @@
 .evening .uni-icon-laba {
   color: #ccc !important;
 }
+/* 首页轮播图 */
+.evening .uni-swiper-slides {
+  opacity: 0.8;
+}
 /* 首页客服字体颜色 */
 .evening .service-icon, .evening .service-text {
   color: #ccc;
@@ -183,11 +187,7 @@
 .evening .activity_image {
   display: none;
 }
-.evening .activity_box .day_money {
-  color: #ccc !important;
-  background-color: #222 !important;
-}
-.evening .activity_box .to_detail {
-  background: none !important;
+.evening .imgUrl {
+  opacity: 0.6;
 }
 

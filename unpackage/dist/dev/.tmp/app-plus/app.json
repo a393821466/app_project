@@ -6,7 +6,8 @@
     "pages/my/my",
     "pages/trade/trade",
     "pages/userAuth/login",
-    "pages/userAuth/register"
+    "pages/userAuth/register",
+    "pages/webViewUi/webViewUi"
   ],
   "window": {
     "navigationBarTextStyle": "white",

@@ -1,7 +1,7 @@
 <template>
 <!-- 通告 -->
 <view class="noticeBox">
-	<view class="notice_box">
+	<view class="notice_box" @click="goAnnount">
 		<view class="notice_icon">
 			<fonts-icon :type="notice.length>0?'laba':''"></fonts-icon>
 		</view>
@@ -49,6 +49,13 @@
 					return [''];
 				}
 			},
+		},
+		methods:{
+			goAnnount(){
+				this.$mRouter.push({
+					"route":this.$routers.notice
+				})
+			}
 		}
 	}
 </script>

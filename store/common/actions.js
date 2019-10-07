@@ -36,7 +36,7 @@ export default{
 		}
 		return loginUser;
 	},
-	resetState({commit}){
-		commit('RESETSTATE')
+	resetCommonState({commit}){
+		commit('RESETCOMMONSTATE')
 	}
 }

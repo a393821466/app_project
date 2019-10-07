@@ -75,7 +75,8 @@ const apiUrl = {
 const reqError = (msg) => {
 	errToast(msg) 
 	chache.clear()
-	store.dispatch('resetState')
+	store.dispatch('resetCommonState')
+	store.dispatch('resetHomeState')
 	// setTimeout(()=>{
 	// 	uni.reLaunch({
 	// 		url: '/pages/index/index'

@@ -45,9 +45,14 @@ export default {
 		name: "注册",
 		path: "/pages/userAuth/register",
 		requiresAuth: true
+	},
+	webViewUi: {
+		name: "客服或活动",
+		path: "/pages/webViewUi/webViewUi",
+		requiresAuth: true
+	},
+	notice:{
+		name:"公告",
+		path:"/pages/annount/annount"
 	}
-	// reg: {
-	// 	name: "注册",
-	// 	path: "/pages/login/login"
-	// }
 }

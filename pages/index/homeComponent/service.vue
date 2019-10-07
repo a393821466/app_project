@@ -1,7 +1,7 @@
 <template>
 <!--客服-->
 <view class="service">
-	<view class="service-input" v-if="notice.length>0">
+	<view class="service-input" v-if="notice.length>0" @click="goService">
 		<!-- <text class="test service-icon">&#xe60b;</text> -->
 		<fonts-icon type="kefu"></fonts-icon>
 		<text class="service-text">联系客服</text>
@@ -22,8 +22,17 @@
 			/*
 			** 公告，模板数据
 			*/
-			...mapGetters(['notice']),
+			...mapGetters(['notice','merchantInfo']),
 		},
+		methods:{
+			...mapActions(['sendUrl']),
+			goService(){
+				this.sendUrl(this.merchantInfo.merchantSetting.customerServiceUrl);
+				this.$mRouter.push({
+					'route':this.$routers.webViewUi
+				})
+			}
+		}
 	}
 </script>
 

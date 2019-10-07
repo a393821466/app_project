@@ -2,18 +2,55 @@
 <!--轮播-->
 <swiper :indicator-dots="true" :circular='true' indicator-active-color="#ffffff" indicator-color="rgba(255, 255, 255, .3)"
  :autoplay="true" :interval="5000" :duration="500" class="banner">
-	<swiper-item>
-		<image src="http://n.sinaimg.cn/sinacn20111/765/w1067h498/20190823/be7d-icqznha0469343.jpg" class="banner"></image>
-	</swiper-item>
-	<swiper-item>
-		<image src="http://img5.imgtn.bdimg.com/it/u=538384195,3019699462&fm=26&gp=0.jpg" class="banner"></image>
+	<swiper-item v-for="item in banners" :key="item.id" @click="onClickBanner(item)">
+		<image :src="item.url" class="banner"></image>
 	</swiper-item>
 </swiper>
 </template>
 
 <script>
+	import {
+		mapActions
+	} from 'vuex'
 	export default{
-		name:'swiper'
+		name:'swiper',
+		props:{
+			bannerData:{
+				type:[Array,Object],
+				required:true
+			}
+		},
+		computed:{
+			banners(){
+				return this.bannerData.length>0?this.bannerData:[];
+			}
+		},
+		methods:{
+			...mapActions(['sendUrl']),
+			onClickBanner(item){
+				let u = ''
+			    if (item.breakUrl === '' || !item.breakUrl) {
+				  return
+			    }
+			    if (process.env.NODE_ENV === 'development') {
+				  u = 'http://cxx.99qupai.com'
+			    } else {
+				  u = location.origin
+			    }
+			    let url = item.breakUrl
+			    if (url !== '') {
+				  let us = url.split(':')
+				if (us[0] === 'http' || us[0] === 'https') {
+					this.sendUrl(url)
+				} else {
+					this.sendUrl(u + '/' + url)
+				}
+				this.$mRouter.push({
+					route:this.$routers.webViewUi
+				})
+			  }
+			}
+		}
 	}
 </script>
 

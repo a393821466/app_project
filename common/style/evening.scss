@@ -26,6 +26,10 @@ $nodeColor:#222; /* 各部分元素的颜色 */
 .evening .uni-icon-laba{
 	color: $fontColor !important;
 }
+/* 首页轮播图 */
+.evening .uni-swiper-slides{
+	opacity: 0.8;
+}
 /* 首页客服字体颜色 */
 .evening .service-icon,.evening .service-text{
 	color: $fontColor;
@@ -77,10 +81,6 @@ $nodeColor:#222; /* 各部分元素的颜色 */
 .evening .activity_image{
 	display:none;
 }
-.evening .activity_box .day_money{
-	color:$fontColor !important;
-	background-color:$nodeColor !important;
-}
-.evening .activity_box .to_detail{
-	background:none !important;
+.evening .imgUrl{
+	opacity:0.6;
 }
