@@ -3,7 +3,8 @@ export const state={
 	className:'daytime',
 	token:'' || chache.get('token'),
 	merchantInfo:chache.get('merchantInfo'),
-	loginKey:''
+	loginKey:'',
+	userInfo:chache.get('userInfo')
 }
 
 export const mutations={
@@ -29,13 +30,15 @@ export const mutations={
 	['LOGIN'](state,val){
 		state.token=val.token;
 		chache.set('token',val.token);
+		state.userInfo=val
 		chache.set('userInfo',val)
 	},
 	//重置state
 	['RESETCOMMONSTATE'](state){
 		state.token='';
 		state.merchantInfo='';
-		state.loginKey=''
+		state.loginKey='';
+		state.userInfo={};
 	}
 }
 

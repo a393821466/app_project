@@ -1,11 +1,14 @@
 <template>
 <!--轮播-->
-<swiper :indicator-dots="true" :circular='true' indicator-active-color="#ffffff" indicator-color="rgba(255, 255, 255, .3)"
- :autoplay="true" :interval="5000" :duration="500" class="banner">
-	<swiper-item v-for="item in banners" :key="item.id" @click="onClickBanner(item)">
-		<image :src="item.url" class="banner"></image>
-	</swiper-item>
-</swiper>
+<view class="banner_home">
+	<swiper :indicator-dots="true" :circular='true' indicator-active-color="#ffffff" indicator-color="rgba(255, 255, 255, .3)"
+	 :autoplay="true" :interval="5000" :duration="500" class="banner" v-if="bannerData.length>0">
+		<swiper-item v-for="item in banners" :key="item.id" @click="onClickBanner(item)">
+			<image :src="item.url" class="banner"></image>
+		</swiper-item>
+	</swiper>
+	<view class="home_banner" v-else></view>
+</view>
 </template>
 
 <script>
@@ -56,8 +59,11 @@
 
 <style lang="scss">
 	/* 首页 */
-	.banner {
+	.banner,.home_banner {
 		width: 100%;
 		height: 320rpx;
+	}
+	.home_banner{
+		background:#eee;
 	}
 </style>

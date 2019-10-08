@@ -108,6 +108,9 @@ class Tools {
    * 手机号隐藏
    */
   hidePhone(phone){
+	  if(!phone){
+		  return
+	  }
 	  const strPhone=typeof phone==='string'?phone:JSON.stringify(phone);
 	  const p= strPhone.substr(0,3)+'****' + strPhone.substr(strPhone.length - 4);
 	  return p

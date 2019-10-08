@@ -4,6 +4,7 @@ import chache from '../utils/storage'
 import store from '@/store'
 
 import {
+	showUiModel,
 	showUiToast,
 	appToast
 } from '../utils/dialog.config'
@@ -13,7 +14,7 @@ http.interceptor.request((config, cancel) => {
 	config.header = {
 		...config.header
 	}
-	if (store.state.homeStore.token !== '' || chache.has('token')) {
+	if (store.state.homeStore.token || chache.has('token')) {
 		let token = !store.state.homeStore.token ? chache.get('token') : store.state.homeStore.token;
 		config.header['Authorization'] = token;
 	} else {
@@ -30,7 +31,16 @@ http.interceptor.response((response) => {
 	let res = response.data;
 	if (res.status === false) {
 		if (res.errorCode === 'LOGIN_INVALID') {
-			reqError(res.msg)
+			showUiModel({'content':res.msg,'showCancel':true},(e)=>{
+				if(e.confirm){
+					uni.navigateTo({
+						url:'/pages/userAuth/login'
+					})
+				}
+				chache.clear()
+				store.dispatch('resetCommonState')
+				store.dispatch('resetHomeState')
+			})
 			return
 		}
 		if (!res.msg) {
@@ -77,13 +87,10 @@ const apiUrl = {
 
 // token失效的时候做的事情
 const reqError = (msg) => {
-	errToast(msg) 
-	chache.clear()
-	store.dispatch('resetCommonState')
-	store.dispatch('resetHomeState')
+	errToast(msg)
 	// setTimeout(()=>{
 	// 	uni.reLaunch({
-	// 		url: '/pages/index/index'
+	// 		url: '/pages/userAuth/login'
 	// 	})
 	// },2000)
 }

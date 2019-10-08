@@ -10,12 +10,17 @@
 			<view class="lookUserRisk">
 				查看<text class="goUserRisk">《用户须知以及风险提示》</text>
 			</view>
-			<button type="primary" class="logout_user">退出当前账号</button>
+			<button type="primary" class="logout_user" @click="logoutActions">退出当前账号</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {mapActions,mapGetters} from 'vuex'
+	import {
+		showUiModel
+	} from '@/common/utils/dialog.config'
+	import chache from '@/common/utils/storage'
 	export default {
 		data() {
 			return {
@@ -38,6 +43,36 @@
 					}
 				]
 			};
+		},
+		methods:{
+			...mapActions(['logout','resetCommonState','resetHomeState']),
+			logoutActions(){
+				const that=this;
+				showUiModel({'content':'您确认退出么?','showCancel':true},(e)=>{
+					if(e.confirm){
+						uni.showLoading({
+						    title: '请稍后...'
+						});
+						that.logout().then(res=>{
+							uni.hideLoading();
+							if(res.status){
+								chache.clear()
+								that.resetCommonState()
+								that.resetHomeState()
+								that.$mRouter.reLaunch({
+									route:that.$routers.index,
+									query:{
+										id:1
+									}
+								})
+							}
+						}).catch(err=>{
+							uni.hideLoading();
+						})
+					}
+				})
+				
+			}
 		}
 	}
 </script>

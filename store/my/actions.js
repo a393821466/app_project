@@ -16,5 +16,10 @@ export default{
 	},
 	resetMy({commit}){
 		commit('RESETMY')
+	},
+	async logout({commit}){
+		const logoutAction=await httpUtils.get(address.common.logout);
+		return logoutAction;
 	}
+	
 }

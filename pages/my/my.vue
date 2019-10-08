@@ -206,15 +206,14 @@
 			};
 		},
 		computed:{
-			...mapGetters(['className','token','userBalance']),
+			...mapGetters(['className','token','userBalance','userInfo']),
 			// 处理手机号
 			getUserPhone(){
-				let getPhone=chache.get('userInfo');
-				return utils.hidePhone(getPhone.userPhone)
+				return !this.userInfo?'':utils.hidePhone(this.userInfo.userPhone)
 			},
 			getReadName(){
 				let readName=chache.get('userInfo');
-				return readName.isUserVierity||chache.get('isUserVierity')?true:false
+				return this.userInfo.isUserVierity||chache.get('isUserVierity')?true:false
 			}
 		},
 		onShow(){

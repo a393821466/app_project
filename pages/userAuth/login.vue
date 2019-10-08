@@ -191,6 +191,7 @@
 		.login_submit_int{
 			border-radius:100rpx;
 			margin-top:50rpx;
+			background:rgb(27, 130, 209) !important;
 		}
 	}
 }

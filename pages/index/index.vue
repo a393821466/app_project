@@ -40,6 +40,11 @@
 			'actList',
 			]),
 		},
+		watch:{
+			token(news,olds){
+				this.getTemplateData()
+			}
+		},
 		onLoad(){
 			// uni.setNavigationBarColor({
 			//     frontColor: '#ffffff',
@@ -53,10 +58,11 @@
 			console.log('首次');
 			this.getMerchant()
 			this.getNoticeData()
+			// this.getBanAct()
+			this.getTemplateData()
 		},
 		onShow(){
-			this.getBanAct()
-			this.getTemplateData()
+			
 		},
 		methods: {
 			/*
@@ -94,6 +100,7 @@
 			// 下拉刷新
 			onPullDownRefresh(e){
 				this.getNoticeData()
+				this.getBanAct()
 				this.getTemplateData()
 				// setTimeout(() => {
 				// 	uni.stopPullDownRefresh();
@@ -103,10 +110,10 @@
 		// onNavigationBarButtonTap(){
 		// 	if(!this.token){
 		// 		this.$mRouter.push({
-		// 			route:this.$routers.login,
-		// 			query:{
-		// 				id:1
-		// 			}
+					// route:this.$routers.login,
+					// query:{
+					// 	id:1
+					// }
 		// 		})
 		// 	}else{
 		// 		showUiModel({content:'您已登录,确认退出?',showCancel:true},(e)=>{
