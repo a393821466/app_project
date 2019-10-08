@@ -1,0 +1,38 @@
+.settingView,.setting_box{
+	padding:0 20rpx;
+	.setting_list{
+		display:flex;
+		flex-direction: row;
+		margin-top:20rpx;
+		border-bottom:2rpx solid #eee;
+		padding:22rpx;
+		.setting_title{
+			flex:0 0 90%;
+			width:90%;
+			color:#666;
+			font-size:32rpx;
+			line-height:60rpx;
+		}
+		.setting_icon{
+			flex:0 0 10%;
+			width:10%;
+			text-align:center;
+			.uni-icon-fanhui{
+				transform:rotate(180deg)
+			}
+		}
+	}
+	.lookUserRisk{
+		font-size:28rpx;
+		margin-top:70rpx;
+		color:#999;
+		.goUserRisk{
+			font-weight:bold;
+			color:rgb(27, 130, 209);
+		}
+	}
+	.logout_user{
+		background:rgb(27, 130, 209);
+		margin-top:100rpx;
+	}
+}

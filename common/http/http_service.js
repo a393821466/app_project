@@ -64,11 +64,15 @@ http.validateStatus = (response) => {
 
 // 针对API提示错误
 const apiUrl = {
+	'/console/subsystem/merchant':'获取品牌信息',
 	'/console/subsystem/announce': '获取公告',
 	'/getHomeTemplate': '获取套餐',
 	'/getPublicKey':'获取密钥',
 	'/login':'登录',
-	'/register':'注册'
+	'/register':'注册',
+	'/verifyImg':'验证码',
+	'/trade/wallet/find/mine':'获取钱包余额',
+	'/trade/wallet/redBag/find':'获取红包'
 }
 
 // token失效的时候做的事情

@@ -24,7 +24,7 @@
 					</view>
 				</view>
 				<view class="my_tops setting">
-					<view class="setting_arrow">
+					<view class="setting_arrow" @click="goSetting">
 						<fonts-icon type="fanhui" color='rgba(255,255,255,.5)' size='32'></fonts-icon>
 					</view>
 				</view>
@@ -52,15 +52,15 @@
 					常用入口
 				</view>
 				<view class="withdraw_rechange_grid">
-					<view class="intOut">
+					<view class="intOut" @click="goIntLink($event,'rechange')">
 						<view class="icon_int rechange"><fonts-icon type="chongzhi" size='38' color='#fff'></fonts-icon></view>
 						<text class="intOutText">充值</text>
 					</view>
-					<view class="intOut">
+					<view class="intOut" @click="goIntLink($event,'balance')">
 						<view class="icon_int moneybag"><fonts-icon type="qianbao" size='38' color='#fff'></fonts-icon></view>
 						<text class="intOutText">钱包</text>
 					</view>
-					<view class="intOut">
+					<view class="intOut" @click="goIntLink($event,'whithdraw')">
 						<view class="icon_int withdraw"><fonts-icon type="tixian" size='38' color='#fff'></fonts-icon></view>
 						<text class="intOutText">提现</text>
 					</view>
@@ -80,8 +80,6 @@
 							<text v-if="showTip && item.tips" v-text="item.tips"></text>
 						</view>
 					</view>
-				</view>
-				<view class="grid_box">
 					<view class="grid-title">
 						<view></view>
 						<text>代理中心</text>
@@ -108,6 +106,7 @@
 	import noLogin from '@/components/noLogin'
 	import chache from '@/common/utils/storage'
 	import utils from '@/common/utils'
+	import {showUiModel} from '@/common/utils/dialog.config'
 	export default {
 		name:'my_view',
 		components:{
@@ -230,7 +229,31 @@
 				console.log(index);
 			},
 			getMines(){
-				this.getMine()
+				this.getMine().then(res=>{
+					if(!res.status){
+						showUiModel(res.msg)
+					}
+				}).catch(err=>{
+					return err
+				})
+			},
+			goSetting(){
+				this.$mRouter.push({
+					route:this.$routers.setting
+				})
+			},
+			goIntLink(e,name){
+				let routeUrl={};
+				if(name=='rechange'){
+					return 
+				}else if(name=='balance'){
+					routeUrl=this.$routers.myBlance
+				}else{
+					return
+				}
+				this.$mRouter.push({
+					route:routeUrl
+				})
 			}
 		}
 	}

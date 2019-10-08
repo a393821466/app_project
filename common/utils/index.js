@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js'
+import moment from 'moment'
 // // rsa加密库
 import JSEncrypt from '../jsencrypt/wx_rsa'
 class Tools {
@@ -108,9 +109,29 @@ class Tools {
    */
   hidePhone(phone){
 	  const strPhone=typeof phone==='string'?phone:JSON.stringify(phone);
-	  const p= '*******' + strPhone.substr(strPhone.length - 4);
+	  const p= strPhone.substr(0,3)+'****' + strPhone.substr(strPhone.length - 4);
 	  return p
   }
+  /*
+  * 格式化时间戳
+  */
+ formartNow(v, nows){
+	 const now = new Date(nows)
+	 const year = now.getFullYear()
+	 const month = now.getMonth() + 1
+	 const date = now.getDate()
+	 const hour = now.getHours()
+	 const minute = now.getMinutes()
+	 const second = now.getSeconds()
+	 const montStr = month < 10 ? '0' + month : month
+	 const dayStr = date < 10 ? '0' + date : date
+	 const hourStr = hour < 10 ? '0' + hour : hour
+	 const mStr = minute < 10 ? '0' + minute : minute
+	 const sStr = second < 10 ? '0' + second : second
+	 const noHourse =
+	   v === '0' ? year + '/' + montStr + '/' + dayStr : year + '/' + montStr + '/' + dayStr + ' ' + hourStr + ':' + mStr + ':' + sStr
+	 return noHourse
+ }
 }
 
 

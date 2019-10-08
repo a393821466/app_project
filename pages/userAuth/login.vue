@@ -86,6 +86,9 @@
 					_that.errToast('用户名或密码不能为空')
 					return false
 				}
+				if(this.btnLoading){
+					return
+				}
 				this.btnLoading=true;
 				this.loginApp(this.ruleForm).then(res=>{
 					_that.btnLoading=false;

@@ -54,5 +54,13 @@ export default {
 	notice:{
 		name:"公告",
 		path:"/pages/annount/annount"
+	},
+	myBlance:{
+		name:'钱包',
+		path:"/pages/my/userCenter/myBalance/myBalance"
+	},
+	setting:{
+		name:'设置',
+		path:"/pages/my/userCenter/setting/setting"
 	}
 }

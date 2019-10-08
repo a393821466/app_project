@@ -1,17 +1,6 @@
 {
   "navigationBarTitleText": "首页",
   "enablePullDownRefresh": true,
-  "titleNView": {
-    "buttons": [
-      {
-        "text": "登录",
-        "fontSize": "14",
-        "float": "right",
-        "color": "#fff",
-        "width": "80px"
-      }
-    ]
-  },
   "usingComponents": {
     "banner": "/pages/index/homeComponent/banner",
     "service": "/pages/index/homeComponent/service",

@@ -16,7 +16,7 @@
 					</view>
 				</view>
 				<view class="annount_time">
-					<text>{{item.createTimeStamp}}</text>
+					<text>{{formartTime(item.createTimeStamp)}}</text>
 				</view>
 			</view>
 		</view>
@@ -39,6 +39,7 @@
 <script>
 	import { mapActions,mapGetters } from 'vuex'
 	import noData from '@/components/noData'
+	import utils from '@/common/utils'
 	export default {
 		name:'annount',
 		components:{
@@ -75,6 +76,9 @@
 				}).catch(err=>{
 					return err;
 				})
+			},
+			formartTime(n){
+				return utils.formartNow('1',n)
 			},
 			// 下拉刷新
 			onPullDownRefresh(e){

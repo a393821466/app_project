@@ -86,9 +86,7 @@
 			// 获取模板
 			getTemplateData() {
 				this.getTemplate().then(res => {
-					if(res.status){
-						uni.stopPullDownRefresh();
-					}
+					uni.stopPullDownRefresh();
 				}).catch(err=>{
 					return err;
 				})
@@ -102,25 +100,25 @@
 				// }, 3000);
 			}
 		},
-		onNavigationBarButtonTap(){
-			if(!this.token){
-				this.$mRouter.push({
-					route:this.$routers.login,
-					query:{
-						id:1
-					}
-				})
-			}else{
-				showUiModel({content:'您已登录,确认退出?',showCancel:true},(e)=>{
-					if(e.confirm){
-						console.log('进了这里')
-						chache.clear()
-						this.$store.dispatch('resetState')
-					}
-				})
-			}
-			
-		},
+		// onNavigationBarButtonTap(){
+		// 	if(!this.token){
+		// 		this.$mRouter.push({
+		// 			route:this.$routers.login,
+		// 			query:{
+		// 				id:1
+		// 			}
+		// 		})
+		// 	}else{
+		// 		showUiModel({content:'您已登录,确认退出?',showCancel:true},(e)=>{
+		// 			if(e.confirm){
+		// 				console.log('进了这里')
+		// 				chache.clear()
+		// 				this.$store.dispatch('resetHomeState')
+		// 			}
+		// 		})
+		// 	}
+		// 	
+		// },
 		components: {
 			banner,
 			service,
