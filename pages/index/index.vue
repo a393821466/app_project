@@ -58,7 +58,7 @@
 			console.log('首次');
 			this.getMerchant()
 			this.getNoticeData()
-			// this.getBanAct()
+			this.getBanAct()
 			this.getTemplateData()
 		},
 		onShow(){

@@ -121,49 +121,56 @@
 						icon:'yinhangqia',
 						sized:50,
 						colors:'#1b82d1',
-						tips: ''
+						tips: '',
+						url:this.$routers.bank
 					},
 					{
 						name: '安全中心',
 						icon:'yanzhengma',
 						sized:50,
 						colors:'#00c1dd',
-						tips: ''
+						tips: '',
+						url:''
 					},
 					{
 						name: '交易明细',
 						icon:'jiaoyi-mingxichaxun',
 						sized:50,
 						colors:'#FD5E5E',
-						tips: ''
+						tips: '',
+						url:''
 					},
 					{
 						name: '充值记录',
 						icon:'icon-test',
 						sized:50,
 						colors:'#1b82d1',
-						tips: ''
+						tips: '',
+						url:''
 					},
 					{
 						name: '提现记录',
 						icon:'tixianjilu1',
 						sized:48,
 						colors:'#F5A623',
-						tips: ''
+						tips: '',
+						url:''
 					},
 					{
 						name: '红包',
 						icon:'red-packet_icon',
 						sized:48,
 						colors:'#d81e06',
-						tips: '12'
+						tips: '12',
+						url:''
 					},
 					{
 						name: '设置',
 						icon:'shezhi',
 						sized:48,
 						colors:'#666',
-						tips: ''
+						tips: '',
+						url:''
 					}
 				],
 				agentGrid:[
@@ -172,35 +179,40 @@
 						icon:'kaihu',
 						sized:52,
 						colors:'#FD5E5E',
-						tips: ''
+						tips: '',
+						url:''
 					},
 					{
 						name: '推广链接',
 						icon:'youqinglianjieguanli',
 						sized:52,
 						colors:'#1b82d1',
-						tips: ''
+						tips: '',
+						url:''
 					},
 					{
 						name: '下级管理',
 						icon:'jinrongtubiaoxiajijigou',
 						sized:52,
 						colors:'#00c1dd',
-						tips: ''
+						tips: '',
+						url:''
 					},
 					{
 						name: '下级盈亏',
 						icon:'leijiyingkui',
 						sized:52,
 						colors:'#F5A623',
-						tips: ''
+						tips: '',
+						url:''
 					},
 					{
 						name: '订单管理',
 						icon:'dingdanguanli-',
 						sized:52,
 						colors:'#d81e06',
-						tips: ''
+						tips: '',
+						url:''
 					}
 				]
 			};
@@ -224,8 +236,12 @@
 		methods:{
 			...mapActions(['getMine']),
 			gridClick (item, index) {	//格子菜单点击事件
-				console.log(item);
-				console.log(index);
+				if(item.url==''){
+					return
+				}
+				this.$mRouter.push({
+					route:item.url
+				})
 			},
 			getMines(){
 				this.getMine().then(res=>{

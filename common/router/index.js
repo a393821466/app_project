@@ -62,5 +62,9 @@ export default {
 	setting:{
 		name:'设置',
 		path:"/pages/my/userCenter/setting/setting"
+	},
+	bank:{
+		name:'银行卡',
+		path:"/pages/my/userCenter/bank/bank"
 	}
 }

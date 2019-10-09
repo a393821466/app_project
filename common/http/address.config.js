@@ -7,7 +7,7 @@ if(process.env.NODE_ENV==='development'){
 	// #endif
 	
 	// #ifndef H5
-	basicUrl='https://tmk.rvsii.com/apis'
+	basicUrl='http://cxx.99qupai.com/apis'
 	// #endif
 }else{
 	// #ifdef H5

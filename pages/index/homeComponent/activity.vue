@@ -76,7 +76,10 @@ export default{
 		goTask(item){
 			this.sendUrl(item.breakUrl)
 		    this.$mRouter.push({
-				route:this.$routers.webViewUi
+				route:this.$routers.webViewUi,
+				query:{
+					title:item.title
+				}
 			})
 		}
 	}
