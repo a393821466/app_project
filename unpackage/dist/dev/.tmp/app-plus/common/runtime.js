@@ -102,11 +102,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/ui-font/index":1,"pages/index/homeComponent/activity":1,"pages/index/homeComponent/banner":1,"pages/index/homeComponent/category":1,"pages/index/homeComponent/news_person":1,"pages/index/homeComponent/notice":1,"pages/index/homeComponent/service":1,"components/noLogin/index":1,"components/noData/index":1};
+/******/ 		var cssChunks = {"components/ui-font/index":1,"pages/index/homeComponent/activity":1,"pages/index/homeComponent/banner":1,"pages/index/homeComponent/category":1,"pages/index/homeComponent/news_person":1,"pages/index/homeComponent/notice":1,"pages/index/homeComponent/service":1,"components/noLogin/index":1,"components/noData/index":1,"components/swiperAction/index":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/ui-font/index":"components/ui-font/index","pages/index/homeComponent/activity":"pages/index/homeComponent/activity","pages/index/homeComponent/banner":"pages/index/homeComponent/banner","pages/index/homeComponent/category":"pages/index/homeComponent/category","pages/index/homeComponent/news_person":"pages/index/homeComponent/news_person","pages/index/homeComponent/notice":"pages/index/homeComponent/notice","pages/index/homeComponent/service":"pages/index/homeComponent/service","components/noLogin/index":"components/noLogin/index","components/noData/index":"components/noData/index"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/ui-font/index":"components/ui-font/index","pages/index/homeComponent/activity":"pages/index/homeComponent/activity","pages/index/homeComponent/banner":"pages/index/homeComponent/banner","pages/index/homeComponent/category":"pages/index/homeComponent/category","pages/index/homeComponent/news_person":"pages/index/homeComponent/news_person","pages/index/homeComponent/notice":"pages/index/homeComponent/notice","pages/index/homeComponent/service":"pages/index/homeComponent/service","components/noLogin/index":"components/noLogin/index","components/noData/index":"components/noData/index","components/swiperAction/index":"components/swiperAction/index"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

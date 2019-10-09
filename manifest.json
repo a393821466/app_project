@@ -71,7 +71,7 @@
 			"disableHostCheck":true,
 			"proxy":{
 				"/apis":{
-					"target":"http://cxx.99qupai.com",
+					"target":"https://tmk.rvsii.com",
 					"changeOrigin":true,
 					"secure":false
 				}

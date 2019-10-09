@@ -86,8 +86,11 @@
             "path" : "pages/my/userCenter/bank/bank",
             "style" : {
 				"navigationBarTitleText":"银行卡",
-				"navigationBarBackgroundColor":"#fff",
-				"navigationBarTextStyle":"black"
+				"navigationBarBackgroundColor":"#333",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"bounce":"none"
+				}
 			}
         }
     ],

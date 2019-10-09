@@ -10,7 +10,8 @@
     "pages/webViewUi/webViewUi",
     "pages/annount/annount",
     "pages/my/userCenter/myBalance/myBalance",
-    "pages/my/userCenter/setting/setting"
+    "pages/my/userCenter/setting/setting",
+    "pages/my/userCenter/bank/bank"
   ],
   "window": {
     "navigationBarTextStyle": "white",

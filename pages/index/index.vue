@@ -42,6 +42,7 @@
 		},
 		watch:{
 			token(news,olds){
+				this.getNoticeData()
 				this.getTemplateData()
 			}
 		},
