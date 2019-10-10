@@ -14,6 +14,16 @@ export default{
 		}
 		return getMoneyBagNum
 	},
+	async queryBank({commit},das){
+		const params={
+			data:das
+		}
+		const getBankList=await httpUtils.post(address.my.queryBank,params);
+		if(getBankList.status){
+			commit('GETBANKLIST',getBankList.data)
+		}
+		return getBankList
+	},
 	resetMy({commit}){
 		commit('RESETMY')
 	},

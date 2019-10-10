@@ -11,17 +11,17 @@
 					</view>
 					<view class="balance_money balance_flex">
 						<view class="money_title">总额度(元)</view>
-						<view>{{item.balance}}</view>
+						<view>{{item.balance==0?0:item.balance.toFixed(2)}}</view>
 						<view class="money_line"></view>
 					</view>
 					<view class="balance_outher_money balance_flex">
 						<view class="frozen_balance">
 							<view class="forzen_balance_title">冻结金额(元)</view>
-							<view>{{item.amountFrozen}}</view>
+							<view>{{item.amountFrozen==0?0:item.amountFrozen.toFixed(2)}}</view>
 						</view>
 						<view class="use_balance">
 							<view class="use_balance_money_title">可用余额(元)</view>
-							<view>{{item.amountUseable}}</view>
+							<view>{{item.amountUseable==0?0:item.amountUseable.toFixed(2)}}</view>
 						</view>
 					</view>
 				</view>

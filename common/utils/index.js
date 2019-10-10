@@ -115,6 +115,13 @@ class Tools {
 	  const p= strPhone.substr(0,3)+'****' + strPhone.substr(strPhone.length - 4);
 	  return p
   }
+	/* 
+	 * 银行卡每四位空格
+	 */
+  formatCardNo(cardNo) {
+	cardNo += "";
+	return cardNo.replace(/\s/g, '').replace(/[^\d]/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');
+  }
   /*
   * 格式化时间戳
   */

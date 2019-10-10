@@ -1,7 +1,8 @@
 import chache from '@/common/utils/storage'
 export const state={
 	userBalance:{},
-	userAllBalance:[]
+	userAllBalance:[],
+	bankList:[]
 }
 
 
@@ -11,7 +12,12 @@ export const mutations={
 		state.userBalance=filterMine[0]
 		state.userAllBalance=val.filter(item=>item.walletType!==4);
 	},
+	['GETBANKLIST'](state,val){
+		state.bankList=val;
+	},
 	['RESETMY'](state){
 		state.userBalance={}
+		state.userAllBalance=[]
+		state.bankList=[]
 	}
 }

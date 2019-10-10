@@ -11,7 +11,8 @@
     "pages/annount/annount",
     "pages/my/userCenter/myBalance/myBalance",
     "pages/my/userCenter/setting/setting",
-    "pages/my/userCenter/bank/bank"
+    "pages/my/userCenter/bank/bank",
+    "pages/my/userCenter/addBank/addBank"
   ],
   "window": {
     "navigationBarTextStyle": "white",

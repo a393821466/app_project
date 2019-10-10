@@ -85,12 +85,19 @@
         },{
             "path" : "pages/my/userCenter/bank/bank",
             "style" : {
-				"navigationBarTitleText":"银行卡",
-				"navigationBarBackgroundColor":"#333",
-				"navigationBarTextStyle":"white",
+				"navigationBarTitleText":"管理银行卡",
+				"navigationBarBackgroundColor":"#f8f8f8",
+				"navigationBarTextStyle":"black",
 				"app-plus":{
 					"bounce":"none"
 				}
+			}
+        }
+        ,{
+            "path" : "pages/my/userCenter/addBank/addBank",
+            "style" : {
+				"navigationBarTitleText":"添加银行卡",
+				"navigationBarBackgroundColor":"#333"
 			}
         }
     ],

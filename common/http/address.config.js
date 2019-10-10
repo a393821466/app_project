@@ -42,6 +42,7 @@ export default{
 	},
 	my:{
 		mine: `/trade/wallet/find/mine`, // 钱包余额
-		regBag: `/trade/wallet/redBag/find`  // 红包
+		regBag: `/trade/wallet/redBag/find`,  // 红包
+		queryBank: `/business/queryBankInfo` // 查找银行卡
 	}
 }

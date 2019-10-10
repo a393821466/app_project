@@ -1,12 +1,27 @@
 <template>
 	<view class="message-list">
-		<block v-for="(it,i) of messagesList" :key="i">
+		<block v-for="(it,i) of bankList" :key="i">
 			<view class="uni-swipe-action">
 				<view class="uni-swipe-action__container" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd"
 				 @touchcancel="touchEnd" :style="{'transform':messageIndex == i ? transformX : 'translateX(0px)','-webkit-transform':messageIndex == i ? transformX : 'translateX(0px)'}" :data-index="i" :data-disabled="it.disabled">
 					<view class="uni-swipe-action__content ">
-						<view class="item" :class="it.stick  ? 'stick' : ''">
-							1231312
+						<view class="bankList" :style="{backgroundColor:it.color}">
+							<view class="bankIcon bankDiv">
+								<view class="bankIconBox">
+									<fonts-icon :type='it.bankCode' size='58' :color='it.color'></fonts-icon>
+								</view>
+							</view>
+							<view class="bankInfo bankDiv">
+								<view class="bankName">{{it.bankName}}</view>
+								<view class="bankType">储蓄卡</view>
+								<view class="bankNumber">**** **** **** {{it.accountNum.substr(it.accountNum.length-4)}}</view>
+								<view class="bankIconBg">
+									<fonts-icon :type='it.bankCode' size='300' color='#fff'></fonts-icon>
+								</view>
+								<view class="arrow" :class="isOpen?'to':''">
+									<fonts-icon type="fanhui" size='22' color='#eee'></fonts-icon>
+								</view>
+							</view>
 						</view>
 					</view>
 					<view class="uni-swipe-action__btn-group" :id="elId">
@@ -26,7 +41,10 @@
 		name: 'swipe-action',
 		props: {
 			options: Array,
-			messagesList:Array,
+			bankList:{
+				type:[Array,Object],
+				required:true
+			},
 		},
 		data() {
 			const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
@@ -34,6 +52,7 @@
 				elId: elId,
 				transformX: 'translateX(0px)',
 				messageIndex: -1,
+				isOpen:false
 			}
 		},
 		created() {
@@ -60,7 +79,7 @@
 				});
 			},
 			bindClickBtn(item, index) {
-				this.messageIndex = -1;
+				// this.messageIndex = -1;
 				console.log(item.text +'message第'+ index+ '项');
 				
 			},
@@ -104,9 +123,11 @@
 				}
 				if (this.messageIndex !== -1) {
 					this.transformX = `translateX(${-this.btnGroupWidth}px)`;
+					this.isOpen=true;
 					this.$emit('opened');
 				} else {
 					this.transformX = 'translateX(0px)';
+					this.isOpen=false;
 					this.$emit('closed');
 				}
 				this.direction = '';
@@ -119,6 +140,8 @@
 	.uni-swipe-action {
 		width: 100%;
 		overflow: hidden;
+		border-radius:15rpx;
+		margin-bottom:10rpx;
 		&__container {
 			background-color: #FFFFFF;
 			width: 200%;
@@ -210,4 +233,66 @@
 			}
 		}
 	}
+.bankList{
+	height:240rpx;
+	display:flex;
+	flex-direction:row;
+	.bankDiv{
+		flex:1;
+		&.bankIcon{
+			.bankIconBox{
+				width:80rpx;
+				height:80rpx;
+				border-radius:80rpx;
+				background:rgba(255,255,255,.8);
+				text-align:center;
+				line-height:75rpx;
+				margin-left:40rpx;
+				margin-top:30rpx;
+			}
+		}
+		&.bankInfo{
+			flex:0 0 80%;
+			width:80%;
+			color:#eee;
+			position:relative;
+			overflow:hidden;
+			.bankName{
+				margin-top:30rpx;
+				font-size:36rpx;
+			}
+			.bankType{
+				font-size:28rpx;
+				line-height:50rpx;
+				color:rgba(255,255,255,.7);
+			}
+			.bankNumber{
+				font-size:48rpx;
+			}
+			.bankIconBg{
+				position:absolute;
+				right:50rpx;
+				top:-25rpx;
+				z-index:0;
+				opacity:.1
+			}
+			.arrow{
+				position:absolute;
+				right:20rpx;
+				top:50%;
+				margin-top:-30rpx;
+				animation:arrowTransition 1s infinite;
+				animation-direction:alternate;
+				transform:rotate(0deg);
+				&.to{
+					transform:rotate(180deg)
+				}
+			}
+		}
+	}
+}
+@keyframes arrowTransition{
+	from{opacity:0;}
+	to{opacity:1;}
+}
 </style>
