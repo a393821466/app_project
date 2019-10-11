@@ -27,7 +27,7 @@
 					<view class="uni-swipe-action__btn-group" :id="elId">
 						<div v-for="(item,index) in options" :key="index" class="uni-swipe-action--btn" :style="{backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',color: item.style && item.style.color ? item.style.color : '#FFFFFF',fontSize: item.style && item.style.fontSize ? item.style.fontSize : '28upx'}"
 						 @click="bindClickBtn(item,i)">
-							{{item.text }}
+							{{item.text}}
 						</div>
 					</view>
 				</view>
@@ -246,7 +246,7 @@
 				border-radius:80rpx;
 				background:rgba(255,255,255,.8);
 				text-align:center;
-				line-height:75rpx;
+				line-height:80rpx;
 				margin-left:40rpx;
 				margin-top:30rpx;
 			}
@@ -280,7 +280,7 @@
 				position:absolute;
 				right:20rpx;
 				top:50%;
-				margin-top:-30rpx;
+				margin-top:-20rpx;
 				animation:arrowTransition 1s infinite;
 				animation-direction:alternate;
 				transform:rotate(0deg);

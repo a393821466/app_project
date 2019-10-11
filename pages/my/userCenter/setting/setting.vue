@@ -45,7 +45,7 @@
 			};
 		},
 		methods:{
-			...mapActions(['logout','resetCommonState','resetHomeState']),
+			...mapActions(['logout','resetCommonState','resetHomeState','resetMy']),
 			logoutActions(){
 				const that=this;
 				showUiModel({'content':'您确认退出么?','showCancel':true},(e)=>{
@@ -56,15 +56,17 @@
 						that.logout().then(res=>{
 							uni.hideLoading();
 							if(res.status){
-								chache.clear()
 								that.resetCommonState()
 								that.resetHomeState()
+								that.resetMy()
+								chache.clear()
 								that.$mRouter.reLaunch({
 									route:that.$routers.index,
 									query:{
 										id:1
 									}
 								})
+								
 							}
 						}).catch(err=>{
 							uni.hideLoading();

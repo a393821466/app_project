@@ -6,7 +6,7 @@
 				<view class="my_tops avatar_top">
 					<view class="icon_avatar">
 						<view class="icons_single">
-							<image src="../../static/images/avatar.jpg" class="avatar"></image>
+							<image :src="avator" class="avatar"></image>
 						</view>
 						<view class="vip">
 							<view class="vip_center">V</view>
@@ -20,7 +20,7 @@
 						
 					</view>
 					<view class="emial_userName">
-						<text class="email">{{getUserPhone}}</text>
+						<text class="email">{{getUserPhone(this.userInfo.userPhone)}}</text>
 					</view>
 				</view>
 				<view class="my_tops setting">
@@ -115,6 +115,7 @@
 		data() {
 			return {
 				showTip:true,
+				avator:'../../static/images/avatar.jpg',
 				memberGrid: [	//格子数据列表
 					{
 						name: '银行卡',
@@ -219,10 +220,6 @@
 		},
 		computed:{
 			...mapGetters(['className','token','userBalance','userInfo']),
-			// 处理手机号
-			getUserPhone(){
-				return !this.userInfo?'':utils.hidePhone(this.userInfo.userPhone)
-			},
 			getReadName(){
 				let readName=chache.get('userInfo');
 				return this.userInfo.isUserVierity||chache.get('isUserVierity')?true:false
@@ -245,10 +242,12 @@
 			},
 			getMines(){
 				this.getMine().then(res=>{
+					uni.stopPullDownRefresh();
 					if(!res.status){
 						showUiModel(res.msg)
 					}
 				}).catch(err=>{
+					uni.stopPullDownRefresh();
 					return err
 				})
 			},
@@ -256,6 +255,10 @@
 				this.$mRouter.push({
 					route:this.$routers.setting
 				})
+			},
+			getUserPhone(phone){
+				if(!phone) return
+				return utils.hidePhone(phone)
 			},
 			goIntLink(e,name){
 				let routeUrl={};
@@ -269,6 +272,10 @@
 				this.$mRouter.push({
 					route:routeUrl
 				})
+			},
+			// 下拉刷新
+			onPullDownRefresh(e){
+				this.getMines()
 			}
 		}
 	}

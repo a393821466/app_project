@@ -1,7 +1,7 @@
 <template>
 	<view class="bankView">
 		<view class="bank_list">
-			<view class="bank_list_content" v-if="bankList.length>0 && httpStatus==1">
+			<view class="bank_list_content" v-if="bankList.length>0">
 				<swiper-action :options="options" :bankList="formartBankList"></swiper-action>
 				<view class="add">
 					<view class="bankIcon">
@@ -10,7 +10,7 @@
 					<text class="add_text">添加银行卡</text>
 				</view>
 			</view>
-			<text class="getBankListView" v-else-if="bankList.length==0 && httpStatus!==1">银行卡列表加载中,请稍后..</text>
+			<!-- <text class="getBankListView" v-else-if="bankList.length==0 && httpStatus!==1">银行卡列表加载中,请稍后..</text> -->
 			<view class="noBank" v-else>
 				<view class="addBanks">
 					<view class="addIcon">

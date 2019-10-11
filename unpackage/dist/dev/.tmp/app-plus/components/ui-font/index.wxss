@@ -217,10 +217,10 @@
 .uni-icon-fanhui:before {
   content: "\E60D";
 }
-.uni-icon-SPDB:before {
+.uni-icon-ICBC:before {
   content: "\E63B";
 }
-.uni-icon-HXB:before {
+.uni-icon-HXBANK:before {
   content: "\E625";
 }
 .uni-icon-CITIC:before {
@@ -244,16 +244,16 @@
 .uni-icon-CEB:before {
   content: "\E7CF";
 }
-.uni-icon-CITIC:before {
+.uni-icon-BOC:before {
   content: "\E640";
 }
-.uni-icon-GDB:before {
+.uni-icon-SPDB:before {
   content: "\E63A";
 }
 .uni-icon-ABC:before {
   content: "\E638";
 }
-.uni-icon-SPDB:before {
+.uni-icon-GDB:before {
   content: "\E62D";
 }
 .uni-icon-CIB:before {

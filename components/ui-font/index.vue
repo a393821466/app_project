@@ -304,10 +304,10 @@ export default {
 .uni-icon-fanhui:before {
   content: "\e60d";
 }
-.uni-icon-SPDB:before {
+.uni-icon-ICBC:before {
   content: "\e63b";
 }
-.uni-icon-HXB:before {
+.uni-icon-HXBANK:before {
   content: "\e625";
 }
 .uni-icon-CITIC:before {
@@ -331,16 +331,16 @@ export default {
 .uni-icon-CEB:before {
   content: "\e7cf";
 }
-.uni-icon-CITIC:before {
+.uni-icon-BOC:before {
   content: "\e640";
 }
-.uni-icon-GDB:before {
+.uni-icon-SPDB:before {
   content: "\e63a";
 }
 .uni-icon-ABC:before {
   content: "\e638";
 }
-.uni-icon-SPDB:before {
+.uni-icon-GDB:before {
   content: "\e62d";
 }
 .uni-icon-CIB:before {

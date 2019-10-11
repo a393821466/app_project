@@ -37,9 +37,10 @@ http.interceptor.response((response) => {
 						url:'/pages/userAuth/login'
 					})
 				}
-				chache.clear()
 				store.dispatch('resetCommonState')
 				store.dispatch('resetHomeState')
+				store.dispatch('resetMy')
+				chache.clear()
 			})
 			return
 		}
