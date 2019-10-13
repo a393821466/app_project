@@ -14,7 +14,7 @@ export const mutations={
 		let activitys = []
 		let u = ''
 	    if (process.env.NODE_ENV === 'development') {
-		  u = 'http://cxx.99qupai.com'
+		  u = 'https://tmk.rvsii.com'
 	    } else {
 		  u = location.origin
 	    }

@@ -5,7 +5,7 @@
 				<view class="uni-swipe-action__container" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd"
 				 @touchcancel="touchEnd" :style="{'transform':messageIndex == i ? transformX : 'translateX(0px)','-webkit-transform':messageIndex == i ? transformX : 'translateX(0px)'}" :data-index="i" :data-disabled="it.disabled">
 					<view class="uni-swipe-action__content ">
-						<view class="bankList" :style="{backgroundColor:it.color}">
+						<view class="bankList" :style="{backgroundColor:it.color,borderRadius:isOpen?0:15+'rpx'}">
 							<view class="bankIcon bankDiv">
 								<view class="bankIconBox">
 									<fonts-icon :type='it.bankCode' size='58' :color='it.color'></fonts-icon>

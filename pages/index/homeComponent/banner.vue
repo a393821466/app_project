@@ -36,10 +36,11 @@
 				  return
 			    }
 			    if (process.env.NODE_ENV === 'development') {
-				  u = 'http://cxx.99qupai.com'
+				  u = 'https://tmk.rvsii.com'
 			    } else {
 				  u = location.origin
 			    }
+				console.log(u)
 			    let url = item.breakUrl
 			    if (url !== '') {
 				  let us = url.split(':')
