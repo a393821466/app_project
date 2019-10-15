@@ -1,9 +1,9 @@
 <template>
 	<view class="bankView">
 		<view class="bank_list">
-			<view class="bank_list_content" v-if="bankList.length>0">
-				<swiper-action :options="options" :bankList="formartBankList"></swiper-action>
-				<view class="add">
+			<view class="bank_list_content" v-if="myBankList.length>0">
+				<swiper-action :options="options" :myBankList="formartBankList"></swiper-action>
+				<view class="add" v-if="formartBankList.length<3" @click="goAddBank">
 					<view class="bankIcon">
 						<image src="../../../../static/images/addBank.svg" class="bankImgs"></image>
 					</view>
@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			<!-- <text class="getBankListView" v-else-if="bankList.length==0 && httpStatus!==1">银行卡列表加载中,请稍后..</text> -->
-			<view class="noBank" v-else>
+			<view class="noBank" @click="goAddBank" v-else>
 				<view class="addBanks">
 					<view class="addIcon">
 						<image src="../../../../static/images/addBank.svg"></image>
@@ -61,7 +61,7 @@
 		data() {
 			return {
 				flat:false,
-				httpStatus:1,
+				httpStatus:2,
 				tip:{
 					display:'block'
 				},
@@ -76,10 +76,10 @@
 			};
 		},
 		computed:{
-			...mapGetters(['userInfo','bankList']),
+			...mapGetters(['userInfo','myBankList']),
 			formartBankList(){
-				if(this.bankList.length>0){
-					let banks=this.bankList;
+				if(this.myBankList.length>0){
+					let banks=this.myBankList;
 					banks.map((item)=>{
 						item.disabled=false;
 						item.color=bankColor[item.bankCode];
@@ -98,13 +98,21 @@
 				this.flat=!this.flat
 			},
 			getBank(){
-				this.httpStatus=2;
-				const uuid=this.userInfo.uuid;
-				this.queryBank({uuid:uuid}).then(res=>{
-					this.httpStatus=1
-				}).catch(err=>{
-					this.httpStatus=1
-				})
+				if(this.httpStatus==2){
+					const uuid=this.userInfo.uuid;
+					this.queryBank({uuid:uuid}).then(res=>{
+						this.httpStatus=1
+					}).catch(err=>{
+						this.httpStatus=1
+					})
+				}
+			},
+			goAddBank(){
+				if(this.httpStatus==1){
+					this.$mRouter.push({
+						route:this.$routers.addBank
+					})
+				}
 			}
 		}
 	}

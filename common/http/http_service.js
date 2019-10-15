@@ -124,13 +124,12 @@ const mathQuery = options => {
 
 export default {
 	// GET请求
-	get: (url, options) => {
+	get: (url, query,options) => {
 		options = {
-			params: {},
 			header: {},
 			dataType: 'json'
 		}
-		return http.get(url, options)
+		return http.get(url,query,options)
 	},
 	// POST请求
 	post: (url, params = {}) => {

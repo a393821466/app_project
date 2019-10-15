@@ -38,11 +38,13 @@ export default{
 		login: `/login`, //登录
 		logout: `/logout`, // 登出
 		verifyImg: `/verifyImg`, // 验证码
-		register: `/accountOpen` // 注册开户
+		register: `/accountOpen`, // 注册开户
+		findAllBankInfo: `/finance/bank/find` // 查找银行卡列表
 	},
 	my:{
 		mine: `/trade/wallet/find/mine`, // 钱包余额
 		regBag: `/trade/wallet/redBag/find`,  // 红包
-		queryBank: `/business/queryBankInfo` // 查找银行卡
+		queryBank: `/business/queryBankInfo`, // 查找银行卡
+		addBank: `/business/addBank` //添加银行卡
 	}
 }

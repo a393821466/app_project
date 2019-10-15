@@ -20,16 +20,33 @@ export default{
 		}
 		const getBankList=await httpUtils.post(address.my.queryBank,params);
 		if(getBankList.status){
-			commit('GETBANKLIST',getBankList.data)
+			commit('GETMYBANKLIST',getBankList.data)
 		}
 		return getBankList
 	},
-	resetMy({commit}){
-		commit('RESETMY')
+	async getBankListInfo({commit},res){
+		const dats={
+			params:res
+		}
+		const findBankList=await httpUtils.get(address.common.findAllBankInfo,dats);
+		if(findBankList.status){
+			commit('GETBANKLISTINFO',findBankList.data)
+		}
+		return findBankList;
+	},
+	async addmyBank({commit},res){
+		const params={
+			data:res
+		}
+		const addBank=await httpUtils.post(address.my.addBank,params);
+		return addBank;
 	},
 	async logout({commit}){
 		const logoutAction=await httpUtils.get(address.common.logout);
 		return logoutAction;
-	}
+	},
 	
+	resetMy({commit}){
+		commit('RESETMY')
+	}
 }

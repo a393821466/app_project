@@ -66,5 +66,9 @@ export default {
 	bank:{
 		name:'银行卡',
 		path:"/pages/my/userCenter/bank/bank"
+	},
+	addBank:{
+		name:'添加银行卡',
+		path:"/pages/my/userCenter/addBank/addBank"
 	}
 }

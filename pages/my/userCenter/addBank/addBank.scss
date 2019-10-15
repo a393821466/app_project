@@ -1,0 +1,60 @@
+.addBank{
+	padding:24rpx 0;
+	.addBank_tip{
+		padding:0 32rpx;
+		font-size:30rpx;
+		.meBankTip{
+			display:inline-block;
+			text-indent:10rpx;
+		}
+	}
+	.bankInput{
+		background:#fff;
+		.bankCartName{
+			display:flex;
+			flex-direction:row;
+			width:680rpx;
+			margin:12rpx auto 0;
+			padding:0 10rpx;
+			border-bottom:1rpx solid #f8f8f8;
+			.flexBankView{
+				flex:0 0 1;
+				font-size:32rpx;
+				line-height:96rpx;
+				color:#777;
+				&.title{
+					width:200rpx;
+					display:block;
+					color:#333;
+				}
+				&.input{
+					flex:0 0 460rpx;
+					.bankNumber{
+						height:95rpx;
+						line-height:95rpx;
+					}
+				}
+				&.iconRight{
+					.uni-icon-wenti{
+						display:block;
+						line-height:95rpx;
+					}
+				}
+			}
+			&.bankCartName:nth-last-child(1){
+				border-bottom:none;
+			}
+		}
+	}
+	.submit_cartNumber{
+		margin-top:26rpx;
+		padding:0 30rpx;
+		button{
+			background:#1b82d1
+		}
+	}
+}
+page{
+	background:#f8f8f8;
+	border-top:1rpx #EFEFEF solid;
+}

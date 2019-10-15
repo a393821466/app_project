@@ -1,6 +1,6 @@
 <template>
 	<view class="message-list">
-		<block v-for="(it,i) of bankList" :key="i">
+		<block v-for="(it,i) of myBankList" :key="i">
 			<view class="uni-swipe-action">
 				<view class="uni-swipe-action__container" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd"
 				 @touchcancel="touchEnd" :style="{'transform':messageIndex == i ? transformX : 'translateX(0px)','-webkit-transform':messageIndex == i ? transformX : 'translateX(0px)'}" :data-index="i" :data-disabled="it.disabled">
@@ -41,7 +41,7 @@
 		name: 'swipe-action',
 		props: {
 			options: Array,
-			bankList:{
+			myBankList:{
 				type:[Array,Object],
 				required:true
 			},

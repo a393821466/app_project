@@ -69,6 +69,7 @@ page{
 			bottom:20rpx;;
 			left:0;
 			display:block;
+			line-height:42rpx;
 			width:100%;
 			.tip{
 				color:#666;
@@ -78,7 +79,7 @@ page{
 				width:90%;
 				border-radius:15rpx;
 				.sp2{
-					font-size:28rpx;
+					font-size:30rpx;
 					display:block;
 					margin-bottom:20rpx;
 					&.sp3{
@@ -109,7 +110,7 @@ page{
 			}
 		}
 		.add_text{
-			font-size:28rpx;
+			font-size:30rpx;
 			line-height:70rpx;
 			display:inline-block;
 			text-indent:10rpx;
