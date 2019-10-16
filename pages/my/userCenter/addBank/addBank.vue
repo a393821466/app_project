@@ -2,7 +2,7 @@
 	<view class="addBank">
 		<view class="addBank_tip">
 			<fonts-icon type="wenti" size='38' color="#1b82d1"></fonts-icon>
-			<text class="meBankTip">请绑定持卡人本人银行卡</text></view>
+			<text class="meBankTip">请填写您的真实信息，通过后将不能修改</text></view>
 		<view class="bankInput">
 			<!-- view class="bankCartName">
 				<text class="flexBankView title">持卡人</text>
@@ -182,8 +182,9 @@
 							    delta: 1
 							});
 							return;
+						}else{
+							showUiToast(res.msg);
 						}
-						showUiToast(res.msg);
 					}).catch(err=>{
 						that.flat=true;
 						return err;

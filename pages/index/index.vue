@@ -26,6 +26,7 @@
 		name:'index',
 		data(){
 			return {
+				onLoadText:''
 			}
 		},
 		computed: {
@@ -42,6 +43,7 @@
 		},
 		watch:{
 			token(news,olds){
+				this.getBanAct()
 				this.getNoticeData()
 				this.getTemplateData()
 			}
@@ -80,7 +82,7 @@
 					return err;
 				})
 			},
-			// 获取公告,活动
+			// 获取轮播,活动
 			getBanAct(){
 				this.getBannerActivity().then(res=>{
 					if(!res.status){

@@ -14,6 +14,7 @@ http.interceptor.request((config, cancel) => {
 	config.header = {
 		...config.header
 	}
+	store.dispatch('onLoadState','开始请求')
 	if (store.state.homeStore.token || chache.has('token')) {
 		let token = !store.state.homeStore.token ? chache.get('token') : store.state.homeStore.token;
 		config.header['Authorization'] = token;
@@ -49,12 +50,14 @@ http.interceptor.response((response) => {
 		}
 		errToast(res.msg)
 	}
+	store.dispatch('onLoadState','请求完成')
 	return Promise.resolve(res)
 }, (err) => {
 	if (err.errMsg == 'request:fail timeout') {
 		errToast(apiUrl[err.config.url] + '超时')
 	}
 	uni.stopPullDownRefresh();
+	store.dispatch('onLoadState','请求失败')
 	return err;
 })
 

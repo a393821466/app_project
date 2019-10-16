@@ -36,6 +36,11 @@ export default{
 		}
 		return loginUser;
 	},
+	// 改变加载状态
+	onLoadState({commit},stateText){
+		commit('ONLOADSTATE',stateText)
+	},
+	// 移除
 	resetCommonState({commit}){
 		commit('RESETCOMMONSTATE')
 	}

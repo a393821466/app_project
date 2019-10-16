@@ -1,4 +1,5 @@
 import chache from '@/common/utils/storage'
+import config from '@/common/utils/config'
 export const state={
 	bannerData:[],
 	notice:[],
@@ -12,12 +13,7 @@ export const mutations={
 		let das = val.content
 		let banners = []
 		let activitys = []
-		let u = ''
-	    if (process.env.NODE_ENV === 'development') {
-		  u = 'https://tmk.rvsii.com'
-	    } else {
-		  u = location.origin
-	    }
+		let u = config.domain
 		for (let i = 0; i < das.length; i++) {
 			let mapData = {
 			  id: das[i].id,

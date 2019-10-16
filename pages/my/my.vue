@@ -131,7 +131,7 @@
 						sized:50,
 						colors:'#00c1dd',
 						tips: '',
-						url:''
+						url:this.$routers.securityCenter
 					},
 					{
 						name: '交易明细',

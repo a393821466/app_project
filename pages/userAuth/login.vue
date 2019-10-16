@@ -40,7 +40,7 @@
 	import {mapActions,mapGetters} from 'vuex'
 	import fontsIcon from '@/components/ui-font/'
 	import {showUiToast,appToast} from '@/common/utils/dialog.config'
-	import utils from '@/common/utils/'
+	import config from '@/common/utils/config'
 	export default {
 		name:'login',
 		components:{
@@ -61,7 +61,7 @@
 			...mapGetters(['className','loginKey','merchantInfo']),
 			getMerchantLogo(){
 				if(this.merchantInfo){
-					return utils.getDomain()+'/'+this.merchantInfo.merchantSetting.logoUrl
+					return config.domain+'/'+this.merchantInfo.merchantSetting.logoUrl
 				}
 			}
 		},

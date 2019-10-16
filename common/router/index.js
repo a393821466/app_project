@@ -70,5 +70,9 @@ export default {
 	addBank:{
 		name:'添加银行卡',
 		path:"/pages/my/userCenter/addBank/addBank"
+	},
+	securityCenter:{
+		name:'安全中心',
+		path:"/pages/my/userCenter/securityCenter/securityCenter"
 	}
 }

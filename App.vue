@@ -1,23 +1,18 @@
 <script>
 	import Vue from 'vue'
+	import {showUiToast} from './common/utils/dialog.config'
 	import {
 		mapActions,
 		mapGetters
 	} from 'vuex'
 	export default {
 		name: 'App',
-		computed: {
-			/*
-			** 公告，模板数据
-			*/
-			...mapGetters(['className']),
-		},
-		watch:{
-			className(n,o){
-				console.log(n)
-			}
-		},
 		onLaunch: function() {
+			uni.onNetworkStatusChange(function (res) {
+			    if(!res.isConnected){
+					showUiToast('无网络状态');
+				}
+			})
 		// 	uni.getSystemInfo({
 		// 		success: function(e) {
 		// 			Vue.prototype.statusBar = e.statusBarHeight
@@ -49,9 +44,7 @@
 		// 		}
 		// 	})
 		},
-		onShow() {
-			console.log(111);
-		}
+		onShow() {}
 	}
 </script>
 

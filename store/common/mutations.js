@@ -1,6 +1,7 @@
 import chache from '@/common/utils/storage'
 export const state={
 	className:'daytime',
+	stateText:'',
 	token:'' || chache.get('token'),
 	merchantInfo:chache.get('merchantInfo'),
 	loginKey:'',
@@ -32,6 +33,10 @@ export const mutations={
 		chache.set('token',val.token);
 		state.userInfo=val
 		chache.set('userInfo',val)
+	},
+	['ONLOADSTATE'](state,text){
+		state.stateText=text;
+		console.log(state.stateText);
 	},
 	//重置state
 	['RESETCOMMONSTATE'](state){

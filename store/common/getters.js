@@ -4,7 +4,8 @@ import {state} from './mutations'
 	token:state=>state.token,
 	merchantInfo:state=>state.merchantInfo,
 	loginKey:state=>state.loginKey,
-	userInfo:state=>state.userInfo
+	userInfo:state=>state.userInfo,
+	stateText:state=>state.stateText
 }
 
 export default getters

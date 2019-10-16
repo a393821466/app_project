@@ -35,12 +35,28 @@
 			</view>
 		</view>
 		<view class="hot_activity_box" v-else>
-			<view class="activity_title_skleton">
-				<view class="activity_image_skeleton">
+			<view v-if="actData[0]==='暂无活动'">
+				<view class="activity_title">
+					<text class="activity_text">热门活动</text>
+					<view class="activity_image">
+						<text>快速上手让你盈利不停</text>
+					</view>
+				</view>
+				<view class="activity_box activity_boxs">
+					<view class="activity_list" style="text-align:center;line-height:180rpx;
+					color:#ccc;">
+						{{actData[0]}}
+					</view>
 				</view>
 			</view>
-			<view class="activity_box activity_boxs">
-				<view class="activity_list" v-for="(item,idx) in 2" :key="idx">
+			<view v-else>
+				<view class="activity_title_skleton">
+					<view class="activity_image_skeleton">
+					</view>
+				</view>
+				<view class="activity_box activity_boxs">
+					<view class="activity_list" v-for="(item,idx) in 2" :key="idx">
+					</view>
 				</view>
 			</view>
 		</view>
@@ -49,7 +65,8 @@
 
 <script>
 import {
-	mapActions
+	mapActions,
+	mapGetters
 } from 'vuex'
 import {promtModel,showActionSheet} from '@/common/utils/dialog.config';
 export default{
@@ -66,8 +83,15 @@ export default{
 		}
 	},
 	computed:{
+		...mapGetters(['stateText']),
 		actData(){
-			return this.actList.length>0?this.actList:[]
+			if(this.stateText=='开始请求'){
+				return []
+			}else if(this.stateText=='请求失败'){
+				return []
+			}else{
+				return this.actList.length>0?this.actList:['暂无活动']
+			}
 		}
 	},
 	methods:{

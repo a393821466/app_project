@@ -102,6 +102,12 @@
 				"navigationBarTextStyle":"black"
 			}
         }
+        ,{
+            "path" : "pages/my/userCenter/securityCenter/securityCenter",
+            "style" : {
+            	"navigationBarTitleText":"安全中心"
+            }
+        }
     ],
 	"condition": {
 		//模式配置，仅开发期间生效
