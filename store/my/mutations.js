@@ -11,7 +11,12 @@ export const state={
 export const mutations={
 	['GETMINE'](state,val){
 		let filterMine=val.filter((item)=>item.walletType==1)
-		state.userBalance=filterMine[0]
+		let formartAmount={
+			balance:filterMine[0].balance==0?'0':filterMine[0].balance.toFixed(2),
+			amountUseable:filterMine[0].amountUseable==0?'0':filterMine[0].amountUseable.toFixed(2),
+			amountFrozen:filterMine[0].amountFrozen==0?'0':filterMine[0].amountFrozen.toFixed(2)
+		}
+		state.userBalance=formartAmount
 		state.userAllBalance=val.filter(item=>item.walletType!==4);
 	},
 	['GETMYBANKLIST'](state,val){

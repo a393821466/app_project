@@ -2,7 +2,7 @@
 	<view class="bankView">
 		<view class="bank_list">
 			<view class="bank_list_content" v-if="myBankList.length>0">
-				<swiper-action :options="options" :myBankList="formartBankList" @delBank='delBank'></swiper-action>
+				<swiper-action ref='bankListRefs' :options="options" :myBankList="formartBankList" @delBank='delBank'></swiper-action>
 				<view class="add" v-if="formartBankList.length<3" @click="goAddBank">
 					<view class="bankIcon">
 						<image src="../../../../static/images/addBank.svg" class="bankImgs"></image>
@@ -112,19 +112,29 @@
 			},
 			// 绑定银行卡
 			goAddBank(){
+				const that=this;
 				const isRealName=chache.get('userInfo').isUserVierity||chache.get('isUserVierity')
-				if(isRealName==1){
-					this.$mRouter.push({
-						route:this.$routers.addBank
-					})
+				if(this.goBindBank){
+					if(isRealName==1){
+						this.$mRouter.push({
+							route:this.$routers.addBank
+						})
+					}else{
+						showUiModel({content:'您还未实名认证,去实名?',showCancel:true},(e)=>{
+							if(e.confirm){
+								this.$mRouter.push(
+									{route:this.$routers.realName}
+								)
+							}
+						})
+					}
+					if(this.myBankList.length>0){
+						setTimeout(()=>{
+							that.$refs.bankListRefs.closeIndex();
+						},500)
+					}
 				}else{
-					showUiModel({content:'您还未实名认证,去实名?',showCancel:true},(e)=>{
-						if(e.confirm){
-							this.$mRouter.push(
-								{route:this.$routers.realName}
-							)
-						}
-					})
+					showUiToast(`正在获取您的银行卡列表,请稍后..`);
 				}
 			},
 			// 移除银行卡

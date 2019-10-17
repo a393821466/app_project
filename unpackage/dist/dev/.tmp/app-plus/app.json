@@ -12,7 +12,9 @@
     "pages/my/userCenter/myBalance/myBalance",
     "pages/my/userCenter/setting/setting",
     "pages/my/userCenter/bank/bank",
-    "pages/my/userCenter/addBank/addBank"
+    "pages/my/userCenter/addBank/addBank",
+    "pages/my/userCenter/securityCenter/securityCenter",
+    "pages/my/userCenter/realName/realName"
   ],
   "window": {
     "navigationBarTextStyle": "white",

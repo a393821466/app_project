@@ -103,7 +103,7 @@
 				let timer=setTimeout(()=>{
 					this.gaugeOption.value+=1;
 					this.add();
-				},10)
+				},30)
 				sum=this.bindInfo.surplus==100 ? 0 : 10;
 				if(this.gaugeOption.value==this.bindInfo.surplus + sum){
 					clearTimeout(timer);
@@ -114,7 +114,7 @@
 				let timer=setTimeout(()=>{
 					this.gaugeOption.value-=1;
 					this.reduct();
-				},50)
+				},40)
 				if(this.gaugeOption.value==this.bindInfo.surplus){
 					clearTimeout(timer);
 				}

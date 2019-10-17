@@ -3,9 +3,16 @@
 	.addBank_tip{
 		padding:0 32rpx;
 		font-size:30rpx;
+		display:flex;
+		flex-direction:row;
+		.uni-icon-wenti{
+			flex:0 0 40rpx;
+			height:40rpx;
+		}
 		.meBankTip{
-			display:inline-block;
+			flex:1;
 			text-indent:10rpx;
+			line-height:50rpx;
 			color:#888;
 		}
 	}
@@ -17,7 +24,7 @@
 			width:680rpx;
 			margin:12rpx auto 0;
 			padding:0 10rpx;
-			border-bottom:1rpx solid #f8f8f8;
+			border-bottom:1px solid #f8f8f8;
 			.flexBankView{
 				flex:0 0 1;
 				font-size:32rpx;
@@ -31,8 +38,9 @@
 				&.input{
 					flex:0 0 460rpx;
 					.bankNumber{
-						height:95rpx;
-						line-height:95rpx;
+						height:52rpx;
+						line-height:52rpx;
+						margin-top:22rpx;
 					}
 				}
 				&.iconRight{

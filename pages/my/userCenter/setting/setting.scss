@@ -1,24 +1,56 @@
+page{
+	background:#f8f8f8;
+}
 .settingView,.setting_box{
-	padding:0 20rpx;
 	.setting_list{
 		display:flex;
 		flex-direction: row;
-		margin-top:20rpx;
-		border-bottom:2rpx solid #eee;
-		padding:22rpx;
+		padding:22rpx 5rpx;
+		&.setting_top{
+			border-top:#f3f3f3 solid 1px;
+		}
 		.setting_title{
 			flex:0 0 90%;
 			width:90%;
 			color:#666;
 			font-size:32rpx;
 			line-height:60rpx;
+			color:#666;
 		}
 		.setting_icon{
 			flex:0 0 10%;
 			width:10%;
-			text-align:center;
+			text-align:right;
+			line-height:60rpx;
 			.uni-icon-fanhui{
 				transform:rotate(180deg)
+			}
+		}
+	}
+	.setting_middle,.setting_middle2,.setting_logout,.setting_top{
+		padding:0 30rpx;
+		background:#fff;
+		border-top:1px solid #f3f3f3;
+		border-bottom:1px solid #f3f3f3;
+	}
+	.setting_middle,.setting_middle2,.setting_top{
+		.setting_list{
+			border-bottom:1px solid #f3f3f3;
+			&:nth-last-child(1){
+				border:0
+			}
+		}
+	}
+	
+	.setting_middle,.setting_middle2,.setting_logout{
+		margin-top:20rpx;
+	}
+	.setting_logout{
+		.setting_list{
+			padding:26rpx;
+			.setting_title{
+				width:100%;
+				flex:1;
 			}
 		}
 	}

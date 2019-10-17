@@ -54,7 +54,8 @@ http.interceptor.response((response) => {
 	return Promise.resolve(res)
 }, (err) => {
 	if (err.errMsg == 'request:fail timeout') {
-		errToast(apiUrl[err.config.url] + '超时')
+		let msg=!apiUrl[err.config.url]?'请求超时':`${apiUrl[err.config.url]}超时`
+		errToast(msg)
 	}
 	uni.stopPullDownRefresh();
 	store.dispatch('onLoadState','请求失败')

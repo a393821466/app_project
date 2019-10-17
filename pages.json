@@ -81,7 +81,9 @@
         ,{
             "path" : "pages/my/userCenter/setting/setting",
             "style" : {
-            	"navigationBarTitleText":"设置"
+            	"navigationBarTitleText":"设置",
+				"navigationBarBackgroundColor":"#f8f8f8",
+				"navigationBarTextStyle":"black"
             }
         },{
             "path" : "pages/my/userCenter/bank/bank",

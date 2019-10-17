@@ -15,6 +15,10 @@
 	import {
 		mapActions
 	} from 'vuex'
+	import config from '@/common/utils/config'
+	import {
+		showUiToast
+	} from '@/common/utils/dialog.config';
 	export default{
 		name:'swiper',
 		props:{
@@ -31,16 +35,11 @@
 		methods:{
 			...mapActions(['sendUrl']),
 			onClickBanner(item){
-				let u = ''
 			    if (item.breakUrl === '' || !item.breakUrl) {
+				  showUiToast('无跳转地址');
 				  return
 			    }
-			    if (process.env.NODE_ENV === 'development') {
-				  u = 'https://tmk.rvsii.com'
-			    } else {
-				  u = location.origin
-			    }
-				console.log(u)
+				let u = config.domain;
 			    let url = item.breakUrl
 			    if (url !== '') {
 				  let us = url.split(':')
@@ -50,7 +49,10 @@
 					this.sendUrl(u + '/' + url)
 				}
 				this.$mRouter.push({
-					route:this.$routers.webViewUi
+					route:this.$routers.webViewUi,
+					query:{
+						title:item.title
+					}
 				})
 			  }
 			}

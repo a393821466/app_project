@@ -83,6 +83,9 @@
 				this.$emit('delBank',item)
 				
 			},
+			closeIndex(){
+				this.messageIndex = -1;
+			},
 			touchStart(event) {
 				if(event.currentTarget.dataset.disabled === true){
 					return;

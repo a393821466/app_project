@@ -32,17 +32,17 @@
 			<!--账户余额，可用余额，冻结余额-->
 			<view class="money_box">
 				<view class="money">
-					<text class="num">{{!userBalance.balance?0:userBalance.balance.toFixed(2)}}</text>
+					<text class="num">{{!userBalance.balance?'-':userBalance.balance}}</text>
 					<view class="rate">账户余额(元)</view>
 					<view class="right_line"></view>
 				</view>
 				<view class="money">
-					<text class="num">{{!userBalance.amountUseable?0:userBalance.amountUseable.toFixed(2)}}</text>
+					<text class="num">{{!userBalance.amountUseable?'-':userBalance.amountUseable}}</text>
 					<view class="rate">可提余额(元)</view>
 					<view class="right_line"></view>
 				</view>
 				<view class="money">
-					<text class="num">{{!userBalance.amountFrozen?0:userBalance.amountFrozen.toFixed(2)}}</text>
+					<text class="num">{{!userBalance.amountFrozen?'-':userBalance.amountFrozen}}</text>
 					<view class="rate">冻结余额(元)</view>
 				</view>
 			</view>

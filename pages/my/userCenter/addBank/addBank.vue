@@ -1,7 +1,7 @@
 <template>
 	<view class="addBank">
 		<view class="addBank_tip">
-			<fonts-icon type="wenti" size='38' color="#1b82d1"></fonts-icon>
+			<fonts-icon type="wenti" size='42' color="#1b82d1"></fonts-icon>
 			<text class="meBankTip">请填写您的真实信息，通过后将不能修改</text></view>
 		<view class="bankInput">
 			<!-- view class="bankCartName">
@@ -93,6 +93,7 @@
 					bankId:0
 			    },
 				flat:true,
+				bankLoad:true,
 				address:'',
 			};
 		},
@@ -118,19 +119,19 @@
 				if(this.bankList.length>0){
 					that.$refs.selector.show();
 				}else{
-					if(this.flat){
-						this.flat=false
+					if(this.bankLoad){
+						this.bankLoad=false
 						this.postBankInfo.bankName='加载银行卡列表中.'
 						this.getBankListInfo({state:1}).then(res=>{
 							this.postBankInfo.bankName='请选择银行'
-							this.flat=true
+							this.bankLoad=true
 							if(res.status){
 								that.$refs.selector.show();
 								return
 							}
 							showUiToast(res.msg);
 						}).catch(err=>{
-							this.flat=true
+							this.bankLoad=true
 							showUiToast('加载失败');
 							return err
 						})
