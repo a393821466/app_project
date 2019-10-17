@@ -2,7 +2,7 @@
 	<view class="bankView">
 		<view class="bank_list">
 			<view class="bank_list_content" v-if="myBankList.length>0">
-				<swiper-action :options="options" :myBankList="formartBankList"></swiper-action>
+				<swiper-action :options="options" :myBankList="formartBankList" @delBank='delBank'></swiper-action>
 				<view class="add" v-if="formartBankList.length<3" @click="goAddBank">
 					<view class="bankIcon">
 						<image src="../../../../static/images/addBank.svg" class="bankImgs"></image>
@@ -53,6 +53,8 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
+	import {showUiModel,showUiToast,showUiLoading,hideUiLoading} from '@/common/utils/dialog.config'
+	import chache from '@/common/utils/storage'
 	export default {
 		name:'bank',
 		components:{
@@ -61,7 +63,7 @@
 		data() {
 			return {
 				flat:false,
-				httpStatus:2,
+				goBindBank:false,
 				tip:{
 					display:'block'
 				},
@@ -77,6 +79,7 @@
 		},
 		computed:{
 			...mapGetters(['userInfo','myBankList']),
+			// 银行卡渲染前做的处理
 			formartBankList(){
 				if(this.myBankList.length>0){
 					let banks=this.myBankList;
@@ -93,26 +96,65 @@
 			this.getBank()
 		},
 		methods:{
-			...mapActions(['queryBank']),
+			...mapActions(['queryBank','delMyBank']),
+			// 提示
 		    openProblem(){
 				this.flat=!this.flat
 			},
+			// 绑定账号绑定的银行卡
 			getBank(){
-				if(this.httpStatus==2){
-					const uuid=this.userInfo.uuid;
-					this.queryBank({uuid:uuid}).then(res=>{
-						this.httpStatus=1
-					}).catch(err=>{
-						this.httpStatus=1
-					})
-				}
+				const uuid=this.userInfo.uuid;
+				this.queryBank({uuid:uuid}).then(res=>{
+					this.goBindBank=true
+				}).catch(err=>{
+					this.goBindBank=true
+				})
 			},
+			// 绑定银行卡
 			goAddBank(){
-				if(this.httpStatus==1){
+				const isRealName=chache.get('userInfo').isUserVierity||chache.get('isUserVierity')
+				if(isRealName==1){
 					this.$mRouter.push({
 						route:this.$routers.addBank
 					})
+				}else{
+					showUiModel({content:'您还未实名认证,去实名?',showCancel:true},(e)=>{
+						if(e.confirm){
+							this.$mRouter.push(
+								{route:this.$routers.realName}
+							)
+						}
+					})
 				}
+			},
+			// 移除银行卡
+			delBank(item){
+				const that=this
+				const bankNumFour=item.accountNum.substr(item.accountNum.length-4);
+				const params={
+					data:{
+						bankId:item.uuid
+					}
+				}
+				showUiModel({content:`您确认移除尾号为(${bankNumFour})的银行卡吗?`,showCancel:true},(e)=>{
+					if(e.confirm){
+						showUiLoading('正在处理,请稍后',{mask:true});
+						this.delMyBank(params).then(res=>{
+							hideUiLoading()
+							if(res.status){
+								showUiToast(`已删除尾号为${bankNumFour}的银行卡`);
+								setTimeout(()=>{
+									that.getBank();
+								},300);
+								return;
+							}
+							showUiToast(res.msg);
+						}).catch(err=>{
+							hideUiLoading()
+							return err
+						})
+					}
+				})
 			}
 		}
 	}

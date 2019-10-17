@@ -36,7 +36,6 @@ export const mutations={
 	},
 	['ONLOADSTATE'](state,text){
 		state.stateText=text;
-		console.log(state.stateText);
 	},
 	//重置state
 	['RESETCOMMONSTATE'](state){

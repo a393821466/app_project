@@ -108,6 +108,12 @@
             	"navigationBarTitleText":"安全中心"
             }
         }
+        ,{
+            "path" : "pages/my/userCenter/realName/realName",
+            "style" : {
+				"navigationBarTitleText":"实名认证"
+			}
+        }
     ],
 	"condition": {
 		//模式配置，仅开发期间生效

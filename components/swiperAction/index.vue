@@ -5,7 +5,7 @@
 				<view class="uni-swipe-action__container" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd"
 				 @touchcancel="touchEnd" :style="{'transform':messageIndex == i ? transformX : 'translateX(0px)','-webkit-transform':messageIndex == i ? transformX : 'translateX(0px)'}" :data-index="i" :data-disabled="it.disabled">
 					<view class="uni-swipe-action__content ">
-						<view class="bankList" :style="{backgroundColor:it.color,borderRadius:isOpen?0:15+'rpx'}">
+						<view class="bankList" :style="{backgroundColor:it.color,borderRadius:messageIndex == i?0:15+'rpx'}">
 							<view class="bankIcon bankDiv">
 								<view class="bankIconBox">
 									<fonts-icon :type='it.bankCode' size='58' :color='it.color'></fonts-icon>
@@ -18,7 +18,7 @@
 								<view class="bankIconBg">
 									<fonts-icon :type='it.bankCode' size='300' color='#fff'></fonts-icon>
 								</view>
-								<view class="arrow" :class="isOpen?'to':''">
+								<view class="arrow" :class="[messageIndex == i?'to':'']">
 									<fonts-icon type="fanhui" size='22' color='#eee'></fonts-icon>
 								</view>
 							</view>
@@ -26,7 +26,7 @@
 					</view>
 					<view class="uni-swipe-action__btn-group" :id="elId">
 						<div v-for="(item,index) in options" :key="index" class="uni-swipe-action--btn" :style="{backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',color: item.style && item.style.color ? item.style.color : '#FFFFFF',fontSize: item.style && item.style.fontSize ? item.style.fontSize : '28upx'}"
-						 @click="bindClickBtn(item,i)">
+						 @click="bindClickBtn(it,i)">
 							{{item.text}}
 						</div>
 					</view>
@@ -51,8 +51,7 @@
 			return {
 				elId: elId,
 				transformX: 'translateX(0px)',
-				messageIndex: -1,
-				isOpen:false
+				messageIndex: -1
 			}
 		},
 		created() {
@@ -80,7 +79,8 @@
 			},
 			bindClickBtn(item, index) {
 				// this.messageIndex = -1;
-				console.log(item.text +'message第'+ index+ '项');
+				// console.log(item.text +'message第'+ index+ '项');
+				this.$emit('delBank',item)
 				
 			},
 			touchStart(event) {
@@ -113,7 +113,7 @@
 				}
 				if (this.direction == 'right') {
 					this.messageIndex = -1;
-				} 
+				}
 				this.endMove(event)
 			},
 			endMove(event) {
@@ -123,11 +123,9 @@
 				}
 				if (this.messageIndex !== -1) {
 					this.transformX = `translateX(${-this.btnGroupWidth}px)`;
-					this.isOpen=true;
 					this.$emit('opened');
 				} else {
 					this.transformX = 'translateX(0px)';
-					this.isOpen=false;
 					this.$emit('closed');
 				}
 				this.direction = '';

@@ -51,28 +51,32 @@ export default {
 		path: "/pages/webViewUi/webViewUi",
 		requiresAuth: true
 	},
-	notice:{
-		name:"公告",
-		path:"/pages/annount/annount"
+	notice: {
+		name: "公告",
+		path: "/pages/annount/annount"
 	},
-	myBlance:{
-		name:'钱包',
-		path:"/pages/my/userCenter/myBalance/myBalance"
+	myBlance: {
+		name: '钱包',
+		path: "/pages/my/userCenter/myBalance/myBalance"
 	},
-	setting:{
-		name:'设置',
-		path:"/pages/my/userCenter/setting/setting"
+	setting: {
+		name: '设置',
+		path: "/pages/my/userCenter/setting/setting"
 	},
-	bank:{
-		name:'银行卡',
-		path:"/pages/my/userCenter/bank/bank"
+	bank: {
+		name: '银行卡',
+		path: "/pages/my/userCenter/bank/bank"
 	},
-	addBank:{
-		name:'添加银行卡',
-		path:"/pages/my/userCenter/addBank/addBank"
+	addBank: {
+		name: '添加银行卡',
+		path: "/pages/my/userCenter/addBank/addBank"
 	},
-	securityCenter:{
-		name:'安全中心',
-		path:"/pages/my/userCenter/securityCenter/securityCenter"
+	securityCenter: {
+		name: '安全中心',
+		path: "/pages/my/userCenter/securityCenter/securityCenter"
+	},
+	realName: {
+		name: '实名认证',
+		path: "/pages/my/userCenter/realName/realName"
 	}
 }

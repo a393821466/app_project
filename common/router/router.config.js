@@ -32,9 +32,9 @@ class Router {
 		this.callBack("switchTab", to);
 	}
 
-	back(delta) {
+	back(num) {
 		uni.navigateBack({
-			delta
+			delta:num
 		})
 	}
 }

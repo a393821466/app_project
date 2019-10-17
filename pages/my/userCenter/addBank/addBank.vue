@@ -97,7 +97,7 @@
 			};
 		},
 		computed:{
-			...mapGetters(['bankList']),
+			...mapGetters(['userInfo','bankList','myBankList']),
 			location(){
 				return address;
 			},
@@ -105,8 +105,11 @@
 				return this.bankList.length>0?this.bankList:[]
 			}
 		},
+		onReady(){
+			this.getMyBank();
+		},
 		methods:{
-			...mapActions(['getBankListInfo','addmyBank']),
+			...mapActions(['getBankListInfo','addmyBank','queryBank']),
 			toggleTab(){
 				this.$refs.linkage.show();
 			},
@@ -133,6 +136,20 @@
 						})
 					}
 				}
+			},
+			getMyBank(){
+				const uuid=this.userInfo.uuid;
+				this.queryBank({uuid:uuid}).then(res=>{
+					if(!res.status){
+						showUiToast(res.msg);
+					}
+					if(res.data.length>=3){
+						showUiToast('您的银行卡绑定数量已上限');
+						this.$mRouter.back(1)
+					}
+				}).catch(err=>{
+					return err;
+				})
 			},
 			onConfirm(val){
 				// console.log(val);

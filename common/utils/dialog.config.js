@@ -27,7 +27,7 @@
   * @params string local 弹框位置
   * */
 export const  hideUiToast=()=>{
-	ui.hideUiToast()
+	uni.hideUiToast()
 }
 
 /**

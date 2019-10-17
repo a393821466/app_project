@@ -1,13 +1,13 @@
 <template>
 	<view class="gauge-box" :style="{'background-color': bgColor}">
 		<canvas :canvas-id="config.id" :style="{'width' : _width + 'px','height' : _width + 'px'}"></canvas>
-		<!-- <view class="gauge-btn" v-if="_status" :class="{'gauge-btn-active':_dStatus}">{{_dStatus ? '在线' : '离线'}}</view> -->
+		<view class="gauge-btn" v-if="_status" :class="{'gauge-btn-active':_dStatus}">{{_dStatus ? '在线' : '离线'}}</view>
 	</view>
 </template>
 
 <script>
 const mainDefault = {
-	bgColor:'#1b82d1', //rgba(255,255,255,1)
+	bgColor:'rgba(255,255,255,0)', //rgba(255,255,255,1)
 	startAngle: 0.75,
 	endAngle: 0.25,
 	width: uni.upx2px(350),
@@ -17,7 +17,7 @@ const mainDefault = {
 	max: 100,	
 	value: 0,
 	unit: false,
-	name: '安全级别',
+	name: '安全指数',
 	detail:{},
 	axisTick:[]
 };
@@ -25,8 +25,8 @@ const detailDefault = {//标题、数值、单位设置
 	title: {//name字体位置设置
 		offsetCenter:[0,uni.upx2px(-40)],//距离圆心直径偏移
 		color:'#eee',
-		fontSize: uni.upx2px(32),
-		fontWeight:'500',
+		fontSize: uni.upx2px(24),
+		fontWeight:'bolder',
 		textAlign:'center'
 	},
 	value: {
@@ -47,10 +47,10 @@ const detailDefault = {//标题、数值、单位设置
 const axisTickDefault = {//轴刻度线
 	width: uni.upx2px(25),//轴长
 	number: 4,//轴数量（相当于几等分）
-	color: '#f8f8f8,#01518f',//轴颜色(第一个值--指针之前的颜色，之后的颜色)
+	color: '#eee,#01518f',//轴颜色(第一个值--指针之前的颜色，之后的颜色)
 	subNumber: 8,//一个大刻度分成几个小刻度
-	subWidth:  uni.upx2px(25),
-	subHeight:  1,
+	subWidth:uni.upx2px(25),
+	subHeight:2,
 	padding: uni.upx2px(20)//刻度距离边距
 };
 const axisTickDefaultSmall = {//轴刻度线(里圈)
@@ -59,7 +59,7 @@ const axisTickDefaultSmall = {//轴刻度线(里圈)
 	color: '#d5d5d5',//轴颜色(第一个值--指针之前的颜色，之后的颜色)
 	subNumber: 8,//大刻度之间分成几个小刻度
 	subWidth:  uni.upx2px(6),
-	subHeight:  1,
+	subHeight:  2,
 	padding: uni.upx2px(25)//刻度距离边距
 };
 export default {
@@ -148,7 +148,6 @@ export default {
 				var startX = -radius - gaugeOption.width * 0.5;
 				var endX = -radius - gaugeOption.width * 0.5 + gaugeOption.width;
 				var childEndX = -radius - gaugeOption.width * 0.5 + gaugeOption.subWidth;
-				
 				// 画大刻度
 				let maxScaleData = {
 					...centerPosition,
@@ -158,11 +157,10 @@ export default {
 					criticalPoint,
 					colors,
 					startAngle: options.startAngle,
-					width: options.subHeight,
+					width: gaugeOption.subHeight,
 					number: gaugeOption.number,
 				}
 				this.drawScale(ctx, maxScaleData);
-				
 				// 画小刻度
 				let minScaleData = {
 					...centerPosition,
@@ -172,7 +170,7 @@ export default {
 					endX: childEndX,
 					splitAngle:childAngle,
 					startAngle: options.startAngle,
-					width: options.subHeight,
+					width: gaugeOption.subHeight,
 					number: gaugeOption.number * gaugeOption.subNumber,
 				}
 				this.drawScale(ctx, minScaleData);
@@ -294,6 +292,7 @@ export default {
 		align-items: center;
 		justify-content: center;
 		text-align: center;
+		z-index:100;
 	}
 	.gauge-box canvas{
 		width: 100%;

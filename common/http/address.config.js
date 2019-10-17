@@ -45,6 +45,8 @@ export default{
 		mine: `/trade/wallet/find/mine`, // 钱包余额
 		regBag: `/trade/wallet/redBag/find`,  // 红包
 		queryBank: `/business/queryBankInfo`, // 查找银行卡
-		addBank: `/business/addBank` //添加银行卡
+		addBank: `/business/addBank`, //添加银行卡
+		delBank: `/business/closeBank`, //移除银行卡
+		security: `/user/userInfo/checkUserInfo`, // 安全中心
 	}
 }

@@ -3,7 +3,8 @@ export const state={
 	userBalance:{},
 	userAllBalance:[],
 	myBankList:[],
-	bankList:[]
+	bankList:[],
+	bindInfo:{}
 }
 
 
@@ -28,10 +29,27 @@ export const mutations={
 		})
 		state.bankList=arr;
 	},
+	['GETBINDINFO'](state,val){
+		val.isPhone=1;
+		let countScore=100;
+		let num=0;
+		let count=0;
+		let lastSum=0;
+		for(var i in val){
+			count++;
+			if(val[i]==1){
+				num++;
+			}
+		}
+		lastSum=(countScore/count)*num;
+		val.surplus=lastSum;
+		state.bindInfo=val;
+	},
 	['RESETMY'](state){
 		state.userBalance={}
 		state.userAllBalance=[]
 		state.myBankList=[]
 		state.bankList=[]
+		state.bindInfo={}
 	}
 }
