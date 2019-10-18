@@ -82,7 +82,7 @@
             "path" : "pages/my/userCenter/setting/setting",
             "style" : {
             	"navigationBarTitleText":"设置",
-				"navigationBarBackgroundColor":"#f8f8f8",
+				"navigationBarBackgroundColor":"#fff",
 				"navigationBarTextStyle":"black"
             }
         },{
@@ -113,7 +113,27 @@
         ,{
             "path" : "pages/my/userCenter/realName/realName",
             "style" : {
-				"navigationBarTitleText":"实名认证"
+				"navigationBarTitleText":"实名认证",
+				"navigationBarBackgroundColor":"#f4f4f4",
+				"navigationBarTextStyle":"black"
+			}
+        },{
+            "path" : "pages/my/userCenter/withdraw/withdraw",
+            "style" : {
+				"navigationBarTitleText":"提现",
+				"navigationBarBackgroundColor":"#f8f8f8",
+				"navigationBarTextStyle":"black",
+				"titleNView" : {
+					"buttons" : [
+						{
+							"text" : "提现记录",
+							"fontSize" : "14",
+							"float" : "right",
+							"color" : "#fff",
+							"width" : "80px"
+						}
+					]
+				}
 			}
         }
     ],

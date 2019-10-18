@@ -1,5 +1,5 @@
 {
-	"name" : "uni_video",
+	"name" : "uni_futures",
 	"appid" : "",
 	"description": "",
 	"versionName": "1.0.0",
@@ -71,7 +71,7 @@
 			"disableHostCheck":true,
 			"proxy":{
 				"/apis":{
-					"target":"https://tmk.rvsii.com",
+					"target":"http://cxx.99qupai.com",
 					"changeOrigin":true,
 					"secure":false
 				}

@@ -78,5 +78,9 @@ export default {
 	realName: {
 		name: '实名认证',
 		path: "/pages/my/userCenter/realName/realName"
+	},
+	withdraw: {
+		name: '提现',
+		path: "/pages/my/userCenter/withdraw/withdraw"
 	}
 }

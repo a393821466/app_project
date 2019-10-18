@@ -58,6 +58,11 @@ export default{
 		const deleteBank=await httpUtils.post(address.my.delBank,res);
 		return deleteBank;
 	},
+	// 实名认证
+	async bindRealNameStore({commit},res){
+		const userRealName=await httpUtils.post(address.my.realName,res);
+		return userRealName;
+	},
 	// 登出操作
 	async logout({commit}){
 		const logoutAction=await httpUtils.get(address.common.logout);

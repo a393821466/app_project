@@ -70,6 +70,7 @@
 <script>
 	import bestGauge from '@/components/best-gauge/best-gauge.vue'
 	import {mapActions,mapGetters} from 'vuex'
+	import {showUiModel} from '@/common/utils/dialog.config'
 	export default {
 		 components:{
 			bestGauge
@@ -104,7 +105,7 @@
 					this.gaugeOption.value+=1;
 					this.add();
 				},30)
-				sum=this.bindInfo.surplus==100 ? 0 : 10;
+				sum=this.bindInfo.surplus>=90 ? 0 : 10;
 				if(this.gaugeOption.value==this.bindInfo.surplus + sum){
 					clearTimeout(timer);
 					this.reduct();

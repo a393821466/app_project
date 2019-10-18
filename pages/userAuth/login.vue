@@ -14,8 +14,8 @@
 			<view class="login_form_node login_form_userPassword">
 				<view class="loginsIcon"><fonts-icon type='suo' color='#666'></fonts-icon></view>
 				<input :type="eye_type?'password':'text'" v-model="ruleForm.password" placeholder="请输入密码" class="loginInput userPassword" />
-				<view class="login_hide_pwd">
-					<fonts-icon :type='eye_type?"yanjing1":"yanjing"' color='#666' @click.native="onClickEye">
+				<view class="login_hide_pwd" @click="onClickEye">
+					<fonts-icon :type='eye_type?"yanjing1":"yanjing"' color='#666'>
 					</fonts-icon>
 				</view>
 			</view>
@@ -41,6 +41,7 @@
 	import fontsIcon from '@/components/ui-font/'
 	import {showUiToast,appToast} from '@/common/utils/dialog.config'
 	import config from '@/common/utils/config'
+	import {isUsername,isPssword} from '@/common/utils/validate'
 	export default {
 		name:'login',
 		components:{
@@ -84,6 +85,14 @@
 				const _that = this
 				if (!this.ruleForm.username || !this.ruleForm.password) {
 					_that.errToast('用户名或密码不能为空')
+					return false
+				}
+				if(!isUsername(this.ruleForm.username)){
+					_that.errToast('用户名格式不正确')
+					return false
+				}
+				if(!isPssword(this.ruleForm.password)){
+					_that.errToast('密码格式不正确')
 					return false
 				}
 				if(this.btnLoading){

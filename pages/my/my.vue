@@ -16,8 +16,7 @@
 				<view class="my_tops userInfo">
 					<view class="realName">
 						<view class="goReadNameTwo" v-if="getReadName"><fonts-icon type="shimingrenzheng" color='#eee' size='24'></fonts-icon><text class="readNameSuccess">已实名认证</text></view>
-						<text class="goReadName" v-else>您还未实名,点我去实名</text>
-						
+						<text class="goReadName" @click="goRealName" v-else>您还未实名,点我去实名</text>
 					</view>
 					<view class="emial_userName">
 						<text class="email">{{getUserPhone(this.userInfo.userPhone)}}</text>
@@ -263,14 +262,20 @@
 			goIntLink(e,name){
 				let routeUrl={};
 				if(name=='rechange'){
-					return 
-				}else if(name=='balance'){
+				} 
+				if(name=='balance'){
 					routeUrl=this.$routers.myBlance
-				}else{
-					return
+				}
+				if(name=='whithdraw'){
+					routeUrl=this.$routers.withdraw
 				}
 				this.$mRouter.push({
 					route:routeUrl
+				})
+			},
+			goRealName(){
+				this.$mRouter.push({
+					route:this.$routers.realName
 				})
 			},
 			// 下拉刷新

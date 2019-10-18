@@ -70,7 +70,7 @@
 <script>
 	import wPicker from "@/components/w-picker/w-picker.vue";
 	import address from '@/components/w-picker/city-data/address.js';
-	import {showUiToast} from '@/common/utils/dialog.config'
+	import {showUiToast,showUiModel} from '@/common/utils/dialog.config'
 	import chache from '@/common/utils/storage'
 	import {
 		mapActions,
@@ -166,6 +166,11 @@
 			},
 			submitAddBank(){
 				const that=this
+				const isRealName=chache.get('userInfo').isUserVierity||chache.get('isUserVierity')
+				if(isRealName!=1){
+					showUiToast('请实名认证后操作');
+					return;
+				}
 				if(this.postBankInfo.bankNum==''){
 					showUiToast('请输入银行卡号');
 					return;
