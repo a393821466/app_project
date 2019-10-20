@@ -2,7 +2,8 @@
 	<view class="withdrawView">
 		<view class="withdrawBox">
 			<view @click="onKeys">点击</view>
-			<payKey :isTrue='flat'></payKey>
+			<text>{{moneyNum}}</text>
+			<payKey :isTrue='flat' @backFnc='backFnc'></payKey>
 		</view>
 	</view>
 </template>
@@ -16,12 +17,17 @@
 		},
 		data() {
 			return {
-				flat:false
+				flat:false,
+				moneyNum:''
 			};
 		},
 		methods:{
 			onKeys(){
 				this.flat=!this.flat
+			},
+			backFnc(val){
+				this.moneyNum=val.password;
+				this.flat=val.isTrue;
 			}
 		}
 	}

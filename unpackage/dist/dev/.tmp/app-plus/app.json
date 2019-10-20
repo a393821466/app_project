@@ -14,7 +14,8 @@
     "pages/my/userCenter/bank/bank",
     "pages/my/userCenter/addBank/addBank",
     "pages/my/userCenter/securityCenter/securityCenter",
-    "pages/my/userCenter/realName/realName"
+    "pages/my/userCenter/realName/realName",
+    "pages/my/userCenter/withdraw/withdraw"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -70,7 +71,7 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "uni_video",
+  "appname": "uni_futures",
   "compilerVersion": "2.2.2",
   "usingComponents": {
     "fonts-icon": "/components/ui-font/index"
