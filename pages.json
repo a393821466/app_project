@@ -121,7 +121,7 @@
             "path" : "pages/my/userCenter/withdraw/withdraw",
             "style" : {
 				"navigationBarTitleText":"提现",
-				"navigationBarBackgroundColor":"#f8f8f8",
+				"navigationBarBackgroundColor":"#f1f1f1",
 				"navigationBarTextStyle":"black",
 				"titleNView" : {
 					"buttons" : [
@@ -129,8 +129,8 @@
 							"text" : "提现记录",
 							"fontSize" : "14",
 							"float" : "right",
-							"color" : "#fff",
-							"width" : "80px"
+							"color" : "#black",
+							"width" : "70px"
 						}
 					]
 				}

@@ -1,7 +1,173 @@
 .withdrawView{
-	padding:22rpx;
-	height:3000rpx;
+	padding:22rpx 36rpx;
+	border-top:1px solid #e8e8e8;
+	.withdrawBox{
+		background:#fff;
+		.selectBankInfo{
+			padding:26rpx 50rpx;
+			display:flex;
+			flex-direction:row;
+			background:#f8f8f8;
+			.goBank{
+				flex:0 0 30%;
+				width:30%;
+				line-height:55rpx;
+			}
+			.bankCartNo{
+				flex:0 0 70%;
+				width:70%;
+				.bankType{
+					display:flex;
+					flex-direction:row;
+					.bankIcons{
+						flex:0 0 20%;
+						width:20%;
+						.uni-icon{
+							display:block;
+							margin:0 auto;
+							line-height:55rpx;
+							text-align:center;
+						}
+					}
+				}
+				.withdrawInfo{
+					color:#888;
+					line-height:60rpx;
+					text-indent:50rpx;
+				}
+				.bankName{
+					width:80%;
+					flex:0 0 80%;
+					line-height:55rpx;
+					color:#000080;
+				}
+			}
+		}
+		.moneyNum{
+			padding:26rpx 50rpx;
+			.inputMoneyNumber{
+				border-bottom:1px solid #eee;
+				position:relative;
+				height:70rpx;
+				margin-top:38rpx;
+				.moneyIcon{
+					position:absolute;
+					top:0;
+					font-size:52rpx;
+				}
+				.moneySum{
+					height:70rpx;
+					padding:0 60rpx;
+					font-weight:bold;
+					font-size:46rpx;
+				}
+				.withdrawFullPassword{
+					height:70rpx;
+					padding:0 60rpx;
+					font-size:28rpx;
+				}
+			}
+			.nowMoneyNum{
+				margin-top:15rpx;
+				.withdraw_action{
+					color:#000080;
+					display:inline-block;
+				}
+			}
+			.withdraw_btn{
+				padding:0 50rpx;
+				margin:46rpx 0;
+				.withdraw_disabled{
+					background-color:#ddd;
+					color:#999;
+					&:after{
+						border:none;
+					}
+				}
+				.withdraw_button_style{
+					background:#1b82d1;
+				}
+			}
+		}
+	}
+}
+
+
+.popupTitle{
+	padding-bottom:28rpx;
+	border-bottom:1px dashed #eee;
+	.selectBank{
+		font-size:32rpx;
+		line-height:68rpx;
+		color:#333;
+	}
+	.bankText{
+		color:#999;
+	}
+}
+.selectBankBox{
+	.selectBankList{
+		display:flex;
+		flex-direction: row;
+		padding:16rpx 0;
+		border-bottom:1px dashed #eee;
+		.bankIcon{
+			flex:0 0 15%;
+			width:15%;
+			.bankStyleSize{
+				width:50rpx;
+				height:50rpx;
+				border-radius:50rpx;
+				background:#fff;
+				box-shadow:0 1rpx 2rpx #999;
+				margin:20rpx auto 0;
+				.uni-icon{
+					display:block;
+					text-align:center;
+					line-height:50rpx;
+				}
+			}
+			
+		}
+		.bankTitles{
+			flex:0 0 70%;
+			width:60%;
+			.selectBankInfo{
+				font-size:20rpx;
+				line-height:50rpx;
+				color:#999;
+			}
+			&.addNewBank{
+				line-height:80rpx;
+			}
+		}
+		.is_select{
+			flex:0 0 15%;
+			width:15%;
+			.selectImg{
+				width:40rpx;
+				height:40rpx;
+				margin: 26rpx auto 0;
+				.select{
+					width:100%;
+					height:100%;
+				}
+			}
+		}
+		&:nth-last-child(1){
+			border-bottom:none;
+		}
+	}
+}
+.addNewBank,.selectBankName{
+	font-size:35rpx;
+}
+.nowMoneyNum,.withdraw_text,.bankName,.goBank{
+	font-size:28rpx;
+}
+.withdrawInfo,.bankText{
+	font-size:25rpx;
 }
 page{
-	background:#f8f8f8;
+	background:#f1f1f1;
 }
