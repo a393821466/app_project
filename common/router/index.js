@@ -55,32 +55,50 @@ export default {
 		name: "公告",
 		path: "/pages/annount/annount"
 	},
+	/*个人中心*/
 	myBlance: {
-		name: '钱包',
+		name: "钱包",
 		path: "/pages/my/userCenter/myBalance/myBalance"
 	},
 	setting: {
-		name: '设置',
+		name: "设置",
 		path: "/pages/my/userCenter/setting/setting"
 	},
 	bank: {
-		name: '银行卡',
+		name: "银行卡",
 		path: "/pages/my/userCenter/bank/bank"
 	},
 	addBank: {
-		name: '添加银行卡',
+		name: "添加银行卡",
 		path: "/pages/my/userCenter/addBank/addBank"
 	},
 	securityCenter: {
-		name: '安全中心',
+		name: "安全中心",
 		path: "/pages/my/userCenter/securityCenter/securityCenter"
 	},
 	realName: {
-		name: '实名认证',
+		name: "实名认证",
 		path: "/pages/my/userCenter/realName/realName"
 	},
 	withdraw: {
-		name: '提现',
+		name: "提现",
 		path: "/pages/my/userCenter/withdraw/withdraw"
+	},
+	withdrawSuccess:{
+		name: "提现申请",
+		path: "/pages/my/userCenter/withdraw/withdrawSuccess/withdrawSuccess"
+	},
+	/* 设置 */
+	setUser:{
+		name: "设置个人资料",
+		path: "/pages/my/userCenter/setting/setUserInfo/setUserInfo"
+	},
+	setLoginPassword:{
+		name: "设置登陆密码",
+		path: "/pages/my/userCenter/setting/setLoginPassword/setLoginPassword"
+	},
+	setFundsPassword:{
+		name: "设置资金密码",
+		path: "/pages/my/userCenter/setting/setFundsPassword/setFundsPassword"
 	}
 }

@@ -48,6 +48,7 @@ export default{
 		addBank: `/business/addBank`, //添加银行卡
 		delBank: `/business/closeBank`, //移除银行卡
 		security: `/user/userInfo/checkUserInfo`, // 安全中心
-		realName: `/business/userVerified` // 实名认证
+		realName: `/business/userVerified`, // 实名认证
+		withdraw: `/business/withdraw` // 提现
 	}
 }

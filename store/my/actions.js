@@ -63,6 +63,11 @@ export default{
 		const userRealName=await httpUtils.post(address.my.realName,res);
 		return userRealName;
 	},
+	// 提现
+	async withdraw({commit},res){
+		const userWithdraw=await httpUtils.post(address.my.withdraw,res);
+		return userWithdraw;
+	},
 	// 登出操作
 	async logout({commit}){
 		const logoutAction=await httpUtils.get(address.common.logout);

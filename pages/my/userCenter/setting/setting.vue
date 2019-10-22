@@ -2,7 +2,7 @@
 	<view class="settingView">
 		<view class="setting_box">
 			<view class="setting_top">
-				<view class="setting_list" v-for="(item,idx) in userArr" :key="item.id">
+				<view class="setting_list" v-for="(item,idx) in userArr" :key="item.id" @click="goUserLink(item)">
 					<view class="setting_title">{{item.title}}</view>
 					<view class="setting_icon">
 						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
@@ -45,7 +45,10 @@
 </template>
 
 <script>
-	import {mapActions,mapGetters} from 'vuex'
+	import {
+		mapActions,
+		mapGetters
+	} from 'vuex'
 	import {
 		showUiModel
 	} from '@/common/utils/dialog.config'
@@ -53,94 +56,100 @@
 	export default {
 		data() {
 			return {
-				userArr:[
-					{
-						id:0,
-						title:'个人设置',
-						link:''
+				userArr: [{
+						id: 0,
+						title: '个人设置',
+						link: this.$routers.setUser
 					},
 					{
-						id:1,
-						title:'登陆密码',
-						link:''
+						id: 1,
+						title: '登陆密码',
+						link: this.$routers.setLoginPassword
 					},
 					{
-						id:2,
-						title:'资金密码',
-						link:''
+						id: 2,
+						title: '资金密码',
+						link: this.$routers.setFundsPassword
 					},
 					{
-						id:3,
-						title:'安全设置',
-						link:''
+						id: 3,
+						title: '安全设置',
+						link: ''
 					},
 				],
-				commonUse:[
+				commonUse: [
 					// {
 					// 	id:1,
 					// 	title:'隐私',
 					// 	link:''
 					// },
 					{
-						id:2,
-						title:'字体大小',
-						link:''
+						id: 2,
+						title: '字体大小',
+						link: ''
 					}
 				],
-				helpArr:[
-					{
-						id:3,
-						title:'查看须知以及风险提示',
-						link:''
+				helpArr: [{
+						id: 3,
+						title: '查看须知以及风险提示',
+						link: ''
 					},
 					{
-						id:4,
-						title:'联系客服',
-						link:''
+						id: 4,
+						title: '联系客服',
+						link: ''
 					},
 					{
-						id:5,
-						title:'关于',
-						link:''
+						id: 5,
+						title: '关于',
+						link: ''
 					}
 				]
 			};
 		},
-		methods:{
-			...mapActions(['logout','resetCommonState','resetHomeState','resetMy']),
-			logoutActions(){
-				const that=this;
-				showUiModel({'content':'您确认退出么?','showCancel':true},(e)=>{
-					if(e.confirm){
+		methods: {
+			...mapActions(['logout', 'resetCommonState', 'resetHomeState', 'resetMy']),
+			logoutActions() {
+				const that = this;
+				showUiModel({
+					'content': '您确认退出么?',
+					'showCancel': true
+				}, (e) => {
+					if (e.confirm) {
 						uni.showLoading({
-						    title: '请稍后...'
+							title: '请稍后...'
 						});
-						that.logout().then(res=>{
+						that.logout().then(res => {
 							uni.hideLoading();
-							if(res.status){
+							if (res.status) {
 								that.resetCommonState()
 								that.resetHomeState()
 								that.resetMy()
 								chache.clear()
 								that.$mRouter.reLaunch({
-									route:that.$routers.index,
-									query:{
-										id:1
+									route: that.$routers.index,
+									query: {
+										id: 1
 									}
 								})
-								
+
 							}
-						}).catch(err=>{
+						}).catch(err => {
 							uni.hideLoading();
 						})
 					}
 				})
-				
+
+			},
+			goUserLink(item) {
+				this.$mRouter.push({
+					route: item.link
+				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-@import './setting.scss';
+	@import './setting.scss';
 </style>

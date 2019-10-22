@@ -3,11 +3,14 @@
 	border-top:1px solid #e8e8e8;
 	.withdrawBox{
 		background:#fff;
+		box-shadow:0px 1px 2px #ddd;
 		.selectBankInfo{
 			padding:26rpx 50rpx;
 			display:flex;
 			flex-direction:row;
-			background:#f8f8f8;
+			background:#fcfcfc;
+			position:relative;
+			border-bottom:1px solid #f8f8f8;
 			.goBank{
 				flex:0 0 30%;
 				width:30%;
@@ -22,11 +25,19 @@
 					.bankIcons{
 						flex:0 0 20%;
 						width:20%;
-						.uni-icon{
-							display:block;
+						.bankIconsStyleRadius{
+							width:50rpx;
+							height:50rpx;
+							border-radius:50rpx;
+							background:#fff;
 							margin:0 auto;
-							line-height:55rpx;
-							text-align:center;
+							box-shadow:1rpx 1rpx 1rpx #ccc;
+							.uni-icon{
+								display:block;
+								margin:0 auto;
+								line-height:55rpx;
+								text-align:center;
+							}
 						}
 					}
 				}
@@ -38,9 +49,16 @@
 				.bankName{
 					width:80%;
 					flex:0 0 80%;
-					line-height:55rpx;
+					line-height:50rpx;
 					color:#000080;
 				}
+			}
+			.arrow{
+				position:absolute;
+				right:15rpx;
+				transform:rotate(-180deg);
+				top:50%;
+				margin-top:-25rpx;
 			}
 		}
 		.moneyNum{
@@ -61,10 +79,14 @@
 					font-weight:bold;
 					font-size:46rpx;
 				}
-				.withdrawFullPassword{
+				.withdrawFullPassword,.noFulPassword{
 					height:70rpx;
 					padding:0 60rpx;
 					font-size:28rpx;
+				}
+				.noFulPassword{
+					color:#666;
+					line-height:70rpx;
 				}
 			}
 			.nowMoneyNum{
@@ -87,6 +109,23 @@
 				.withdraw_button_style{
 					background:#1b82d1;
 				}
+			}
+		}
+	}
+	.tipView{
+		.title{
+			font-size:38rpx;
+			text-align:center;
+			line-height:60rpx;
+			color:#999;
+			font-weight:800;
+		}
+		.p1{
+			font-size:28rpx;
+			color:#999;
+			line-height:52rpx;
+			.phone{
+				color:#d0031b;
 			}
 		}
 	}
@@ -159,6 +198,16 @@
 		}
 	}
 }
+.noBindBanks{
+	width:100%;
+	height:200rpx;
+	text-align:center;
+	line-height:200rpx;
+	background:#fff;
+	border-radius:15rpx;
+	color:#999;
+	font-size:32rpx;
+}
 .addNewBank,.selectBankName{
 	font-size:35rpx;
 }
@@ -169,5 +218,5 @@
 	font-size:25rpx;
 }
 page{
-	background:#f1f1f1;
+	background:#f8f8f8;
 }

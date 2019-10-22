@@ -1,140 +1,169 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText":"首页",
-			"enablePullDownRefresh" : true //开启下拉刷新
-			// "titleNView" : {
-			// 	"buttons" : [
-			// 		{
-			// 			"text" : "登录",
-			// 			"fontSize" : "14",
-			// 			"float" : "right",
-			// 			"color" : "#fff",
-			// 			"width" : "80px"
-			// 		}
-			// 	]
-			// }
-		}
-	}, {
-		"path" : "pages/market/market",
-		"style" : {
-			"navigationBarTitleText":"行情",
-			"enablePullDownRefresh" : true
-		}
-	},  {
-		"path" : "pages/news/news",
-		"style" : {
-			"navigationBarTitleText":"资讯"
-			
-		}
-	},  {
-		"path" : "pages/my/my",
-		"style" : {
-			"navigationBarTitleText":"我的",
-			"enablePullDownRefresh" : true
-		}
-	},  {
-		"path" : "pages/trade/trade",
-		"style" : {
-			"navigationBarTitleText":"交易"
-		}
-	},
-	{
-		"path" : "pages/userAuth/login",
-		"style" : {
-			"navigationBarTitleText" : "登陆",
-			"titleNView" : {
-				"buttons" : [
-					{
-						"text" : "立即注册",
-						"fontSize" : "14",
-						"float" : "right",
-						"color" : "#fff",
-						"width" : "80px"
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true //开启下拉刷新
+				// "titleNView" : {
+				// 	"buttons" : [
+				// 		{
+				// 			"text" : "登录",
+				// 			"fontSize" : "14",
+				// 			"float" : "right",
+				// 			"color" : "#fff",
+				// 			"width" : "80px"
+				// 		}
+				// 	]
+				// }
+			}
+		}, {
+			"path": "pages/market/market",
+			"style": {
+				"navigationBarTitleText": "行情",
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "资讯"
+
+			}
+		}, {
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/trade/trade",
+			"style": {
+				"navigationBarTitleText": "交易"
+			}
+		},
+		{
+			"path": "pages/userAuth/login",
+			"style": {
+				"navigationBarTitleText": "登陆",
+				"titleNView": {
+					"buttons": [{
+						"text": "立即注册",
+						"fontSize": "14",
+						"float": "right",
+						"color": "#fff",
+						"width": "80px"
+					}]
+				}
+			}
+		},
+		{
+			"path": "pages/userAuth/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/webViewUi/webViewUi",
+			"style": {}
+		}, {
+			"path": "pages/annount/annount",
+			"style": {
+				"navigationBarTitleText": "公告",
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/my/userCenter/myBalance/myBalance",
+			"style": {
+				"navigationBarTitleText": "钱包",
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/my/userCenter/setting/setting",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTextStyle": "black"
+			}
+		}, {
+			"path": "pages/my/userCenter/bank/bank",
+			"style": {
+				"navigationBarTitleText": "管理银行卡",
+				"navigationBarBackgroundColor": "#f8f8f8",
+				"navigationBarTextStyle": "black",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/my/userCenter/addBank/addBank",
+			"style": {
+				"navigationBarTitleText": "添加银行卡",
+				"navigationBarBackgroundColor": "#f8f8f8",
+				"navigationBarTextStyle": "black"
+			}
+		}, {
+			"path": "pages/my/userCenter/securityCenter/securityCenter",
+			"style": {
+				"navigationBarTitleText": "安全中心"
+			}
+		}, {
+			"path": "pages/my/userCenter/realName/realName",
+			"style": {
+				"navigationBarTitleText": "实名认证",
+				"navigationBarBackgroundColor": "#f4f4f4",
+				"navigationBarTextStyle": "black"
+			}
+		}, {
+			"path": "pages/my/userCenter/withdraw/withdraw",
+			"style": {
+				"navigationBarTitleText": "提现",
+				"navigationBarBackgroundColor": "#f8f8f8",
+				"navigationBarTextStyle": "black",
+				"titleNView": {
+					"buttons": [{
+						"fontSrc":"/static/font/right_top.ttf",
+						"fontSize":"24px",
+						"float":"right",
+						"text": "\ue628",
+						"width": "35px",
+						"color": "#666"
+					}]
+				}
+			}
+		}, {
+			"path": "pages/my/userCenter/withdraw/withdrawSuccess/withdrawSuccess",
+			"style": {
+				"navigationBarTitleText": "提现申请",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTextStyle": "black",
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": "false"
 					}
-				]
-			}
-		}
-	},  
-	{
-		"path" : "pages/userAuth/register",
-		"style" : {
-			"navigationBarTitleText" : "注册"
-		}
-	},{
-		"path" : "pages/webViewUi/webViewUi",
-		"style" : {}
-	},{
-		"path" : "pages/annount/annount",
-		"style" : {
-			"navigationBarTitleText":"公告",
-			"enablePullDownRefresh" : true
-		}
-	},{
-		"path" : "pages/my/userCenter/myBalance/myBalance",
-		"style" : {
-			"navigationBarTitleText":"钱包",
-			"enablePullDownRefresh":true
-		}
-	}
-        ,{
-            "path" : "pages/my/userCenter/setting/setting",
-            "style" : {
-            	"navigationBarTitleText":"设置",
-				"navigationBarBackgroundColor":"#fff",
-				"navigationBarTextStyle":"black"
-            }
-        },{
-            "path" : "pages/my/userCenter/bank/bank",
-            "style" : {
-				"navigationBarTitleText":"管理银行卡",
-				"navigationBarBackgroundColor":"#f8f8f8",
-				"navigationBarTextStyle":"black",
-				"app-plus":{
-					"bounce":"none"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/my/userCenter/addBank/addBank",
-            "style" : {
-				"navigationBarTitleText":"添加银行卡",
-				"navigationBarBackgroundColor":"#f8f8f8",
-				"navigationBarTextStyle":"black"
-			}
-        }
-        ,{
-            "path" : "pages/my/userCenter/securityCenter/securityCenter",
-            "style" : {
-            	"navigationBarTitleText":"安全中心"
+		}
+	    ,{
+            "path" : "pages/my/userCenter/setting/setLoginPassword/setLoginPassword",
+            "style": {
+            	"navigationBarTitleText": "设置登陆密码",
+            	"navigationBarBackgroundColor": "#ffffff",
+            	"navigationBarTextStyle": "black"
             }
         }
         ,{
-            "path" : "pages/my/userCenter/realName/realName",
+            "path" : "pages/my/userCenter/setting/setFundsPassword/setFundsPassword",
             "style" : {
-				"navigationBarTitleText":"实名认证",
-				"navigationBarBackgroundColor":"#f4f4f4",
-				"navigationBarTextStyle":"black"
+				"navigationBarTitleText": "设置资金密码",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTextStyle": "black"
 			}
-        },{
-            "path" : "pages/my/userCenter/withdraw/withdraw",
+        }
+        ,{
+            "path" : "pages/my/userCenter/setting/setUserInfo/setUserInfo",
             "style" : {
-				"navigationBarTitleText":"提现",
-				"navigationBarBackgroundColor":"#f1f1f1",
-				"navigationBarTextStyle":"black",
-				"titleNView" : {
-					"buttons" : [
-						{
-							"text" : "提现记录",
-							"fontSize" : "14",
-							"float" : "right",
-							"color" : "#black",
-							"width" : "70px"
-						}
-					]
-				}
-			}
+            	"navigationBarTitleText": "设置个人资料",
+            	"navigationBarBackgroundColor": "#ffffff",
+            	"navigationBarTextStyle": "black"
+            }
         }
     ],
 	"condition": {
@@ -146,49 +175,48 @@
 			"query": "" //启动参数，在页面的onLoad函数里面得到。
 		}]
 	},
-    "globalStyle" : {
-        "navigationBarTextStyle" : "white",
-        "navigationBarTitleText" : "",
-        "navigationBarBackgroundColor" : "#1b82d1",
-        "backgroundColor" : "#1b82d1"
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#1b82d1",
+		"backgroundColor": "#1b82d1"
 		// "navigationStyle":"custom"
-    },
-    "tabBar" : {
-        "color" : "#999999",
-        "selectedColor" : "#1b82d1",
-        "borderStyle" : "black",
-        "backgroundColor" : "#ffffff",
-        "list" : [
-            {
-                "pagePath" : "pages/index/index",
-                "text" : "首页",
-                "iconPath" : "static/tabBarIco/home.png",
-                "selectedIconPath" : "static/tabBarIco/home_sel.png"
-            },
-            {
-                "pagePath" : "pages/market/market",
-                "text" : "行情",
-                "iconPath" : "static/tabBarIco/market.png",
-                "selectedIconPath" : "static/tabBarIco/market_sel.png"
-            },
-            {
-                "pagePath" : "pages/trade/trade",
-                "text" : "交易",
-                "iconPath" : "static/tabBarIco/trade.png",
-                "selectedIconPath" : "static/tabBarIco/trade_sel.png"
-            },
-            {
-                "pagePath" : "pages/news/news",
-                "text" : "资讯",
-                "iconPath" : "static/tabBarIco/news.png",
-                "selectedIconPath" : "static/tabBarIco/news_sel.png"
-            },
-            {
-                "pagePath" : "pages/my/my",
-                "text" : "我的",
-                "iconPath" : "static/tabBarIco/my.png",
-                "selectedIconPath" : "static/tabBarIco/my_sel.png"
-            }
-        ]
-    }
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#1b82d1",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/tabBarIco/home.png",
+				"selectedIconPath": "static/tabBarIco/home_sel.png"
+			},
+			{
+				"pagePath": "pages/market/market",
+				"text": "行情",
+				"iconPath": "static/tabBarIco/market.png",
+				"selectedIconPath": "static/tabBarIco/market_sel.png"
+			},
+			{
+				"pagePath": "pages/trade/trade",
+				"text": "交易",
+				"iconPath": "static/tabBarIco/trade.png",
+				"selectedIconPath": "static/tabBarIco/trade_sel.png"
+			},
+			{
+				"pagePath": "pages/news/news",
+				"text": "资讯",
+				"iconPath": "static/tabBarIco/news.png",
+				"selectedIconPath": "static/tabBarIco/news_sel.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/tabBarIco/my.png",
+				"selectedIconPath": "static/tabBarIco/my_sel.png"
+			}
+		]
+	}
 }
