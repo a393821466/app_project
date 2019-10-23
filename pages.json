@@ -145,7 +145,7 @@
             "path" : "pages/my/userCenter/setting/setLoginPassword/setLoginPassword",
             "style": {
             	"navigationBarTitleText": "设置登陆密码",
-            	"navigationBarBackgroundColor": "#ffffff",
+            	"navigationBarBackgroundColor": "#f8f8f8",
             	"navigationBarTextStyle": "black"
             }
         }

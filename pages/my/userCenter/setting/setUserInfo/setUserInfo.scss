@@ -1,0 +1,55 @@
+page{
+	background:#f9f9f9;
+}
+.setUserInfoView{
+	.setTopView{
+		height:20rpx;
+		border-top:1px solid #f3f3f3;
+	}
+	.setting_box{
+		.setting_list{
+			display:flex;
+			flex-direction: row;
+			padding:22rpx 10rpx;
+			border-bottom:1px solid #f8f8f8;
+			&.setting_top{
+				border-top:#f3f3f3 solid 1px;
+			}
+			.setting_title{
+				flex:0 0 90%;
+				width:90%;
+				color:#666;
+				font-size:32rpx;
+				line-height:60rpx;
+				color:#666;
+				.emailView{
+					height:100%;
+					margin-top:10rpx;
+				}
+			}
+			.setting_icon{
+				flex:0 0 10%;
+				width:10%;
+				text-align:right;
+				line-height:60rpx;
+				.uni-icon-fanhui{
+					transform:rotate(180deg)
+				}
+			}
+		}
+	}
+	.submit_button{
+		padding:0 26rpx;
+		.submit_btn{
+			font-size:32rpx;
+			background:#1b82d1;
+			margin-top:30rpx
+		}
+	}
+}
+.setting_top{
+	padding:0 30rpx;
+	background:#fff;
+	border-top:1px solid #f3f3f3;
+	border-bottom:1px solid #f3f3f3;
+}

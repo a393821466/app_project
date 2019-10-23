@@ -68,6 +68,11 @@ export default{
 		const userWithdraw=await httpUtils.post(address.my.withdraw,res);
 		return userWithdraw;
 	},
+	// 设置用户资料
+	async setUserInfo({commit},res){
+		const setUser=await httpUtils.post(address.my.setUserInfo,res);
+		return setUser;
+	},
 	// 登出操作
 	async logout({commit}){
 		const logoutAction=await httpUtils.get(address.common.logout);

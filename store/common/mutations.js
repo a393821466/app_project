@@ -5,7 +5,8 @@ export const state={
 	token:'' || chache.get('token'),
 	merchantInfo:chache.get('merchantInfo'),
 	loginKey:'',
-	userInfo:chache.get('userInfo')
+	userInfo:chache.get('userInfo'),
+	verifyImg:''
 }
 
 export const mutations={
@@ -34,8 +35,13 @@ export const mutations={
 		state.userInfo=val
 		chache.set('userInfo',val)
 	},
+	// 加载...
 	['ONLOADSTATE'](state,text){
 		state.stateText=text;
+	},
+	// 图形验证码
+	['VERIFYIMG'](state,val){
+		state.verifyImg=val.data
 	},
 	//重置state
 	['RESETCOMMONSTATE'](state){

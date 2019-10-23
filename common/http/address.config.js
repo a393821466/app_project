@@ -39,7 +39,9 @@ export default{
 		logout: `/logout`, // 登出
 		verifyImg: `/verifyImg`, // 验证码
 		register: `/accountOpen`, // 注册开户
-		findAllBankInfo: `/finance/bank/find` // 查找银行卡列表
+		findAllBankInfo: `/finance/bank/find`, // 查找银行卡列表
+		sendCode: `/sendMsg`, // 手机验证码
+		setPass: `/business/setPass` // 设置密码
 	},
 	my:{
 		mine: `/trade/wallet/find/mine`, // 钱包余额
@@ -49,6 +51,7 @@ export default{
 		delBank: `/business/closeBank`, //移除银行卡
 		security: `/user/userInfo/checkUserInfo`, // 安全中心
 		realName: `/business/userVerified`, // 实名认证
-		withdraw: `/business/withdraw` // 提现
+		withdraw: `/business/withdraw`, // 提现
+		setUserInfo: `/business/addUserDetial` // 设置用户资料
 	}
 }
