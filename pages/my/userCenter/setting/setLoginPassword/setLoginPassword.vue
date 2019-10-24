@@ -3,7 +3,7 @@
 		<view class="setTopView">
 			<view class="userText1">请为您的账号</view>
 			<view class="userAccount">{{getUserPhone}}</view>
-			<view class="newText2">设置一个新密码</view>
+			<view class="newText2">设置一个新登陆密码</view>
 		</view>
 		<view class="setting_box">
 			<view class="setting_top">

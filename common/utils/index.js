@@ -117,23 +117,59 @@ class Tools {
   /*
   * 格式化时间戳
   */
- formartNow(v, nows){
-	 const now = new Date(nows)
-	 const year = now.getFullYear()
-	 const month = now.getMonth() + 1
-	 const date = now.getDate()
-	 const hour = now.getHours()
-	 const minute = now.getMinutes()
-	 const second = now.getSeconds()
-	 const montStr = month < 10 ? '0' + month : month
-	 const dayStr = date < 10 ? '0' + date : date
-	 const hourStr = hour < 10 ? '0' + hour : hour
-	 const mStr = minute < 10 ? '0' + minute : minute
-	 const sStr = second < 10 ? '0' + second : second
-	 const noHourse =
-	   v === '0' ? year + '/' + montStr + '/' + dayStr : year + '/' + montStr + '/' + dayStr + ' ' + hourStr + ':' + mStr + ':' + sStr
-	 return noHourse
- }
+	formartNow(v, nows){
+		 const now = new Date(nows)
+		 const year = now.getFullYear()
+		 const month = now.getMonth() + 1
+		 const date = now.getDate()
+		 const hour = now.getHours()
+		 const minute = now.getMinutes()
+		 const second = now.getSeconds()
+		 const montStr = month < 10 ? '0' + month : month
+		 const dayStr = date < 10 ? '0' + date : date
+		 const hourStr = hour < 10 ? '0' + hour : hour
+		 const mStr = minute < 10 ? '0' + minute : minute
+		 const sStr = second < 10 ? '0' + second : second
+		 const noHourse =
+		   v === '0' ? year + '/' + montStr + '/' + dayStr : year + '/' + montStr + '/' + dayStr + ' ' + hourStr + ':' + mStr + ':' + sStr
+		 return noHourse
+	}
+	// 获取其它天数
+	getBeforeNow (t, d) {
+	    let year = ''
+	    let mon = ''
+	    let day = ''
+	    let times = ''
+	    let hour = ''
+	    let minute = ''
+	    let second = ''
+	    let s = ''
+	    if (t === 1) {
+	      times = d.getTime()
+	      hour = d.getHours()
+	      minute = d.getMinutes()
+	      second = d.getSeconds()
+	      s = parseInt((times - hour * 3600 * 1000 - minute * 60 * 1000 - second * 1000) / 1000) * 1000
+	    }
+	    if (t === 7) {
+	      d = +d - 1000 * 60 * 60 * 24 * 6
+	    }
+	    if (t === 30) {
+	      d = +d - 1000 * 60 * 60 * 24 * 29
+	    }
+	    if (t === 7 || t === 30) {
+	      d = new Date(d)
+	      year = d.getFullYear()
+	      mon = d.getMonth() + 1
+	      day = d.getDate()
+	      hour = d.getHours()
+	      minute = d.getMinutes()
+	      second = d.getSeconds()
+	      let sc = year + '/' + (mon < 10 ? ('0' + mon) : mon) + '/' + (day < 10 ? ('0' + day) : day) + ' ' + '00:00:00'
+	      s = Date.parse(sc)
+	    }
+	    return new Date(s).toISOString()
+	}
 }
 
 

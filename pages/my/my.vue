@@ -146,7 +146,7 @@
 						sized:50,
 						colors:'#1b82d1',
 						tips: '',
-						url:''
+						url:this.$routers.rechargeRecord
 					},
 					{
 						name: '提现记录',
@@ -170,7 +170,7 @@
 						sized:48,
 						colors:'#666',
 						tips: '',
-						url:''
+						url:this.$routers.setting
 					}
 				],
 				agentGrid:[

@@ -41,7 +41,8 @@ export default{
 		register: `/accountOpen`, // 注册开户
 		findAllBankInfo: `/finance/bank/find`, // 查找银行卡列表
 		sendCode: `/sendMsg`, // 手机验证码
-		setPass: `/business/setPass` // 设置密码
+		setPass: `/business/setPass`, // 设置登陆密码
+		setFundPass: `/business/setFundPass` // 设置资金密码
 	},
 	my:{
 		mine: `/trade/wallet/find/mine`, // 钱包余额

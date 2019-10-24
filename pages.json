@@ -153,7 +153,7 @@
             "path" : "pages/my/userCenter/setting/setFundsPassword/setFundsPassword",
             "style" : {
 				"navigationBarTitleText": "设置资金密码",
-				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarBackgroundColor": "#f8f8f8",
 				"navigationBarTextStyle": "black"
 			}
         }
@@ -161,9 +161,28 @@
             "path" : "pages/my/userCenter/setting/setUserInfo/setUserInfo",
             "style" : {
             	"navigationBarTitleText": "设置个人资料",
-            	"navigationBarBackgroundColor": "#ffffff",
+            	"navigationBarBackgroundColor": "#f8f8f8",
             	"navigationBarTextStyle": "black"
             }
+        }
+        ,{
+            "path" : "pages/my/userCenter/rechargeRecord/rechargeRecord",
+            "style" : {
+				"navigationBarTitleText": "充值记录",
+				"navigationBarBackgroundColor": "#1b82d1",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"titleNView": {
+					"buttons": [{
+						"fontSrc":"/static/font/right_top.ttf",
+						"fontSize":"20px",
+						"float":"right",
+						"text": "\ue714",
+						"width": "30px",
+						"color": "#f8f8f8"
+					}]
+				}
+			}
         }
     ],
 	"condition": {

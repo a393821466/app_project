@@ -8,7 +8,8 @@ const getters = {
 	loginKey: state => state.loginKey,
 	userInfo: state => state.userInfo,
 	stateText: state => state.stateText,
-	verifyImg: state => state.verifyImg
+	verifyImg: state => state.verifyImg,
+	timeList: state => state.timeList
 }
 
 export default getters

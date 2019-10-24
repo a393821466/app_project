@@ -56,7 +56,7 @@ export default{
 		let sendCode=await httpUtils.post(address.common.sendCode+'?imgCode='+das.imgCode,{data:das});
 		return sendCode;
 	},
-	// 设置密码
+	// 设置登陆密码
 	async setPassword({commit},das){
 		const uuid = chache.get('userInfo')
 		  ? chache.get('userInfo').uuid
@@ -74,6 +74,31 @@ export default{
 		}
 		const setPwd=await httpUtils.post(address.common.setPass,{data:params});
 		return setPwd;
+	},
+	// 设置支付密码
+	async setFundsPassword({commit},das){
+		const uuid = chache.get('userInfo')
+		  ? chache.get('userInfo').uuid
+		  : '';
+		const merchantCode = chache.get('userInfo')
+		  ? chache.get('userInfo').merchantCode
+		  : '';
+		const params = {
+		  phone: das.phone,
+		  merchantCode: merchantCode,
+		  templateType: das.templateType,
+		  userId: uuid,
+		  fundpass: das.password,
+		  msgCode: das.phoneCode
+		}
+		const setFundsPwd=await httpUtils.post(address.common.setFundPass,{data:params});
+		return setFundsPwd;
+	},
+	// 日期
+	getTimeList: ({
+		commit
+	  }) => {
+		commit('GETTIMELIST')
 	},
 	// 改变加载状态
 	onLoadState({commit},stateText){

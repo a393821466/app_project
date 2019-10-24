@@ -88,6 +88,10 @@ export default {
 		name: "提现申请",
 		path: "/pages/my/userCenter/withdraw/withdrawSuccess/withdrawSuccess"
 	},
+	rechargeRecord:{
+		name: "提现申请",
+		path: "/pages/my/userCenter/rechargeRecord/rechargeRecord"
+	},
 	/* 设置 */
 	setUser:{
 		name: "设置个人资料",

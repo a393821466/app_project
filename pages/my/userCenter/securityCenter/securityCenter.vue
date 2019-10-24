@@ -143,6 +143,9 @@
 					return;
 				}
 				if(val==='amountPwd'){
+					this.$mRouter.push({
+						route:this.$routers.setFundsPassword
+					})
 					return;
 				}
 			}
