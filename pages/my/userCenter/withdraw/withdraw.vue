@@ -104,7 +104,7 @@
 				<view class="selectBankList" v-show='allWithdraw.length<3'>
 					<view class="bankIcon">
 					</view>
-					<view class="bankTitles addNewBank">
+					<view class="bankTitles addNewBank" @click="goBankLink">
 						添加新银行卡
 					</view>
 					<view class="is_select">
@@ -304,9 +304,13 @@
 			},
 			// 去绑定银行卡
 			goBankLink(){
+				if(this.myBankList.length>=3){
+					return;
+				}
 				this.$mRouter.push({
-					route:this.$routers.bank
+					route:this.$routers.addBank
 				})
+				this.$refs.popup.close()
 			},
 			// 去设置资金密码
 			goBindFulPasswordPage() {

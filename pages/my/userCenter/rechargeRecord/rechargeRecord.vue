@@ -20,25 +20,37 @@
 			</view>
 		</view> -->
 		<view class="uni-padding-wrap uni-common-mt rechargeRecord">
-			<view class="rechargeList" v-for="(num,index) in data" :key="index">
-				<view class="rechargeTitle">
-					微信支付
+			<view class="rechargeView" v-if="rechargeList.length>0">
+				<view class="rechargeList" v-for="(it,index) in rechargeList" :key="index">
+					<view class="rechargeTitle">
+						{{!it.remark?'-':it.remark}}
+					</view>
+					<view class="rechargeBox">
+						<view class="rechargeDetail left">
+							<view class="rechargeStatus">
+								充值状态：<text class="type" style="color:#F5A623" v-if="it.status==1">处理中</text>
+								<text class="type" style="color:#34C487" v-else-if="it.status==2">成功</text>
+								<text class="type" style="color:#34C487" v-else-if="it.status==4">成功</text>
+								<text class="type" style="color:#34C487" v-else-if="it.status==5">成功</text>
+								<text class="type" style="color:#FF5E4D" v-else>失败</text>
+							</view>
+							<view class="tradeTime">
+								交易时间：{{formartTime(it.createTime)}}
+							</view>
+						</view>
+						<view class="rechargeDetail right">
+							<text class="right_money">充值余额：{{it.amount}}元</text>
+						</view>
+					</view>
 				</view>
-				<view class="rechargeBox">
-					<view class="rechargeDetail left">
-						<view class="rechargeStatus">
-							充值状态：<text class="type">处理中</text>
-						</view>
-						<view class="tradeTime">
-							交易时间：2019-10-18 17:14:58
-						</view>
-					</view>
-					<view class="rechargeDetail right">
-						<text class="right_money">充值余额：100元</text>
-					</view>
+				<load-more :status="more" @click.native='getMore' :content-text="loadText"></load-more>
+			</view>
+			<view class="rechargeView" v-else>
+				<view class="noDataImg">
+					<image src="../../../../static/images/noData.svg" class="img"></image>
+					<text class="noDataText">暂无更多内容</text>
 				</view>
 			</view>
-			<load-more :status="more"></load-more>
 		</view>
 		<popup ref="rechargeTerm" type="bottom" @change='change'>
 			<view class="typeTerm">
@@ -46,10 +58,8 @@
 					选择充值类型
 				</view>
 				<view class="typeTermBox">
-					<view class="typeList" :class="[item.id==typeTerm.id?'active':'']" 
-					v-for="(item,idx) in typeTermList" 
-					:key='item.id' 
-					@click="rechargeTypeClick(item)">{{item.name}}</view>
+					<view class="typeList" :class="[item.id==typeTerm.id?'active':'']" v-for="(item,idx) in typeTermList" :key='item.id'
+					 @click="rechargeTypeClick(item)">{{item.name}}</view>
 				</view>
 			</view>
 			<view class="typeTerm">
@@ -57,15 +67,14 @@
 					选择时间
 				</view>
 				<view class="typeTermBox">
-					<view class="typeTimer" v-for="(item,idx) in timeList" 
-					:class="timer.status===item.status?'active':''" 
-					:key='item.status' @click="typeTermDate(item)">{{item.name}}</view>
+					<view class="typeTimer" v-for="(item,idx) in timeList" :class="timer.status===item.status?'active':''" :key='item.status'
+					 @click="typeTermDate(item)">{{item.name}}</view>
 					<view class="typeTimer">自定义</view>
 				</view>
 			</view>
 			<view class="selectBtn">
 				<button type="primary" class="btn reset" @click="reset">重置</button>
-				<button type="primary" class="btn confirm">确定</button>
+				<button type="primary" class="btn confirm" @click="confirmSreach">确定</button>
 			</view>
 		</popup>
 	</view>
@@ -74,101 +83,202 @@
 <script>
 	import loadMore from '@/components/onloadMore/uni-load-more'
 	import Popup from '@/components/popup'
-	import {mapActions,mapGetters} from 'vuex'
+	import {
+		mapActions,
+		mapGetters
+	} from 'vuex'
+	import {
+		showUiToast,
+		showUiLoading,
+		hideUiLoading
+	} from '@/common/utils/dialog.config'
+	import moment from 'moment'
+	import utils from '@/common/utils/'
 	export default {
-		name:'rechargeRecord',
-		components:{
+		name: 'rechargeRecord',
+		components: {
 			Popup,
 			loadMore
 		},
 		data() {
 			return {
-				typeTerm:{ name: '全部', id: 0, status: '' },
-				typeTermList:[
-					{ name: '全部', id: 0, status: '' },
-					{ name: '处理中', id: 1, status: 1 },
-					{ name: '成功', id: 2, status: 2 },
-					{ name: '失败', id: 3, status: 3 }
+				typeTerm: {
+					name: '全部',
+					id: 0,
+					status: ''
+				},
+				typeTermList: [{
+						name: '全部',
+						id: 0,
+						status: ''
+					},
+					{
+						name: '处理中',
+						id: 1,
+						status: 1
+					},
+					{
+						name: '成功',
+						id: 2,
+						status: 2
+					},
+					{
+						name: '失败',
+						id: 3,
+						status: 3
+					}
 				],
-				timer:{name: '当天', date: 1, status: 0 },
-				data: [],
-				showLoadMore: false,
-				more:'loading',
-				max: 0
+				timer: {
+					name: '当天',
+					date: 1,
+					status: 0
+				},
+				startDate: '',
+				endDate: '',
+				more: 'more',
+				pages: 1,
+				pageSize: 10,
+				total: 1,
+				loadText:{contentdown: "显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}
 			};
 		},
-		computed:{
-			...mapGetters(['timeList'])
+		computed: {
+			...mapGetters(['timeList', 'rechargeList'])
 		},
 		onLoad() {
 			this.getTimeList();
-			this.initData();
+			this.status = this.typeTerm.status;
+			this.startDate = this.timeList[0].startTimes;
+			this.endDate = this.timeList[0].endTimes
+			this.getRechargeRecords(this.status, this.startDate, this.endDate)
 		},
 		onReachBottom() {
 			console.log("onReachBottom");
-			if (this.max > 40) {
-				this.more='noMore'
-				return;
-			}
-			setTimeout(() => {
-				this.setDate();
-			}, 300);
+			this.more = 'loading'
+			this.setDate(this.status,this.startDate,this.endDate)
 		},
+		// 下拉刷新
 		onPullDownRefresh() {
 			console.log('onPullDownRefresh');
-			this.more='loading'
-			this.initData();
+			this.getRechargeRecords(this.status,this.startDate,this.endDate)
 		},
 		// 打开条件筛选
-		onNavigationBarButtonTap(){
+		onNavigationBarButtonTap() {
 			this.$refs.rechargeTerm.open()
 		},
-		methods:{
-			...mapActions(['getTimeList']),
+		methods: {
+			...mapActions(['getTimeList','addRecharRecord','getRecharRecord']),
 			// 类型条件
-			rechargeTypeClick(item){
-				this.typeTerm=item;
+			rechargeTypeClick(item) {
+				this.typeTerm = item;
 			},
 			// 时间条件
-			typeTermDate(item){
-				this.timer=item;
+			typeTermDate(item) {
+				this.startDate = item.startTimes;
+				this.endDate = item.endTimes;
+				this.timer = item;
+			},
+			// 确定搜索条件
+			confirmSreach() {
+				const data = {
+					status: this.typeTerm.status,
+					startTime: this.startDate,
+					endTime: this.endDate
+				}
+				this.more = 'loading'
+				this.getRechargeRecords(data.status, data.startTime, data.endTime);
 			},
 			// 重置
-			reset(){
-				this.typeTerm={ name: '全部', id: 0, status: '' };
-				this.timer={name: '当天', date: 1, status: 0 }
+			reset() {
+				this.typeTerm = {
+					name: '全部',
+					id: 0,
+					status: ''
+				};
+				this.timer = {
+					name: '当天',
+					date: 1,
+					status: 0
+				}
 			},
 			// 隐藏popup
-			change(val){
-				if(!val.show){
-					this.reset()
+			change(val) {
+				if (!val.show) {
+					// this.reset()
 				}
 			},
-			initData(){
-				setTimeout(() => {
-					this.max = 0;
-					this.data = [];
-					let data = [];
-					this.max += 10;
-					for (var i = this.max - 9; i < this.max + 1; i++) {
-						data.push(i)
-					}
-					this.data = this.data.concat(data);
+			// 获取充值记录
+			getRechargeRecords(status, startTimer, endTimer) {
+				let das = {
+					pageNum: 1,
+					pageSize: this.pageSize,
+					status: status,
+					startTime: startTimer,
+					endTime: endTimer
+				}
+				showUiLoading('加载中..',{mask:true});
+				this.getRecharRecord(das).then(res => {
+					hideUiLoading();
 					uni.stopPullDownRefresh();
-				}, 300);
+					if (res.status) {
+						this.pages = res.data.pageNum;
+						this.total = res.data.pages;
+						this.$refs.rechargeTerm.close()
+						if(this.total<=this.pages){
+							this.more = 'noMore'
+						}else{
+							this.more = 'more'
+						}
+					}
+				}).catch(err => {
+					uni.stopPullDownRefresh();
+					hideUiLoading();
+					return err
+				})
 			},
-			setDate() {
-				let data = [];
-				this.max += 10;
-				for (var i = this.max - 9; i < this.max + 1; i++) {
-					data.push(i)
+			// 格式化ISO时间
+			formartTime (t) {
+			  return moment(t).format('YYYY-MM-DD HH:mm:ss')
+			},
+			// 如果记录数量小于10的时候,点击追加
+			getMore(){
+				if(this.rechargeList.length<10){
+					if(this.total!==this.pages){
+						this.setDate(this.typeTerm.status,this.startDate,this.endDate)
+					}
 				}
-				this.data = this.data.concat(data);
+			},
+			// 追加充值记录
+			setDate(status,startTimer, endTimer) {
+				const that=this;
+				if (this.pages < this.total) {
+					let das = {
+					  pageNum: (this.pages += 1),
+					  pageSize: this.pageSize,
+					  status: status,
+					  startTime: startTimer,
+					  endTime: endTimer
+					}
+					this.addRecharRecord(das).then(res=>{
+						if(res.status){
+							this.pages = res.data.pageNum;
+							if(this.total<=this.pages){
+								this.more = 'noMore'
+							}else{
+								this.more = 'more'
+							}
+						}
+					}).catch(err=>{
+						return err
+					})
+				}else{
+					this.more = 'noMore'
+				}
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-@import './rechargeRecord.scss';
+	@import './rechargeRecord.scss';
 </style>

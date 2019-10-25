@@ -4,7 +4,8 @@ export const state={
 	userAllBalance:[],
 	myBankList:[],
 	bankList:[],
-	bindInfo:{}
+	bindInfo:{},
+	rechargeList:[]
 }
 
 
@@ -50,11 +51,19 @@ export const mutations={
 		val.surplus=lastSum;
 		state.bindInfo=val;
 	},
+	['RECHARGERECORD'](state,val){
+		if(val.type==1){
+			state.rechargeList=val.record
+		}else if(val.type==2){
+			state.rechargeList=state.rechargeList.concat(val.record)
+		}
+	},
 	['RESETMY'](state){
 		state.userBalance={}
 		state.userAllBalance=[]
 		state.myBankList=[]
 		state.bankList=[]
 		state.bindInfo={}
+		state.rechargeList=[]
 	}
 }

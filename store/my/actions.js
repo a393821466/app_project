@@ -68,6 +68,30 @@ export default{
 		const userWithdraw=await httpUtils.post(address.my.withdraw,res);
 		return userWithdraw;
 	},
+	// 充值记录
+	async getRecharRecord({commit},res){
+		const getRecord=await httpUtils.get(address.my.rechargeRecord,res);
+		if(getRecord.status){
+			let das={
+				record:getRecord.data.result,
+				type:1
+			}
+			commit('RECHARGERECORD',das)
+		}
+		return getRecord;
+	},
+	// 追加充值记录
+	async addRecharRecord({commit},res){
+		const addRecord=await httpUtils.get(address.my.rechargeRecord,res);
+		if(addRecord.status){
+			let das={
+				record:addRecord.data.result,
+				type:2
+			}
+			commit('RECHARGERECORD',das)
+		}
+		return addRecord;
+	},
 	// 设置用户资料
 	async setUserInfo({commit},res){
 		const setUser=await httpUtils.post(address.my.setUserInfo,res);

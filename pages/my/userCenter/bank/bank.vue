@@ -116,9 +116,13 @@
 				const isRealName=chache.get('userInfo').isUserVierity||chache.get('isUserVierity')
 				if(this.goBindBank){
 					if(isRealName==1){
-						this.$mRouter.push({
-							route:this.$routers.addBank
-						})
+						if(this.myBankList.length>=3){
+							showUiToast(`您绑定银行卡数量过多`);
+						}else{
+							this.$mRouter.push({
+								route:this.$routers.addBank
+							})
+						}
 					}else{
 						showUiModel({content:'您还未实名认证,去实名?',showCancel:true},(e)=>{
 							if(e.confirm){

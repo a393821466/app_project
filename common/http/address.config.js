@@ -53,6 +53,7 @@ export default{
 		security: `/user/userInfo/checkUserInfo`, // 安全中心
 		realName: `/business/userVerified`, // 实名认证
 		withdraw: `/business/withdraw`, // 提现
-		setUserInfo: `/business/addUserDetial` // 设置用户资料
+		setUserInfo: `/business/addUserDetial`, // 设置用户资料
+		rechargeRecord: `/finance/deposit/find/page` //充值记录
 	}
 }

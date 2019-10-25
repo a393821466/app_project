@@ -128,12 +128,18 @@ const mathQuery = options => {
 
 export default {
 	// GET请求
-	get: (url, query,options) => {
+	get: (url, query, options) => {
 		options = {
 			header: {},
 			dataType: 'json'
 		}
-		return http.get(url,query,options)
+		let queryString = ''
+		if (query) {
+		  queryString = utils.objParseUrlAndParam(url,query)
+		} else {
+		  queryString = url
+		}
+		return http.get(queryString,options)
 	},
 	// POST请求
 	post: (url, params = {}) => {
