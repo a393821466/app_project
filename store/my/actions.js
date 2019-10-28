@@ -92,6 +92,29 @@ export default{
 		}
 		return addRecord;
 	},
+	// 提现记录
+	async withdrawRecordsList({commit},res){
+		const getWithdrawRecord=await httpUtils.get(address.my.withdrawRecord,res);
+		if(getWithdrawRecord.status){
+			let das={
+				withdraw:getWithdrawRecord.data.result,
+				type:1
+			}
+			commit('WITHDRAWRECORD',das)
+		}
+		return getWithdrawRecord;
+	},
+	async addWithdrawRecordsList({commit},das){
+		const addWithdrawRecord=await httpUtils.get(address.my.withdrawRecord,res);
+		if(addWithdrawRecord.status){
+			let das={
+				withdraw:addWithdrawRecord.data.result,
+				type:2
+			}
+			commit('WITHDRAWRECORD',das)
+		}
+		return addWithdrawRecord;
+	},
 	// 设置用户资料
 	async setUserInfo({commit},res){
 		const setUser=await httpUtils.post(address.my.setUserInfo,res);

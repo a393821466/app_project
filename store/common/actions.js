@@ -5,8 +5,8 @@ import {state} from './mutations'
 
 export default{
 	// 颜色
-	appColor({commit},name){
-		commit('CLASSNAME',name)
+	appFontSize({commit},name){
+		commit('THEMEFONTSIZE',name)
 	},
 	// 获取登录Key
 	async getKey({commit}){

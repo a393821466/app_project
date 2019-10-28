@@ -1,7 +1,7 @@
 import chache from '@/common/utils/storage'
 import utils from '@/common/utils'
 export const state={
-	className:'daytime',
+	themeFontSize:'daytime',
 	stateText:'',
 	token:'' || chache.get('token'),
 	merchantInfo:chache.get('merchantInfo'),
@@ -13,8 +13,8 @@ export const state={
 
 export const mutations={
 	// 颜色
-	['CLASSNAME'](state,val){
-		state.className=val;
+	['THEMEFONTSIZE'](state,val){
+		state.themeFontSize=val;
 	},
 	// 获取登录key
 	['GETKEYS'](state,val){

@@ -141,7 +141,6 @@
 		}
 
 		.activity_text {
-			font-size: 30rpx;
 			padding-top: 8rpx;
 		}
 

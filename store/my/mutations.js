@@ -5,7 +5,8 @@ export const state={
 	myBankList:[],
 	bankList:[],
 	bindInfo:{},
-	rechargeList:[]
+	rechargeList:[],
+	withdrawList:[]
 }
 
 
@@ -58,6 +59,13 @@ export const mutations={
 			state.rechargeList=state.rechargeList.concat(val.record)
 		}
 	},
+	['WITHDRAWRECORD'](state,val){
+		if(val.type==1){
+			state.withdrawList=val.withdraw
+		}else if(val.type==2){
+			state.withdrawList=state.withdrawList.concat(val.withdraw)
+		}
+	},
 	['RESETMY'](state){
 		state.userBalance={}
 		state.userAllBalance=[]
@@ -65,5 +73,6 @@ export const mutations={
 		state.bankList=[]
 		state.bindInfo={}
 		state.rechargeList=[]
+		state.withdrawList=[]
 	}
 }

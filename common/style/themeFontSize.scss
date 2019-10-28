@@ -1,0 +1,66 @@
+// 基本字体
+$twentySixSize:26rpx;
+$twentyEightSize:28rpx;
+$thirtySize:30rpx;
+.daytime .service-text{
+	font-size:$thirtySize;
+}
+.daytime .text{
+	font-size:$twentyEightSize;
+}
+.daytime .category_list .category_text{
+	font-size:$thirtySize;
+}
+.daytime .news_prople .news_title{
+	font-size:$thirtySize;
+}
+.daytime .hot_activity .activity_text{
+	font-size:$thirtySize;
+}
+.daytime .news_prople .news_text{
+	font-size:$twentySixSize;
+}
+// 中号字体
+$middleTwentySixSize:30rpx;
+$middleTwentyEightSize:32rpx;
+$middleThirtySize:34rpx;
+.daytime2 .service-text{
+	font-size:$middleTwentySixSize;
+}
+.daytime2 .text{
+	font-size:$middleTwentyEightSize;
+}
+.daytime2 .category_list .category_text{
+	font-size:$middleTwentySixSize;
+}
+.daytime2 .news_prople .news_title{
+	font-size:$middleTwentySixSize;
+}
+.daytime2 .hot_activity .activity_text{
+	font-size:$middleTwentySixSize;
+}
+.daytime2 .news_prople .news_text{
+	font-size:$middleThirtySize;
+}
+// 大号字体
+$bigTwentySixSize:32rpx;
+$bigTwentyEightSize:34rpx;
+$bigThirtySize:36rpx;
+.daytime3 .service-text{
+	font-size:$bigThirtySize;
+}
+.daytime3 .text{
+	font-size:$bigTwentyEightSize;
+}
+.daytime3 .category_list .category_text{
+	font-size:$bigThirtySize;
+}
+.daytime3 .news_prople .news_title{
+	font-size:$bigThirtySize;
+}
+.daytime3 .hot_activity .activity_text{
+	font-size:$bigThirtySize;
+}
+.daytime3 .news_prople .news_text{
+	font-size:$bigTwentySixSize;
+}

@@ -1,5 +1,5 @@
 <template>
-<view class="market_box" :class="className">
+<view class="market_box" :class="themeFontSize">
 	<view class="category_home" v-if="categoryData.length>0">
 		<view class="category_list" v-for="(item,idx) in categoryData" :key="item.id" :class="idx===categoryData.length-1&&categoryData.length%2==1?'upside_list_class':''"
 		 :style='{backgroundColor:!item.color?"#999":item.color}'>
@@ -29,7 +29,7 @@
 			/*
 			** 公告，模板数据
 			*/
-			...mapGetters(['temList','className','token']),
+			...mapGetters(['temList','themeFontSize','token']),
 			categoryData(){
 				return this.temList.length>0?this.temList:[]
 			}

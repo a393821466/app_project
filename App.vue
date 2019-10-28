@@ -50,5 +50,6 @@
 
 <style lang='scss'>
 	@import "./common/style/daytime.scss";
+	@import "./common/style/themeFontSize.scss";
 	@import "./common/style/evening.scss";
 </style>

@@ -89,8 +89,12 @@ export default {
 		path: "/pages/my/userCenter/withdraw/withdrawSuccess/withdrawSuccess"
 	},
 	rechargeRecord:{
-		name: "提现申请",
+		name: "充值记录",
 		path: "/pages/my/userCenter/rechargeRecord/rechargeRecord"
+	},
+	withdrawRecord:{
+		name: "提现记录",
+		path: "/pages/my/userCenter/withdrawRecord/withdrawRecord"
 	},
 	/* 设置 */
 	setUser:{

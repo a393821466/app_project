@@ -54,6 +54,7 @@ export default{
 		realName: `/business/userVerified`, // 实名认证
 		withdraw: `/business/withdraw`, // 提现
 		setUserInfo: `/business/addUserDetial`, // 设置用户资料
-		rechargeRecord: `/finance/deposit/find/page` //充值记录
+		rechargeRecord: `/finance/deposit/find/page`, //充值记录
+		withdrawRecord: `/finance/withdraw/find/page` //提现记录
 	}
 }

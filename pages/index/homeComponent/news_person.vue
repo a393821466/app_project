@@ -40,9 +40,6 @@ export default{
 ** 新手引导
 */
 .news_prople{
-	.news_title{
-		font-size:30rpx;
-	}
 	.news_images{
 		width:100%;
 		height:52rpx;
@@ -51,7 +48,6 @@ export default{
 		margin-top:15rpx;
 	}
 	.news_text{
-		font-size:26rpx;
 		line-height:52rpx;
 		text-align:center;
 		display:block;

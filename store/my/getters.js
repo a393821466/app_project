@@ -7,7 +7,8 @@ const getters = {
 	myBankList: state => state.myBankList,
 	bankList: state => state.bankList,
 	bindInfo: state => state.bindInfo,
-	rechargeList: state => state.rechargeList
+	rechargeList: state => state.rechargeList,
+	withdrawList: state => state.withdrawList
 }
 
 export default getters

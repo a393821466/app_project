@@ -46,9 +46,8 @@
 		align-self: center;
 		display: flex;
 		.service-text {
-			font-size: 30rpx;
-			flex: 0 0 120rpx;
-			width: 120rpx;
+			flex: 0 0 150rpx;
+			width: 150rpx;
 			line-height: 45rpx;
 			padding-left:10rpx;
 		}

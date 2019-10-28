@@ -154,7 +154,7 @@
 						sized:48,
 						colors:'#F5A623',
 						tips: '',
-						url:''
+						url:this.$routers.withdrawRecord
 					},
 					{
 						name: '红包',

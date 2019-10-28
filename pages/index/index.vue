@@ -1,5 +1,5 @@
 <template>
-	<view class="indexHome" :class="className">
+	<view class="indexHome" :class="themeFontSize">
 		<banner :bannerData='bannerData'></banner>
 		<service></service>
 		<notice-view :notice='notice'></notice-view>
@@ -35,7 +35,7 @@
 			*/
 			...mapGetters(['notice', 
 			'temList',
-			'className',
+			'themeFontSize',
 			'token',
 			'bannerData',
 			'actList',

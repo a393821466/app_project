@@ -1,33 +1,15 @@
 <template>
-	<view class="rechargeRecordView">
+	<view class="withdrawRecordView">
 		<view class="clearView"></view>
-		<!-- <view class="rechargeSelect">
-			<view class="term type">
-				<view class="term_select">
-					全部
-				</view>
-				<view class="triangle">
-					<image src="../../../../static/images/triangle.svg" class="triangleImg"></image>
-				</view>
-			</view>
-			<view class="term date">
-				<view class="term_select">
-					日期
-				</view>
-				<view class="triangle">
-					<image src="../../../../static/images/triangle.svg" class="triangleImg"></image>
-				</view>
-			</view>
-		</view> -->
-		<view class="uni-padding-wrap uni-common-mt rechargeRecord">
-			<view class="rechargeView" v-if="rechargeList.length>0">
-				<view class="rechargeList" v-for="(it,index) in rechargeList" :key="index">
-					<view class="rechargeTitle">
+		<view class="uni-padding-wrap uni-common-mt withdrawRecord">
+			<view class="withdrawView" v-if="withdrawList.length>0">
+				<view class="withdrawList" v-for="(it,index) in withdrawList" :key="index">
+					<view class="withdrawTitle">
 						{{!it.remark?'-':it.remark}}
 					</view>
-					<view class="rechargeBox">
-						<view class="rechargeDetail left">
-							<view class="rechargeStatus">
+					<view class="withdrawBox">
+						<view class="withdrawDetail left">
+							<view class="withdrawStatus">
 								充值状态：<text class="type" style="color:#F5A623" v-if="it.status==1">处理中</text>
 								<text class="type" style="color:#34C487" v-else-if="it.status==2">成功</text>
 								<text class="type" style="color:#34C487" v-else-if="it.status==4">成功</text>
@@ -38,14 +20,14 @@
 								交易时间：{{formartTime(it.createTime)}}
 							</view>
 						</view>
-						<view class="rechargeDetail right">
+						<view class="withdrawDetail right">
 							<text class="right_money">充值余额：{{it.amount}}元</text>
 						</view>
 					</view>
 				</view>
 				<load-more :status="more" @click.native='getMore' :content-text="loadText"></load-more>
 			</view>
-			<view class="rechargeView" v-else>
+			<view class="withdrawView" v-else>
 				<view class="noDataImg">
 					<image src="../../../../static/images/noData.svg" class="img"></image>
 					<text class="noDataText">暂无更多内容</text>
@@ -62,14 +44,14 @@
 			@cancel="bindCancel"
 			themeColor="#4C83D6"
 		></rangeDatePick>
-		<popup ref="rechargeTerm" type="bottom" @change='change'>
+		<popup ref="withdrawTerm" type="bottom" @change='change'>
 			<view class="typeTerm">
 				<view class="typeTermTitle">
-					选择充值类型
+					选择提现类型
 				</view>
 				<view class="typeTermBox">
 					<view class="typeList" :class="[item.id==typeTerm.id?'active':'']" v-for="(item,idx) in typeTermList" :key='item.id'
-					 @click="rechargeTypeClick(item)">{{item.name}}</view>
+					 @click="withdrawTypeClick(item)">{{item.name}}</view>
 				</view>
 			</view>
 			<view class="typeTerm">
@@ -108,11 +90,12 @@
 	import utils from '@/common/utils/'
 	import rangeDatePick from '@/components/mx-datepicker/range-dtpicker';
 	export default {
-		name: 'rechargeRecord',
-		components: {
+		name: 'withdrawRecord',
+		components:{
 			Popup,
 			loadMore,
 			rangeDatePick
+			
 		},
 		data() {
 			const currentDate = this.getDate({
@@ -124,32 +107,15 @@
 					id: 0,
 					status: ''
 				},
-				typeTermList: [{
-						name: '全部',
-						id: 0,
-						status: ''
-					},
-					{
-						name: '处理中',
-						id: 1,
-						status: 1
-					},
-					{
-						name: '成功',
-						id: 2,
-						status: 2
-					},
-					{
-						name: '失败',
-						id: 3,
-						status: 3
-					}
+				typeTermList: [
+					{ name: '全部', id: 0, status: '' },
+					{ name: '申请', id: 1, status: 1 },
+					{ name: '审核', id: 2, status: 2 },
+					{ name: '拒绝', id: 3, status: 3 },
+					{ name: '发起', id: 4, status: 4 },
+					{ name: '成功', id: 5, status: 5 },
+					{ name: '失败', id: 6, status: 6 }
 				],
-				timer: {
-					name: '当天',
-					date: 1,
-					status: 0
-				},
 				startDate: '',
 				endDate: '',
 				more: 'more',
@@ -157,14 +123,19 @@
 				pageSize: 10,
 				total: 1,
 				loadText:{contentdown: "显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"},
+				timer: {
+					name: '当天',
+					date: 1,
+					status: 0
+				},
 				nowDate:currentDate,//获取当前时间
 				isShow:false,
 				value:[],
 				chooseDate:"自定义"
 			};
 		},
-		computed: {
-			...mapGetters(['timeList', 'rechargeList']),
+		computed:{
+			...mapGetters(['timeList', 'withdrawList']),
 			startTimer(){
 				return moment(new Date()).subtract(1,'years').format('YYYY-MM-DD');
 			},
@@ -177,7 +148,7 @@
 			this.status = this.typeTerm.status;
 			this.startDate = this.timeList[0].startTimes;
 			this.endDate = this.timeList[0].endTimes
-			this.getRechargeRecords(this.status, this.startDate, this.endDate)
+			this.getWithdrawRecords(this.status, this.startDate, this.endDate)
 		},
 		onReachBottom() {
 			console.log("onReachBottom");
@@ -187,16 +158,16 @@
 		// 下拉刷新
 		onPullDownRefresh() {
 			console.log('onPullDownRefresh');
-			this.getRechargeRecords(this.status,this.startDate,this.endDate)
+			this.getWithdrawRecords(this.status,this.startDate,this.endDate)
 		},
 		// 打开条件筛选
 		onNavigationBarButtonTap() {
-			this.$refs.rechargeTerm.open()
+			this.$refs.withdrawTerm.open()
 		},
-		methods: {
-			...mapActions(['getTimeList','addRecharRecord','getRecharRecord']),
+		methods:{
+			...mapActions(['getTimeList','withdrawRecordsList','addWithdrawRecordsList']),
 			// 类型条件
-			rechargeTypeClick(item) {
+			withdrawTypeClick(item) {
 				this.typeTerm = item;
 			},
 			// 时间条件
@@ -214,7 +185,7 @@
 					endTime: this.endDate
 				}
 				this.more = 'loading'
-				this.getRechargeRecords(data.status, data.startTime, data.endTime);
+				this.getWithdrawRecords(data.status, data.startTime, data.endTime);
 			},
 			// 重置
 			reset() {
@@ -235,8 +206,8 @@
 					// this.reset()
 				}
 			},
-			// 获取充值记录
-			getRechargeRecords(status, startTimer, endTimer) {
+			// 获取提现记录
+			getWithdrawRecords(status, startTimer, endTimer) {
 				let das = {
 					pageNum: 1,
 					pageSize: this.pageSize,
@@ -245,13 +216,13 @@
 					endTime: endTimer
 				}
 				showUiLoading('加载中..',{mask:true});
-				this.getRecharRecord(das).then(res => {
+				this.withdrawRecordsList(das).then(res => {
 					hideUiLoading();
 					uni.stopPullDownRefresh();
 					if (res.status) {
 						this.pages = res.data.pageNum;
 						this.total = res.data.pages;
-						this.$refs.rechargeTerm.close()
+						this.$refs.withdrawTerm.close()
 						if(this.total<=this.pages){
 							this.more = 'noMore'
 						}else{
@@ -287,7 +258,7 @@
 					  startTime: startTimer,
 					  endTime: endTimer
 					}
-					this.addRecharRecord(das).then(res=>{
+					this.addWithdrawRecordsList(das).then(res=>{
 						if(res.status){
 							this.pages = res.data.pageNum;
 							if(this.total<=this.pages){
@@ -338,5 +309,5 @@
 </script>
 
 <style lang="scss">
-	@import './rechargeRecord.scss';
+@import './withdrawRecord.scss';
 </style>

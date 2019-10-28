@@ -88,7 +88,6 @@
 				 left:22rpx;
 				 display:block;
 			  }
-			  // font-size:36rpx;
 		  }
 		  .notice{
 			  width: 620rpx;
@@ -97,7 +96,6 @@
 			  overflow: hidden;
 			  .text {
 				width: 100%;
-				font-size:28rpx;
 				line-height:80rpx;
 			  }
 		  }

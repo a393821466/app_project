@@ -2,7 +2,7 @@ import {
 	state
 } from './mutations'
 const getters = {
-	className: state => state.className,
+	themeFontSize: state => state.themeFontSize,
 	token: state => state.token,
 	merchantInfo: state => state.merchantInfo,
 	loginKey: state => state.loginKey,
