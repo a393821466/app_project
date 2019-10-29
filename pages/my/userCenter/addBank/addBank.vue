@@ -1,5 +1,5 @@
 <template>
-	<view class="addBank">
+	<view class="addBank" :class="themeFontSize">
 		<view class="addBank_tip">
 			<fonts-icon type="wenti" size='42' color="#1b82d1"></fonts-icon>
 			<text class="meBankTip">请填写您的真实信息，通过后将不能修改</text></view>
@@ -98,7 +98,7 @@
 			};
 		},
 		computed:{
-			...mapGetters(['userInfo','bankList','myBankList']),
+			...mapGetters(['userInfo','bankList','myBankList','themeFontSize']),
 			location(){
 				return address;
 			},

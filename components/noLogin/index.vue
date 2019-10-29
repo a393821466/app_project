@@ -59,7 +59,6 @@
 		width:160rpx;
 		height:60rpx;
 		background:#1b82d1;
-		font-size:28rpx;
 		color:#eee;
 		text-align:center;
 		margin:0 auto;

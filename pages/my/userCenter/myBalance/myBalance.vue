@@ -1,5 +1,5 @@
 <template>
-	<view class="myBalance_View">
+	<view class="myBalance_View" :class="themeFontSize">
 		<view class="balance_list" v-if="userAllBalance.length>0">
 			<view class="balance_case" v-for="item in getAllUserBalance" :key='item.id'>
 				<view class="balance_top_row">
@@ -84,7 +84,7 @@
 	export default {
 		name:'myBalance',
 		computed:{
-			...mapGetters(['userAllBalance']),
+			...mapGetters(['userAllBalance','themeFontSize']),
 			getAllUserBalance(){
 				if(this.userAllBalance.length>0){
 					let arr=this.userAllBalance;

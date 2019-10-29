@@ -1,5 +1,5 @@
 <template>
-	<view class="setLoginPwd">
+	<view class="setLoginPwd" :class="themeFontSize">
 		<view class="setTopView">
 			<view class="userText1">请为您的账号</view>
 			<view class="userAccount">{{getUserPhone}}</view>
@@ -82,7 +82,7 @@ export default {
 		};
 	},
 	computed:{
-		...mapGetters(['userInfo','verifyImg']),
+		...mapGetters(['userInfo','verifyImg','themeFontSize']),
 		getUserPhone(){
 			return this.userInfo.userPhone;
 		}

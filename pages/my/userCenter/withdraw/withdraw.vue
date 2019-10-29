@@ -1,5 +1,5 @@
 <template>
-	<view class="withdrawView">
+	<view class="withdrawView" :class="themeFontSize">
 		<view class="withdrawBox" v-if="myBankList.length>0">
 			<view class="selectBankInfo" @click="openSelectBankList">
 				<view class="bankStyle goBank">到账银行卡</view>
@@ -140,7 +140,7 @@
 			Popup
 		},
 		computed: {
-			...mapGetters(['userInfo', 'myBankList', 'userBalance']),
+			...mapGetters(['userInfo', 'myBankList', 'userBalance','themeFontSize']),
 			// 银行卡渲染前做的处理
 			formartBankList() {
 				if (this.myBankList.length > 0) {

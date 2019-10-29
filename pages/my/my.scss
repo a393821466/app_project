@@ -58,7 +58,6 @@
 			.realName{
 				margin:20rpx 0rpx 30rpx 0;
 				.goReadName,.goReadNameTwo{
-					font-size:24rpx;
 					display:inline-block;
 					border:solid 1rpx rgba(255,255,255,.3);
 					padding:8rpx;
@@ -66,7 +65,6 @@
 					border-radius:10rpx;
 				}
 				.goReadNameTwo{
-					width:170rpx;
 					.uni-icon-shimingrenzheng{
 						float:left;
 						margin-left:5rpx;
@@ -85,7 +83,6 @@
 				border-radius:50rpx;
 				border:2rpx solid rgba(255,255,255,.2);
 				.email{
-					font-size:28rpx;
 					display:block;
 					color:#d5e8f7;
 					line-height:50rpx;
@@ -122,9 +119,6 @@
 				line-height:80rpx;
 				font-size:38rpx;
 			}
-			.rate{
-				font-size:22rpx;
-			}
 			.right_line{
 				position:absolute;
 				right:0;
@@ -142,7 +136,6 @@
 		margin:20rpx 0 0 0;
 		.withdraw_rechange_title{
 			padding:0 20rpx;
-			font-size:28rpx;
 			text-indent:20rpx;
 			line-height:70rpx;
 			border-bottom:1px solid #eee;
@@ -171,7 +164,6 @@
 					}
 				}
 				.intOutText{
-					font-size:26rpx;
 					display:block;
 					line-height:46rpx;
 					color:#999;
@@ -187,15 +179,8 @@
 			.grid-title{
 				display: flex;
 				align-items: center;
-				font-size: 28rpx;
-				color: rgba(0,0,0,.63);
 				padding: 30rpx 40rpx;
-				// view{
-				// 	width: 8upx;
-				// 	height: 30upx;
-				// 	background-color: rgba(255,82,65,1);
-				// 	margin-right: 20upx;
-				// }
+				color:#999;
 			}
 			.grid{
 				display: flex;
@@ -215,7 +200,6 @@
 						height: 48rpx;
 					}
 					view{
-						font-size: 24rpx;
 						margin-top: 12rpx;
 						color: rgba(0,0,0,.53);
 					}

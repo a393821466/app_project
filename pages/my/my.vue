@@ -1,5 +1,5 @@
 <template>
-	<view class="my_page">
+	<view class="my_page" :class="themeFontSize">
 		<view class="all_intOut" v-if="token">
 			<!--头像，实名，用户名，设置，-->
 			<view class="my_top_box">
@@ -15,7 +15,7 @@
 				</view>
 				<view class="my_tops userInfo">
 					<view class="realName">
-						<view class="goReadNameTwo" v-if="getReadName"><fonts-icon type="shimingrenzheng" color='#eee' size='24'></fonts-icon><text class="readNameSuccess">已实名认证</text></view>
+						<view class="goReadNameTwo" v-if="getReadName"><fonts-icon type="shimingrenzheng" color='#eee' size='28'></fonts-icon><text class="readNameSuccess">已实名认证</text></view>
 						<text class="goReadName" @click="goRealName" v-else>您还未实名,点我去实名</text>
 					</view>
 					<view class="emial_userName">
@@ -218,7 +218,7 @@
 			};
 		},
 		computed:{
-			...mapGetters(['className','token','userBalance','userInfo']),
+			...mapGetters(['className','token','userBalance','userInfo','themeFontSize']),
 			getReadName(){
 				let readName=chache.get('userInfo');
 				return this.userInfo.isUserVierity||chache.get('isUserVierity')?true:false

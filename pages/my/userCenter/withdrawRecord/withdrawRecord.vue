@@ -1,5 +1,5 @@
 <template>
-	<view class="withdrawRecordView">
+	<view class="withdrawRecordView" :class="themeFontSize">
 		<view class="clearView"></view>
 		<view class="uni-padding-wrap uni-common-mt withdrawRecord">
 			<view class="withdrawView" v-if="withdrawList.length>0">
@@ -135,7 +135,7 @@
 			};
 		},
 		computed:{
-			...mapGetters(['timeList', 'withdrawList']),
+			...mapGetters(['timeList', 'withdrawList','themeFontSize']),
 			startTimer(){
 				return moment(new Date()).subtract(1,'years').format('YYYY-MM-DD');
 			},

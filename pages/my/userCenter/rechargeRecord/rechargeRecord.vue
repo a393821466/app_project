@@ -1,5 +1,5 @@
 <template>
-	<view class="rechargeRecordView">
+	<view class="rechargeRecordView" :class="themeFontSize">
 		<view class="clearView"></view>
 		<!-- <view class="rechargeSelect">
 			<view class="term type">
@@ -164,7 +164,7 @@
 			};
 		},
 		computed: {
-			...mapGetters(['timeList', 'rechargeList']),
+			...mapGetters(['timeList', 'rechargeList','themeFontSize']),
 			startTimer(){
 				return moment(new Date()).subtract(1,'years').format('YYYY-MM-DD');
 			},

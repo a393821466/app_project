@@ -85,7 +85,6 @@
 			.category_text {
 				text-align: center;
 				line-height: 246rpx;
-				font-size: 30rpx;
 				text-align: center;
 				display: block;
 				color: #fff;

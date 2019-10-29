@@ -1,5 +1,5 @@
 <template>
-	<view class="setUserInfoView">
+	<view class="setUserInfoView" :class="themeFontSize">
 		<view class="setTopView"></view>
 		<view class="setting_box">
 			<view class="setting_top">
@@ -77,6 +77,7 @@
 			};
 		},
 		computed: {
+			...mapGetters(['themeFontSize']),
 			location() {
 				return address;
 			}

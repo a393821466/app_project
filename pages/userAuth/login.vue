@@ -1,5 +1,5 @@
 <template>
-	<view class="login" :class='className'>
+	<view class="login" :class='themeFontSize'>
 		<view class="logo">
 			<image :src="getMerchantLogo" class="logo_img"></image>
 			<text class="logo_txt">欢迎来到{{merchantInfo.merchantName}}</text>
@@ -59,7 +59,7 @@
 			}
 		},
 		computed:{
-			...mapGetters(['className','loginKey','merchantInfo']),
+			...mapGetters(['loginKey','merchantInfo','themeFontSize']),
 			getMerchantLogo(){
 				if(this.merchantInfo){
 					return config.domain+'/'+this.merchantInfo.merchantSetting.logoUrl
@@ -169,7 +169,6 @@
 			.loginInput{
 				width:100%;
 				height:60rpx;
-				font-size:28rpx;
 				border:none;
 				outline: none;
 			}
@@ -186,14 +185,12 @@
 				flex:1;
 				.checkBoxStyle,.checkBoxText{
 					display:inline-block;
-					font-size:30rpx;
 					color:#666;
 				}
 			}
 			.forget_password{
 				flex:1;
 				text-align:right;
-				font-size:30rpx;
 				color:#666;
 			}
 		}

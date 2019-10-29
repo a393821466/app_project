@@ -44,7 +44,6 @@
 				.withdrawInfo{
 					color:#888;
 					line-height:60rpx;
-					text-indent:50rpx;
 				}
 				.bankName{
 					width:80%;
@@ -114,14 +113,12 @@
 	}
 	.tipView{
 		.title{
-			font-size:38rpx;
 			text-align:center;
 			line-height:60rpx;
 			color:#999;
 			font-weight:800;
 		}
 		.p1{
-			font-size:28rpx;
 			color:#999;
 			line-height:52rpx;
 			.phone{
@@ -206,17 +203,11 @@
 	background:#fff;
 	border-radius:15rpx;
 	color:#999;
-	font-size:32rpx;
-}
-.addNewBank,.selectBankName{
-	font-size:35rpx;
-}
-.nowMoneyNum,.withdraw_text,.bankName,.goBank{
-	font-size:28rpx;
 }
 .withdrawInfo,.bankText{
-	font-size:25rpx;
+	font-size:$uni-font-size-sm;
 }
+
 page{
 	background:#f8f8f8;
 }

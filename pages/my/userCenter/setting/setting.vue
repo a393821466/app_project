@@ -1,5 +1,5 @@
 <template>
-	<view class="settingView">
+	<view class="settingView" :class="themeFontSize">
 		<view class="setting_box">
 			<view class="setting_top">
 				<view class="setting_list" v-for="(item,idx) in userArr" :key="item.id" @click="goUserLink(item)">
@@ -106,6 +106,9 @@
 					}
 				]
 			};
+		},
+		computed:{
+			...mapGetters(['themeFontSize'])
 		},
 		methods: {
 			...mapActions(['logout', 'resetCommonState', 'resetHomeState', 'resetMy']),

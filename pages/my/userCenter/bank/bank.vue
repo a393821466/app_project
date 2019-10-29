@@ -1,5 +1,5 @@
 <template>
-	<view class="bankView">
+	<view class="bankView" :class="themeFontSize">
 		<view class="bank_list">
 			<view class="bank_list_content" v-if="myBankList.length>0">
 				<swiper-action ref='bankListRefs' :options="options" :myBankList="formartBankList" @delBank='delBank'></swiper-action>
@@ -78,7 +78,7 @@
 			};
 		},
 		computed:{
-			...mapGetters(['userInfo','myBankList']),
+			...mapGetters(['userInfo','myBankList','themeFontSize']),
 			// 银行卡渲染前做的处理
 			formartBankList(){
 				if(this.myBankList.length>0){

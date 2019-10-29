@@ -1,5 +1,5 @@
 <template>
-	<view class="securityView">
+	<view class="securityView" :class="themeFontSize">
 		<view class="securityTable">
 			<best-gauge :config="gaugeOption" bgColor="rgba(255,255,255,0)"></best-gauge>
 			<div class="wave one"></div>
@@ -87,7 +87,7 @@
 			};
 		},
 		computed:{
-			...mapGetters(['bindInfo'])
+			...mapGetters(['bindInfo','themeFontSize'])
 		},
 		onReady(){
 			this.getBindInfo();
