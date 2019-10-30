@@ -79,6 +79,7 @@ class Tools {
 		paramsStr = this.objParseParam(obj);
 		paramsStr && (url += "?");
 		url += paramsStr;
+		console.log(url);
 		return url;
 	}
 	/* 

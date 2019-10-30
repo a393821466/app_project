@@ -108,5 +108,9 @@ export default {
 	setFundsPassword:{
 		name: "设置资金密码",
 		path: "/pages/my/userCenter/setting/setFundsPassword/setFundsPassword"
+	},
+	fontSizePage:{
+		name: "字体大小",
+		path: "/pages/my/userCenter/setting/fontSizePage/fontSizePage"
 	}
 }

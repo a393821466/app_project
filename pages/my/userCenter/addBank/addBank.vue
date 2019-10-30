@@ -129,7 +129,6 @@
 								that.$refs.selector.show();
 								return
 							}
-							showUiToast(res.msg);
 						}).catch(err=>{
 							this.bankLoad=true
 							showUiToast('加载失败');

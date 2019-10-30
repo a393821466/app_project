@@ -203,6 +203,15 @@
             	}
             }
         }
+        ,{
+            "path" : "pages/my/userCenter/setting/fontSizePage/fontSizePage",
+            "style" : {
+				"navigationBarTitleText": "字体大小",
+				"navigationBarBackgroundColor": "#f8f8f8",
+				"navigationBarTextStyle": "black",
+				"enablePullDownRefresh": true
+			}
+        }
     ],
 	"condition": {
 		//模式配置，仅开发期间生效

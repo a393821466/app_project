@@ -1,11 +1,11 @@
 <template>
-	<view class="setfundsPwd">
+	<view class="setfundsPwd" :class="themeFontSize">
 		<view class="setTopView">
 			<view class="userText1">请为您的账号</view>
 			<view class="userAccount">{{getUserPhone}}</view>
 			<view class="newText2">设置一个新资金密码</view>
 		</view>
-		<view class="setting_box">
+		<view class="setting_box setFundsPwds">
 			<view class="setting_top">
 				<view class="setting_list">
 					<view class="setting_title">
@@ -32,7 +32,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="submit_button">
+			<view class="submits">
 				<button type="primary" class="submit_btn" @click="setSubmitPwd" :loading="!flat">提交</button>
 			</view>
 		</view>
@@ -90,7 +90,7 @@
 			};
 		},
 		computed: {
-			...mapGetters(['userInfo', 'verifyImg']),
+			...mapGetters(['userInfo', 'verifyImg','themeFontSize']),
 			getUserPhone() {
 				return this.userInfo.userPhone;
 			}
@@ -149,8 +149,6 @@
 						this.flat = true
 						if (res.status) {
 							showUiToast('设置成功');
-						} else {
-							showUiToast(res.msg);
 						}
 					}).catch(err => {
 						this.flat = true

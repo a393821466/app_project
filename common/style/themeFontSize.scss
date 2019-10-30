@@ -16,7 +16,7 @@
 	}
 	// 我的
 	.all_intOut{
-		.email,.withdraw_rechange_title,.intOutText,.grid-title,.item_text,.goReadNameTwo{
+		.email,.withdraw_rechange_title,.intOutText,.grid-title,.item_text,.goReadNameTwo,.goReadName{
 			font-size:$uni-font-size-sm;
 		}
 	}
@@ -35,6 +35,22 @@
 	.balance_list{
 		.balance_flex,.btn{
 			font-size:$uni-font-size-base;
+		}
+	}
+	// 实名认证
+	&.realNameView{
+		.tip{
+			font-size:$uni-font-size-sm;
+		}
+		.realInput{
+			.realNameInputView,.realNameInput,.cartId{
+				font-size:$uni-font-size-sm;
+			}
+		}
+		.submit_realName{
+			button{
+				font-size:$uni-font-size-base;
+			}
 		}
 	}
 	// 提现
@@ -131,6 +147,27 @@
 			font-size:$uni-font-size-base;
 		}
 	}
+	.setLoginPwds,.setFundsPwds{
+		.setting_title{
+			font-size:$uni-font-size-sm;
+		}
+		.setting{
+			button{
+				font-size:$uni-font-size-sm;
+			}
+		}
+		.submits{
+			.submit_btn{
+				font-size:$uni-font-size-sm;
+			}
+		}
+	}
+	// 字体大小
+	&.fontSizeView{
+		.bindInfo{
+			font-size:$uni-font-size-sm;
+		}
+	}
 }
 // 中号字体
 .daytime2{
@@ -156,13 +193,29 @@
 		.rate,.item_text,.goReadNameTwo{
 			font-size:$uni-font-size-sm;
 		}
-		.email,.withdraw_rechange_title,.intOutText,.grid-title{
+		.email,.withdraw_rechange_title,.intOutText,.grid-title,.goReadName{
 			font-size:$uni-font-size-base;
 		}
 	}
 	.noLogin{
 		.go{
 			font-size:$uni-font-size-base;
+		}
+	}
+	// 实名认证
+	&.realNameView{
+		.tip{
+			font-size:$uni-font-size-base;
+		}
+		.realInput{
+			.realNameInputView,.realNameInput,.cartId{
+				font-size:$uni-font-size-base;
+			}
+		}
+		.submit_realName{
+			button{
+				font-size:$uni-font-size-base;
+			}
 		}
 	}
 	// 设置
@@ -274,6 +327,27 @@
 			font-size:$uni-font-size-base;
 		}
 	}
+	.setLoginPwds,.setFundsPwds{
+		.setting_title{
+			font-size:$uni-font-size-base;
+		}
+		.setting{
+			button{
+				font-size:$uni-font-size-base;
+			}
+		}
+		.submits{
+			.submit_btn{
+				font-size:$uni-font-size-base;
+			}
+		}
+	}
+	// 字体大小
+	&.fontSizeView{
+		.bindInfo{
+			font-size:$uni-font-size-base;
+		}
+	}
 }
 // 大号字体
 .daytime3{
@@ -293,7 +367,7 @@
 	}
 	// 我的
 	.all_intOut{
-		.email,.item_text,.grid-title,.intOutText,.withdraw_rechange_title{
+		.email,.item_text,.grid-title,.intOutText,.withdraw_rechange_title,.goReadName{
 			font-size:$uni-font-size-lg;
 		}
 		.rate,.goReadNameTwo{
@@ -303,6 +377,22 @@
 	.noLogin{
 		.go{
 			font-size:$uni-font-size-base;
+		}
+	}
+	// 实名认证
+	&.realNameView{
+		.tip{
+			font-size:$uni-font-size-base;
+		}
+		.realInput{
+			.realNameInputView,.realNameInput,.cartId{
+				font-size:$uni-font-size-base;
+			}
+		}
+		.submit_realName{
+			button{
+				font-size:$uni-font-size-base;
+			}
 		}
 	}
 	// 设置
@@ -408,6 +498,27 @@
 	// 设置登陆密码
 	.setTopView{
 		.userText1,.userAccount,.userText1,.newText2{
+			font-size:$uni-font-size-lg;
+		}
+	}
+	.setLoginPwds,.setFundsPwds{
+		.setting_title{
+			font-size:$uni-font-size-lg;
+		}
+		.setting{
+			button{
+				font-size:$uni-font-size-lg;
+			}
+		}
+		.submits{
+			.submit_btn{
+				font-size:$uni-font-size-lg;
+			}
+		}
+	}
+	// 字体大小
+	&.fontSizeView{
+		.bindInfo{
 			font-size:$uni-font-size-lg;
 		}
 	}

@@ -475,8 +475,11 @@
 			},
 			//时间选择确定
 			onConfirmTime() {
-				if (this.timeType == 'begin') this.beginTime = this.timeValue;
-				else this.endTime = this.timeValue;
+				if (this.timeType == 'begin'){
+					this.beginTime = this.timeValue;
+				}else{
+					this.endTime = this.timeValue;
+				}
 				this.showTimePicker = false;
 				this.type == 'time' && this.onConfirm();
 			},

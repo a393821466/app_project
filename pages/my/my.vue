@@ -218,7 +218,7 @@
 			};
 		},
 		computed:{
-			...mapGetters(['className','token','userBalance','userInfo','themeFontSize']),
+			...mapGetters(['token','userBalance','userInfo','themeFontSize']),
 			getReadName(){
 				let readName=chache.get('userInfo');
 				return this.userInfo.isUserVierity||chache.get('isUserVierity')?true:false

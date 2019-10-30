@@ -10,7 +10,7 @@
 				</view>
 			</view>
 			<view class="setting_middle">
-				<view class="setting_list" v-for="(item,idx) in commonUse" :key="item.id">
+				<view class="setting_list" v-for="(item,idx) in commonUse" :key="item.id" @click="goUserLink(item)">
 					<view class="setting_title">{{item.title}}</view>
 					<view class="setting_icon">
 						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
@@ -86,7 +86,7 @@
 					{
 						id: 2,
 						title: '字体大小',
-						link: ''
+						link: this.$routers.fontSizePage
 					}
 				],
 				helpArr: [{

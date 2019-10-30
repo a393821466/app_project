@@ -7,7 +7,7 @@ if(process.env.NODE_ENV==='development'){
 	// #endif
 	
 	// #ifndef H5
-	basicUrl='https://tmk.rvsii.com/apis'
+	basicUrl='https://tmk.eanjee.com/apis'
 	// #endif
 }else{
 	// #ifdef H5
@@ -15,7 +15,7 @@ if(process.env.NODE_ENV==='development'){
 	// #endif
 	
 	// #ifndef H5
-	basicUrl='https://tmk.rvsii.com/apis'
+	basicUrl='https://tmk.eanjee.com/apis'
 	// #endif
 }
 

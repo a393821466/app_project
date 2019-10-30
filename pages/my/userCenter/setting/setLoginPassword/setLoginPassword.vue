@@ -5,7 +5,7 @@
 			<view class="userAccount">{{getUserPhone}}</view>
 			<view class="newText2">设置一个新登陆密码</view>
 		</view>
-		<view class="setting_box">
+		<view class="setting_box setLoginPwds">
 			<view class="setting_top">
 				<view class="setting_list">
 					<view class="setting_title">
@@ -33,7 +33,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="submit_button">
+			<view class="submits">
 				<button type="primary" class="submit_btn" @click="setSubmitPwd" :loading="!flat">提交</button>
 			</view>
 		</view>
@@ -141,8 +141,6 @@ export default {
 					this.flat=true
 					if(res.status){
 						showUiToast('设置成功');
-					}else{
-						showUiToast(res.msg);
 					}
 				}).catch(err=>{
 					this.flat=true

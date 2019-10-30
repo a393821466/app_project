@@ -15,7 +15,14 @@
     "pages/my/userCenter/addBank/addBank",
     "pages/my/userCenter/securityCenter/securityCenter",
     "pages/my/userCenter/realName/realName",
-    "pages/my/userCenter/withdraw/withdraw"
+    "pages/my/userCenter/withdraw/withdraw",
+    "pages/my/userCenter/withdraw/withdrawSuccess/withdrawSuccess",
+    "pages/my/userCenter/setting/setLoginPassword/setLoginPassword",
+    "pages/my/userCenter/setting/setFundsPassword/setFundsPassword",
+    "pages/my/userCenter/setting/setUserInfo/setUserInfo",
+    "pages/my/userCenter/rechargeRecord/rechargeRecord",
+    "pages/my/userCenter/withdrawRecord/withdrawRecord",
+    "pages/my/userCenter/setting/fontSizePage/fontSizePage"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -71,7 +78,7 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "uni_futures",
+  "appname": "期货",
   "compilerVersion": "2.2.2",
   "usingComponents": {
     "fonts-icon": "/components/ui-font/index"

@@ -5,7 +5,6 @@ page{
 	padding:24rpx 0;
 	.tip{
 		padding:0 32rpx;
-		font-size:30rpx;
 		display:flex;
 		flex-direction:row;
 		.uni-icon-wenti{
@@ -15,12 +14,12 @@ page{
 		.info{
 			flex:1;
 			text-indent:10rpx;
-			line-height:50rpx;
 			color:#888;
 		}
 	}
 	.realInput{
 		background:#fff;
+		margin-top:30rpx;
 		.realNameInputView{
 			display:flex;
 			flex-direction:row;
@@ -30,7 +29,6 @@ page{
 			border-bottom:1px solid #f9f9f9;
 			.flexBankView{
 				flex:0 0 1;
-				font-size:28rpx;
 				line-height:96rpx;
 				color:#777;
 				&.title{
@@ -44,7 +42,6 @@ page{
 						height:52rpx;
 						line-height:52rpx;
 						margin-top:22rpx;
-						font-size:28rpx;
 					}
 				}
 				&.iconRight{

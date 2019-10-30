@@ -28,10 +28,7 @@ export default{
 	},
 	// 获取银行卡信息列表
 	async getBankListInfo({commit},res){
-		const dats={
-			params:res
-		}
-		const findBankList=await httpUtils.get(address.common.findAllBankInfo,dats);
+		const findBankList=await httpUtils.get(address.common.findAllBankInfo,res);
 		if(findBankList.status){
 			commit('GETBANKLISTINFO',findBankList.data)
 		}

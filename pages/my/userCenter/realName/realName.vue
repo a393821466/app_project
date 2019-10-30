@@ -1,5 +1,5 @@
 <template>
-	<view class="realNameView">
+	<view class="realNameView" :class="themeFontSize">
 		<view class="oNrealName" v-if="getVierity||nowUserVierity">
 			<view class="oNrealNameIcon">
 				<fonts-icon type="wodeshimingrenzhengx" size='216' color='#1b82d1'></fonts-icon>
@@ -77,7 +77,7 @@
 			};
 		},
 		computed: {
-			...mapGetters(['userInfo']),
+			...mapGetters(['userInfo','themeFontSize']),
 			getVierity() {
 				return this.userInfo.isUserVierity || chache.get('isUserVierity') ? true : false
 			}
