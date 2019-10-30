@@ -22,6 +22,7 @@ import {
 	mapActions,
 	mapGetters
 } from 'vuex'
+import config from '@/common/utils/config'
 export default{
 	name:'news_person',
 	data(){
@@ -32,6 +33,8 @@ export default{
 	computed: {
 		...mapGetters(['temList']),
 	},
+	methods:{
+	}
 }
 </script>
 

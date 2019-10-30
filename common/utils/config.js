@@ -4,12 +4,31 @@ const config={
 		name:'futures',
 		path:'_doc/futures.db',
 		success:function(e){
-			console.log('open sqlLite success!');
+			uni.showToast({
+			    title: 'success!',
+			    duration: 2000
+			});
 		},
-		fail:function(){
-			console.log('openDatabase failed: '+JSON.stringify(e));
+		fail:function(e){
+			console.log('failed: '+JSON.stringify(e));
 		}
 	}
+	// isSqlLite:{
+	// 	name:'futures',
+	// 	path:'_doc/futures.db'
+	// },
+	// closeSqlLite:{
+	// 	name:'futures',
+	// 	success:function(e){
+	// 		uni.showToast({
+	// 		    title: 'close success',
+	// 		    duration: 2000
+	// 		});
+	// 	},
+	// 	fail:function(e){
+	// 		console.log('closeDatabase failed: '+JSON.stringify(e));
+	// 	}
+	// }
 }
 
 export default config;

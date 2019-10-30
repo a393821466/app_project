@@ -284,8 +284,8 @@
 				this.chooseDate=data[0]+"至"+data[1]
 				let sDate=data[0] + ' ' + '00:00:00'
 				let eDate=data[1] + ' ' + '23:59:59'
-				this.startDate=new Date(sDate).toISOString()
-				this.endDate=new Date(eDate).toISOString()
+				this.startDate=moment(sDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+				this.endDate=moment(eDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
 				this.timer={
 					name: '自定义',
 					date: 99,

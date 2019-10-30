@@ -190,10 +190,10 @@
 	}
 	// 我的
 	.all_intOut{
-		.rate,.item_text,.goReadNameTwo{
+		.rate,.item_text,.goReadNameTwo,.intOutText{
 			font-size:$uni-font-size-sm;
 		}
-		.email,.withdraw_rechange_title,.intOutText,.grid-title,.goReadName{
+		.email,.withdraw_rechange_title,.grid-title,.goReadName{
 			font-size:$uni-font-size-base;
 		}
 	}

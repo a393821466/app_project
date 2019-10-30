@@ -218,10 +218,10 @@
 .daytime2 .login_form .login_submit_int {
   font-size: 34rpx;
 }
-.daytime2 .all_intOut .rate, .daytime2 .all_intOut .item_text, .daytime2 .all_intOut .goReadNameTwo {
+.daytime2 .all_intOut .rate, .daytime2 .all_intOut .item_text, .daytime2 .all_intOut .goReadNameTwo, .daytime2 .all_intOut .intOutText {
   font-size: 28rpx;
 }
-.daytime2 .all_intOut .email, .daytime2 .all_intOut .withdraw_rechange_title, .daytime2 .all_intOut .intOutText, .daytime2 .all_intOut .grid-title, .daytime2 .all_intOut .goReadName {
+.daytime2 .all_intOut .email, .daytime2 .all_intOut .withdraw_rechange_title, .daytime2 .all_intOut .grid-title, .daytime2 .all_intOut .goReadName {
   font-size: 30rpx;
 }
 .daytime2 .noLogin .go {
