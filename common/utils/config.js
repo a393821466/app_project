@@ -4,19 +4,12 @@ const config={
 		name:'futures',
 		path:'_doc/futures.db',
 		success:function(e){
-			uni.showToast({
-			    title: 'success!',
-			    duration: 2000
-			});
+			console.log('ok!');
 		},
 		fail:function(e){
 			console.log('failed: '+JSON.stringify(e));
 		}
 	}
-	// isSqlLite:{
-	// 	name:'futures',
-	// 	path:'_doc/futures.db'
-	// },
 	// closeSqlLite:{
 	// 	name:'futures',
 	// 	success:function(e){

@@ -54,12 +54,12 @@
 			writeSql(){
 				plus.sqlite.executeSql({
 					name:'futures',
-					sql:'create table if not exists fontDataBase("id" INT(11) PRIMARY KEY NOT NULL,"type" INT(11))',
+					sql:'create table if not exists fontDataBase("id" INT(11) PRIMARY KEY NOT NULL,"type" CHAR(100))',
 					success:function(e){
-						console.log('executeSql success!');
+						console.log(e);
 						plus.sqlite.executeSql({
 							name: 'futures',
-							sql: "insert into fontDataBase values(1,2)",
+							sql: "insert into fontDataBase values(1,'daytime2')",
 							success: function(e){
 								console.log('executeSql success!');
 								uni.showToast({
@@ -114,7 +114,7 @@
 			updateSql(){
 				plus.sqlite.executeSql({
 					name: 'futures',
-					sql: "update fontDataBase set type=4 where id=1",
+					sql: "update fontDataBase set type='daytime3' where id=1",
 					success: function(e){
 						uni.showToast({
 						    title: `更新成功`,

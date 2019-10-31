@@ -43,8 +43,7 @@
 		// 			// Vue.prototype.phoneHeight=e.windowHeight-(Vue.prototype.customBar+Vue.prototype.customFooter);
 		// 		}
 		// 	})
-		},
-		onShow() {}
+		}
 	}
 </script>
 

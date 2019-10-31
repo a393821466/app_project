@@ -10,12 +10,14 @@
 				</view>
 			</view>
 			<view class="setting_middle">
+				<!-- #ifdef APP-PLUS-->
 				<view class="setting_list" v-for="(item,idx) in commonUse" :key="item.id" @click="goUserLink(item)">
 					<view class="setting_title">{{item.title}}</view>
 					<view class="setting_icon">
 						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
 					</view>
 				</view>
+				<!-- #endif -->
 				<view class="setting_list">
 					<view class="setting_title">夜间模式</view>
 					<view class="setting_icon">

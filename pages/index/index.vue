@@ -22,6 +22,7 @@
 	import newsPerson from './homeComponent/news_person'
 	import {showUiModel,confirmModel} from '@/common/utils/dialog.config'
 	import chache from '@/common/utils/storage'
+	import config from '@/common/utils/config'
 	export default {
 		name:'index',
 		data(){
@@ -65,13 +66,42 @@
 			this.getTemplateData()
 		},
 		onShow(){
-			
+			// #ifdef APP-PLUS
+			if(chache.has('fontSizeType')){
+				const fonts=chache.get('fontSizeType')
+				this.appFontSize(fonts)
+			}else{
+				const isOpenSql=plus.sqlite.isOpenDatabase(config.sqlLiteConfig);
+				if(isOpenSql){
+					this.getOpenDataBase()
+				}else{
+					plus.sqlite.openDatabase(config.sqlLiteConfig);
+					this.getOpenDataBase()
+				}
+			}
+			// #endif
 		},
 		methods: {
 			/*
 			** 公告，模板发送store
 			*/
-			...mapActions(['getBannerActivity','getNotice', 'getTemplate','getMerchant']),
+			...mapActions(['getBannerActivity','getNotice', 'getTemplate','getMerchant','appFontSize']),
+			// 获取字体
+			getOpenDataBase(){
+				const that=this;
+				plus.sqlite.selectSql(
+					{
+						name: 'futures',
+						sql: 'select * from fontDataBase',
+						success:function(data){
+							that.appFontSize(data[0].type);
+						},
+						fail:function(e){
+							showUiToast(JSON.stringify(e.message));
+						}
+					}
+				);
+			},
 			// 获取公告
 			getNoticeData() {
 				this.getNotice().then(res => {
