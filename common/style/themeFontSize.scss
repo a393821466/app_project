@@ -191,7 +191,7 @@
 	// 我的
 	.all_intOut{
 		.rate,.item_text,.goReadNameTwo,.intOutText{
-			font-size:$uni-font-size-sm;
+			font-size:$uni-font-size-base;
 		}
 		.email,.withdraw_rechange_title,.grid-title,.goReadName{
 			font-size:$uni-font-size-base;
@@ -371,7 +371,7 @@
 			font-size:$uni-font-size-lg;
 		}
 		.rate,.goReadNameTwo{
-			font-size:$uni-font-size-base;
+			font-size:$uni-font-size-lg;
 		}
 	}
 	.noLogin{
