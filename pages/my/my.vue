@@ -138,7 +138,7 @@
 						sized:50,
 						colors:'#FD5E5E',
 						tips: '',
-						url:''
+						url:this.$routers.tradeRecord
 					},
 					{
 						name: '充值记录',

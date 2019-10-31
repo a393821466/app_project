@@ -22,7 +22,8 @@
     "pages/my/userCenter/setting/setUserInfo/setUserInfo",
     "pages/my/userCenter/rechargeRecord/rechargeRecord",
     "pages/my/userCenter/withdrawRecord/withdrawRecord",
-    "pages/my/userCenter/setting/fontSizePage/fontSizePage"
+    "pages/my/userCenter/setting/fontSizePage/fontSizePage",
+    "pages/my/userCenter/tradeRecord/tradeRecord"
   ],
   "window": {
     "navigationBarTextStyle": "white",

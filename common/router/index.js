@@ -96,6 +96,10 @@ export default {
 		name: "提现记录",
 		path: "/pages/my/userCenter/withdrawRecord/withdrawRecord"
 	},
+	tradeRecord:{
+		name: "交易记录",
+		path: "/pages/my/userCenter/tradeRecord/tradeRecord"
+	},
 	/* 设置 */
 	setUser:{
 		name: "设置个人资料",

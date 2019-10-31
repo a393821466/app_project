@@ -4,6 +4,18 @@
 	.service-text,.text,.category_text,.news_title,.activity_text,.news_text{
 		font-size:$uni-font-size-sm;
 	}
+	// 公告
+	.annount_list{
+		.atitle{
+			font-size:$uni-font-size-base;
+		}
+		.annount_body{
+			font-size:$uni-font-size-sm;
+		}
+		.annount_time{
+			font-size:$uni-font-size-sm;
+		}
+	}
 	// 行情
 	// 登陆
 	.login_form{
@@ -174,6 +186,18 @@
 	// 首页
 	.service-text,.text,.category_text,.news_title,.activity_text,.news_text{
 		font-size:$uni-font-size-base;
+	}
+	// 公告
+	.annount_list{
+		.atitle{
+			font-size:$uni-font-size-lg;
+		}
+		.annount_body{
+			font-size:$uni-font-size-sm;
+		}
+		.annount_time{
+			font-size:$uni-font-size-sm;
+		}
 	}
 	// 行情
 	// 登陆
@@ -354,6 +378,18 @@
 	// 首页
 	.service-text,.text,.category_text,.news_title,.activity_text,.news_text{
 		font-size:$uni-font-size-lg;
+	}
+	// 公告
+	.annount_list{
+		.atitle{
+			font-size:38upx;
+		}
+		.annount_body{
+			font-size:32upx;
+		}
+		.annount_time{
+			font-size:32upx;
+		}
 	}
 	// 行情
 	// 登陆

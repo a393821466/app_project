@@ -17,13 +17,13 @@
 						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
 					</view>
 				</view>
-				<!-- #endif -->
 				<view class="setting_list">
 					<view class="setting_title">夜间模式</view>
 					<view class="setting_icon">
 						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
 					</view>
 				</view>
+				<!-- #endif -->
 			</view>
 			<view class="setting_middle2">
 				<view class="setting_list" v-for="(item,idx) in helpArr" :key="item.id">

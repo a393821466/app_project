@@ -1,5 +1,5 @@
 <template>
-	<view class="notice_annount">
+	<view class="notice_annount" :class="themeFontSize">
 		<view class="annount_box" v-if="notice.length>0">
 			<view class="annount_list" v-for="(item,idx) in notice" :data-item="item.announcementId===noticeId?'open':'close'" :key="idx" @click.prevent="onClickNotice($event,item,idx)">
 				<view class="annount_title">
@@ -52,7 +52,7 @@
 			};
 		},
 		computed: {
-		    ...mapGetters(['notice'])
+		    ...mapGetters(['notice','themeFontSize'])
 		},
 		onShow(){
 			this.noticeList()
@@ -100,7 +100,6 @@
 				flex:0 0 1;
 			}
 			.atitle{
-				font-size:32rpx;
 				width:90%;
 				font-weight:bold;
 				color:#666;
@@ -141,7 +140,6 @@
 			}
 		}
 		.annount_body{
-			font-size:28rpx;
 			color:#888;
 			.annount_content{
 				height:0;
@@ -158,7 +156,6 @@
 		.annount_time{
 			line-height:70rpx;
 			color:#777;
-			font-size:26rpx;
 			border-bottom:2rpx dashed #eee; 
 			.anount_time__skeleton{
 				width:300rpx;

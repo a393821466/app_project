@@ -102,46 +102,55 @@
   color: #eee !important;
 }
 .daytime1 .service-text, .daytime1 .text, .daytime1 .category_text, .daytime1 .news_title, .daytime1 .activity_text, .daytime1 .news_text {
-  font-size: 28rpx;
+  font-size: 29rpx;
+}
+.daytime1 .annount_list .atitle {
+  font-size: 32rpx;
+}
+.daytime1 .annount_list .annount_body {
+  font-size: 29rpx;
+}
+.daytime1 .annount_list .annount_time {
+  font-size: 29rpx;
 }
 .daytime1 .login_form .userPhone, .daytime1 .login_form .userPassword {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .login_form .forget_password, .daytime1 .login_form .checkBoxText, .daytime1 .login_form .login_submit_int {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .all_intOut .email, .daytime1 .all_intOut .withdraw_rechange_title, .daytime1 .all_intOut .intOutText, .daytime1 .all_intOut .grid-title, .daytime1 .all_intOut .item_text, .daytime1 .all_intOut .goReadNameTwo, .daytime1 .all_intOut .goReadName {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .noLogin .go {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .setting_box .setting_title {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .balance_list .balance_flex, .daytime1 .balance_list .btn {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1.realNameView .tip {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1.realNameView .realInput .realNameInputView, .daytime1.realNameView .realInput .realNameInput, .daytime1.realNameView .realInput .cartId {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1.realNameView .submit_realName button {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .withdrawBox .nowMoneyNum, .daytime1 .withdrawBox .withdraw_text, .daytime1 .withdrawBox .bankName, .daytime1 .withdrawBox .goBank, .daytime1 .withdrawBox .noBindBanks {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .addNewBank, .daytime1 .selectBankName {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .tipView .title {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .tipView .p1 {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .tip_box .sp2 {
   font-size: 30rpx;
@@ -153,109 +162,118 @@
   font-size: 28rpx;
 }
 .daytime1 .addBank_tip {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .flexBankView {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .bankNumber {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .submit_cartNumber button {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .userBindInfo .bind {
   font-size: 32rpx;
 }
 .daytime1 .rechargeView .rechargeTitle {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .rechargeView .rechargeBox, .daytime1 .rechargeView .typeTimer {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .typeTerm .typeTermTitle {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .typeTerm .typeList, .daytime1 .typeTerm .typeTimer {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .withdrawView .withdrawTitle {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .withdrawView .withdrawBox {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .setting_box .emailView, .daytime1 .setting_box .setting_title, .daytime1 .setting_box .submit_btn {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .setting_box .submit_button .submit_btn {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .setTopView .userText1, .daytime1 .setTopView .userAccount, .daytime1 .setTopView .userText1, .daytime1 .setTopView .newText2 {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime1 .setLoginPwds .setting_title, .daytime1 .setFundsPwds .setting_title {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .setLoginPwds .setting button, .daytime1 .setFundsPwds .setting button {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1 .setLoginPwds .submits .submit_btn, .daytime1 .setFundsPwds .submits .submit_btn {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime1.fontSizeView .bindInfo {
-  font-size: 28rpx;
+  font-size: 29rpx;
 }
 .daytime2 .service-text, .daytime2 .text, .daytime2 .category_text, .daytime2 .news_title, .daytime2 .activity_text, .daytime2 .news_text {
-  font-size: 30rpx;
+  font-size: 32rpx;
+}
+.daytime2 .annount_list .atitle {
+  font-size: 35rpx;
+}
+.daytime2 .annount_list .annount_body {
+  font-size: 29rpx;
+}
+.daytime2 .annount_list .annount_time {
+  font-size: 29rpx;
 }
 .daytime2 .login_form .userPhone, .daytime2 .login_form .userPassword {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .login_form .forget_password, .daytime2 .login_form .checkBoxText {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .login_form .login_submit_int {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime2 .all_intOut .rate, .daytime2 .all_intOut .item_text, .daytime2 .all_intOut .goReadNameTwo, .daytime2 .all_intOut .intOutText {
-  font-size: 28rpx;
+  font-size: 32rpx;
 }
 .daytime2 .all_intOut .email, .daytime2 .all_intOut .withdraw_rechange_title, .daytime2 .all_intOut .grid-title, .daytime2 .all_intOut .goReadName {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .noLogin .go {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2.realNameView .tip {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2.realNameView .realInput .realNameInputView, .daytime2.realNameView .realInput .realNameInput, .daytime2.realNameView .realInput .cartId {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2.realNameView .submit_realName button {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .setting_box .setting_title {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .balance_list .btn {
   font-size: 32rpx;
 }
 .daytime2 .balance_list .balance_flex {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .withdrawBox .nowMoneyNum, .daytime2 .withdrawBox .withdraw_text, .daytime2 .withdrawBox .bankName, .daytime2 .withdrawBox .goBank, .daytime2 .withdrawBox .noBindBanks {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .addNewBank, .daytime2 .selectBankName {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .tipView .title {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime2 .tipView .p1 {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .tip_box .sp2 {
   font-size: 34rpx;
@@ -267,97 +285,106 @@
   font-size: 30rpx;
 }
 .daytime2 .addBank_tip {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .flexBankView {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .bankNumber {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .submit_cartNumber button {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .userBindInfo .bind {
   font-size: 34rpx;
 }
 .daytime2 .rechargeView .rechargeTitle {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime2 .rechargeView .rechargeBox, .daytime2 .rechargeView .typeTimer {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .typeTerm .typeTermTitle {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .typeTerm .typeList, .daytime2 .typeTerm .typeTimer {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .withdrawView .withdrawTitle {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime2 .withdrawView .withdrawBox {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .setting_box .emailView, .daytime2 .setting_box .setting_title {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .setting_box .submit_button .submit_btn {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .setTopView .userText1, .daytime2 .setTopView .userAccount, .daytime2 .setTopView .userText1, .daytime2 .setTopView .newText2 {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .setLoginPwds .setting_title, .daytime2 .setFundsPwds .setting_title {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .setLoginPwds .setting button, .daytime2 .setFundsPwds .setting button {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2 .setLoginPwds .submits .submit_btn, .daytime2 .setFundsPwds .submits .submit_btn {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime2.fontSizeView .bindInfo {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime3 .service-text, .daytime3 .text, .daytime3 .category_text, .daytime3 .news_title, .daytime3 .activity_text, .daytime3 .news_text {
-  font-size: 34rpx;
+  font-size: 35rpx;
+}
+.daytime3 .annount_list .atitle {
+  font-size: 38rpx;
+}
+.daytime3 .annount_list .annount_body {
+  font-size: 32rpx;
+}
+.daytime3 .annount_list .annount_time {
+  font-size: 32rpx;
 }
 .daytime3 .login_form .userPhone, .daytime3 .login_form .userPassword {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .login_form .forget_password, .daytime3 .login_form .checkBoxText, .daytime3 .login_form .login_submit_int {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .all_intOut .email, .daytime3 .all_intOut .item_text, .daytime3 .all_intOut .grid-title, .daytime3 .all_intOut .intOutText, .daytime3 .all_intOut .withdraw_rechange_title, .daytime3 .all_intOut .goReadName {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .all_intOut .rate, .daytime3 .all_intOut .goReadNameTwo {
-  font-size: 30rpx;
+  font-size: 35rpx;
 }
 .daytime3 .noLogin .go {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime3.realNameView .tip {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime3.realNameView .realInput .realNameInputView, .daytime3.realNameView .realInput .realNameInput, .daytime3.realNameView .realInput .cartId {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime3.realNameView .submit_realName button {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime3 .setting_box .setting_title {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .balance_list .balance_flex, .daytime3 .balance_list .btn {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .withdrawBox .nowMoneyNum, .daytime3 .withdrawBox .withdraw_text, .daytime3 .withdrawBox .bankName, .daytime3 .withdrawBox .goBank, .daytime3 .withdrawBox .noBindBanks {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .addNewBank, .daytime3 .selectBankName {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .tipView .title {
   font-size: 42rpx;
@@ -375,31 +402,31 @@
   font-size: 34rpx;
 }
 .daytime3 .addBank_tip {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime3 .flexBankView {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .bankNumber {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .submit_cartNumber button {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .userBindInfo .bind {
   font-size: 38rpx;
 }
 .daytime3 .rechargeView .rechargeTitle {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .rechargeView .rechargeBox {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 .daytime3 .typeTerm .typeTermTitle {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .typeTerm .typeList, .daytime3 .typeTerm .typeTimer {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .withdrawView .withdrawTitle {
   font-size: 40rpx;
@@ -408,25 +435,25 @@
   font-size: 32rpx;
 }
 .daytime3 .setting_box .emailView, .daytime3 .setting_box .setting_title {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .setting_box .submit_button .submit_btn {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .setTopView .userText1, .daytime3 .setTopView .userAccount, .daytime3 .setTopView .userText1, .daytime3 .setTopView .newText2 {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .setLoginPwds .setting_title, .daytime3 .setFundsPwds .setting_title {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .setLoginPwds .setting button, .daytime3 .setFundsPwds .setting button {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3 .setLoginPwds .submits .submit_btn, .daytime3 .setFundsPwds .submits .submit_btn {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 .daytime3.fontSizeView .bindInfo {
-  font-size: 34rpx;
+  font-size: 35rpx;
 }
 /* 背景颜色 */
 /* 主题颜色 */

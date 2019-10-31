@@ -1,7 +1,7 @@
 import chache from '@/common/utils/storage'
 import utils from '@/common/utils'
 export const state={
-	themeFontSize:'daytime2',
+	themeFontSize:'daytime3',
 	stateText:'',
 	token:'' || chache.get('token'),
 	merchantInfo:chache.get('merchantInfo'),

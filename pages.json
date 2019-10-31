@@ -212,6 +212,15 @@
 				"enablePullDownRefresh": true
 			}
         }
+        ,{
+            "path" : "pages/my/userCenter/tradeRecord/tradeRecord",
+            "style" : {
+				"navigationBarTitleText": "提现记录",
+				"navigationBarBackgroundColor": "#1b82d1",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true
+			}
+        }
     ],
 	"condition": {
 		//模式配置，仅开发期间生效
