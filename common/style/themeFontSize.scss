@@ -129,7 +129,7 @@
 		.typeTermTitle{
 			font-size:$uni-font-size-sm;
 		}
-		.typeList,.typeTimer{
+		.typeList,.typeTimer,.typeBox{
 			font-size:$uni-font-size-sm;
 		}
 	}
@@ -178,6 +178,25 @@
 	&.fontSizeView{
 		.bindInfo{
 			font-size:$uni-font-size-sm;
+		}
+	}
+	// 交易明细
+	&.tradeRecordView{
+		.condition{
+			font-size:$uni-font-size-sm;
+		}
+		.tradeType,.dateTimer,.type{
+			font-size:18upx;
+		}
+		.tradeBodyDetails{
+			.tradeTitle{
+				.p1{
+					font-size:$uni-font-size-sm;
+				}
+			}
+			.tradeContainer{
+				font-size:$uni-font-size-sm;
+			}
 		}
 	}
 }
@@ -321,7 +340,7 @@
 		.typeTermTitle{
 			font-size:$uni-font-size-base;
 		}
-		.typeList,.typeTimer{
+		.typeList,.typeTimer,.typeBox{
 			font-size:$uni-font-size-base;
 		}
 	}
@@ -370,6 +389,25 @@
 	&.fontSizeView{
 		.bindInfo{
 			font-size:$uni-font-size-base;
+		}
+	}
+	// 交易明细
+	&.tradeRecordView{
+		.condition{
+			font-size:30upx;
+		}
+		.tradeType,.dateTimer,.type{
+			font-size:24upx;
+		}
+		.tradeBodyDetails{
+			.tradeTitle{
+				.p1{
+					font-size:30upx;
+				}
+			}
+			.tradeContainer{
+				font-size:26upx;
+			}
 		}
 	}
 }
@@ -507,7 +545,7 @@
 		.typeTermTitle{
 			font-size:$uni-font-size-lg;
 		}
-		.typeList,.typeTimer{
+		.typeList,.typeTimer,.typeBox{
 			font-size:$uni-font-size-lg;
 		}
 	}
@@ -556,6 +594,25 @@
 	&.fontSizeView{
 		.bindInfo{
 			font-size:$uni-font-size-lg;
+		}
+	}
+	// 交易明细
+	&.tradeRecordView{
+		.condition{
+			font-size:$uni-font-size-lg;
+		}
+		.tradeType,.dateTimer,.type{
+			font-size:$uni-font-size-sm;
+		}
+		.tradeBodyDetails{
+			.tradeTitle{
+				.p1{
+					font-size:$uni-font-size-lg;
+				}
+			}
+			.tradeContainer{
+				font-size:$uni-font-size-sm;
+			}
 		}
 	}
 }

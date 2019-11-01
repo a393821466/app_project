@@ -6,7 +6,9 @@ export const state={
 	bankList:[],
 	bindInfo:{},
 	rechargeList:[],
-	withdrawList:[]
+	withdrawList:[],
+	tradeMxList:[],
+	tradeTypeList:[]
 }
 
 
@@ -19,7 +21,27 @@ export const mutations={
 			amountFrozen:filterMine[0].amountFrozen==0?'0':filterMine[0].amountFrozen.toFixed(2)
 		}
 		state.userBalance=formartAmount
-		state.userAllBalance=val.filter(item=>item.walletType!==4);
+		// state.userAllBalance=val.filter(item=>item.walletType!==4);
+		let banlances = val.map((item, idx) => {
+		  if (item.walletType === 1) {
+			item.name = '现金'
+			item.oIndex = 0
+		  }
+		  if (item.walletType === 2) {
+			item.name = '积分'
+			item.oIndex = 1
+		  }
+		  if (item.walletType === 3) {
+			item.name = '模拟'
+			item.oIndex = 2
+		  }
+		  if (item.walletType === 5) {
+			item.name = '佣金'
+			item.oIndex = 3
+		  }
+		  return item
+		})
+		state.userAllBalance=banlances;
 	},
 	['GETMYBANKLIST'](state,val){
 		state.myBankList=val;
@@ -66,6 +88,16 @@ export const mutations={
 			state.withdrawList=state.withdrawList.concat(val.withdraw)
 		}
 	},
+	['TRADERECORD'](state,val){
+		if(val.type==1){
+			state.tradeMxList=val.record
+		}else if(val.type==2){
+			state.tradeMxList=state.tradeMxList.concat(val.record)
+		}
+	},
+	['TRADETYPELIST'](state,val){
+		state.tradeTypeList=val
+	},
 	['RESETMY'](state){
 		state.userBalance={}
 		state.userAllBalance=[]
@@ -74,5 +106,7 @@ export const mutations={
 		state.bindInfo={}
 		state.rechargeList=[]
 		state.withdrawList=[]
+		state.tradeMxList=[]
+		state.tradeTypeList=[]
 	}
 }

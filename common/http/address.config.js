@@ -55,6 +55,8 @@ export default{
 		withdraw: `/business/withdraw`, // 提现
 		setUserInfo: `/business/addUserDetial`, // 设置用户资料
 		rechargeRecord: `/finance/deposit/find/page`, //充值记录
-		withdrawRecord: `/finance/withdraw/find/page` //提现记录
+		withdrawRecord: `/finance/withdraw/find/page`, //提现记录
+		tradeRecord: `/trade/flow/find/page`, // 交易明细
+		tradeType: `/trade/tradeType/find` // 交易明细类型
 	}
 }

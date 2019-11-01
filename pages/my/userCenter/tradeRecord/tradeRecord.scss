@@ -1,0 +1,134 @@
+.tradeRecordView{
+	.clearBox{
+		height:110upx;
+	}
+	.tradeRecordNavigator{
+		width:100%;
+		height:110upx;
+		background:#f8f8f8;
+		display:flex;
+		flex-direction:row;
+		position:fixed;
+		top:90upx;
+		left:0;
+		z-index:800;
+		border-bottom:1px solid #f3f3f3;
+		.condition{
+			flex:1;
+			text-align:center;
+			padding:0 20upx;
+			.condition_text{
+				padding-top:18upx;
+				.texts{
+					float:left;
+					margin-left:66upx;
+				}
+				.arrow{
+					width:40upx;
+					height:40upx;
+					float:left;
+					margin-left:6upx;
+					.triangle{
+						width:100%;
+						height:100%;
+					}
+				}
+			}
+			.tradeType,.dateTimer,.type{
+				display:block;
+				clear:left;
+				text-align:center;
+				color:#1b82d1;
+			}
+		}
+	}
+	.tradeBodyDetails{
+		padding:0 20upx;
+		.tradeList{
+			padding:20upx;
+			margin-top:20upx;
+			margin-bottom:20upx;
+			box-shadow:0upx 1upx 10upx #ddd;
+			border-radius:10upx;
+			.tradeTitle{
+				display:flex;
+				flex-direction:row;
+				border-bottom:1px solid #f8f8f8;
+				.p1{
+					flex:1;
+					line-height:60upx;
+					&.title{
+						text-align:left;
+						color:#4a4a4a;
+					}
+					&.tradeMoney{
+						text-align:right;
+						color:rgb(194, 27, 27);
+					}
+				}
+			}
+			.tradeContainer{
+				display:flex;
+				flex-direction:row;
+				color:#777;
+				margin-top:14upx;
+				.tradeLeft{
+					flex:0 0 60%;
+					width:60%;
+					line-height:60upx;
+				}
+				.tradeRight{
+					flex:0 0 40%;
+					width:40%;
+					line-height:60upx;
+					.typeText{
+						color:rgb(245, 149, 35);
+					}
+				}
+			}
+		}
+	}
+}
+.typeTerm{
+	.typeTermTitle{
+		text-align:left;
+		line-height:76rpx;
+		text-indent:20rpx;
+		border-bottom:1px solid #eee;
+		color:#555;
+	}
+	.typeTermBox{
+		margin:24rpx 0 10rpx;
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+		.typeList,.typeTimer,.typeBox{
+			text-align:center;
+			background:#f4f4f4;
+			color:#999;
+			padding:25rpx 40rpx;
+			margin:0rpx 15rpx 20rpx;
+			border-radius:10rpx;
+			&.active{
+				background:#1b82d1;
+				color:#f8f8f8;
+			}
+		}
+	}
+}
+
+.noDataImg{
+	width:280rpx;
+	height:180rpx;
+	margin:180rpx auto 0;
+	.img{
+		width:100%;
+		height:100%;
+	}
+	.noDataText{
+		display:block;
+		color:#999;
+		font-size:34rpx;
+		text-align:center;
+	}
+}

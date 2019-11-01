@@ -1,7 +1,7 @@
 <template>
 	<view class="myBalance_View" :class="themeFontSize">
 		<view class="balance_list" v-if="userAllBalance.length>0">
-			<view class="balance_case" v-for="item in getAllUserBalance" :key='item.id'>
+			<view class="balance_case" v-for="item in getAllUserBalance" :key='item.id' v-if='item.walletType!=4'>
 				<view class="balance_top_row">
 					<view class="balance_icon balance_flex">
 						<view class="icons">

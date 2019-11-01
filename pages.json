@@ -215,10 +215,20 @@
         ,{
             "path" : "pages/my/userCenter/tradeRecord/tradeRecord",
             "style" : {
-				"navigationBarTitleText": "提现记录",
+				"navigationBarTitleText": "交易明细",
 				"navigationBarBackgroundColor": "#1b82d1",
 				"navigationBarTextStyle": "white",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"titleNView": {
+					"buttons": [{
+						"fontSrc":"/static/font/right_top.ttf",
+						"fontSize":"20px",
+						"float":"right",
+						"text": "\ue6b5",
+						"width": "32px",
+						"color": "#f5f5f5"
+					}]
+				}
 			}
         }
     ],

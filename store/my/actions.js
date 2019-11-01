@@ -101,6 +101,7 @@ export default{
 		}
 		return getWithdrawRecord;
 	},
+	// 追加提现记录
 	async addWithdrawRecordsList({commit},das){
 		const addWithdrawRecord=await httpUtils.get(address.my.withdrawRecord,res);
 		if(addWithdrawRecord.status){
@@ -111,6 +112,26 @@ export default{
 			commit('WITHDRAWRECORD',das)
 		}
 		return addWithdrawRecord;
+	},
+	// 交易明细
+	async getTradeRecordList({commit},res){
+		const tradeRecord=await httpUtils.get(address.my.tradeRecord,res);
+		if(tradeRecord.status){
+			let das={
+				record:tradeRecord.data.result,
+				type:1
+			}
+			commit('TRADERECORD',das)
+		}
+		return tradeRecord;
+	},
+	// 交易明细类型
+	async getTradeType({commit},res){
+		const tradeTypeList=await httpUtils.get(address.my.tradeType);
+		if(tradeTypeList.status){
+			commit('TRADETYPELIST',tradeTypeList.data)
+		}
+		return tradeTypeList;
 	},
 	// 设置用户资料
 	async setUserInfo({commit},res){

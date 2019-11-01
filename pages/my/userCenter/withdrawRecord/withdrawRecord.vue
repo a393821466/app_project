@@ -95,7 +95,6 @@
 			Popup,
 			loadMore,
 			rangeDatePick
-			
 		},
 		data() {
 			const currentDate = this.getDate({

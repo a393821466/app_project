@@ -8,7 +8,9 @@ const getters = {
 	bankList: state => state.bankList,
 	bindInfo: state => state.bindInfo,
 	rechargeList: state => state.rechargeList,
-	withdrawList: state => state.withdrawList
+	withdrawList: state => state.withdrawList,
+	tradeMxList:state=> state.tradeMxList,
+	tradeTypeList:state => state.tradeTypeList
 }
 
 export default getters
