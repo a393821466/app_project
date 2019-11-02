@@ -9,7 +9,12 @@
 		display:flex;
 		flex-direction:row;
 		position:fixed;
+		/* #ifdef H5 */
 		top:90upx;
+		/* #endif */
+		/* #ifdef APP-PLUS */
+		top:0;
+		/* #endif */
 		left:0;
 		z-index:800;
 		border-bottom:1px solid #f3f3f3;

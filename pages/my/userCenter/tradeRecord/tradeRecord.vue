@@ -31,7 +31,7 @@
 			</view>
 		</view>
 		<view class="tradeBodyDetails" v-if="tradeMxList.length>0">
-			<view class="tradeList" v-for="(item,idx) in tradeMxList" :key="idx">
+			<view class="tradeList" v-for="(item,idx) in tradeMxList" :key="item.orderNo">
 				<view class="tradeTitle">
 					<view class="title p1">
 						{{item.remark}}
