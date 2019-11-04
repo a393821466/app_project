@@ -1,21 +1,21 @@
 import http from './request.config';
-
+import config from '../utils/config'
 let basicUrl=''
 if(process.env.NODE_ENV==='development'){
-	// #ifdef H5
-	basicUrl='/apis'
+	// #ifdef APP-PLUS
+		basicUrl='https://tmk.eanjee.com/apis'
 	// #endif
 	
-	// #ifndef H5
-	basicUrl='https://tmk.eanjee.com/apis'
+	// #ifndef APP-PLUS
+		basicUrl='/apis'
 	// #endif
 }else{
-	// #ifdef H5
-	basicUrl='/apis'
+	// #ifdef APP-PLUS
+		basicUrl='https://tmk.eanjee.com/apis'
 	// #endif
 	
-	// #ifndef H5
-	basicUrl='https://tmk.eanjee.com/apis'
+	// #ifndef APP-PLUS
+		basicUrl='/apis'
 	// #endif
 }
 

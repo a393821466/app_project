@@ -16,15 +16,15 @@
 		// 	uni.getSystemInfo({
 		// 		success: function(e) {
 		// 			Vue.prototype.statusBar = e.statusBarHeight
-		// 			// #ifndef MP
-		// 			if (e.platform == 'android') {
-		// 				Vue.prototype.customBar = e.statusBarHeight + 50
-		// 				Vue.prototype.customFooter=e.statusBarHeight+40
-		// 			} else {
-		// 				Vue.prototype.customBar = e.statusBarHeight + 45
-		// 				Vue.prototype.customFooter=e.statusBarHeight+40
-		// 			}
-		// 			// #endif
+					// // #ifndef MP
+					// if (e.platform == 'android') {
+					// 	Vue.prototype.customBar = e.statusBarHeight + 50
+					// 	Vue.prototype.customFooter=e.statusBarHeight+40
+					// } else {
+					// 	Vue.prototype.customBar = e.statusBarHeight + 45
+					// 	Vue.prototype.customFooter=e.statusBarHeight+40
+					// }
+					// // #endif
 		// 
 		// 			// #ifdef MP-WEIXIN
 		// 			let custom = wx.getMenuButtonBoundingClientRect()

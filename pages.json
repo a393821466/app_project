@@ -218,7 +218,11 @@
 				"navigationBarTitleText": "交易明细",
 				"navigationBarBackgroundColor": "#1b82d1",
 				"navigationBarTextStyle": "white",
-				"enablePullDownRefresh": true,
+				"enablePullDownRefresh": false,
+				"disableScroll": true,
+				"app-plus" : {
+					"bounce" : "none"
+				},
 				"titleNView": {
 					"buttons": [{
 						"fontSrc":"/static/font/right_top.ttf",

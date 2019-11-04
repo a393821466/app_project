@@ -20,7 +20,7 @@
 	import category from './homeComponent/category'
 	import activity from './homeComponent/activity'
 	import newsPerson from './homeComponent/news_person'
-	import {showUiModel,confirmModel} from '@/common/utils/dialog.config'
+	import {showUiModel} from '@/common/utils/dialog.config'
 	import chache from '@/common/utils/storage'
 	import config from '@/common/utils/config'
 	export default {
@@ -50,6 +50,7 @@
 			}
 		},
 		onLoad(){
+			console.log(config.domain)
 			// uni.setNavigationBarColor({
 			//     frontColor: '#ffffff',
 			//     backgroundColor: '#000000'
@@ -97,7 +98,7 @@
 							that.appFontSize(data[0].type);
 						},
 						fail:function(e){
-							showUiToast(JSON.stringify(e.message));
+							console.log(e)
 						}
 					}
 				);

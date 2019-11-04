@@ -203,8 +203,11 @@
 // 中号字体
 .daytime2{
 	// 首页
-	.service-text,.text,.category_text,.news_title,.activity_text,.news_text{
+	.service-text,.text,.category_text,.news_title,.activity_text{
 		font-size:$uni-font-size-base;
+	}
+	.news_text{
+		font-size:$uni-font-size-sm;
 	}
 	// 公告
 	.annount_list{
@@ -233,11 +236,14 @@
 	}
 	// 我的
 	.all_intOut{
-		.rate,.item_text,.goReadNameTwo,.intOutText{
+		.rate,.item_text,.intOutText,.email,.withdraw_rechange_title,.grid-title{
 			font-size:$uni-font-size-base;
 		}
-		.email,.withdraw_rechange_title,.grid-title,.goReadName{
-			font-size:$uni-font-size-base;
+		.goReadName,.goReadNameTwo{
+			font-size:28upx;
+		}
+		.num{
+			font-size:32upx;
 		}
 	}
 	.noLogin{
@@ -441,11 +447,14 @@
 	}
 	// 我的
 	.all_intOut{
-		.email,.item_text,.grid-title,.intOutText,.withdraw_rechange_title,.goReadName{
+		.email,.item_text,.grid-title,.intOutText,.withdraw_rechange_title,.rate{
 			font-size:$uni-font-size-lg;
 		}
-		.rate,.goReadNameTwo{
-			font-size:$uni-font-size-lg;
+		.goReadNameTwo,.goReadName{
+			font-size:30upx;
+		}
+		.num{
+			font-size:36upx;
 		}
 	}
 	.noLogin{

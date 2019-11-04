@@ -54,7 +54,7 @@
 							}
 						},
 						fail:function(e){
-							showUiToast(JSON.stringify(e.message));
+							console.log(JSON.stringify(e.message))
 						}
 					}
 				);
@@ -104,7 +104,7 @@
 									}
 								},
 								fail:function(e){
-									showUiToast(JSON.stringify(e.message));
+									console.log(JSON.stringify(e.message))
 								}
 							}
 						);

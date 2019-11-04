@@ -8,10 +8,6 @@
 		background:#f8f8f8;
 		display:flex;
 		flex-direction:row;
-		position:fixed;
-		top:90upx;
-		left:0;
-		z-index:800;
 		border-bottom:1px solid #f3f3f3;
 		.condition{
 			flex:1;
@@ -46,10 +42,10 @@
 		padding:0 20upx;
 		.tradeList{
 			padding:20upx;
-			margin-top:20upx;
-			margin-bottom:20upx;
 			box-shadow:0upx 1upx 10upx #ddd;
 			border-radius:10upx;
+			width:90%;
+			margin:20upx auto 20upx;
 			.tradeTitle{
 				display:flex;
 				flex-direction:row;

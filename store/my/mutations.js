@@ -92,6 +92,7 @@ export const mutations={
 		if(val.type==1){
 			state.tradeMxList=val.record
 		}else if(val.type==2){
+			if(val.pageNum==1) state.tradeMxList=[]
 			state.tradeMxList=state.tradeMxList.concat(val.record)
 		}
 	},

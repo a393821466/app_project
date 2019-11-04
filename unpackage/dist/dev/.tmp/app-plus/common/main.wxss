@@ -185,7 +185,7 @@
 .daytime1 .typeTerm .typeTermTitle {
   font-size: 29rpx;
 }
-.daytime1 .typeTerm .typeList, .daytime1 .typeTerm .typeTimer {
+.daytime1 .typeTerm .typeList, .daytime1 .typeTerm .typeTimer, .daytime1 .typeTerm .typeBox {
   font-size: 29rpx;
 }
 .daytime1 .withdrawView .withdrawTitle {
@@ -215,8 +215,23 @@
 .daytime1.fontSizeView .bindInfo {
   font-size: 29rpx;
 }
-.daytime2 .service-text, .daytime2 .text, .daytime2 .category_text, .daytime2 .news_title, .daytime2 .activity_text, .daytime2 .news_text {
+.daytime1.tradeRecordView .condition {
+  font-size: 29rpx;
+}
+.daytime1.tradeRecordView .tradeType, .daytime1.tradeRecordView .dateTimer, .daytime1.tradeRecordView .type {
+  font-size: 18rpx;
+}
+.daytime1.tradeRecordView .tradeBodyDetails .tradeTitle .p1 {
+  font-size: 29rpx;
+}
+.daytime1.tradeRecordView .tradeBodyDetails .tradeContainer {
+  font-size: 29rpx;
+}
+.daytime2 .service-text, .daytime2 .text, .daytime2 .category_text, .daytime2 .news_title, .daytime2 .activity_text {
   font-size: 32rpx;
+}
+.daytime2 .news_text {
+  font-size: 29rpx;
 }
 .daytime2 .annount_list .atitle {
   font-size: 35rpx;
@@ -236,10 +251,13 @@
 .daytime2 .login_form .login_submit_int {
   font-size: 35rpx;
 }
-.daytime2 .all_intOut .rate, .daytime2 .all_intOut .item_text, .daytime2 .all_intOut .goReadNameTwo, .daytime2 .all_intOut .intOutText {
+.daytime2 .all_intOut .rate, .daytime2 .all_intOut .item_text, .daytime2 .all_intOut .intOutText, .daytime2 .all_intOut .email, .daytime2 .all_intOut .withdraw_rechange_title, .daytime2 .all_intOut .grid-title {
   font-size: 32rpx;
 }
-.daytime2 .all_intOut .email, .daytime2 .all_intOut .withdraw_rechange_title, .daytime2 .all_intOut .grid-title, .daytime2 .all_intOut .goReadName {
+.daytime2 .all_intOut .goReadName, .daytime2 .all_intOut .goReadNameTwo {
+  font-size: 28rpx;
+}
+.daytime2 .all_intOut .num {
   font-size: 32rpx;
 }
 .daytime2 .noLogin .go {
@@ -308,7 +326,7 @@
 .daytime2 .typeTerm .typeTermTitle {
   font-size: 32rpx;
 }
-.daytime2 .typeTerm .typeList, .daytime2 .typeTerm .typeTimer {
+.daytime2 .typeTerm .typeList, .daytime2 .typeTerm .typeTimer, .daytime2 .typeTerm .typeBox {
   font-size: 32rpx;
 }
 .daytime2 .withdrawView .withdrawTitle {
@@ -338,6 +356,18 @@
 .daytime2.fontSizeView .bindInfo {
   font-size: 32rpx;
 }
+.daytime2.tradeRecordView .condition {
+  font-size: 30rpx;
+}
+.daytime2.tradeRecordView .tradeType, .daytime2.tradeRecordView .dateTimer, .daytime2.tradeRecordView .type {
+  font-size: 24rpx;
+}
+.daytime2.tradeRecordView .tradeBodyDetails .tradeTitle .p1 {
+  font-size: 30rpx;
+}
+.daytime2.tradeRecordView .tradeBodyDetails .tradeContainer {
+  font-size: 26rpx;
+}
 .daytime3 .service-text, .daytime3 .text, .daytime3 .category_text, .daytime3 .news_title, .daytime3 .activity_text, .daytime3 .news_text {
   font-size: 35rpx;
 }
@@ -356,11 +386,14 @@
 .daytime3 .login_form .forget_password, .daytime3 .login_form .checkBoxText, .daytime3 .login_form .login_submit_int {
   font-size: 35rpx;
 }
-.daytime3 .all_intOut .email, .daytime3 .all_intOut .item_text, .daytime3 .all_intOut .grid-title, .daytime3 .all_intOut .intOutText, .daytime3 .all_intOut .withdraw_rechange_title, .daytime3 .all_intOut .goReadName {
+.daytime3 .all_intOut .email, .daytime3 .all_intOut .item_text, .daytime3 .all_intOut .grid-title, .daytime3 .all_intOut .intOutText, .daytime3 .all_intOut .withdraw_rechange_title, .daytime3 .all_intOut .rate {
   font-size: 35rpx;
 }
-.daytime3 .all_intOut .rate, .daytime3 .all_intOut .goReadNameTwo {
-  font-size: 35rpx;
+.daytime3 .all_intOut .goReadNameTwo, .daytime3 .all_intOut .goReadName {
+  font-size: 30rpx;
+}
+.daytime3 .all_intOut .num {
+  font-size: 36rpx;
 }
 .daytime3 .noLogin .go {
   font-size: 32rpx;
@@ -425,7 +458,7 @@
 .daytime3 .typeTerm .typeTermTitle {
   font-size: 35rpx;
 }
-.daytime3 .typeTerm .typeList, .daytime3 .typeTerm .typeTimer {
+.daytime3 .typeTerm .typeList, .daytime3 .typeTerm .typeTimer, .daytime3 .typeTerm .typeBox {
   font-size: 35rpx;
 }
 .daytime3 .withdrawView .withdrawTitle {
@@ -454,6 +487,18 @@
 }
 .daytime3.fontSizeView .bindInfo {
   font-size: 35rpx;
+}
+.daytime3.tradeRecordView .condition {
+  font-size: 35rpx;
+}
+.daytime3.tradeRecordView .tradeType, .daytime3.tradeRecordView .dateTimer, .daytime3.tradeRecordView .type {
+  font-size: 29rpx;
+}
+.daytime3.tradeRecordView .tradeBodyDetails .tradeTitle .p1 {
+  font-size: 35rpx;
+}
+.daytime3.tradeRecordView .tradeBodyDetails .tradeContainer {
+  font-size: 29rpx;
 }
 /* 背景颜色 */
 /* 主题颜色 */

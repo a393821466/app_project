@@ -113,6 +113,14 @@ export default{
 		}
 		return addWithdrawRecord;
 	},
+	// 交易明细类型
+	async getTradeType({commit},res){
+		const tradeTypeList=await httpUtils.get(address.my.tradeType);
+		if(tradeTypeList.status){
+			commit('TRADETYPELIST',tradeTypeList.data)
+		}
+		return tradeTypeList;
+	},
 	// 交易明细
 	async getTradeRecordList({commit},res){
 		const tradeRecord=await httpUtils.get(address.my.tradeRecord,res);
@@ -125,13 +133,18 @@ export default{
 		}
 		return tradeRecord;
 	},
-	// 交易明细类型
-	async getTradeType({commit},res){
-		const tradeTypeList=await httpUtils.get(address.my.tradeType);
-		if(tradeTypeList.status){
-			commit('TRADETYPELIST',tradeTypeList.data)
+	// 追加交易明细
+	async addGetTradeRecordList({commit},res){
+		const tradeRecord=await httpUtils.get(address.my.tradeRecord,res);
+		if(tradeRecord.status){
+			let das={
+				record:tradeRecord.data.result,
+				type:2,
+				pageNum:tradeRecord.data.pageNum
+			}
+			commit('TRADERECORD',das)
 		}
-		return tradeTypeList;
+		return tradeRecord;
 	},
 	// 设置用户资料
 	async setUserInfo({commit},res){
