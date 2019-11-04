@@ -42,7 +42,7 @@ page{
 		.fontSize_view{
 			font-size:36upx;
 			color:#666;
-			padding:0upx 30upx 0;
+			padding:0upx 80upx 0;
 			margin:34upx 0;
 			display:flex;
 			flex-direction:row;
@@ -63,6 +63,9 @@ page{
 				font-size:32upx;
 				background:#1b82d1;
 			}
+		}
+		.fontSize_slider{
+			padding:0 60upx;
 		}
 		.uni-slider-track{
 			background:#1b82d1;

@@ -20,16 +20,22 @@
 	// 登陆
 	.login_form{
 		.userPhone,.userPassword{
-			font-size:$uni-font-size-base;
+			font-size:$uni-font-size-sm;
 		}
 		.forget_password,.checkBoxText,.login_submit_int{
-			font-size:$uni-font-size-base;
+			font-size:$uni-font-size-sm;
 		}
 	}
 	// 我的
 	.all_intOut{
-		.email,.withdraw_rechange_title,.intOutText,.grid-title,.item_text,.goReadNameTwo,.goReadName{
+		.rate,.item_text,.intOutText,.email,.withdraw_rechange_title,.grid-title{
 			font-size:$uni-font-size-sm;
+		}
+		.goReadName,.goReadNameTwo{
+			font-size:28upx;
+		}
+		.num{
+			font-size:34upx;
 		}
 	}
 	.noLogin{
@@ -46,7 +52,7 @@
 	// 钱包
 	.balance_list{
 		.balance_flex,.btn{
-			font-size:$uni-font-size-base;
+			font-size:$uni-font-size-sm;
 		}
 	}
 	// 实名认证
@@ -165,7 +171,7 @@
 		}
 		.setting{
 			button{
-				font-size:$uni-font-size-sm;
+				font-size:26upx;
 			}
 		}
 		.submits{
@@ -243,7 +249,7 @@
 			font-size:28upx;
 		}
 		.num{
-			font-size:32upx;
+			font-size:38upx;
 		}
 	}
 	.noLogin{
@@ -382,7 +388,7 @@
 		}
 		.setting{
 			button{
-				font-size:$uni-font-size-base;
+				font-size:26upx;
 			}
 		}
 		.submits{
@@ -454,7 +460,7 @@
 			font-size:30upx;
 		}
 		.num{
-			font-size:36upx;
+			font-size:40upx;
 		}
 	}
 	.noLogin{
@@ -590,7 +596,7 @@
 		}
 		.setting{
 			button{
-				font-size:$uni-font-size-lg;
+				font-size:28upx;
 			}
 		}
 		.submits{

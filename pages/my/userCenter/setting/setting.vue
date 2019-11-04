@@ -17,13 +17,19 @@
 						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
 					</view>
 				</view>
-				<view class="setting_list">
+				<!-- <view class="setting_list">
 					<view class="setting_title">夜间模式</view>
 					<view class="setting_icon">
 						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
 					</view>
-				</view>
+				</view> -->
 				<!-- #endif -->
+				<view class="setting_list" @click="clearStorage">
+					<view class="setting_title">清理APP缓存</view>
+					<view class="setting_icon">
+						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
+					</view>
+				</view>
 			</view>
 			<view class="setting_middle2">
 				<view class="setting_list" v-for="(item,idx) in helpArr" :key="item.id">
@@ -52,6 +58,7 @@
 		mapGetters
 	} from 'vuex'
 	import {
+		showUiToast,
 		showUiModel
 	} from '@/common/utils/dialog.config'
 	import chache from '@/common/utils/storage'
@@ -114,6 +121,7 @@
 		},
 		methods: {
 			...mapActions(['logout', 'resetCommonState', 'resetHomeState', 'resetMy']),
+			// 登出
 			logoutActions() {
 				const that = this;
 				showUiModel({
@@ -127,10 +135,8 @@
 						that.logout().then(res => {
 							uni.hideLoading();
 							if (res.status) {
-								that.resetCommonState()
-								that.resetHomeState()
-								that.resetMy()
-								chache.clear()
+								chache.delete('token');
+								chache.delete('userInfo');
 								that.$mRouter.reLaunch({
 									route: that.$routers.index,
 									query: {
@@ -145,6 +151,30 @@
 					}
 				})
 
+			},
+			// 清理缓存
+			clearStorage(){
+				const that = this;
+				showUiModel({
+					'content': '清理缓存将会登出,您确定这样做吗?',
+					'showCancel': true
+				}, (e) => {
+					if (e.confirm) {
+						that.resetCommonState()
+						that.resetHomeState()
+						that.resetMy()
+						chache.clear()
+						showUiToast('清理完成')
+						setTimeout(()=>{
+							that.$mRouter.reLaunch({
+								route: that.$routers.index,
+								query: {
+									id: 1
+								}
+							})
+						}, 1000);
+					}
+				})
 			},
 			goUserLink(item) {
 				this.$mRouter.push({

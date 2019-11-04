@@ -1,13 +1,13 @@
 <template>
 <!--客服-->
 <view class="service">
-	<view class="service-input" v-if="notice.length>0" @click="goService">
+	<view class="service-input" @click="goService">
 		<!-- <text class="test service-icon">&#xe60b;</text> -->
 		<fonts-icon type="kefu"></fonts-icon>
 		<text class="service-text">联系客服</text>
 	</view>
-	<view class="service-skeleton" v-else>
-	</view>
+	<!-- <view class="service-skeleton" v-else>
+	</view> -->
 </view>
 </template>
 
@@ -22,7 +22,7 @@
 			/*
 			** 公告，模板数据
 			*/
-			...mapGetters(['notice','merchantInfo']),
+			...mapGetters(['merchantInfo']),
 		},
 		methods:{
 			...mapActions(['sendUrl']),

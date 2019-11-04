@@ -15,6 +15,7 @@
 </template>
 
 <script>
+	import chache from '@/common/utils/storage'
 	import {
 		mapActions,
 		mapGetters
@@ -31,7 +32,16 @@
 			*/
 			...mapGetters(['temList','themeFontSize','token']),
 			categoryData(){
-				return this.temList.length>0?this.temList:[]
+				if(this.temList.length>0){
+					return this.temList;
+				}else{
+					if(chache.has('template')){
+						let tem=chache.get('template')
+						return tem;
+					}else{
+						return [];
+					}
+				}
 			}
 		},
 		onShow(){

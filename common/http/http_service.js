@@ -38,10 +38,8 @@ http.interceptor.response((response) => {
 						url:'/pages/userAuth/login'
 					})
 				}
-				store.dispatch('resetCommonState')
-				store.dispatch('resetHomeState')
-				store.dispatch('resetMy')
-				chache.clear()
+				chache.delete('token')
+				chache.delete('userInfo');
 			})
 			return
 		}

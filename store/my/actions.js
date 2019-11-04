@@ -151,11 +151,6 @@ export default{
 		const setUser=await httpUtils.post(address.my.setUserInfo,res);
 		return setUser;
 	},
-	// 登出操作
-	async logout({commit}){
-		const logoutAction=await httpUtils.get(address.common.logout);
-		return logoutAction;
-	},
 	// 移除store
 	resetMy({commit}){
 		commit('RESETMY')

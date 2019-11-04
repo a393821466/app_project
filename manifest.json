@@ -66,7 +66,7 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/apis" : {
-                    "target" : "http://cxx.99qupai.com",
+                    "target" : "https://tmk.eanjee.com",
                     "changeOrigin" : true,
                     "secure" : false
                 }

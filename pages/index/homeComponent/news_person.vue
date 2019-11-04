@@ -1,7 +1,7 @@
 <template>
 <!-- 新手引导 -->
 <view class="news_prople">
-	<view class="news_perple_content" v-if="temList.length>0">
+	<view class="news_perple_content">
 		<view class="news_title">
 			<text>新手引导</text>
 		</view>
@@ -9,11 +9,11 @@
 			<text class="news_text">新手引导-快速上手-日进斗金</text>
 		</view>
 	</view>
-	<view class="new_perple_content" v-else>
+	<!-- <view class="new_perple_content">
 		<view class="news_title_box">
 		</view>
 		<view class="news_skeleton"></view>
-	</view>
+	</view> -->
 </view>
 </template>
 
@@ -29,9 +29,6 @@ export default{
 		return{
 			da:false
 		}
-	},
-	computed: {
-		...mapGetters(['temList']),
 	},
 	methods:{
 	}

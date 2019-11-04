@@ -36,6 +36,12 @@ export default{
 		}
 		return loginUser;
 	},
+	// 登出操作
+	async logout({commit}){
+		const logoutAction=await httpUtils.get(address.common.logout);
+		commit('LOGOUTAPP');
+		return logoutAction;
+	},
 	// 获取验证码
 	async getVerifyImg({commit}){
 		let verifyImg=await httpUtils.get(address.common.verifyImg);

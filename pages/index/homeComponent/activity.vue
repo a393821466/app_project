@@ -71,6 +71,7 @@
 	import {
 		showUiToast
 	} from '@/common/utils/dialog.config';
+	import chache from '@/common/utils/storage'
 	export default {
 		name: 'activity',
 		props: {
@@ -88,11 +89,20 @@
 			...mapGetters(['stateText']),
 			actData() {
 				if (this.stateText == '开始请求') {
-					return []
+					return [];
 				} else if (this.stateText == '请求失败') {
 					return []
 				} else {
-					return this.actList.length > 0 ? this.actList : ['暂无活动']
+					if(this.actList.length>0){
+						return this.actList
+					}else{
+						if(chache.has('activity')){
+							let activityList=chache.get('activity')
+							return activityList;
+						}else{
+							return ['暂无活动'];
+						}
+					}
 				}
 			}
 		},

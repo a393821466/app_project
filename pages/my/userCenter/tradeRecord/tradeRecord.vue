@@ -200,7 +200,7 @@
 				typeFication:false,
 				typeTabList:false,
 				pages: 1,
-				pageSize: 10,
+				pageSize: 5,
 				total: 1,
 				nowDate:currentDate,//获取当前时间
 				isShow:false,
@@ -221,7 +221,7 @@
 						num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
 						size: 10 // 每页数据的数量,默认10
 					},
-					noMoreSize: 10, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
+					noMoreSize: 5, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
 					empty: {
 						tip: '暂无内容'
 					},

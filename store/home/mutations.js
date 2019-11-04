@@ -28,15 +28,19 @@ export const mutations={
 			  activitys.push(mapData)
 			}
 		}
+		chache.set('banner',banners)
+		chache.set('activity',activitys)
 		state.bannerData = banners
 		state.actList = activitys
 	},
 	['NOTICE'](state,val){
 		state.notice=val.data.content
+		chache.set('notice',val.data.content)
 	},
 	['TEMPLATELIST'](state,val){
 		if(val.status){
 			state.temList=val.data
+			chache.set('template',val.data)
 		}
 	},
 	['BIMGURL'](state,url){

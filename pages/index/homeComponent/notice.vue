@@ -3,7 +3,7 @@
 <view class="noticeBox">
 	<view class="notice_box" @click="goAnnount">
 		<view class="notice_icon">
-			<fonts-icon :type="notice.length>0?'laba':''"></fonts-icon>
+			<fonts-icon :type="getAnnountList.length>0?'laba':''"></fonts-icon>
 		</view>
 		<view class="notice">
 			<swiper autoplay="true" interval="5000" :disable-touch="disableTouch">
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+	import chache from '@/common/utils/storage'
 	export default{
 		name:'notice',
 		data(){
@@ -33,20 +34,19 @@
 		computed:{
 			// 公告的处理
 			getAnnountList() {
-				if (this.notice.length > 0) {
-					let arr = [];
-					for (let i = 0; i < this.notice.length; i++) {
-						if (i >= 5) {
-							break;
-						}
-						let noticeText=this.notice[i].cnSummary;
-						let str=noticeText.substring(0,20);
-						let strLen=str+(noticeText.length>20?'...':'');
-						arr.push(i + 1 + '.' + strLen);
-					}
-					return arr
+				let noticeList=this.notice;
+				let list=[];
+				if (noticeList.length > 0) {
+					list=this.pullNotice(noticeList);
+					return list
 				} else {
-					return [''];
+					if(chache.has('notice')){
+						let notice=chache.get('notice')
+						list=this.pullNotice(notice);
+						return list;
+					}else{
+						return [''];
+					}
 				}
 			},
 		},
@@ -55,6 +55,19 @@
 				this.$mRouter.push({
 					"route":this.$routers.notice
 				})
+			},
+			pullNotice(notice){
+				let arr = [];
+				for (let i = 0; i < notice.length; i++) {
+					if (i >= 5) {
+						break;
+					}
+					let noticeText=notice[i].cnSummary;
+					let str=noticeText.substring(0,20);
+					let strLen=str+(noticeText.length>20?'...':'');
+					arr.push(i + 1 + '.' + strLen);
+				}
+				return arr
 			}
 		}
 	}

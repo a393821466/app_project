@@ -2,7 +2,7 @@
 <!--轮播-->
 <view class="banner_home">
 	<swiper :indicator-dots="true" :circular='true' indicator-active-color="#ffffff" indicator-color="rgba(255, 255, 255, .3)"
-	 :autoplay="true" :interval="5000" :duration="500" class="banner" v-if="bannerData.length>0">
+	 :autoplay="true" :interval="5000" :duration="500" class="banner" v-if="banners.length>0">
 		<swiper-item v-for="item in banners" :key="item.id" @click="onClickBanner(item)">
 			<image :src="item.url" class="banner"></image>
 		</swiper-item>
@@ -18,7 +18,8 @@
 	import config from '@/common/utils/config'
 	import {
 		showUiToast
-	} from '@/common/utils/dialog.config';
+	} from '@/common/utils/dialog.config'
+	import chache from '@/common/utils/storage'
 	export default{
 		name:'swiper',
 		props:{
@@ -29,7 +30,16 @@
 		},
 		computed:{
 			banners(){
-				return this.bannerData.length>0?this.bannerData:[];
+				if(this.bannerData.length>0){
+					return this.bannerData;
+				}else{
+					if(chache.has('banner')){
+						let bannerList=chache.get('banner')
+						return bannerList;
+					}else{
+						return [];
+					}
+				}
 			}
 		},
 		methods:{

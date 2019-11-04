@@ -1,7 +1,7 @@
 import chache from '@/common/utils/storage'
 import utils from '@/common/utils'
 export const state={
-	themeFontSize:'daytime2',
+	themeFontSize:'daytime1',
 	stateText:'',
 	token:'' || chache.get('token'),
 	merchantInfo:chache.get('merchantInfo'),
@@ -36,6 +36,11 @@ export const mutations={
 		chache.set('token',val.token);
 		state.userInfo=val
 		chache.set('userInfo',val)
+	},
+	// 登出
+	['LOGOUTAPP'](state){
+		state.token=''
+		state.userInfo=''
 	},
 	// 加载...
 	['ONLOADSTATE'](state,text){

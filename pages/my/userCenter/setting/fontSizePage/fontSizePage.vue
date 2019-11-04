@@ -13,9 +13,9 @@
 		</view>
 		<view class="slider_fontSize_view">
 			<view class="fontSize_view">
-				<view class="fontSize_view_fontSize view1">小</view>
-				<view class="fontSize_view_fontSize view2">标准</view>
-				<view class="fontSize_view_fontSize view3">大</view>
+				<view class="fontSize_view_fontSize view1">标准</view>
+				<view class="fontSize_view_fontSize view2">大</view>
+				<view class="fontSize_view_fontSize view3">超大</view>
 			</view>
 			<view class="fontSize_slider">
 				<slider @change="changeSlider($event)" :value="val" min="1" max="3" name="slider" :show-value="false"></slider>
@@ -92,10 +92,10 @@
 									}else{
 										plus.sqlite.executeSql({
 											name: 'futures',
-											sql: "insert into fontDataBase values(1,'daytime2')",
+											sql: "insert into fontDataBase values(1,'daytime1')",
 											success: function(e){
 												console.log('executeSql success!');
-												that.appFontSize('daytime2');
+												that.appFontSize('daytime1');
 											},
 											fail: function(e){
 												console.log('executeSql failed: '+JSON.stringify(e));
@@ -137,7 +137,6 @@
 					sql: sql,
 					success: function(e){
 						that.appFontSize(types);
-						
 						console.log('set success!');
 					},
 					fail: function(e){
