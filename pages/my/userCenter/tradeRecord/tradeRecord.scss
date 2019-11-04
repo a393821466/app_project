@@ -8,18 +8,6 @@
 		background:#f8f8f8;
 		display:flex;
 		flex-direction:row;
-<<<<<<< HEAD
-=======
-		position:fixed;
-		/* #ifdef H5 */
-		top:90upx;
-		/* #endif */
-		/* #ifdef APP-PLUS */
-		top:0;
-		/* #endif */
-		left:0;
-		z-index:800;
->>>>>>> 41fcac25524fabb01ac6fd77000303f9abe38f78
 		border-bottom:1px solid #f3f3f3;
 		.condition{
 			flex:1;

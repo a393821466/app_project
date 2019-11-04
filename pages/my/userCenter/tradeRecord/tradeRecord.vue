@@ -29,7 +29,6 @@
 				<view class="tradeType">({{typeData.description}})</view>
 			</view>
 		</view>
-<<<<<<< HEAD
 		<view class="tradeBodyDetails" :style="{height:screenHeight+'px'}">
 			<mescroll-uni 
 				:down="downOption" 
@@ -49,13 +48,6 @@
 						<view class="tradeMoney p1" v-else style="color:rgb(126, 211, 33)">
 							金额：{{item.amount}} 元
 						</view>
-=======
-		<view class="tradeBodyDetails" v-if="tradeMxList.length>0">
-			<view class="tradeList" v-for="(item,idx) in tradeMxList" :key="item.orderNo">
-				<view class="tradeTitle">
-					<view class="title p1">
-						{{item.remark}}
->>>>>>> 41fcac25524fabb01ac6fd77000303f9abe38f78
 					</view>
 					<view class="tradeContainer">
 						<view class="t tradeLeft">
