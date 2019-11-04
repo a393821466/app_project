@@ -1,2 +1,0 @@
-setCssToHead(["@charset \x22UTF-8\x22;\n.",[1],"trade_box .",[1],"sql { width: ",[0,230],"; height: ",[0,80],"; line-height: ",[0,80],"; border: solid 1px #2580EF; margin: ",[0,20],"; text-align: center; border-radius: ",[0,10],"; }\n",])();
-document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/trade/trade.wxml') } }));
