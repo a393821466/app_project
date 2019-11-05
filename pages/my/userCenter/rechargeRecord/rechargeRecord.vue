@@ -20,37 +20,44 @@
 			</view>
 		</view> -->
 		<view class="uni-padding-wrap uni-common-mt rechargeRecord">
-			<view class="rechargeView" v-if="rechargeList.length>0">
-				<view class="rechargeList" v-for="(it,index) in rechargeList" :key="index">
-					<view class="rechargeTitle">
-						{{!it.remark?'-':it.remark}}
-					</view>
-					<view class="rechargeBox">
-						<view class="rechargeDetail left">
-							<view class="rechargeStatus">
-								充值状态：<text class="type" style="color:#F5A623" v-if="it.status==1">处理中</text>
-								<text class="type" style="color:#34C487" v-else-if="it.status==2">成功</text>
-								<text class="type" style="color:#34C487" v-else-if="it.status==4">成功</text>
-								<text class="type" style="color:#34C487" v-else-if="it.status==5">成功</text>
-								<text class="type" style="color:#FF5E4D" v-else>失败</text>
+			<view class="rechargeView">
+				<mescroll-uni
+					:down="downOption" 
+					@down="downCallback" 
+					:up="upOption" 
+					@up="upCallback"
+					@init="mescrollInit">
+					<view class="rechargeList" v-for="(it,index) in rechargeList" :key="index">
+						<view class="rechargeTitle">
+							{{!it.remark?'-':it.remark}}
+						</view>
+						<view class="rechargeBox">
+							<view class="rechargeDetail left">
+								<view class="rechargeStatus">
+									充值状态：<text class="type" style="color:#F5A623" v-if="it.status==1">处理中</text>
+									<text class="type" style="color:#34C487" v-else-if="it.status==2">成功</text>
+									<text class="type" style="color:#34C487" v-else-if="it.status==4">成功</text>
+									<text class="type" style="color:#34C487" v-else-if="it.status==5">成功</text>
+									<text class="type" style="color:#FF5E4D" v-else>失败</text>
+								</view>
+								<view class="tradeTime">
+									交易时间：{{formartTime(it.createTime)}}
+								</view>
 							</view>
-							<view class="tradeTime">
-								交易时间：{{formartTime(it.createTime)}}
+							<view class="rechargeDetail right">
+								<text class="right_money">充值余额：{{it.amount}}元</text>
 							</view>
 						</view>
-						<view class="rechargeDetail right">
-							<text class="right_money">充值余额：{{it.amount}}元</text>
-						</view>
 					</view>
-				</view>
-				<load-more :status="more" @click.native='getMore' :content-text="loadText"></load-more>
+				</mescroll-uni>
+				<!-- <load-more :status="more" @click.native='getMore' :content-text="loadText"></load-more> -->
 			</view>
-			<view class="rechargeView" v-else>
+			<!-- <view class="rechargeView" v-else>
 				<view class="noDataImg">
 					<image src="../../../../static/images/noData.svg" class="img"></image>
 					<text class="noDataText">暂无更多内容</text>
 				</view>
-			</view>
+			</view> -->
 		</view>
 		<rangeDatePick
 			:show="isShow"
@@ -93,7 +100,6 @@
 </template>
 
 <script>
-	import loadMore from '@/components/onloadMore/uni-load-more'
 	import Popup from '@/components/popup'
 	import {
 		mapActions,
@@ -106,12 +112,13 @@
 	} from '@/common/utils/dialog.config'
 	import moment from 'moment'
 	import utils from '@/common/utils/'
+	import MescrollUni from "@/components/mescroll-uni/mescroll-uni.vue"
 	import rangeDatePick from '@/components/mx-datepicker/range-dtpicker';
 	export default {
 		name: 'rechargeRecord',
 		components: {
 			Popup,
-			loadMore,
+			MescrollUni,
 			rangeDatePick
 		},
 		data() {
@@ -152,15 +159,36 @@
 				},
 				startDate: '',
 				endDate: '',
-				more: 'more',
 				pages: 1,
 				pageSize: 10,
 				total: 1,
-				loadText:{contentdown: "显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"},
 				nowDate:currentDate,//获取当前时间
 				isShow:false,
 				value:[],
-				chooseDate:"自定义"
+				chooseDate:"自定义",
+				// 下拉刷新组件参数
+				mescroll: null,
+				downOption: { 
+					use: true, // 是否启用下拉刷新; 默认true
+					auto: false, // 是否在初始化完毕之后自动执行下拉刷新的回调; 默认true
+				},
+				// 上拉加载的常用配置
+				upOption: {
+					use: true, // 是否启用上拉加载; 默认true
+					auto: true, // 是否在初始化完毕之后自动执行上拉加载的回调; 默认true
+					page: {
+						num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
+						size: 10 // 每页数据的数量,默认10
+					},
+					noMoreSize: 5, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
+					empty: {
+						use: true, // 是否显示空布局
+						tip: '~ 暂无内容 ~', // 提示
+						tipFontSize:30 // 字体大小
+					},
+					textLoading: '加载中...', // 加载中的提示文本
+					textNoMore: '-- 无更多内容 --', // 没有更多数据的提示文本
+				},
 			};
 		},
 		computed: {
@@ -177,24 +205,17 @@
 			this.status = this.typeTerm.status;
 			this.startDate = this.timeList[0].startTimes;
 			this.endDate = this.timeList[0].endTimes
-			this.getRechargeRecords(this.status, this.startDate, this.endDate)
-		},
-		onReachBottom() {
-			console.log("onReachBottom");
-			this.more = 'loading'
-			this.setDate(this.status,this.startDate,this.endDate)
-		},
-		// 下拉刷新
-		onPullDownRefresh() {
-			console.log('onPullDownRefresh');
-			this.getRechargeRecords(this.status,this.startDate,this.endDate)
 		},
 		// 打开条件筛选
 		onNavigationBarButtonTap() {
 			this.$refs.rechargeTerm.open()
 		},
 		methods: {
-			...mapActions(['getTimeList','addRecharRecord','getRecharRecord']),
+			...mapActions(['getTimeList','addRecharRecord']),
+			// 初始化
+			mescrollInit(mescroll){
+				this.mescroll = mescroll;
+			},
 			// 类型条件
 			rechargeTypeClick(item) {
 				this.typeTerm = item;
@@ -213,8 +234,12 @@
 					startTime: this.startDate,
 					endTime: this.endDate
 				}
-				this.more = 'loading'
-				this.getRechargeRecords(data.status, data.startTime, data.endTime);
+				this.getRecharRecord(
+				data.status, 
+				data.startTime, 
+				data.endTime,
+				this.mescroll);
+				this.$refs.rechargeTerm.close()
 			},
 			// 重置
 			reset() {
@@ -235,73 +260,56 @@
 					// this.reset()
 				}
 			},
-			// 获取充值记录
-			getRechargeRecords(status, startTimer, endTimer) {
-				let das = {
-					pageNum: 1,
-					pageSize: this.pageSize,
-					status: status,
-					startTime: startTimer,
-					endTime: endTimer
-				}
-				showUiLoading('加载中..',{mask:true});
-				this.getRecharRecord(das).then(res => {
-					hideUiLoading();
-					uni.stopPullDownRefresh();
-					if (res.status) {
-						this.pages = res.data.pageNum;
-						this.total = res.data.pages;
-						this.$refs.rechargeTerm.close()
-						if(this.total<=this.pages){
-							this.more = 'noMore'
-						}else{
-							this.more = 'more'
-						}
-					}
-				}).catch(err => {
-					uni.stopPullDownRefresh();
-					hideUiLoading();
-					return err
-				})
-			},
 			// 格式化ISO时间
 			formartTime (t) {
 			  return moment(t).format('YYYY-MM-DD HH:mm:ss')
 			},
-			// 如果记录数量小于10的时候,点击追加
-			getMore(){
-				if(this.rechargeList.length<10){
-					if(this.total!==this.pages){
-						this.setDate(this.typeTerm.status,this.startDate,this.endDate)
-					}
+			// 充值记录
+			getRecharRecord(status,startTimer, endTimer,mescroll) {
+				const that = this
+				let pageNum = mescroll.num; // 页码, 默认从1开始
+				let pageSize = mescroll.size; // 页长, 默认每页10条
+				let das = {
+				  pageNum: pageNum,
+				  pageSize: pageSize,
+				  status: status,
+				  startTime: startTimer,
+				  endTime: endTimer
 				}
+				this.startDate = startTimer
+				this.endDate = endTimer
+				this.addRecharRecord(das).then(res=>{
+					if(mescroll){
+						mescroll.endSuccess();
+					}
+					if(res.status){
+						let totalPage = res.data.pages;
+						that.pageSize=res.data.pageSize;
+						that.total=res.data.pages;
+						mescroll.endByPage(res.data.result.length, totalPage); 
+						this.$nextTick(()=>{
+							mescroll.endSuccess(res.data.result.length)
+						})
+					}
+				}).catch(err=>{
+					if(mescroll){
+						mescroll.endErr()
+					}
+					return err
+				})
 			},
-			// 追加充值记录
-			setDate(status,startTimer, endTimer) {
-				const that=this;
-				if (this.pages < this.total) {
-					let das = {
-					  pageNum: (this.pages += 1),
-					  pageSize: this.pageSize,
-					  status: status,
-					  startTime: startTimer,
-					  endTime: endTimer
-					}
-					this.addRecharRecord(das).then(res=>{
-						if(res.status){
-							this.pages = res.data.pageNum;
-							if(this.total<=this.pages){
-								this.more = 'noMore'
-							}else{
-								this.more = 'more'
-							}
-						}
-					}).catch(err=>{
-						return err
-					})
-				}else{
-					this.more = 'noMore'
-				}
+			// 下拉刷新操作
+			downCallback(mescroll){
+				mescroll.resetUpScroll()
+			},
+			// 上拉加载操作
+			upCallback(mescroll) {
+				console.log(111)
+				this.getRecharRecord(
+				    this.typeTerm.status,
+					this.startDate,
+					this.endDate,
+					mescroll)
 			},
 			showPicker(e){
 				this.isShow=true

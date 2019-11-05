@@ -26,13 +26,13 @@
 					</view>
 				</view>
 				<view class="blance_bottom_row">
-					<view class="break_btn_rechange btns">
+					<view class="break_btn_rechange btns" @click="goRecharge">
 						<view class="btn" v-if='item.walletType==1'>充值</view>
 					</view>
-					<view class="break_btn_withdraw btns">
+					<view class="break_btn_withdraw btns" @click="goWithdraw">
 						<view class="btn" v-if='item.walletType==1'>提现</view>
 					</view>
-					<view class="break_btn_trade_detail btns">
+					<view class="break_btn_trade_detail btns" @click="goTradeRecord(item)">
 						<view class="btn">交易明细</view>
 					</view>
 				</view>
@@ -114,6 +114,32 @@
 		},
 		methods:{
 			...mapActions(['getMine']),
+			// 去充值
+			goRecharge(){
+				// this.$mRouter.push({
+				// 	route.
+				// })
+				console.log('去充值')
+			},
+			// 去提现
+			goWithdraw(){
+				this.$mRouter.push({
+					route:this.$routers.withdraw
+				})
+			},
+			// 去交易明细
+			goTradeRecord(item){
+				this.$mRouter.push({
+					route:this.$routers.tradeRecord,
+					query:{
+						name: item.name,
+						walletName: item.walletName,
+						walletType: item.walletType,
+						oIndex: item.oIndex
+					}
+				})
+			},
+			// 获取钱包
 			getMines(){
 				this.getMine().then(res=>{
 					uni.stopPullDownRefresh();

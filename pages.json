@@ -171,7 +171,11 @@
 				"navigationBarTitleText": "充值记录",
 				"navigationBarBackgroundColor": "#1b82d1",
 				"navigationBarTextStyle": "white",
-				"enablePullDownRefresh": true,
+				"enablePullDownRefresh": false,
+				"disableScroll": true,
+				"app-plus" : {
+					"bounce" : "none"
+				},
 				"titleNView": {
 					"buttons": [{
 						"fontSrc":"/static/font/right_top.ttf",
@@ -190,7 +194,11 @@
             	"navigationBarTitleText": "提现记录",
             	"navigationBarBackgroundColor": "#1b82d1",
             	"navigationBarTextStyle": "white",
-            	"enablePullDownRefresh": true,
+            	"enablePullDownRefresh": false,
+				"disableScroll": true,
+				"app-plus" : {
+					"bounce" : "none"
+				},
             	"titleNView": {
             		"buttons": [{
             			"fontSrc":"/static/font/right_top.ttf",

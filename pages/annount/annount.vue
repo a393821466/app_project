@@ -32,18 +32,18 @@
 				</view>
 			</view>
 		</view> -->
-		<no-data v-else :top='"80"'></no-data>
+		<no-more v-else top='80' temText='noData'></no-more>
 	</view>
 </template>
 
 <script>
 	import { mapActions,mapGetters } from 'vuex'
-	import noData from '@/components/noData'
+	import noMore from '@/components/noMore'
 	import utils from '@/common/utils'
 	export default {
 		name:'annount',
 		components:{
-			noData
+			noMore
 		},
 		data() {
 			return {

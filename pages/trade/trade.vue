@@ -1,16 +1,17 @@
 <template>
-	<view class="trade">
+	<view class="trade" :class="themeFontSize">
 		<view class="trade_box" v-if="token">
-			<view class="openSql sql" @click="openSql">打开数据库</view>
+			<!-- <view class="openSql sql" @click="openSql">打开数据库</view>
 			<view class="jcsql sql" @click="isSql">检查数据库</view>
 			<view class="xrSql sql" @click="writeSql">写入数据库</view>
 			<view class="dqSql sql" @click="readSql">读取数据库</view>
 			<view class="updateSql sql" @click="updateSql">更新数据</view>
 			<view class="closeSql sql" @click="closeSql">关闭数据库</view>
 			<view class="delSql sql" @click="delSql">删除数据</view>
-			<view class="delSql sql" @click="delSqlTable">删除数据表</view>
+			<view class="delSql sql" @click="delSqlTable">删除数据表</view> -->
+      这是交易页面
 		</view>
-		<no-login v-else></no-login>
+		<no-more v-else></no-more>
 	</view>
 </template>
 
@@ -19,13 +20,13 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
-	import noLogin from '@/components/noLogin'
+	import noMore from '@/components/noMore'
 	import config from '@/common/utils/config'
 	import {showUiToast} from '@/common/utils/dialog.config'
 	export default {
 		name:'trade',
 		components:{
-			noLogin
+			noMore
 		},
 		data() {
 			return {
@@ -33,7 +34,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['token']),
+			...mapGetters(['token','themeFontSize']),
 		},
 		onShow(){
 			if(!this.token){

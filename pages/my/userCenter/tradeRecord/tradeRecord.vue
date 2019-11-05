@@ -77,7 +77,7 @@
 					<view class="typeList" :class="[statusIndex.oIndex===idx?'active':'']" 
 					 v-for="(item,idx) in allBanlances" :key="item.walletType"
 					 v-show="item.walletType!==4"
-					 @click="withdrawTypeClick(item)">{{item.name}}</view>
+					 @click="withdrawTypeClick(item,0)">{{item.name}}</view>
 				</view>
 			</view>
 		</popup>
@@ -90,8 +90,8 @@
 					<view class="typeTimer" v-for="(item,idx) in timeList" 
 					:class="timer.status===item.status?'active':''" 
 					:key='item.status'
-					 @click="onClickDate(item)">{{item.name}}</view>
-					 <view class="typeTimer" @click="showPicker" :class="timer.status===3?'active':''">{{chooseDate}}</view>
+					 @click="onClickDate(item,0)">{{item.name}}</view>
+					 <view class="typeTimer" @click="showPicker($event,0)" :class="timer.status===3?'active':''">{{chooseDate}}</view>
 				</view>
 			</view>
 		</popup>
@@ -101,10 +101,81 @@
 					选择类型
 				</view>
 				<view class="typeTermBox">
-					<view class="typeBox" v-for="(item,idx) in tradeList" 
-					:class="typeData.typeId===item.typeId?'active':''" 
-					:key='item.typeId'
-					 @click="onClickTypeName(item)">{{item.description}}</view>
+					<view class="typeBox" v-for="(item,idx) in tradeTypeList" 
+					:class="typeData.typeId===item.typeId?'active':''"
+				    :key="item.typeName"
+				     v-if="item.level==3"
+					 @click="onClickTypeName(item,0)">{{item.description}}</view>
+				</view>
+			</view>
+		</popup>
+		<popup ref="tradeRecordUi" type="bottom" @change='changeMoreSelect'>
+			<view class="moreSelectCondition">
+				<view class="moreSelectList">
+					<view class="typeTerm">
+						<view class="typeTermTitle">
+							选择分类
+						</view>
+						<view class="typeTermBox">
+							<view class="typeList" :class="[temporaryStatusIndex.oIndex===idx?'active':'']" 
+							 v-for="(item,idx) in allBanlances" :key="item.walletType"
+							 v-show="item.walletType!==4"
+							 @click="withdrawTypeClick(item,1)">{{item.name}}</view>
+						</view>
+					</view>
+					<view class="typeTerm">
+						<view class="typeTermTitle">
+							选择日期
+						</view>
+						<view class="typeTermBox">
+							<view class="typeTimer" v-for="(item,idx) in timeList" 
+							:class="temporaryTimer.status===item.status?'active':''" 
+							:key='item.status'
+							 @click="onClickDate(item,1)">{{item.name}}</view>
+							 <view class="typeTimer" @click="showPicker($event,1)" :class="temporaryTimer.status===3?'active':''">{{temporaryDateText}}</view>
+						</view>
+					</view>
+					<view class="typeTerm">
+						<view class="typeTermTitle">
+							交易分类
+						</view>
+						<view class="typeTermBox">
+							<view class="typeTimer" v-for="(item,idx) in tradeTypeList" 
+							:class="tradeClassificationId==item.typeId?'active':''"
+							:key="item.typeName"
+							 v-if="item.level==2"
+							 @click="tradeCategory(item)">{{item.description}}</view>
+						</view>
+					</view>
+					<view class="typeTerm">
+						<view class="typeTermTitle">
+							资金分类
+						</view>
+						<view class="typeTermBox">
+							<view class="typeTimer" v-for="(item,idx) in tradeTypeList" 
+							:class="amountClassificationId==item.typeId?'active':''"
+							:key="item.typeName"
+							 v-if="item.level==1"
+							 @click="moneyCategory(item)">{{item.description}}</view>
+						</view>
+					</view>
+					<view class="typeTerm">
+						<view class="typeTermTitle">
+							交易类型
+						</view>
+						<view class="typeTermBox">
+							<view class="typeTimer" v-for="(item,idx) in tradeList"
+							:class="tradeTypeIds==item.typeId?'active':''"
+							:key="item.typeName"
+							 v-if="item.level==3"
+							 :style="item.typeId==0?'':item.check?'':'backgroundColor:#f8f8f8;color:#ccc'"
+							 @click="tradeTypeClick(item)">{{item.description}}</view>
+						</view>
+					</view>
+				</view>
+				<view class="selectButton">
+					<button type="primary" class="btn reset" @click="reset">重置</button>
+					<button type="primary" class="btn confirm" @click="confirmSreach">确定</button>
 				</view>
 			</view>
 		</popup>
@@ -126,23 +197,21 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
-	import MescrollUni from "mescroll-uni"
-	import Popup from '@/components/popup'
-	import chache from '@/common/utils/storage'
-	import loadMore from '@/components/onloadMore/uni-load-more'
 	import {
 		showUiToast,
 		showUiLoading,
 		hideUiLoading,
 		showActionSheet
 	} from '@/common/utils/dialog.config'
+	import MescrollUni from "@/components/mescroll-uni/mescroll-uni.vue"
+	import Popup from '@/components/popup'
+	import chache from '@/common/utils/storage'
 	import moment from 'moment'
 	import rangeDatePick from '@/components/mx-datepicker/range-dtpicker';
 	export default {
 		name: 'tradeRecord',
 		components: {
 			Popup,
-			loadMore,
 			rangeDatePick,
 			MescrollUni
 		},
@@ -153,20 +222,32 @@
 			  return list
 			},
 			tradeList(){
-				const that=this
-				const list=this.tradeTypeList;
-				let arr=[];
-				if(list.length>0){
-					arr=list.filter(item=>item.level!==3);
-					let das={
-						description: "全部",
-						level:3,
-						typeId:29380024
-					}
-					that.typeData=das;
-					arr.unshift(das)
-				}
-				return arr;
+				let das = this.tradeTypeList
+				  if (das) {
+					das.map((item, idx) => {
+					  if (item.level === 3) {
+						if (
+						  this.tradeClassificationId === 0 &&
+						  this.amountClassificationId === 0
+						) {
+						  item.check = true
+						} else {
+						  if (item.typeId !== 0) {
+							let parent = this.tradeClassificationId + this.amountClassificationId
+							if (
+							  (parent & item.typeId) === parent
+							) {
+							  item.check = true
+							} else {
+							  item.check = false
+							}
+						  }
+						}
+						return item
+					  }
+					})
+					return das
+				  }
 			},
 			startTimer(){
 				return moment(new Date()).subtract(1,'years').format('YYYY-MM-DD');
@@ -194,7 +275,12 @@
 				startDate:'',
 				endDate:'',
 				type:'',
-				typeData: {},
+				typeData: {
+				  description: '全部',
+				  level: 3,
+				  typeName: 'ALL3',
+				  typeId: 0
+				},
 				screenHeight:0,
 				fication:false,
 				typeFication:false,
@@ -223,14 +309,41 @@
 					},
 					noMoreSize: 5, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
 					empty: {
-						tip: '暂无内容'
+						use: true, // 是否显示空布局
+						tip: '~ 暂无内容 ~', // 提示
+						tipFontSize:30 // 字体大小
 					},
 					textLoading: '加载中...', // 加载中的提示文本
 					textNoMore: '-- 无更多内容 --', // 没有更多数据的提示文本
 				},
+				temporaryStatusIndex:{
+					name: '现金',
+					walletName: 'CASH',
+					walletType: 1,
+					oIndex: 0
+				},
+				temporaryTimer:{
+					name: '当天',
+					date: 1,
+					status: 0
+				},
+				temporaryType:{},
+				temporaryDateText:'自定义',
+				isOpenSelect:0,
+				tradeClassificationId: 0,
+			    amountClassificationId: 0,
+			    tradeTypeIds: 0
 			};
 		},
-		onLoad() {
+		onLoad(query) {
+			if(query.name){
+				this.statusIndex={
+					name: query.name,
+					walletName: query.walletName,
+					walletType: query.walletType,
+					oIndex: query.oIndex
+				}
+			}
 			// 获取高度
 			this.getScreenInfo()
 			// 取时间
@@ -246,69 +359,21 @@
 			// 交易类型
 			this.getTrade()
 		},
+		// 打开条件筛选
+		onNavigationBarButtonTap() {
+			this.$refs.tradeRecordUi.open()
+		},
 		methods:{
-			...mapActions(['getTimeList','getMine','getTradeType','getTradeRecordList','addGetTradeRecordList']),
+			...mapActions(['getTimeList','getMine','getTradeType','addGetTradeRecordList']),
 			mescrollInit(mescroll){
 				this.mescroll = mescroll;
 			},
-			// 获取交易明细列表
-			// getTradeRecord(walletTypes, typeIds, startTimer, endTimer,mescroll){
-			// 	const that=this
-			// 	let das = typeIds==29380024||!typeIds?{
-			// 		pageNum: 1,
-			// 		pageSize: that.pageSize,
-			// 		startTime: startTimer,
-			// 		endTime: endTimer,
-			// 		walletType: walletTypes
-			//     }:{
-			// 		pageNum: 1,
-			// 		pageSize: that.pageSize,
-			// 		startTime: startTimer,
-			// 		endTime: endTimer,
-			// 		walletType: walletTypes,
-			// 		typeId: typeIds
-			//     }
-			// 	this.startDate = startTimer
-			//     this.endDate = endTimer
-			// 	if(that.flat){
-			// 		that.flat=false
-			// 		if(!mescroll){
-			// 			showUiLoading('加载中..',{mask:true});
-			// 		}
-			// 		that.getTradeRecordList(das).then(res=>{
-			// 			if(mescroll){
-			// 				mescroll.endSuccess();
-			// 			}else{
-			// 				hideUiLoading();
-			// 			}
-			// 			if(res.status){
-			// 				that.pageSize=res.data.pageSize;
-			// 				that.total=res.data.pages;
-			// 				that.flat=true;
-			// 				
-			// 			}
-			// 		}).catch(err=>{
-			// 			if(mescroll){
-			// 				mescroll.endErr()
-			// 			}else{
-			// 				hideUiLoading();
-			// 			}
-			// 			return err
-			// 		})
-			// 	}else{
-			// 		showUiToast('您操作过快...');
-			// 		if(mescroll){
-			// 			mescroll.endSuccess()
-			// 		}
-			// 	}
-			// 	
-			// },
 			// 交易明细
 			addTradeRecord(walletTypes, typeIds, startTimer, endTimer,mescroll){
 				const that = this
 				let pageNum = mescroll.num; // 页码, 默认从1开始
 				let pageSize = mescroll.size; // 页长, 默认每页10条
-				let das = typeIds==29380024||!typeIds?{
+				let das = typeIds==0||!typeIds?{
 				  pageNum: pageNum,
 				  pageSize: pageSize,
 				  startTime: startTimer,
@@ -363,17 +428,22 @@
 				this.fication=true
 			},
 			// 选择分类
-			withdrawTypeClick(item){
-				this.statusIndex=item
-				this.addTradeRecord(
-					item.walletType,
-					this.typeData.typeId,
-					this.startDate,
-					this.endDate,
-					this.mescroll
-				)
-				this.fication=false
-				this.$refs.recordType.close()
+			withdrawTypeClick(item,num){
+				const that=this
+				if(num==0){
+					that.statusIndex=item
+					that.addTradeRecord(
+						item.walletType,
+						that.typeData.typeId,
+						that.startDate,
+						that.endDate,
+						that.mescroll
+					)
+					that.fication=false
+					that.$refs.recordType.close()
+				}else{
+					that.temporaryStatusIndex=item;
+				}
 			},
 			// 打开日期
 			onClickDateTimer(){
@@ -381,17 +451,23 @@
 				this.typeFication=true
 			},
 			// 选择日期
-			onClickDate(item){
-				this.timer=item
-				this.addTradeRecord(
-					this.statusIndex.walletType,
-					this.typeData.typeId,
-					item.startTimes,
-					item.endTimes,
-					this.mescroll
-				)
-				this.typeFication=false
-				this.$refs.dateType.close()
+			onClickDate(item,num){
+				const that=this
+				if(num==0){
+					that.timer=item
+					that.addTradeRecord(
+						that.statusIndex.walletType,
+						that.typeData.typeId,
+						item.startTimes,
+						item.endTimes,
+						that.mescroll
+					)
+					that.typeFication=false
+					that.$refs.dateType.close()
+				}else{
+					console.log(item)
+					that.temporaryTimer=item
+				}
 			},
 			// 打开类型
 			onClickType(){
@@ -401,6 +477,7 @@
 			// 选择类型
 			onClickTypeName(item){
 				this.typeData=item
+				console.log(item)
 				this.addTradeRecord(
 					this.statusIndex.walletType,
 					item.typeId,
@@ -422,7 +499,8 @@
 				})
 			},
 			// 显示日期
-			showPicker(e){
+			showPicker(e,n){
+				this.isOpenSelect=n;
 				this.isShow=true
 			},
 			// 显示隐藏日期
@@ -431,25 +509,36 @@
 			},
 			// 自定义日期
 			bindChange(data){
-				this.chooseDate=data[0]+"至"+data[1]
 				let sDate=data[0] + ' ' + '00:00:00'
 				let eDate=data[1] + ' ' + '23:59:59'
-				this.startDate=moment(sDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
-				this.endDate=moment(eDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
-				this.timer={
-					name: '自定义',
-					date: 99,
-					status: 3
+				if(this.isOpenSelect==0){
+					this.chooseDate=data[0]+"至"+data[1]
+					this.startDate=moment(sDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+					this.endDate=moment(eDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+					this.timer={
+						name: '自定义',
+						date: 99,
+						status: 3
+					}
+					this.addTradeRecord(
+						this.statusIndex.walletType,
+						this.typeData.typeId,
+						this.startDate,
+						this.endDate,
+						this.mescroll
+					)
+					this.typeFication=false
+					this.$refs.dateType.close()
+				}else{
+					this.temporaryTimer={
+						name: '自定义',
+						date: 99,
+						status: 3,
+						startTimes:moment(sDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+						endTimes:moment(eDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+					}
+					this.temporaryDateText=data[0]+"至"+data[1]
 				}
-				this.addTradeRecord(
-					this.statusIndex.walletType,
-					this.typeData.typeId,
-					this.startDate,
-					this.endDate,
-					this.mescroll
-				)
-				this.typeFication=false
-				this.$refs.dateType.close()
 			},
 			// 下拉刷新操作
 			downCallback(mescroll){
@@ -463,6 +552,87 @@
 					this.startDate,
 					this.endDate,
 					mescroll)
+			},
+			changeMoreSelect(item){
+				if(!item.show){
+					// this.statusIndex= {
+					// 	name: '现金',
+					// 	walletName: 'CASH',
+					// 	walletType: 1,
+					// 	oIndex: 0
+					// }
+					// this.timer={
+					// 	name: '当天',
+					// 	date: 1,
+					// 	status: 0
+					// }
+				}
+			},
+			// 交易分类点击事件
+			tradeCategory(item){
+				this.tradeClassificationId = item.typeId
+				this.tradeTypeIds = 0
+			},
+			// 资金类型点击事件
+			moneyCategory(item){
+				this.amountClassificationId = item.typeId
+			    this.tradeTypeIds = 0
+			},
+			// 交易类型点击事件
+			tradeTypeClick(item){
+				if (!item.check) {
+					return
+				}
+			    this.temporaryType = item
+			    this.tradeTypeIds = item.typeId
+			},
+			// 重置筛选
+			reset(){
+				this.temporaryStatusIndex={
+					name: '现金',
+					walletName: 'CASH',
+					walletType: 1,
+					oIndex: 0
+				}
+				this.temporaryTimer={
+					name: '当天',
+					date: 1,
+					status: 0,
+					startTimes:this.timeList[0].startTimes,
+					endTimes:this.timeList[0].endTimes
+				}
+			    this.tradeClassificationId = 0
+			    this.amountClassificationId = 0
+			    this.tradeTypeIds = 0
+				this.temporaryDateText='自定义'
+			},
+			// 确认筛选
+			confirmSreach(){
+				let typeIds=this.tradeClassificationId+this.amountClassificationId+this.tradeTypeIds;
+				this.statusIndex=this.temporaryStatusIndex
+				this.timer=this.temporaryTimer
+				this.chooseDate=this.temporaryDateText
+				let typeList=this.tradeTypeList;
+				let filterType=typeList.filter(item=>item.typeId==typeIds&&item.typeId!==0&&item.level==3);
+				if(filterType.length>0){
+					this.temporaryType=filterType[0]
+				}else{
+					this.temporaryType={
+						description: '全部',
+						level: 3,
+						typeName: 'ALL3',
+						typeId: 0
+					}
+				}
+				this.typeData=this.temporaryType
+				this.addTradeRecord(
+					this.statusIndex.walletType,
+					typeIds,
+					this.timer.startTimes,
+					this.timer.endTimes,
+					this.mescroll
+				)
+				this.$refs.tradeRecordUi.close()
 			},
 			// 高度
 			getScreenInfo(){

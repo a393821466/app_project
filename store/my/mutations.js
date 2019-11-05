@@ -75,29 +75,39 @@ export const mutations={
 		state.bindInfo=val;
 	},
 	['RECHARGERECORD'](state,val){
-		if(val.type==1){
-			state.rechargeList=val.record
-		}else if(val.type==2){
-			state.rechargeList=state.rechargeList.concat(val.record)
-		}
+		if(val.pageNum==1) state.rechargeList=[]
+		state.rechargeList=state.rechargeList.concat(val.record)
 	},
 	['WITHDRAWRECORD'](state,val){
-		if(val.type==1){
-			state.withdrawList=val.withdraw
-		}else if(val.type==2){
-			state.withdrawList=state.withdrawList.concat(val.withdraw)
-		}
+		if(val.pageNum==1) state.withdrawList=[]
+		state.withdrawList=state.withdrawList.concat(val.withdraw)
 	},
 	['TRADERECORD'](state,val){
-		if(val.type==1){
-			state.tradeMxList=val.record
-		}else if(val.type==2){
-			if(val.pageNum==1) state.tradeMxList=[]
-			state.tradeMxList=state.tradeMxList.concat(val.record)
-		}
+		if(val.pageNum==1) state.tradeMxList=[]
+		state.tradeMxList=state.tradeMxList.concat(val.record)
 	},
 	['TRADETYPELIST'](state,val){
-		state.tradeTypeList=val
+		let all = [{
+		      description: '全部',
+		      level: 1,
+		      typeId: 0,
+		      typeName: 'ALL1'
+		    },
+		    {
+		      description: '全部',
+		      level: 2,
+		      typeId: 0,
+		      typeName: 'ALL2'
+		    }, {
+		      description: '全部',
+		      level: 3,
+		      typeName: 'ALL3',
+		      typeId: 0
+		    }
+		]
+		all=all.concat(val)
+		chache.set('tradeTypeList',all)
+		state.tradeTypeList=all
 	},
 	['RESETMY'](state){
 		state.userBalance={}

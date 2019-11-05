@@ -181,7 +181,9 @@
 		onNavigationBarButtonTap() {
 			showActionSheet({arr:this.tipArr},(res)=>{
 				if(res.tapIndex==0){
-					console.log('提现记录')
+					this.$mRouter.push({
+						route:this.$routers.withdrawRecord
+					})
 					return;
 				}
 				if(res.tapIndex==1){

@@ -66,48 +66,26 @@ export default{
 		return userWithdraw;
 	},
 	// 充值记录
-	async getRecharRecord({commit},res){
-		const getRecord=await httpUtils.get(address.my.rechargeRecord,res);
-		if(getRecord.status){
-			let das={
-				record:getRecord.data.result,
-				type:1
-			}
-			commit('RECHARGERECORD',das)
-		}
-		return getRecord;
-	},
-	// 追加充值记录
 	async addRecharRecord({commit},res){
 		const addRecord=await httpUtils.get(address.my.rechargeRecord,res);
 		if(addRecord.status){
 			let das={
 				record:addRecord.data.result,
-				type:2
+				type:2,
+				pageNum:addRecord.data.pageNum
 			}
 			commit('RECHARGERECORD',das)
 		}
 		return addRecord;
 	},
 	// 提现记录
-	async withdrawRecordsList({commit},res){
-		const getWithdrawRecord=await httpUtils.get(address.my.withdrawRecord,res);
-		if(getWithdrawRecord.status){
-			let das={
-				withdraw:getWithdrawRecord.data.result,
-				type:1
-			}
-			commit('WITHDRAWRECORD',das)
-		}
-		return getWithdrawRecord;
-	},
-	// 追加提现记录
 	async addWithdrawRecordsList({commit},das){
-		const addWithdrawRecord=await httpUtils.get(address.my.withdrawRecord,res);
+		const addWithdrawRecord=await httpUtils.get(address.my.withdrawRecord,das);
 		if(addWithdrawRecord.status){
 			let das={
 				withdraw:addWithdrawRecord.data.result,
-				type:2
+				type:2,
+				pageNum:addWithdrawRecord.data.pageNum
 			}
 			commit('WITHDRAWRECORD',das)
 		}
@@ -122,18 +100,6 @@ export default{
 		return tradeTypeList;
 	},
 	// 交易明细
-	async getTradeRecordList({commit},res){
-		const tradeRecord=await httpUtils.get(address.my.tradeRecord,res);
-		if(tradeRecord.status){
-			let das={
-				record:tradeRecord.data.result,
-				type:1
-			}
-			commit('TRADERECORD',das)
-		}
-		return tradeRecord;
-	},
-	// 追加交易明细
 	async addGetTradeRecordList({commit},res){
 		const tradeRecord=await httpUtils.get(address.my.tradeRecord,res);
 		if(tradeRecord.status){

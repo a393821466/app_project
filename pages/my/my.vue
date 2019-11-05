@@ -93,7 +93,7 @@
 				</view>
 			</view>
 		</view>
-		<no-login v-else></no-login>
+		<no-more v-else></no-more>
 	</view>
 </template>
 
@@ -102,14 +102,14 @@
 		mapActions,
 		mapGetters
 	} from 'vuex'
-	import noLogin from '@/components/noLogin'
+	import noMore from '@/components/noMore'
 	import chache from '@/common/utils/storage'
 	import utils from '@/common/utils'
 	import {showUiModel} from '@/common/utils/dialog.config'
 	export default {
 		name:'my_view',
 		components:{
-			noLogin
+			noMore
 		},
 		data() {
 			return {
