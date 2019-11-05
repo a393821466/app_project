@@ -1,6 +1,5 @@
 <template>
 	<view class="withdrawRecordView" :class="themeFontSize">
-		<view class="clearView"></view>
 		<view class="uni-padding-wrap uni-common-mt withdrawRecord">
 			<view class="withdrawView">
 			<mescroll-uni
@@ -40,7 +39,7 @@
 				</view>
 			</view> -->
 		</view>
-		<rangeDatePick
+		<range-date-pick
 			:show="isShow"
 			@showchange="showchange"
 			:start="startTimer"
@@ -49,7 +48,7 @@
 			@change="bindChange"
 			@cancel="bindCancel"
 			themeColor="#4C83D6"
-		></rangeDatePick>
+		></range-date-pick>
 		<popup ref="withdrawTerm" type="bottom" @change='change'>
 			<view class="typeTerm">
 				<view class="typeTermTitle">
@@ -158,6 +157,7 @@
 						tipFontSize:30 // 字体大小
 					}
 				},
+				isOpen:false
 			};
 		},
 		computed:{
@@ -178,7 +178,13 @@
 		},
 		// 打开条件筛选
 		onNavigationBarButtonTap() {
-			this.$refs.withdrawTerm.open()
+			if(!this.isOpen){
+				this.isOpen=true
+				this.$refs.withdrawTerm.open()
+			}else{
+				this.isOpen=false
+				this.$refs.withdrawTerm.close()
+			}
 		},
 		methods:{
 			...mapActions(['getTimeList','addWithdrawRecordsList']),
@@ -209,6 +215,7 @@
 					data.endTime,
 					this.mescroll
 				);
+				this.isOpen=false
 				this.$refs.withdrawTerm.close()
 			},
 			// 重置
@@ -226,8 +233,9 @@
 			},
 			// 隐藏popup
 			change(val) {
+				const that=this
 				if (!val.show) {
-					// this.reset()
+					that.isOpen=false
 				}
 			},
 			// 格式化ISO时间

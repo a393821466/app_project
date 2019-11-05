@@ -122,16 +122,23 @@
 		}
 	}
 	// 充值记录
-	.rechargeView{
-		.rechargeTitle{
-			font-size:$uni-font-size-base;
+	&.rechargeRecordView{
+		.rechargeView{
+			.rechargeTitle{
+				font-size:$uni-font-size-base;
+			}
+			.rechargeBox,.typeTimer{
+				font-size:$uni-font-size-sm;
+			}
 		}
-		.rechargeBox,.typeTimer{
-			font-size:$uni-font-size-sm;
+		.selectBtn{
+			.btn{
+				font-size:$uni-font-size-sm;
+			}
 		}
 	}
 	// 充值类型
-	.typeTerm{
+	.typeTerm,.typeTerm1,.typeTerm2,.typeTerm3,.typeTerm4,.typeTerm5,.typeTerm6,.typeTerm7,.typeTerm8{
 		.typeTermTitle{
 			font-size:$uni-font-size-sm;
 		}
@@ -140,12 +147,19 @@
 		}
 	}
 	// 提现记录
-	.withdrawView{
-		.withdrawTitle{
-			font-size:$uni-font-size-base;
+	&.withdrawRecordView{
+		.withdrawView{
+			.withdrawTitle{
+				font-size:$uni-font-size-base;
+			}
+			.withdrawBox{
+				font-size:$uni-font-size-sm;
+			}
 		}
-		.withdrawBox{
-			font-size:$uni-font-size-sm;
+		.selectBtn{
+			.btn{
+				font-size:$uni-font-size-sm;
+			}
 		}
 	}
 	// 设置个人资料
@@ -202,6 +216,11 @@
 			}
 			.tradeContainer{
 				font-size:24upx;
+			}
+		}
+		.selectButton{
+			.btn{
+				font-size:$uni-font-size-sm;
 			}
 		}
 	}
@@ -339,16 +358,23 @@
 		}
 	}
 	// 充值记录
-	.rechargeView{
-		.rechargeTitle{
-			font-size:$uni-font-size-lg;
+	&.rechargeRecordView{
+		.rechargeView{
+			.rechargeTitle{
+				font-size:$uni-font-size-lg;
+			}
+			.rechargeBox,.typeTimer{
+				font-size:$uni-font-size-base;
+			}
 		}
-		.rechargeBox,.typeTimer{
-			font-size:$uni-font-size-base;
+		.selectBtn{
+			.btn{
+				font-size:$uni-font-size-base;
+			}
 		}
 	}
 	// 充值类型
-	.typeTerm{
+	.typeTerm,.typeTerm1,.typeTerm2,.typeTerm3,.typeTerm4,.typeTerm5,.typeTerm6,.typeTerm7,.typeTerm8{
 		.typeTermTitle{
 			font-size:$uni-font-size-base;
 		}
@@ -357,12 +383,19 @@
 		}
 	}
 	// 提现记录
-	.withdrawView{
-		.withdrawTitle{
-			font-size:$uni-font-size-lg;
+	&.withdrawRecordView{
+		.withdrawView{
+			.withdrawTitle{
+				font-size:$uni-font-size-lg;
+			}
+			.withdrawBox{
+				font-size:$uni-font-size-base;
+			}
 		}
-		.withdrawBox{
-			font-size:$uni-font-size-base;
+		.selectBtn{
+			.btn{
+				font-size:$uni-font-size-base;
+			}
 		}
 	}
 	// 设置个人资料
@@ -419,6 +452,11 @@
 			}
 			.tradeContainer{
 				font-size:28upx;
+			}
+		}
+		.selectButton{
+			.btn{
+				font-size:$uni-font-size-base;
 			}
 		}
 	}
@@ -547,16 +585,23 @@
 		}
 	}
 	// 充值记录
-	.rechargeView{
-		.rechargeTitle{
-			font-size:$uni-font-size-lg;
+	&.rechargeRecordView{
+		.rechargeView{
+			.rechargeTitle{
+				font-size:$uni-font-size-lg;
+			}
+			.rechargeBox,.typeTimer{
+				font-size:$uni-font-size-base;
+			}
 		}
-		.rechargeBox{
-			font-size:$uni-font-size-base;
+		.selectBtn{
+			.btn{
+				font-size:$uni-font-size-base;
+			}
 		}
 	}
 	// 充值类型
-	.typeTerm{
+	.typeTerm,.typeTerm1,.typeTerm2,.typeTerm3,.typeTerm4,.typeTerm5,.typeTerm6,.typeTerm7,.typeTerm8{
 		.typeTermTitle{
 			font-size:$uni-font-size-lg;
 		}
@@ -565,12 +610,19 @@
 		}
 	}
 	// 提现记录
-	.withdrawView{
-		.withdrawTitle{
-			font-size:40upx;
+	&.withdrawRecordView{
+		.withdrawView{
+			.withdrawTitle{
+				font-size:40upx;
+			}
+			.withdrawBox{
+				font-size:32upx;
+			}
 		}
-		.withdrawBox{
-			font-size:32upx;
+		.selectBtn{
+			.btn{
+				font-size:$uni-font-size-lg;
+			}
 		}
 	}
 	// 设置个人资料
@@ -627,6 +679,11 @@
 			}
 			.tradeContainer{
 				font-size:$uni-font-size-sm;
+			}
+		}
+		.selectButton{
+			.btn{
+				font-size:$uni-font-size-lg;
 			}
 		}
 	}

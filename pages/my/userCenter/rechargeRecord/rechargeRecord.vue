@@ -59,7 +59,7 @@
 				</view>
 			</view> -->
 		</view>
-		<rangeDatePick
+		<range-date-pick
 			:show="isShow"
 			@showchange="showchange"
 			:start="startTimer"
@@ -68,7 +68,7 @@
 			@change="bindChange"
 			@cancel="bindCancel"
 			themeColor="#4C83D6"
-		></rangeDatePick>
+		></range-date-pick>
 		<popup ref="rechargeTerm" type="bottom" @change='change'>
 			<view class="typeTerm">
 				<view class="typeTermTitle">
@@ -157,6 +157,7 @@
 					date: 1,
 					status: 0
 				},
+				isOpen:false,
 				startDate: '',
 				endDate: '',
 				pages: 1,
@@ -208,7 +209,13 @@
 		},
 		// 打开条件筛选
 		onNavigationBarButtonTap() {
-			this.$refs.rechargeTerm.open()
+			if(!this.isOpen){
+				this.isOpen=true
+				this.$refs.rechargeTerm.open()
+			}else{
+				this.isOpen=false
+				this.$refs.rechargeTerm.close()
+			}
 		},
 		methods: {
 			...mapActions(['getTimeList','addRecharRecord']),
@@ -240,6 +247,7 @@
 				data.endTime,
 				this.mescroll);
 				this.$refs.rechargeTerm.close()
+				this.isOpen=false
 			},
 			// 重置
 			reset() {
@@ -256,8 +264,9 @@
 			},
 			// 隐藏popup
 			change(val) {
+				const that=this
 				if (!val.show) {
-					// this.reset()
+					that.isOpen=false
 				}
 			},
 			// 格式化ISO时间

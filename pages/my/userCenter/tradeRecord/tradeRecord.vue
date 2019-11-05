@@ -1,118 +1,109 @@
 <template>
 	<view class="tradeRecordView" :class="themeFontSize">
-		<view class="tradeRecordNavigator" :style="screenHeight">
-			<view class="condition condition1" @click="onClickClassification">
-				<view class="condition_text">
-					<text class="texts">分类</text>
-					<view class="arrow" :style="fication?'transform:rotate(180deg)':'transform:rotate(0)'">
-						<image src="../../../../static/images/triangle.svg" class="triangle"></image>
+		<view class="uni-padding-wrap uni-common-mt tradeTypes">
+			<view class="tradeRecordNavigator">
+				<view class="condition condition1" @click="onClickClassification">
+					<view class="condition_text">
+						<text class="texts">分类</text>
+						<view class="arrow" :style="fication?'transform:rotate(180deg)':'transform:rotate(0)'">
+							<image src="../../../../static/images/triangle.svg" class="triangle"></image>
+						</view>
 					</view>
+					<view class="type">({{statusIndex.name}})</view>
 				</view>
-				<view class="type">({{statusIndex.name}})</view>
+				<view class="condition condition2" @click="onClickDateTimer">
+					<view class="condition_text">
+						<text class="texts">日期</text>
+						<view class="arrow" :style="typeFication?'transform:rotate(180deg)':'transform:rotate(0)'">
+							<image src="../../../../static/images/triangle.svg" class="triangle"></image>
+						</view>
+					</view>
+					<view class="dateTimer">({{timer.name}})</view>
+				</view>
+				<view class="condition condition3" @click="onClickType">
+					<view class="condition_text">
+						<text class="texts">类型</text>
+						<view class="arrow" :style="typeTabList?'transform:rotate(180deg)':'transform:rotate(0)'">
+							<image src="../../../../static/images/triangle.svg" class="triangle"></image>
+						</view>
+					</view>
+					<view class="tradeType">({{typeData.description}})</view>
+				</view>
 			</view>
-			<view class="condition condition2" @click="onClickDateTimer">
-				<view class="condition_text">
-					<text class="texts">日期</text>
-					<view class="arrow" :style="typeFication?'transform:rotate(180deg)':'transform:rotate(0)'">
-						<image src="../../../../static/images/triangle.svg" class="triangle"></image>
+			<view class="tradeBodyDetails" :style="{height:screenHeight+'px'}">
+				<mescroll-uni 
+					:down="downOption" 
+					@down="downCallback" 
+					:up="upOption" 
+					@up="upCallback" 
+					top="110" 
+					@init="mescrollInit">
+					<view class="tradeList" v-for="(item,idx) in tradeMxList" :key="item.orderNo">
+						<view class="tradeTitle">
+							<view class="title p1">
+								{{item.remark}}
+							</view>
+							<view class="tradeMoney p1" v-if="item.amount>0">
+								金额：+{{item.amount}} 元
+							</view>
+							<view class="tradeMoney p1" v-else style="color:rgb(126, 211, 33)">
+								金额：{{item.amount}} 元
+							</view>
+						</view>
+						<view class="tradeContainer">
+							<view class="t tradeLeft">
+								<view class="orderNo">订单号：{{item.orderNo}}</view>
+								<view class="time">时间：{{formartTime(item.createTime)}}</view>
+							</view>
+							<view class="t tradeRight">
+								<view class="tadeType">类型：<text class="typeText">{{item.remark}}</text></view>
+								<view class="time">当前余额：{{item.currentBalance}}</view>
+							</view>
+						</view>
 					</view>
-				</view>
-				<view class="dateTimer">({{timer.name}})</view>
-			</view>
-			<view class="condition condition3" @click="onClickType">
-				<view class="condition_text">
-					<text class="texts">类型</text>
-					<view class="arrow" :style="typeTabList?'transform:rotate(180deg)':'transform:rotate(0)'">
-						<image src="../../../../static/images/triangle.svg" class="triangle"></image>
-					</view>
-				</view>
-				<view class="tradeType">({{typeData.description}})</view>
+				</mescroll-uni>
 			</view>
 		</view>
-		<view class="tradeBodyDetails" :style="{height:screenHeight+'px'}">
-			<mescroll-uni 
-				:down="downOption" 
-				@down="downCallback" 
-				:up="upOption" 
-				@up="upCallback" 
-				top="110" 
-				@init="mescrollInit">
-				<view class="tradeList" v-for="(item,idx) in tradeMxList" :key="idx">
-					<view class="tradeTitle">
-						<view class="title p1">
-							{{item.remark}}
-						</view>
-						<view class="tradeMoney p1" v-if="item.amount>0">
-							金额：+{{item.amount}} 元
-						</view>
-						<view class="tradeMoney p1" v-else style="color:rgb(126, 211, 33)">
-							金额：{{item.amount}} 元
-						</view>
-					</view>
-					<view class="tradeContainer">
-						<view class="t tradeLeft">
-							<view class="orderNo">订单号：{{item.orderNo}}</view>
-							<view class="time">时间：{{formartTime(item.createTime)}}</view>
-						</view>
-						<view class="t tradeRight">
-							<view class="tadeType">类型：<text class="typeText">{{item.remark}}</text></view>
-							<view class="time">当前余额：{{item.currentBalance}}</view>
-						</view>
-					</view>
-				</view>
-			</mescroll-uni>
-		</view>
-		<!-- <view class="withdrawView" v-else >
-			<view class="noDataImg">
-				<image src="../../../../static/images/noData.svg" class="img"></image>
-				<text class="noDataText">暂无更多内容</text>
-			</view>
-		</view> -->
-		<popup ref="recordType" type="bottom" @change="change">
-			<view class="typeTerm">
+		<popup ref="commonPopup" type="bottom" @change='change'>
+			<view class="typeTerm1" v-if="popupType==1">
 				<view class="typeTermTitle">
 					选择分类
 				</view>
 				<view class="typeTermBox">
 					<view class="typeList" :class="[statusIndex.oIndex===idx?'active':'']" 
-					 v-for="(item,idx) in allBanlances" :key="item.walletType"
+					 v-for="(item,idx) in allBanlances" 
+					 :key="item.walletType"
 					 v-show="item.walletType!==4"
 					 @click="withdrawTypeClick(item,0)">{{item.name}}</view>
 				</view>
 			</view>
-		</popup>
-		<popup ref="dateType" type="bottom" @change="change">
-			<view class="typeTerm">
+			<view class="typeTerm2" v-else-if="popupType==2">
 				<view class="typeTermTitle">
 					选择日期
 				</view>
 				<view class="typeTermBox">
-					<view class="typeTimer" v-for="(item,idx) in timeList" 
+					<view class="typeTimer" v-for="item in timeList" 
 					:class="timer.status===item.status?'active':''" 
 					:key='item.status'
 					 @click="onClickDate(item,0)">{{item.name}}</view>
 					 <view class="typeTimer" @click="showPicker($event,0)" :class="timer.status===3?'active':''">{{chooseDate}}</view>
 				</view>
 			</view>
-		</popup>
-		<popup ref="typeList" type="bottom" @change="change">
-			<view class="typeTerm">
+			<view class="typeTerm3" v-else-if="popupType==3">
 				<view class="typeTermTitle">
 					选择类型
 				</view>
 				<view class="typeTermBox">
-					<view class="typeBox" v-for="(item,idx) in tradeTypeList" 
+					<view class="typeBox" v-for="item in tradeTypeDataList" 
 					:class="typeData.typeId===item.typeId?'active':''"
 				    :key="item.typeName"
 				     v-if="item.level==3"
 					 @click="onClickTypeName(item,0)">{{item.description}}</view>
 				</view>
 			</view>
-		</popup>
-		<popup ref="tradeRecordUi" type="bottom" @change='changeMoreSelect'>
-			<view class="moreSelectCondition">
+			<view class="moreSelectCondition" v-else>
 				<view class="moreSelectList">
-					<view class="typeTerm">
+					<view class="typeTerm4">
 						<view class="typeTermTitle">
 							选择分类
 						</view>
@@ -123,48 +114,48 @@
 							 @click="withdrawTypeClick(item,1)">{{item.name}}</view>
 						</view>
 					</view>
-					<view class="typeTerm">
+					<view class="typeTerm5">
 						<view class="typeTermTitle">
 							选择日期
 						</view>
 						<view class="typeTermBox">
-							<view class="typeTimer" v-for="(item,idx) in timeList" 
+							<view class="typeTimer" v-for="item in timeList" 
 							:class="temporaryTimer.status===item.status?'active':''" 
 							:key='item.status'
 							 @click="onClickDate(item,1)">{{item.name}}</view>
 							 <view class="typeTimer" @click="showPicker($event,1)" :class="temporaryTimer.status===3?'active':''">{{temporaryDateText}}</view>
 						</view>
 					</view>
-					<view class="typeTerm">
+					<view class="typeTerm6">
 						<view class="typeTermTitle">
 							交易分类
 						</view>
 						<view class="typeTermBox">
-							<view class="typeTimer" v-for="(item,idx) in tradeTypeList" 
+							<view class="typeTimer" v-for="item in tradeTypeDataList" 
 							:class="tradeClassificationId==item.typeId?'active':''"
 							:key="item.typeName"
 							 v-if="item.level==2"
 							 @click="tradeCategory(item)">{{item.description}}</view>
 						</view>
 					</view>
-					<view class="typeTerm">
+					<view class="typeTerm7">
 						<view class="typeTermTitle">
 							资金分类
 						</view>
 						<view class="typeTermBox">
-							<view class="typeTimer" v-for="(item,idx) in tradeTypeList" 
+							<view class="typeTimer" v-for="item in tradeTypeDataList" 
 							:class="amountClassificationId==item.typeId?'active':''"
 							:key="item.typeName"
 							 v-if="item.level==1"
 							 @click="moneyCategory(item)">{{item.description}}</view>
 						</view>
 					</view>
-					<view class="typeTerm">
+					<view class="typeTerm8">
 						<view class="typeTermTitle">
 							交易类型
 						</view>
 						<view class="typeTermBox">
-							<view class="typeTimer" v-for="(item,idx) in tradeList"
+							<view class="typeTimer" v-for="item in tradeList"
 							:class="tradeTypeIds==item.typeId?'active':''"
 							:key="item.typeName"
 							 v-if="item.level==3"
@@ -179,7 +170,7 @@
 				</view>
 			</view>
 		</popup>
-		<rangeDatePick
+		<range-date-pick
 			:show="isShow"
 			@showchange="showchange"
 			:start="startTimer"
@@ -188,7 +179,7 @@
 			@change="bindChange"
 			@cancel="bindCancel"
 			themeColor="#4C83D6"
-		></rangeDatePick>
+		></range-date-pick>
 	</view>
 </template>
 
@@ -222,8 +213,8 @@
 			  return list
 			},
 			tradeList(){
-				let das = this.tradeTypeList
-				  if (das) {
+				let das = this.tradeTypeDataList
+			    if (das) {
 					das.map((item, idx) => {
 					  if (item.level === 3) {
 						if (
@@ -247,7 +238,11 @@
 					  }
 					})
 					return das
-				  }
+				}
+			},
+			tradeTypeDataList(){
+				let getTradeTypes=chache.get('tradeTypeList')
+				return chache.has('tradeTypeList')?getTradeTypes:this.tradeTypeList;
 			},
 			startTimer(){
 				return moment(new Date()).subtract(1,'years').format('YYYY-MM-DD');
@@ -274,7 +269,7 @@
 				},
 				startDate:'',
 				endDate:'',
-				type:'',
+				isOpen:false,
 				typeData: {
 				  description: '全部',
 				  level: 3,
@@ -332,7 +327,8 @@
 				isOpenSelect:0,
 				tradeClassificationId: 0,
 			    amountClassificationId: 0,
-			    tradeTypeIds: 0
+			    tradeTypeIds: 0,
+				popupType:1
 			};
 		},
 		onLoad(query) {
@@ -344,24 +340,32 @@
 					oIndex: query.oIndex
 				}
 			}
-			// 获取高度
-			this.getScreenInfo()
 			// 取时间
 			this.getTimeList();
-			// 第一次进入数据
-			this.startDate = this.timeList[0].startTimes;
-			this.endDate = this.timeList[0].endTimes
-			// this.getTradeRecord(this.statusIndex.walletType,this.typeData.typeId,this.startDate,this.endDate)
-		},
-		onReady(){
+			// 获取高度
+			this.getScreenInfo()
 			// 钱包分类
 			this.getTradeMoney()
 			// 交易类型
-			this.getTrade()
+			if(!chache.has('tradeTypeList')){
+				this.getTrade()
+			}
+			// 第一次进入数据
+			this.startDate = this.timeList[0].startTimes;
+			this.endDate = this.timeList[0].endTimes
+			this.temporaryTimer.startTimes=this.startDate
+			this.temporaryTimer.endTimes=this.endDate
 		},
 		// 打开条件筛选
 		onNavigationBarButtonTap() {
-			this.$refs.tradeRecordUi.open()
+			if(!this.isOpen){
+				this.isOpen=true
+				this.popupType=4
+				this.$refs.commonPopup.open()
+			}else{
+				this.isOpen=false
+				this.$refs.commonPopup.close()
+			}
 		},
 		methods:{
 			...mapActions(['getTimeList','getMine','getTradeType','addGetTradeRecordList']),
@@ -389,6 +393,7 @@
 				}
 				this.startDate = startTimer
 				this.endDate = endTimer
+				
 				that.addGetTradeRecordList(das).then(res=>{
 					if(mescroll){
 						mescroll.endSuccess();
@@ -398,7 +403,7 @@
 						that.pageSize=res.data.pageSize;
 						that.total=res.data.pages;
 						mescroll.endByPage(res.data.result.length, totalPage); 
-						this.$nextTick(()=>{
+						that.$nextTick(()=>{
 							mescroll.endSuccess(res.data.result.length)
 						})
 					}
@@ -424,7 +429,9 @@
 			},
 			// 打开分类
 			onClickClassification(){
-				this.$refs.recordType.open()
+				this.popupType=1
+				this.$refs.commonPopup.open()
+				// this.$refs.recordTypePopup.open()
 				this.fication=true
 			},
 			// 选择分类
@@ -432,6 +439,7 @@
 				const that=this
 				if(num==0){
 					that.statusIndex=item
+					that.temporaryStatusIndex=item;
 					that.addTradeRecord(
 						item.walletType,
 						that.typeData.typeId,
@@ -440,14 +448,16 @@
 						that.mescroll
 					)
 					that.fication=false
-					that.$refs.recordType.close()
+					this.$refs.commonPopup.close()
 				}else{
 					that.temporaryStatusIndex=item;
 				}
 			},
 			// 打开日期
 			onClickDateTimer(){
-				this.$refs.dateType.open()
+				this.popupType=2
+				this.$refs.commonPopup.open()
+				// this.$refs.dateTypePopup.open()
 				this.typeFication=true
 			},
 			// 选择日期
@@ -455,6 +465,7 @@
 				const that=this
 				if(num==0){
 					that.timer=item
+					that.temporaryTimer=item
 					that.addTradeRecord(
 						that.statusIndex.walletType,
 						that.typeData.typeId,
@@ -463,21 +474,22 @@
 						that.mescroll
 					)
 					that.typeFication=false
-					that.$refs.dateType.close()
+					this.$refs.commonPopup.close()
 				}else{
-					console.log(item)
 					that.temporaryTimer=item
 				}
 			},
 			// 打开类型
 			onClickType(){
-				this.$refs.typeList.open()
+				this.popupType=3
+				this.$refs.commonPopup.open()
+				// this.$refs.typeListPopup.open()
 				this.typeTabList=true
 			},
 			// 选择类型
 			onClickTypeName(item){
 				this.typeData=item
-				console.log(item)
+				this.tradeTypeIds=item.typeId
 				this.addTradeRecord(
 					this.statusIndex.walletType,
 					item.typeId,
@@ -485,8 +497,10 @@
 					this.endDate,
 					this.mescroll
 				)
+				this.tradeClassificationId=0
+				this.amountClassificationId=0
 				this.typeTabList=false
-				this.$refs.typeList.close()
+				this.$refs.commonPopup.close()
 			},
 			// 交易类型
 			getTrade(){
@@ -518,8 +532,12 @@
 					this.timer={
 						name: '自定义',
 						date: 99,
-						status: 3
+						status: 3,
+						startTimes:this.startDate,
+						endTimes:this.startDate
 					}
+					this.temporaryTimer=this.timer
+					this.temporaryDateText=data[0]+"至"+data[1]
 					this.addTradeRecord(
 						this.statusIndex.walletType,
 						this.typeData.typeId,
@@ -528,7 +546,7 @@
 						this.mescroll
 					)
 					this.typeFication=false
-					this.$refs.dateType.close()
+					this.$refs.commonPopup.close()
 				}else{
 					this.temporaryTimer={
 						name: '自定义',
@@ -612,7 +630,7 @@
 				this.statusIndex=this.temporaryStatusIndex
 				this.timer=this.temporaryTimer
 				this.chooseDate=this.temporaryDateText
-				let typeList=this.tradeTypeList;
+				let typeList=this.tradeTypeDataList;
 				let filterType=typeList.filter(item=>item.typeId==typeIds&&item.typeId!==0&&item.level==3);
 				if(filterType.length>0){
 					this.temporaryType=filterType[0]
@@ -632,7 +650,8 @@
 					this.timer.endTimes,
 					this.mescroll
 				)
-				this.$refs.tradeRecordUi.close()
+				this.isOpen=false
+				this.$refs.commonPopup.close()
 			},
 			// 高度
 			getScreenInfo(){
@@ -666,6 +685,7 @@
 					that.fication=false
 					that.typeFication=false
 					that.typeTabList=false
+					that.isOpen=false
 				}
 			}
 		}

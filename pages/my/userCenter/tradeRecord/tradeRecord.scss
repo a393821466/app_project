@@ -1,13 +1,10 @@
 .tradeRecordView{
-	.clearBox{
-		height:110upx;
-	}
+	width:100%;
 	.tradeRecordNavigator{
 		width:100%;
 		height:110upx;
 		background:#f8f8f8;
 		display:flex;
-		flex-direction:row;
 		border-bottom:1px solid #f3f3f3;
 		.condition{
 			flex:1;
@@ -85,7 +82,7 @@
 		}
 	}
 }
-.typeTerm{
+.typeTerm1,.typeTerm2,.typeTerm3,.typeTerm4,.typeTerm5,.typeTerm6,.typeTerm7,.typeTerm8{
 	.typeTermTitle{
 		text-align:left;
 		line-height:76rpx;
