@@ -22,7 +22,20 @@
 				"navigationBarTitleText": "行情",
 				"enablePullDownRefresh": true
 			}
-		}, {
+		},{
+            "path" : "pages/market/marketList/marketList",
+            "style" : {
+            	"navigationBarTitleText": "行情列表",
+            	"navigationBarBackgroundColor": "#1b82d1",
+            	"navigationBarTextStyle": "white",
+            	"enablePullDownRefresh": false,
+            	"disableScroll": true,
+            	"app-plus" : {
+            		"bounce" : "none"
+            	}
+            }
+        },
+		{
 			"path": "pages/news/news",
 			"style": {
 				"navigationBarTitleText": "资讯"

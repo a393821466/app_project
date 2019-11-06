@@ -105,7 +105,7 @@
 	import noMore from '@/components/noMore'
 	import chache from '@/common/utils/storage'
 	import utils from '@/common/utils'
-	import {showUiModel} from '@/common/utils/dialog.config'
+	import {showUiToast,showUiModel} from '@/common/utils/dialog.config'
 	export default {
 		name:'my_view',
 		components:{
@@ -233,6 +233,7 @@
 			...mapActions(['getMine']),
 			gridClick (item, index) {	//格子菜单点击事件
 				if(item.url==''){
+					showUiToast('该区域正在施工!');
 					return
 				}
 				this.$mRouter.push({
@@ -243,7 +244,7 @@
 				this.getMine().then(res=>{
 					uni.stopPullDownRefresh();
 					if(!res.status){
-						showUiModel(res.msg)
+						showUiToast(res.msg)
 					}
 				}).catch(err=>{
 					uni.stopPullDownRefresh();
@@ -262,6 +263,8 @@
 			goIntLink(e,name){
 				let routeUrl={};
 				if(name=='rechange'){
+					showUiToast('该区域正在施工!');
+					return
 				} 
 				if(name=='balance'){
 					routeUrl=this.$routers.myBlance

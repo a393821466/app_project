@@ -32,7 +32,7 @@
 	export default {
 		data() {
 			return {
-				val:2
+				val:1
 			};
 		},
 		computed:{

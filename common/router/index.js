@@ -29,9 +29,13 @@ export default {
 		name: "首页",
 		path: "/pages/index/index"
 	},
-	reg: {
+	market: {
 		name: "行情",
 		path: "/pages/market/market"
+	},
+	marketList:{
+		name: "行情列表",
+		path: "/pages/market/marketList/marketList"
 	},
 	news: {
 		name: "资讯",

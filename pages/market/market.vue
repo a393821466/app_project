@@ -2,7 +2,7 @@
 <view class="market_box" :class="themeFontSize">
 	<view class="category_home" v-if="categoryData.length>0">
 		<view class="category_list" v-for="(item,idx) in categoryData" :key="item.id" :class="idx===categoryData.length-1&&categoryData.length%2==1?'upside_list_class':''"
-		 :style='{backgroundColor:!item.color?"#999":item.color}'>
+		 :style='{backgroundColor:!item.color?"#999":item.color}' @click="goMarketList(item)">
 			<text class="category_text">{{item.templateName}}</text>
 			<view :class="idx===categoryData.length-1&&categoryData.length%2==1?'img':'category_backgorund'"></view>
 		</view>
@@ -16,6 +16,7 @@
 
 <script>
 	import chache from '@/common/utils/storage'
+	import {showUiModel} from '@/common/utils/dialog.config'
 	import {
 		mapActions,
 		mapGetters
@@ -60,6 +61,30 @@
 				}).catch(err=>{
 					return err;
 				})
+			},
+			// 去行情列表
+			goMarketList(item){
+				const that=this
+				if(chache.has('token')){
+					this.$mRouter.push({
+						route:this.$routers.marketList,
+						query:{
+							code:item.templateCode,
+							marketName:item.templateName
+						}
+					})
+				}else{
+					showUiModel({
+						'content': '您还未登陆,去登陆?',
+						'showCancel': true
+					}, (e) => {
+						if (e.confirm) {
+							that.$mRouter.push({
+								route:that.$routers.login
+							})
+						}
+					})
+				}
 			}
 		},
 		// 下拉刷新
@@ -73,64 +98,5 @@
 </script>
 
 <style lang="scss">
-/**
- * 分类
- */
-.market_box{
-	padding:20rpx;
-	.category_home {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		.category_list {
-			width:345rpx;
-			height: 246rpx;
-			position: relative;
-			border-radius: 10rpx;
-			flex: 0 0 1;
-			margin-bottom: 20rpx;
-			&:nth-child(even) {
-				margin-left: 20rpx;
-			}
-			.category_text {
-				text-align: center;
-				line-height: 246rpx;
-				text-align: center;
-				display: block;
-				color: #fff;
-			}
-			.category_backgorund {
-				position: absolute;
-				background: url('../../static/images/quick_bg1.png') no-repeat;
-				width: 100%;
-				height: 100%;
-				background-size: cover;
-				top: 0;
-				left: 0;
-			}
-		}
-	}
-}
-.upside_list_class {
-	width: 100%;
-	position:relative;
-	flex: 0 0 100%;
-	.img {
-		position:absolute;
-		top:0;
-		left:0;
-		width:100%;
-		height:100%;
-		background: url('../../static/images/quick_bg2.png') no-repeat;
-		background-size:cover;
-	}
-}
-.category_boxs{
-	.category_list{
-		&:nth-last-child(1){
-			width: 100%;
-			flex: 0 0 100%;
-		}
-	}
-}
+@import './market.scss';
 </style>

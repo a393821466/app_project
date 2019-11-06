@@ -10,11 +10,16 @@
       :class="[type, ani, animation ? 'ani' : '', !custom ? 'uni-custom' : '']"
       class="uni-popup__wrapper"
       @click="close(true)">
-      <view
-        class="uni-popup__wrapper-box"
-        @click.stop="clear">
-        <slot />
-      </view>
+		<!-- <scroll-view 
+		@click.stop="clear" 
+		:scroll-top="scrollTop" 
+		scroll-y="true" 
+		class="scroll-Y uni-popup__wrapper-box" 
+		@scroll="scroll"> -->
+		<view class="uni-popup__wrapper-box">
+			<slot />
+		</view>
+		<!-- </scroll-view> -->
     </view>
   </view>
 </template>
@@ -51,13 +56,14 @@ export default {
   data () {
     return {
       ani: '',
+	  scrollTop:0,
       showPopup: false
     }
   },
   watch: {
     show (newValue) {
       if (newValue) {
-        this.open()
+		this.open()
       } else {
         this.close()
       }
@@ -88,7 +94,10 @@ export default {
           this.showPopup = false
         }, 300)
       })
-    }
+    },
+	scroll(e){
+		console.log(e)
+	}
   }
 }
 </script>
