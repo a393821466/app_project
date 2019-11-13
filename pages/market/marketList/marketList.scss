@@ -1,0 +1,22 @@
+.top-warp{
+	z-index: 999;
+	position: fixed;
+	top: --window-top; /* css变量 */
+	left: 0;
+	height: 80upx;
+	width:100%;
+	text-align:left;
+	background-color: white;
+	border-bottom: 1upx solid #ddd;
+}
+.top-warp .tabs{
+	display: inline-block;
+	padding:0 40upx;
+	line-height: 80upx;
+	font-size: 28upx;
+	margin-left:20upx;
+}
+.top-warp .active{
+	border-bottom: 2upx solid rgb(27, 130, 209);
+	color: rgb(27, 130, 209);
+}

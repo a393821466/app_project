@@ -1,5 +1,5 @@
 const config={
-	domain:process.env.NODE_ENV=='development'?'https://tmk.eanjee.com':'https://tmk.eanjee.com',
+	domain:'https://tmk.eanjee.com',
 	sqlLiteConfig:{
 		name:'futures',
 		path:'_doc/futures.db',

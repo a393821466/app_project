@@ -58,5 +58,8 @@ export default{
 		withdrawRecord: `/finance/withdraw/find/page`, //提现记录
 		tradeRecord: `/trade/flow/find/page`, // 交易明细
 		tradeType: `/trade/tradeType/find` // 交易明细类型
+	},
+	marketTrade:{
+		marketList: `/business/getQuotaList` // 行情列表
 	}
 }

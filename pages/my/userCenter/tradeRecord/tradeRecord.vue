@@ -115,7 +115,7 @@
 							<view class="typeList" :class="[temporaryStatusIndex.oIndex===idx?'active':'']" 
 							 v-for="(item,idx) in allBanlances" :key="item.walletType"
 							 v-show="item.walletType!==4"
-							 @click="withdrawTypeClick(item,1)">{{item.name}}</view>
+							 @click.stop="withdrawTypeClick(item,1)">{{item.name}}</view>
 						</view>
 					</view>
 					<view class="typeTerm4 r_select_list">
@@ -126,8 +126,8 @@
 							<view class="typeTimer" v-for="item in timeList" 
 							:class="temporaryTimer.status===item.status?'active':''" 
 							:key='item.status'
-							 @click="onClickDate(item,1)">{{item.name}}</view>
-							 <view class="typeTimer" @click="showPicker($event,1)" :class="temporaryTimer.status===3?'active':''">{{temporaryDateText}}</view>
+							 @click.stop="onClickDate(item,1)">{{item.name}}</view>
+							 <view class="typeTimer" @click.stop="showPicker($event,1)" :class="temporaryTimer.status===3?'active':''">{{temporaryDateText}}</view>
 						</view>
 					</view>
 					<view class="typeTerm4 r_select_list">
@@ -139,7 +139,7 @@
 							:class="tradeClassificationId==item.typeId?'active':''"
 							:key="item.typeName"
 							 v-if="item.level==2"
-							 @click="tradeCategory(item)">{{item.description}}</view>
+							 @click.stop="tradeCategory(item)">{{item.description}}</view>
 						</view>
 					</view>
 					<view class="typeTerm4 r_select_list">
@@ -151,7 +151,7 @@
 							:class="amountClassificationId==item.typeId?'active':''"
 							:key="item.typeName"
 							 v-if="item.level==1"
-							 @click="moneyCategory(item)">{{item.description}}</view>
+							 @click.stop="moneyCategory(item)">{{item.description}}</view>
 						</view>
 					</view>
 					<view class="typeTerm4 r_select_list">
@@ -164,7 +164,7 @@
 							:key="item.typeName"
 							 v-if="item.level==3"
 							 :style="item.typeId==0?'':item.check?'':'backgroundColor:#f8f8f8;color:#ccc'"
-							 @click="tradeTypeClick(item)">{{item.description}}</view>
+							 @click.stop="tradeTypeClick(item)">{{item.description}}</view>
 						</view>
 					</view>
 				</scroll-view>
