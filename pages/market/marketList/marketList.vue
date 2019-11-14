@@ -6,6 +6,12 @@
 				:class="{'active':curIndex===i}" 
 				@click="changeTab(i)">{{tab}}</view>
 			</view>
+			<!-- <view class="navTitle">
+				<view class="nav nav1">商品编码</view>
+				<view class="nav nav2">商品名称</view>
+				<view class="nav nav3">涨幅</view>
+				<view class="nav nav4">最新价/时间</view>
+			</view> -->
 		</view>
 		<swiper class="swiper" :current="curIndex" @change="swiperChange" :style="{height:screenHeight+'px'}">
 			<swiper-item v-for="(item,idx) in list" :key='idx'>

@@ -3,20 +3,56 @@
 	position: fixed;
 	top: --window-top; /* css变量 */
 	left: 0;
-	height: 80upx;
 	width:100%;
 	text-align:left;
 	background-color: white;
 	border-bottom: 1upx solid #ddd;
+	background:#f5f5f5;
 }
 .top-warp .tabs{
 	display: inline-block;
-	padding:0 40upx;
-	line-height: 80upx;
+	padding:0 30upx;
+	line-height: 60upx;
 	font-size: 28upx;
 	margin-left:20upx;
+	margin-top:10upx;
+	margin-bottom:10upx;
+	border:solid 1px #ccc;
+	color:#f8f8f8;
+	border-radius:8upx;
+	color:#ccc;
 }
 .top-warp .active{
-	border-bottom: 2upx solid rgb(27, 130, 209);
-	color: rgb(27, 130, 209);
+	// border-bottom: 2upx solid rgb(27, 130, 209);
+	// color: rgb(27, 130, 209);
+	border:solid 1px rgb(27, 130, 209);
+	color:#f8f8f8;
+	border-radius:8upx;
+	color:rgb(27, 130, 209);
+}
+.top-warp .navTitle{
+	display:flex;
+	flex-direction: row;
+	padding:0 20upx;
+	border-top:1px solid #eee;
+	.nav{
+		flex:1;
+		font-size:28upx;
+		line-height:70upx;
+		height:70upx;
+		text-align:center;
+		color:#888;
+		&.nav1{
+			width:120upx;
+			flex:0 0 120upx;
+		}
+		&.nav2{
+			width:160upx;
+			flex:0 0 160upx;
+		}
+		&.nav3{
+			width:160upx;
+			flex:0 0 160upx;
+		}
+	}
 }

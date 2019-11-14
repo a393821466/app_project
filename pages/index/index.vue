@@ -1,7 +1,7 @@
 <template>
 	<view class="indexHome" :class="themeFontSize">
 		<banner :bannerData='bannerData'></banner>
-		<service></service>
+		<!-- <service></service> -->
 		<notice-view :notice='notice'></notice-view>
 		<category :temList="temList"></category>
 		<news-person></news-person>
@@ -15,7 +15,7 @@
 		mapGetters
 	} from 'vuex'
 	import banner from './homeComponent/banner'
-	import service from './homeComponent/service'
+	// import service from './homeComponent/service'
 	import noticeView from './homeComponent/notice'
 	import category from './homeComponent/category'
 	import activity from './homeComponent/activity'
@@ -162,7 +162,7 @@
 		// },
 		components: {
 			banner,
-			service,
+			// service,
 			noticeView,
 			category,
 			newsPerson,

@@ -1,7 +1,18 @@
 // 基本字体
 .daytime1{
 	// 首页
-	.service-text,.text,.category_text,.news_title,.activity_text,.news_text{
+	.service-text{
+		font-size:28upx;
+	}
+	.categoryList{
+		.icon{
+			font-size:$uni-font-size-base;
+		}
+		.categoryText{
+			font-size:$uni-font-size-sm;
+		}
+	}
+	.text,.category_text,.news_title,.activity_text,.news_text{
 		font-size:$uni-font-size-sm;
 	}
 	// 公告
@@ -228,7 +239,18 @@
 // 中号字体
 .daytime2{
 	// 首页
-	.service-text,.text,.category_text,.news_title,.activity_text{
+	.service-text{
+		font-size:30upx;
+	}
+	.categoryList{
+		.icon{
+			font-size:$uni-font-size-lg;
+		}
+		.categoryText{
+			font-size:$uni-font-size-base;
+		}
+	}
+	.text,.category_text,.news_title,.activity_text{
 		font-size:$uni-font-size-base;
 	}
 	.news_text{
@@ -464,7 +486,18 @@
 // 大号字体
 .daytime3{
 	// 首页
-	.service-text,.text,.category_text,.news_title,.activity_text,.news_text{
+	.service-text{
+		font-size:$uni-font-size-base;
+	}
+	.categoryList{
+		.icon{
+			font-size:38upx;
+		}
+		.categoryText{
+			font-size:34upx;
+		}
+	}
+	.text,.category_text,.news_title,.activity_text,.news_text{
 		font-size:$uni-font-size-lg;
 	}
 	// 公告

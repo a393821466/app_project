@@ -121,8 +121,8 @@
 							&.market_title{
 								font-size:30rpx;
 								line-height:50rpx;
-								width:40%;
-								flex:0 0 40%;
+								width:50%;
+								flex:0 0 50%;
 							}
 							&.market_percentage{
 								font-size:24rpx;

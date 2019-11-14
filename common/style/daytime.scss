@@ -1,5 +1,5 @@
 $bgColor:#fff; /* 背景颜色 */
-$materColor:#2580EF; /* 主题颜色 */
+$materColor:rgb(27, 130, 209); /* 主题颜色 */
 $fontColor:#666; /* 字体颜色 */ 
 $skeleton:#efefef; /*骨架颜色*/
 
@@ -30,8 +30,8 @@ $skeleton:#efefef; /*骨架颜色*/
 	background:#d8e6f6;
 }
 /* 首页通知字体颜色 */
-.notice_box{
-	background:$skeleton;
+.noticeBox{
+	background:#fff;
 }
 .text,.notice_icon{
 	color:#333;
