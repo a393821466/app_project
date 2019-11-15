@@ -13,17 +13,18 @@
 		</view>
 	</view> -->
 	<scroll-view class="category_home" scroll-x="true" @scroll="scroll" scroll-left="1">
-		<view class="categoryList" v-for="(item,idx) in categoryData" :key="idx">
-			<view class="categoryNavigator" v-for="(items,idx) in item" :key="items.id">
-				<view class="icon" :style='{backgroundColor:!items.color?"#999":items.color}'>
-					{{!items.templateName?'':items.templateName.substr(0,1)}}
-				<view class="category_backgorund"></view></view>
-				<text class="categoryText">{{!items.templateName?'':items.templateName.substr(0,4)}}</text>
-			</view>
+		<!-- view class="categoryList" v-for="(item,idx) in categoryData" :key="idx">
+			
+		</view> -->
+		<view class="categoryNavigator" v-for="items in categoryData" :key="items.id">
+			<view class="icon" :style='{backgroundColor:!items.color?"#999":items.color}'>
+				{{!items.templateName?'':items.templateName.substr(0,1)}}
+			<view class="category_backgorund"></view></view>
+			<text class="categoryText">{{!items.templateName?'':items.templateName.substr(0,4)}}</text>
 		</view>
 	</scroll-view>
 	<div class="scrollBox">
-		<div class="scrollWidth" :style="{'width':len==1?'100%':scrollX+'%'}"></div>
+		<div class="scrollWidth" :style="{'width':len<=4?'100%':scrollX+'%'}"></div>
 	</div>
 	<div class="clearBox"></div>
 </view>
@@ -50,11 +51,14 @@ export default{
 		categoryData(){
 			const that=this
 			if(this.temList.length>0){
-				return this.group(this.temList,4)
+				// return this.group(this.temList,4)
+				that.len=that.temList.length
+				return this.temList
 			}else{
 				if(chache.has('template')){
 					let tem=chache.get('template')
-					return this.group(tem,4)
+					that.len=tem.length
+					return tem
 				}else{
 					return [];
 				}
@@ -96,42 +100,42 @@ export default{
 .category_home {
 	width: 100%;
 	white-space: nowrap;
-	.categoryList{
+	// .categoryList{
+	// 	display:inline-block;
+	// 	white-space:normal;
+	// 	width:100%;
+	.categoryNavigator{
 		display:inline-block;
-		white-space:normal;
-		width:100%;
-		.categoryNavigator{
-			display:inline-block;
-			width:25%;
-			margin-top:20upx;
-			.icon{
-				width:90upx;
-				height:90upx;
-				background:#009999;
-				color:#f8f8f8;
-				text-align:center;
-				line-height:90upx;
-				border-radius:90upx;
-				position:relative;
-				margin:0 auto;
-			}
-			.categoryText{
-				text-align:center;
-				line-height:50upx;
-				display:block;
-				color:#666;
-			}
-			.category_backgorund {
-				position: absolute;
-				background: url('../../../static/images/quick_bg3.png') no-repeat;
-				width: 100%;
-				height: 100%;
-				background-size: cover;
-				top: 0;
-				left: 0;
-			}
+		width:25%;
+		margin-top:20upx;
+		.icon{
+			width:90upx;
+			height:90upx;
+			background:#009999;
+			color:#f8f8f8;
+			text-align:center;
+			line-height:90upx;
+			border-radius:90upx;
+			position:relative;
+			margin:0 auto;
+		}
+		.categoryText{
+			text-align:center;
+			line-height:50upx;
+			display:block;
+			color:#666;
+		}
+		.category_backgorund {
+			position: absolute;
+			background: url('../../../static/images/quick_bg3.png') no-repeat;
+			width: 100%;
+			height: 100%;
+			background-size: cover;
+			top: 0;
+			left: 0;
 		}
 	}
+	// }
 }
 .scrollBox{
 	width:80upx;

@@ -52,7 +52,7 @@
 				showList:[],
 				mescroll: null, //mescroll实例对象
 				downOption:{
-					auto:true, // 不自动加载
+					auto:false, // 不自动加载
 				},
 				upOption:{
 					use:false,

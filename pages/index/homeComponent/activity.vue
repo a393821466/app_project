@@ -127,17 +127,16 @@
 </script>
 
 <style lang="scss">
-	/*
+/*
 ** 热门活动
 */
 	.hot_activity {
-		margin: 20rpx 0rpx;
-
+		margin: 20upx 0rpx 5upx;
+		background:#fff;
 		.activity_list {
 			width: 100%;
 			height: 180rpx;
 			margin-top: 15rpx;
-
 			.imgUrl {
 				width: 100%;
 				height: 100%;
@@ -164,57 +163,6 @@
 			color: #fff;
 			line-height: 50rpx;
 		}
-
-		// .activity_box{
-		// 	.activity_list{
-		// 		width:100%;
-		// 		height:176rpx;
-		// 		background-size:100% 100%;
-		// 		margin:20rpx 0 10rpx 0;
-		// 		display:flex;
-		// 		flex-direction: row;
-		// 	}
-		// 	.activity{
-		// 		flex:1;
-		// 		.money_num{
-		// 			font-size:92rpx;
-		// 			line-height:176rpx;
-		// 			text-align:center;
-		// 			display:block;
-		// 		}
-		// 		.day_money{
-		// 			font-size:28rpx;
-		// 			width:160rpx;
-		// 			text-align:center;	
-		// 			margin-top:50rpx;
-		// 		}
-		// 		.box_money_unit{
-		// 			font-size:36rpx;
-		// 			color:#fff;
-		// 		}
-		// 		.task{
-		// 			font-size:28rpx;
-		// 			margin:20rpx 0 10rpx 0;
-		// 			text-align:center;
-		// 		}
-		// 		text{
-		// 			display:block;
-		// 		}
-		// 		.to_detail{
-		// 			width:140rpx;
-		// 			height:50rpx;
-		// 			color: #dda643;
-		// 			background-color: #fdfbf6;
-		// 			border-radius:100rpx;
-		// 			background: linear-gradient(-180deg,#fdfbf6,#fbe3ad);
-		// 			font-size:28rpx;
-		// 			line-height:50rpx;
-		// 			text-align:center;
-		// 			margin:0 auto;
-		// 			cursor:pointer;
-		// 		}
-		// 	}
-		// }
 		.activity_image_skeleton {
 			width: 280rpx;
 			height: 40rpx;
@@ -226,5 +174,8 @@
 				border-radius: 10rpx;
 			}
 		}
+	}
+	.hot_activity_box{
+		padding:10upx 0;
 	}
 </style>

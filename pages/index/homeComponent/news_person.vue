@@ -40,6 +40,9 @@ export default{
 ** 新手引导
 */
 .news_prople{
+	background:#fff;
+	margin-top:20upx;
+	padding:20upx;
 	.news_images{
 		width:100%;
 		height:52rpx;

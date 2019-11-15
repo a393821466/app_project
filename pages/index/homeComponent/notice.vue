@@ -109,11 +109,11 @@
 		  flex-direction: row;
 		  border-radius:10rpx;
 		  .notice_icon{
-			  flex:0 0 80upx;
-			  width:80upx;
+			  flex:0 0 70upx;
+			  width:70upx;
 			  text-align:center;
 			  position:relative;
-			  padding-top:23rpx;
+			  padding-top:20rpx;
 			  .uni-icon-laba{
 				 position:absolute;
 				 top:20rpx;
@@ -148,7 +148,7 @@
 		  		.service-text {
 		  			flex: 1;
 		  			line-height: 45rpx;
-					text-indent:10rpx;
+					text-indent:5rpx;
 		  		}
 		  	}
 		  }
