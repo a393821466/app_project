@@ -34,10 +34,11 @@
 	import MescrollUni from "@/components/mescroll-uni/mescroll-uni.vue"
 	import MarketListContent from "./marketContent/marketListContent"
 	import UUID from 'uuid'
-	import {
-	  command,
-	  msg
-	} from '@/static/js/proto-helper'
+	// import {
+	//   command,
+	//   msg
+	// } from '@/static/js/proto-helper'
+	// import command from '@/static/js/Command_pb'
 	import {mapActions,mapGetters} from 'vuex'
 	export default {
 		components: {
@@ -52,7 +53,7 @@
 				showList:[],
 				mescroll: null, //mescroll实例对象
 				downOption:{
-					auto:false, // 不自动加载
+					auto:true, // 不自动加载
 				},
 				upOption:{
 					use:false,
@@ -115,7 +116,9 @@
 		},
 		// 关闭socket
 		beforeDestroy() {
-			this.closeSocket()
+			if(this.socketTask!=null){
+				this.closeSocket()
+			}
 		},
 		methods: {
 			...mapActions(['createWebsocket','getMarketList','closeSocket']),
@@ -136,7 +139,7 @@
 				const _that = this
 				this.getMarketList({templateCode:code}).then(res=>{
 					_that.list=_that.marketList
-					_that.startSocket()
+					// _that.startSocket()
 					if(mescroll){
 						mescroll.endSuccess()
 					}

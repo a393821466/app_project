@@ -9,8 +9,14 @@
 
 var jspb = require('google-protobuf')
 var goog = jspb
+//#ifdef H5
 var global = Function('return this')()
-
+// #endif
+// #ifndef H5
+var global = (function(){
+  return this;
+})()
+//#endif
 var Command_pb = require('./Command_pb.js')
 var FuturesQuoteData_pb = require('./FuturesQuoteData_pb.js')
 var FuturesQuoteSimpleData_pb = require('./FuturesQuoteSimpleData_pb.js')

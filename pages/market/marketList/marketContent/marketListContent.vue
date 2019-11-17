@@ -1,13 +1,13 @@
 <template>
 	<view class="pd-list">
-		<view class="pd-li" v-for="(item,idx) in itemData" :key='item.commodityCode+idx' :style="{'backgroundColor':item.status==2?'#eee':'#fff'}">
+		<view class="pd-li" v-for="(item,idx) in itemData" :key='item.commodityCode' :style="{'backgroundColor':item.status==2?'#eee':'#fff'}">
 			<view class="market marketLeft">
-				<text class="icon" :style="{backgroundColor:item.icon}">{{!item.commodityCode?'-':item.commodityCode.substr(0,3)}}</text>
+				<text class="icon" :style="{backgroundColor:item.icon}">{{!item.commodityCode?'-':item.commodityCode}}</text>
 			</view>
 			<view class="market marketCenter">
 				<view class="market_center_title">
 					<view class="b market_title">
-						{{item.CommodityName}}
+						{{!item.CommodityName?'-':item.CommodityName}}
 					</view>
 					<view class="b market_percentage" 
 					:class="item.status!==2?(item.upDropSpeed>0&&item.status===1?'rise':'fall'):'close'">
@@ -26,7 +26,7 @@
 					</view>
 				</view>
 				<view class="market_remark">
-					{{item.remark}}
+					{{!item.remark?'-':item.remark}}
 				</view>
 			</view>
 			<view class="market marketRight">
@@ -35,7 +35,7 @@
 					{{!item.lastPrice?'-':item.lastPrice}}
 				</view>
 				<view class="market_Timer">
-					{{item.tradeTime}}
+					{{!item.tradeTime?'-':item.tradeTime}}
 				</view>
 			</view>
 		</view>
@@ -85,7 +85,7 @@
 <style lang="scss">
 	/*数据列表*/
 	.pd-list{
-		padding:0 20rpx;
+		padding:10rpx 20rpx;
 		.pd-li{
 			position: relative;
 			box-shadow:0rpx 0rpx 8rpx #ccc;

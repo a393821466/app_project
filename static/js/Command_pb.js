@@ -9,7 +9,14 @@
 
 var jspb = require('google-protobuf')
 var goog = jspb
+//#ifdef H5
 var global = Function('return this')()
+// #endif
+// #ifndef H5
+var global = (function(){
+  return this;
+})()
+//#endif
 
 goog.exportSymbol('proto.CommandType', null, global)
 /**

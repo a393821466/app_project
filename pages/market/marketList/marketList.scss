@@ -16,19 +16,17 @@
 	font-size: 28upx;
 	margin-left:20upx;
 	margin-top:10upx;
-	margin-bottom:10upx;
-	border:solid 1px #ccc;
-	color:#f8f8f8;
-	border-radius:8upx;
-	color:#ccc;
+	// border:solid 1px #ccc;
+	// border-radius:8upx;
+	color:#999;
 }
 .top-warp .active{
-	// border-bottom: 2upx solid rgb(27, 130, 209);
-	// color: rgb(27, 130, 209);
-	border:solid 1px rgb(27, 130, 209);
-	color:#f8f8f8;
-	border-radius:8upx;
-	color:rgb(27, 130, 209);
+	border-bottom: 2upx solid rgb(27, 130, 209);
+	color: rgb(27, 130, 209);
+	// border:solid 1px rgb(27, 130, 209);
+	// color:#f8f8f8;
+	// border-radius:8upx;
+	// color:rgb(27, 130, 209);
 }
 .top-warp .navTitle{
 	display:flex;
