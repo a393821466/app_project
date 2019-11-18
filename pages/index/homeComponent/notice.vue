@@ -109,8 +109,8 @@
 		  flex-direction: row;
 		  border-radius:10rpx;
 		  .notice_icon{
-			  flex:0 0 70upx;
-			  width:70upx;
+			  flex:0 0 10%;
+			  width:10%;
 			  text-align:center;
 			  position:relative;
 			  padding-top:20rpx;
@@ -122,8 +122,8 @@
 			  }
 		  }
 		  .notice{
-			  width:440upx;
-			  flex:0 0 440upx;
+			  width:60%;
+			  flex:0 0 60%;
 			  text-overflow: ellipsis;
 			  white-space: nowrap; 
 			  overflow: hidden;
@@ -137,7 +137,9 @@
 		  	display: flex;
 		  	flex-direction: row-reverse;
 		  	height: 80rpx;
-			flex:0 0 1;
+			flex:0 0 30%;
+			width:30%;
+			text-algin:right;
 		  	.service-input {
 		  		align-self: center;
 		  		display: flex;

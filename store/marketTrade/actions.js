@@ -23,11 +23,11 @@ export default{
 		if (dev === 'development') {
 		  t1 = 'wss://' + socketUrl + '/ws'
 		} else {
-		  t1 = (u === 'https:' ? 'wss://' : 'ws://') + socketUrl + '/ws'
+		  t1 = (u[0] === 'https' ? 'wss://' : 'ws://') + socketUrl + '/ws'
 		}
 		// #endif
 		// #ifndef H5
-		  t1 = (u === 'https:' ? 'wss://' : 'ws://') + socketUrl + '/ws'
+		  t1 = (u[0] === 'https' ? 'wss://' : 'ws://') + socketUrl + '/ws'
 		// #endif
 		await commit('CONNECTSOCKET',t1)
 		openSocket()
@@ -37,22 +37,22 @@ export default{
 		})
 		// 监听关闭
 		state.socketTask.onClose(()=>{
-			console.log('关闭socket')
+			console.log('watch close socket')
 		})
 		// 监听出错
-		state.socketTask.onError(()=>{
-			console.log('socket连接出错了')
+		state.socketTask.onError(res =>{
+			console.log('socket connect err:'+JSON.stringify(res))
 		})
 		function openSocket(){
 			// 打开socket并发送数据
 			state.socketTask.onOpen((rs)=>{
-				console.log("WebSocket连接正常...")
+				console.log("WebSocket connect normal...")
 				commit('SOCKETISOPEN',true)
-				state.socketTask._webSocket.binaryType = 'arraybuffer'
+				// state.socketTask._webSocket.binaryType = 'arraybuffer'
 				state.socketTask.send({
 					data:res,
 					success() {
-						console.log("消息发送成功");
+						console.log("message send success...");
 					}
 				})
 			})

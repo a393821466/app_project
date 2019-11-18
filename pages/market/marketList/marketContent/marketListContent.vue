@@ -1,6 +1,7 @@
 <template>
 	<view class="pd-list">
-		<view class="pd-li" v-for="(item,idx) in itemData" :key='item.commodityCode' :style="{'backgroundColor':item.status==2?'#eee':'#fff'}">
+		<view class="pd-li" v-for="(item,idx) in itemData" :key='item.commodityCode' 
+		:style="{'backgroundColor':item.status==2?'#eee':'#fff'}" @click="goMarketInset(item)">
 			<view class="market marketLeft">
 				<text class="icon" :style="{backgroundColor:item.icon}">{{!item.commodityCode?'-':item.commodityCode}}</text>
 			</view>
@@ -43,6 +44,8 @@
 </template>
 
 <script>
+	import {showUiToast} from '@/common/utils/dialog.config'
+	import {mapActions,mapGetters} from 'vuex'
 	export default {
 		name:'marketListContent',
 		props:{
@@ -51,9 +54,37 @@
 				default(){
 					return []
 				}
+			},
+			marketCode:{
+				type:[Array,Object],
+				required:true
 			}
 		},
+		computed:{
+			...mapGetters(['socketTask'])
+		},
 		methods:{
+			...mapActions(['closeSocket']),
+			goMarketInset(item){
+				if (item.status === 3) {
+					showUiToast('该商品异常,请选择其它商品');
+					return
+				  }
+				if(this.socketTask!=null){
+				  	this.closeSocket()
+				}
+				this.$mRouter.push({
+					route:this.$routers.marketDetail,
+					query:{
+						tpCode:this.marketCode.code,
+						CommodityName: item.CommodityName,
+						commodityCode: item.commodityCode,
+						contractCode: item.contractCode,
+						productTypeCode: item.productTypeCode,
+						priceDecimalPlaces: item.priceDecimalPlaces
+					}
+				})
+			},
 			getUpPrice(upDropSpeed) {
 			  let num
 			  if (upDropSpeed === undefined || upDropSpeed === 'NaN') {
@@ -103,7 +134,6 @@
 						background:#ccc;
 						display:block;
 						border-radius:50%;
-						font-size:32rpx;
 						text-align:center;
 						line-height:90rpx;
 						margin:30rpx 0 30rpx 16rpx;
@@ -119,13 +149,11 @@
 						.b{
 							flex:1;
 							&.market_title{
-								font-size:30rpx;
 								line-height:50rpx;
 								width:50%;
 								flex:0 0 50%;
 							}
 							&.market_percentage{
-								font-size:24rpx;
 								color:#fff;
 								width:40%;
 								flex:0 0 40%;
@@ -149,7 +177,6 @@
 								}
 							}
 							&.xs{
-								font-size:24rpx;
 								text-align:center;
 								line-height:50rpx;
 								color:#999;
@@ -157,9 +184,8 @@
 						}
 					}
 					.market_remark{
-						font-size:24rpx;
 						color:#999;
-						line-height:58rpx;
+						line-height:62rpx;
 					}
 				}
 				&.marketRight{
@@ -169,7 +195,6 @@
 						font-weight:bold;
 					}
 					.market_Timer{
-						font-size:24rpx;
 						line-height:56rpx;
 						color:#888;
 						text-align:center;

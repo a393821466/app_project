@@ -37,6 +37,10 @@ export default {
 		name: "行情列表",
 		path: "/pages/market/marketList/marketList"
 	},
+	marketDetail:{
+		name: "行情详情",
+		path: "/pages/market/marketChart/marketChart"
+	},
 	news: {
 		name: "资讯",
 		path: "/pages/news/news"

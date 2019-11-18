@@ -34,6 +34,27 @@
             		"bounce" : "none"
             	}
             }
+        },{
+            "path" : "pages/market/marketChart/marketChart",
+            "style" : {
+				"navigationBarTitleText": "行情图",
+				"navigationBarBackgroundColor": "#1b82d1",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"disableScroll": true,
+				"app-plus" : {
+					"bounce" : "none"
+				},
+				"titleNView": {
+					"buttons": [{
+						"text": "规则",
+						"fontSize": "14",
+						"float": "right",
+						"color": "#fff",
+						"width": "60px"
+					}]
+				}
+			}
         },
 		{
 			"path": "pages/news/news",

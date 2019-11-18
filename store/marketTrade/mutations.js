@@ -1,4 +1,5 @@
 import chache from '@/common/utils/storage'
+import socket from 'plus-websocket'
 export const state={
 	socketTask:null,
 	socketIsOpen:false,
@@ -40,10 +41,10 @@ export const mutations={
 	},
 	// 行情websocket
 	['CONNECTSOCKET'](state,u){
-		state.socketTask=uni.connectSocket({
+		state.socketTask=socket.connectSocket({
 			url:u,
 			success(data){
-				console.log('websocket连接成功')
+				console.log('Websocket connect')
 			}
 		})
 	},
@@ -60,10 +61,10 @@ export const mutations={
 		state.socketTask.close({
 			success(res){
 				state.socketIsOpen=false
-				console.log("关闭成功:"+JSON.stringify(res))
+				console.log("close ok!")
 			},
 			fail(err){
-				console.log('关闭socket失败:'+err)
+				console.log('close socket fail:'+err)
 			}
 		})
 	},

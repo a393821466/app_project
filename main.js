@@ -9,7 +9,7 @@ import $AppEntryController from './common/utils/appEntryController.js'
 import './common/router/router_auth'
 
 import fontsIcon from './components/ui-font/'
-
+import './static/js/marketMq.js'
 Vue.config.productionTip = false
 
 Vue.component('fonts-icon',fontsIcon)
@@ -17,6 +17,7 @@ Vue.component('fonts-icon',fontsIcon)
 Vue.prototype.$store=store
 // Vue.prototype.$routers = routers
 // Vue.prototype.$mRouter = mRouter
+Vue.prototype.$market=proto
 Vue.prototype.$AppEntryController = $AppEntryController
 
 // store赋值给vue原型链

@@ -1,5 +1,5 @@
 <template>
-	<view class="market_list">
+	<view class="market_list" :class="themeFontSize">
 		<view class="top-warp">
 			<view class="top_tab">
 				<view class="tabs" v-for="(tab, i) in marketTitle" :key="i" 
@@ -23,7 +23,7 @@
 				:up="upOption"
 				@init="mescrollInit">
 					<!-- 数据列表 -->
-					<market-list-content :itemData="item"></market-list-content>
+					<market-list-content :itemData="item" :marketCode='marketCode'></market-list-content>
 				</mescroll-uni>
 			</swiper-item>
 		</swiper>
@@ -38,7 +38,6 @@
 	//   command,
 	//   msg
 	// } from '@/static/js/proto-helper'
-	// import command from '@/static/js/Command_pb'
 	import {mapActions,mapGetters} from 'vuex'
 	export default {
 		components: {
@@ -53,7 +52,7 @@
 				showList:[],
 				mescroll: null, //mescroll实例对象
 				downOption:{
-					auto:true, // 不自动加载
+					auto:false, // 不自动加载
 				},
 				upOption:{
 					use:false,
@@ -78,11 +77,11 @@
 			};
 		},
 		computed:{
-			...mapGetters(['marketTitle','marketList','marketSocketList','socketTask'])
+			...mapGetters(['marketTitle','marketList','marketSocketList','socketTask','themeFontSize'])
 		},
 		watch:{
 			marketSocketList(marketData){
-				let data = msg.MessageBase.deserializeBinary(marketData).array[6]
+				let data = this.$market.MessageBase.deserializeBinary(marketData).array[6]
 				if (!data || !data.length) {
 					return
 				}else{
@@ -97,6 +96,7 @@
 							das[i].lastPrice = data[0][3]
 							das[i].upDropSpeed =
 							  (data[0][3] - data[0][7]) / data[0][7]
+							// console.log(das[i].CommodityName,das[i].lastPrice,das[i].upDropSpeed)
 							break
 						  }
 						}
@@ -112,13 +112,15 @@
 			})
 		},
 		onReady(){
+			this.closeSocketIo()
 			this.getScreenInfo()
+		},
+		onShow(){
+			this.getMarketListView(this.marketCode.code,this.mescroll)
 		},
 		// 关闭socket
 		beforeDestroy() {
-			if(this.socketTask!=null){
-				this.closeSocket()
-			}
+			this.closeSocketIo()
 		},
 		methods: {
 			...mapActions(['createWebsocket','getMarketList','closeSocket']),
@@ -139,7 +141,7 @@
 				const _that = this
 				this.getMarketList({templateCode:code}).then(res=>{
 					_that.list=_that.marketList
-					// _that.startSocket()
+					_that.startSocket()
 					if(mescroll){
 						mescroll.endSuccess()
 					}
@@ -152,19 +154,23 @@
 			},
 			// 执行socket
 			startSocket(){
-				let message = new msg.MessageBase()
+				let message = new this.$market.MessageBase()
 				message.setClientid(UUID.v1())
-				message.setCmd(command.CommandType.PUSH_DATA)
+				message.setCmd(this.$market.CommandType.PUSH_DATA)
 				message.setRequesttype(2)
 				let bytes = message.serializeBinary()
 				this.createWebsocket(bytes)
 			},
 			/*下拉刷新的回调 */
 			downCallback(mescroll) {
+				this.closeSocketIo()
+				this.getMarketListView(this.marketCode.code,mescroll)
+			},
+			// 关闭socket
+			closeSocketIo(){
 				if(this.socketTask!=null){
 					this.closeSocket()
 				}
-				this.getMarketListView(this.marketCode.code,mescroll)
 			},
 			// 高度
 			getScreenInfo(){

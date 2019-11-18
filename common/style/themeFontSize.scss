@@ -28,6 +28,32 @@
 		}
 	}
 	// 行情
+	.top-warp{
+		.tabs{
+			font-size:$uni-font-size-sm;
+		}
+	}
+	.pd-list{
+		.icon{
+			font-size:$uni-font-size-sm;
+		}
+		.market_title{
+			font-size:$uni-font-size-sm;
+		}
+		.market_percentage {
+			font-size:20upx;
+		}
+		.market_remark{
+			font-size:25upx;
+		}
+		.undulate_price{
+			font-size:34upx;
+			margin-bottom:8upx;
+		}
+		.market_Timer{
+			font-size:24upx;
+		}
+	}
 	// 登陆
 	.login_form{
 		.userPhone,.userPassword{
@@ -269,6 +295,32 @@
 		}
 	}
 	// 行情
+	.top-warp{
+		.tabs{
+			font-size:$uni-font-size-base;
+		}
+	}
+	.pd-list{
+		.icon{
+			font-size:$uni-font-size-base;
+		}
+		.market_title{
+			font-size:$uni-font-size-base;
+		}
+		.market_percentage {
+			font-size:26upx;
+		}
+		.market_remark{
+			font-size:28upx;
+		}
+		.undulate_price{
+			font-size:36upx;
+			margin-bottom:5upx;
+		}
+		.market_Timer{
+			font-size:26upx;
+		}
+	}
 	// 登陆
 	.login_form{
 		.userPhone,.userPassword{
@@ -513,6 +565,31 @@
 		}
 	}
 	// 行情
+	.top-warp{
+		.tabs{
+			font-size:$uni-font-size-lg;
+		}
+	}
+	.pd-list{
+		.icon{
+			font-size:$uni-font-size-lg;
+		}
+		.market_title{
+			font-size:$uni-font-size-lg;
+		}
+		.market_percentage {
+			font-size:28upx;
+		}
+		.market_remark{
+			font-size:30upx;
+		}
+		.undulate_price{
+			font-size:40upx;
+		}
+		.market_Timer{
+			font-size:30upx;
+		}
+	}
 	// 登陆
 	.login_form{
 		.userPhone,.userPassword{
