@@ -60,6 +60,7 @@ export default{
 		tradeType: `/trade/tradeType/find` // 交易明细类型
 	},
 	marketTrade:{
-		marketList: `/business/getQuotaList` // 行情列表
+		marketList: `/business/getQuotaList`, // 行情列表
+		marketDetail: `/business/getQuotaInfo` ,// 单个行情品种详情
 	}
 }

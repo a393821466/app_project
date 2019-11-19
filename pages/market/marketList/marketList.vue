@@ -1,5 +1,24 @@
 <template>
 	<view class="market_list" :class="themeFontSize">
+		<view class="marketHeader">
+			<hx-navbar
+			    :back="false" 
+				:background-color="[[20, 152, 237],[53, 91, 236]]"
+			    :fixed="true">
+			    <block slot="left">
+			        <view class="back" @click="backNextRoute">
+			            <fonts-icon type="fanhui" color="#f8f8f8" size="28"></fonts-icon>
+			        </view>
+			    </block>
+			    <view class="input-view">
+			        {{marketCode.marketName}}
+			    </view>
+				<block slot="right">
+				    <view class="right_btn">
+				    </view>
+				</block>
+			</hx-navbar>
+		</view>
 		<view class="top-warp">
 			<view class="top_tab">
 				<view class="tabs" v-for="(tab, i) in marketTitle" :key="i" 
@@ -32,6 +51,7 @@
 
 <script>
 	import MescrollUni from "@/components/mescroll-uni/mescroll-uni.vue"
+	import hxNavbar from "@/components/customNavigator/hx-navbar.vue"
 	import MarketListContent from "./marketContent/marketListContent"
 	import UUID from 'uuid'
 	// import {
@@ -41,6 +61,7 @@
 	import {mapActions,mapGetters} from 'vuex'
 	export default {
 		components: {
+			hxNavbar,
 			MescrollUni,
 			MarketListContent
 		},
@@ -107,15 +128,16 @@
 		onLoad(query){
 			// 更改标题
 			this.marketCode=query
-			uni.setNavigationBarTitle({
-				title:query.marketName
-			})
+			// uni.setNavigationBarTitle({
+			// 	title:query.marketName
+			// })
 		},
 		onReady(){
-			this.closeSocketIo()
+			// this.closeSocketIo()
 			this.getScreenInfo()
 		},
 		onShow(){
+			this.closeSocketIo()
 			this.getMarketListView(this.marketCode.code,this.mescroll)
 		},
 		// 关闭socket
@@ -172,12 +194,17 @@
 					this.closeSocket()
 				}
 			},
+			backNextRoute(){
+				this.$mRouter.reLaunch({
+				    route:this.$routers.market
+				})
+			},
 			// 高度
 			getScreenInfo(){
 				const that=this
 				uni.getSystemInfo({
 					success: function(e) {
-						that.screenHeight=e.windowHeight
+						that.screenHeight=e.windowHeight-44
 					}
 				})
 			}

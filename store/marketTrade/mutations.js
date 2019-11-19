@@ -5,7 +5,10 @@ export const state={
 	socketIsOpen:false,
 	marketTitle:[],
 	marketList:[],
-	marketSocketList:[]
+	marketSocketList:[],
+	marketDetails:{},
+	marketGoods:{},
+	historyData:[]
 }
 
 
@@ -52,9 +55,21 @@ export const mutations={
 	['SOCKETISOPEN'](state,flat){
 		state.socketIsOpen=flat
 	},
-	// 获取行情数据
+	// 获取行情数据 (socket返回的数据)
 	['GETMARKETDATA'](state,it){
 		state.marketSocketList=it
+	},
+	// 获取单个行情详情（商品信息以及止盈止损等）
+	['GETMARKETDETAILS'](state,it){
+		state.marketDetails=it
+	},
+	// 获取行情数据（商品价格信息及时间等）
+	['GETMARKETGOODSDETAILS'](state,it){
+		state.marketGoods=it
+	},
+	// 获取行情图历史数据
+	['GETHISTORYCHART'](state,it){
+		state.historyData=it
 	},
 	// 手动关闭socket
 	['CLOSESOCKET'](state){
@@ -74,5 +89,8 @@ export const mutations={
 		state.socketTask=null
 		state.marketSocketList=[]
 		state.socketIsOpen=false
+		state.marketSocketList={}
+		state.marketGoods={}
+		state.historyData=[]
 	}
 }

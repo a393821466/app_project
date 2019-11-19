@@ -58,6 +58,30 @@ export default{
 			})
 		}
 	},
+	// 获取单个品种详情
+	async getSingleMarketDetails({commit},res){
+		const getMarketDetails=await httpUtils.get(address.marketTrade.marketDetail,res);
+		if(getMarketDetails.status){
+			commit('GETMARKETDETAILS',getMarketDetails.data)
+		}
+		return getMarketDetails
+	},
+	// 获取单个商品号的价格信息
+	async getMarketGoodsDetails({commit},res){
+		const getMarketGoodsDetails=await httpUtils.get(`/futures/v2/market/${res.commodityCode}/${res.contractCode}`);
+		if(getMarketGoodsDetails.status){
+			commit('GETMARKETGOODSDETAILS',getMarketGoodsDetails.data)
+		}
+		return getMarketGoodsDetails
+	},
+	// 获取行情图数据
+	async getHistoryChartDas({commit},res){
+		const getHistoryChart=await httpUtils.get(`/futures/v2/market/${res.commodityCode}/${res.contractCode}/minsline`);
+		if(getHistoryChart.status){
+			commit('GETHISTORYCHART',getHistoryChart.data)
+		}
+		return getHistoryChart
+	},
 	// 关闭marketSocket
 	closeSocket({commit}){
 		commit('CLOSESOCKET')

@@ -3,7 +3,12 @@
 		<view class="pd-li" v-for="(item,idx) in itemData" :key='item.commodityCode' 
 		:style="{'backgroundColor':item.status==2?'#eee':'#fff'}" @click="goMarketInset(item)">
 			<view class="market marketLeft">
-				<text class="icon" :style="{backgroundColor:item.icon}">{{!item.commodityCode?'-':item.commodityCode}}</text>
+				<view class="icon" :style="{backgroundColor:item.icon}" v-if="item.status!=2">
+					{{!item.commodityCode?'-':item.commodityCode}}
+				</view>
+				<view class="icon" :style="{backgroundColor:'#878787'}" v-else>
+					休市
+				</view>
 			</view>
 			<view class="market marketCenter">
 				<view class="market_center_title">
@@ -138,6 +143,21 @@
 						line-height:90rpx;
 						margin:30rpx 0 30rpx 16rpx;
 						color:#fff;
+						position:relative;
+						// .status{
+						// 	width:46upx;
+						// 	height:46upx;
+						// 	border-radius:46upx;
+						// 	font-size:16upx;
+						// 	line-height:46upx;
+						// 	text-align:center;
+						// 	background:#878585;
+						// 	color:#fff;
+						// 	margin-left:8upx;
+						// 	position:absolute;
+						// 	bottom:-10upx;
+						// 	right:0;
+						// }
 					}
 				}
 				&.marketCenter{

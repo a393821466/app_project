@@ -66,13 +66,15 @@
 			goMarketList(item){
 				const that=this
 				if(chache.has('token')){
+					let das={
+						code:item.templateCode,
+						marketName:item.templateName
+					}
 					this.$mRouter.push({
 						route:this.$routers.marketList,
-						query:{
-							code:item.templateCode,
-							marketName:item.templateName
-						}
+						query:das
 					})
+					chache.set('selectTemName',das)
 				}else{
 					showUiModel({
 						'content': '您还未登陆,去登陆?',
