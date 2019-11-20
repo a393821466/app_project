@@ -1,5 +1,5 @@
 <template>
-	<view class="marketChartView">
+	<view class="marketChartView" :class="themeFontSize">
 		<view class="marketHeader">
 			<hx-navbar
 			    :back="false" 
@@ -25,41 +25,38 @@
 				</block>
 			</hx-navbar>
 		</view>
-		<view class="marketChartInfo">
-			<view class="marketInfo marketInfo_left">
-				<view class="marketName">
-					恒生指数<text class="code">HSI1911</text>
-				</view>
-				<view class="marketPrice_ratio">
-					<text class="b blockLeft">27078</text>
-					<view class="b blockRight">
-						<text class="one">0</text>
-						<text class="two">0.00%</text>
-					</view>
-				</view>
-			</view>
-			<view class="marketInfo marketInfo_right">2</view>
-		</view>
+		<dynamic-price></dynamic-price>
+		<quick-order></quick-order>
 	</view>
 </template>
 
 <script>
 	import hxNavbar from "@/components/customNavigator/hx-navbar.vue"
+	import dynamicPrice from "./dynamicPrice/dynamicPrice.vue"
+	import quickOrder from "./quickOrder/quickOrder.vue"
 	import chache from '@/common/utils/storage'
 	import {showUiToast,showUiLoading,hideUiLoading} from '@/common/utils/dialog.config'
-	import {mapActions,mapGettets} from 'vuex'
+	import {mapActions,mapGetters} from 'vuex'
 	export default {
 		name:'marketChart',
-		components: {hxNavbar},
+		components: {
+			hxNavbar,
+			dynamicPrice,
+			quickOrder
+		},
 		data() {
 			return {
 				queryData:{}
 			};
 		},
 		computed:{
+			...mapGetters(['themeFontSize'])
 		},
 		onLoad(query){
 			this.queryData=query;
+			uni.setNavigationBarTitle({
+				title:`${query.CommodityName}(${query.commodityCode})`
+			})
 			let das={
 				commodityCode:query.commodityCode,
 				contractCode:query.contractCode

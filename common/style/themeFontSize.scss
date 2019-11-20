@@ -1,8 +1,22 @@
-// 基本字体
+/**
+ * 标准字体样式
+ */
+$uni-standard-20:20upx;
+$uni-standard-22:22upx;
+$uni-standard-24:24upx;
+$uni-standard-26:26upx;
+$uni-standard-28:28upx;
+$uni-standard-30:30upx;
+$uni-standard-32:32upx;
+$uni-standard-34:34upx;
+$uni-standard-36:36upx;
+$uni-standard-38:38upx;
+$uni-standard-40:40upx;
+
 .daytime1{
 	// 首页
 	.service-text{
-		font-size:28upx;
+		font-size:$uni-standard-28;
 	}
 	.category_home{
 		.icon{
@@ -41,17 +55,69 @@
 			font-size:$uni-font-size-sm;
 		}
 		.market_percentage {
-			font-size:20upx;
+			font-size:$uni-standard-20;
 		}
 		.market_remark{
-			font-size:25upx;
+			font-size:$uni-standard-24;
 		}
 		.undulate_price{
-			font-size:34upx;
+			font-size:$uni-standard-34;
 			margin-bottom:8upx;
 		}
 		.market_Timer{
-			font-size:24upx;
+			font-size:$uni-standard-24;
+		}
+	}
+	// 行情图页面
+	.marketHeader{
+		.right_btn{
+			font-size:$uni-standard-26;
+		}
+	}
+	.marketChartInfo{
+		.name{
+			font-size:$uni-standard-36;
+		}
+		.code{
+			font-size:$uni-font-size-sm;
+		}
+		.marketPrice_ratio{
+			.blockLeft{
+				font-size:$uni-standard-40;
+			}
+			.blockRight{
+				.one,.two{
+					font-size:$uni-standard-28;
+				}
+			}
+		}
+		.positionBtn{
+			font-size:$uni-standard-24;
+		}
+		.nowPositionTimer{
+			font-size:$uni-standard-26;
+		}
+		.buyMallNum{
+			font-size:$uni-standard-26;
+		}
+	}
+	.quickOrder{
+		.rise-top{
+			font-size:$uni-standard-32;
+		}
+		.rise-bottom{
+			font-size:$uni-standard-32;
+		}
+		.quick-text{
+			font-size:$uni-standard-24;
+		}
+	}
+	.quick{
+		.model{
+			font-size:$uni-standard-30;
+		}
+		.hand-num-view,.stop-loop-amount{
+			font-size:$uni-standard-24;
 		}
 	}
 	// 登陆
@@ -69,10 +135,10 @@
 			font-size:$uni-font-size-sm;
 		}
 		.goReadName,.goReadNameTwo{
-			font-size:28upx;
+			font-size:$uni-standard-28;
 		}
 		.num{
-			font-size:34upx;
+			font-size:$uni-standard-34;
 		}
 	}
 	.noLogin{
@@ -128,14 +194,14 @@
 	// 银行卡
 	.tip_box{
 		.sp2{
-			font-size:30upx;
+			font-size:$uni-standard-30;
 		}
 		.sp3{
-			font-size:28upx;
+			font-size:$uni-standard-28;
 		}
 	}
 	.titles,.add_text{
-		font-size:28upx;
+		font-size:$uni-standard-28;
 	}
 	// 添加银行卡
 	.addBank_tip{
@@ -155,7 +221,7 @@
 	// 安全中心
 	.userBindInfo{
 		.bind{
-			font-size:32upx;
+			font-size:$uni-standard-32;
 		}
 	}
 	// 充值记录
@@ -222,7 +288,7 @@
 		}
 		.setting{
 			button{
-				font-size:26upx;
+				font-size:$uni-standard-26;
 			}
 		}
 		.submits{
@@ -243,16 +309,16 @@
 			font-size:$uni-font-size-sm;
 		}
 		.tradeType,.dateTimer,.type{
-			font-size:24upx;
+			font-size:$uni-standard-24;
 		}
 		.tradeBodyDetails{
 			.tradeTitle{
 				.p1{
-					font-size:28upx;
+					font-size:$uni-standard-28;
 				}
 			}
 			.tradeContainer{
-				font-size:24upx;
+				font-size:$uni-standard-24;
 			}
 		}
 		.selectButton{
@@ -262,11 +328,25 @@
 		}
 	}
 }
-// 中号字体
+
+
+/**
+ * 加大号字体样式
+ */
+$uni-addBig-26:26upx;
+$uni-addBig-28:28upx;
+$uni-addBig-30:30upx;
+$uni-addBig-32:32upx;
+$uni-addBig-34:34upx;
+$uni-addBig-36:36upx;
+$uni-addBig-38:38upx;
+$uni-addBig-40:40upx;
+$uni-addBig-42:42upx;
+
 .daytime2{
 	// 首页
 	.service-text{
-		font-size:30upx;
+		font-size:$uni-addBig-30;
 	}
 	.category_home{
 		.icon{
@@ -308,17 +388,69 @@
 			font-size:$uni-font-size-base;
 		}
 		.market_percentage {
-			font-size:26upx;
+			font-size:$uni-addBig-26;
 		}
 		.market_remark{
-			font-size:28upx;
+			font-size:$uni-addBig-28;
 		}
 		.undulate_price{
-			font-size:36upx;
+			font-size:$uni-addBig-36;
 			margin-bottom:5upx;
 		}
 		.market_Timer{
-			font-size:26upx;
+			font-size:$uni-addBig-26;
+		}
+	}
+	// 行情图页面
+	.marketHeader{
+		.right_btn{
+			font-size:$uni-addBig-28;
+		}
+	}
+	.marketChartInfo{
+		.name{
+			font-size:$uni-addBig-38;
+		}
+		.code{
+			font-size:$uni-addBig-32;
+		}
+		.marketPrice_ratio{
+			.blockLeft{
+				font-size:$uni-addBig-42;
+			}
+			.blockRight{
+				.one,.two{
+					font-size:$uni-addBig-32;
+				}
+			}
+		}
+		.positionBtn{
+			font-size:$uni-addBig-26;
+		}
+		.nowPositionTimer{
+			font-size:$uni-addBig-28;
+		}
+		.buyMallNum{
+			font-size:$uni-addBig-28;
+		}
+	}
+	.quickOrder{
+		.rise-top{
+			font-size:$uni-addBig-34;
+		}
+		.rise-bottom{
+			font-size:$uni-addBig-34;
+		}
+		.quick-text{
+			font-size:$uni-addBig-26;
+		}
+	}
+	.quick{
+		.model{
+			font-size:$uni-addBig-34;
+		}
+		.hand-num-view,.stop-loop-amount{
+			font-size:$uni-addBig-28;
 		}
 	}
 	// 登陆
@@ -339,10 +471,10 @@
 			font-size:$uni-font-size-base;
 		}
 		.goReadName,.goReadNameTwo{
-			font-size:28upx;
+			font-size:$uni-addBig-28;
 		}
 		.num{
-			font-size:38upx;
+			font-size:$uni-addBig-38;
 		}
 	}
 	.noLogin{
@@ -375,7 +507,7 @@
 	// 钱包
 	.balance_list{
 		.btn{
-			font-size:32upx;
+			font-size:$uni-addBig-32;
 		}
 		.balance_flex{
 			font-size:$uni-font-size-base;
@@ -401,14 +533,14 @@
 	// 银行卡
 	.tip_box{
 		.sp2{
-			font-size:34upx;
+			font-size:$uni-addBig-34;
 		}
 		.sp3{
-			font-size:30upx;
+			font-size:$uni-addBig-30;
 		}
 	}
 	.titles,.add_text{
-		font-size:30upx;
+		font-size:$uni-addBig-30;
 	}
 	// 添加银行卡
 	.addBank_tip{
@@ -428,7 +560,7 @@
 	// 安全中心
 	.userBindInfo{
 		.bind{
-			font-size:34upx;
+			font-size:$uni-addBig-34;
 		}
 	}
 	// 充值记录
@@ -495,7 +627,7 @@
 		}
 		.setting{
 			button{
-				font-size:26upx;
+				font-size:$uni-addBig-26;
 			}
 		}
 		.submits{
@@ -513,19 +645,19 @@
 	// 交易明细
 	&.tradeRecordView{
 		.condition{
-			font-size:30upx;
+			font-size:$uni-addBig-30;
 		}
 		.tradeType,.dateTimer,.type{
-			font-size:26upx;
+			font-size:$uni-addBig-26;
 		}
 		.tradeBodyDetails{
 			.tradeTitle{
 				.p1{
-					font-size:32upx;
+					font-size:$uni-addBig-32;
 				}
 			}
 			.tradeContainer{
-				font-size:28upx;
+				font-size:$uni-addBig-28;
 			}
 		}
 		.selectButton{
@@ -535,7 +667,20 @@
 		}
 	}
 }
-// 大号字体
+
+
+/**
+ * 超大号字体样式
+ */
+$uni-oversized-28:28upx;
+$uni-oversized-30:30upx;
+$uni-oversized-32:32upx;
+$uni-oversized-34:34upx;
+$uni-oversized-36:36upx;
+$uni-oversized-38:38upx;
+$uni-oversized-40:40upx;
+$uni-oversized-42:42upx;
+$uni-oversized-48:48upx;
 .daytime3{
 	// 首页
 	.service-text{
@@ -543,10 +688,10 @@
 	}
 	.category_home{
 		.icon{
-			font-size:38upx;
+			font-size:$uni-oversized-38;
 		}
 		.categoryText{
-			font-size:34upx;
+			font-size:$uni-oversized-34;
 		}
 	}
 	.text,.category_text,.news_title,.activity_text,.news_text{
@@ -555,13 +700,13 @@
 	// 公告
 	.annount_list{
 		.atitle{
-			font-size:38upx;
+			font-size:$uni-oversized-38;
 		}
 		.annount_body{
-			font-size:32upx;
+			font-size:$uni-oversized-32;
 		}
 		.annount_time{
-			font-size:32upx;
+			font-size:$uni-oversized-32;
 		}
 	}
 	// 行情
@@ -578,16 +723,68 @@
 			font-size:$uni-font-size-lg;
 		}
 		.market_percentage {
-			font-size:28upx;
+			font-size:$uni-oversized-28;
 		}
 		.market_remark{
-			font-size:30upx;
+			font-size:$uni-oversized-30;
 		}
 		.undulate_price{
-			font-size:40upx;
+			font-size:$uni-oversized-40;
 		}
 		.market_Timer{
-			font-size:30upx;
+			font-size:$uni-oversized-30;
+		}
+	}
+	// 行情图页面
+	.marketHeader{
+		.right_btn{
+			font-size:$uni-oversized-30;
+		}
+	}
+	.marketChartInfo{
+		.name{
+			font-size:$uni-oversized-40;
+		}
+		.code{
+			font-size:$uni-oversized-34;
+		}
+		.marketPrice_ratio{
+			.blockLeft{
+				font-size:$uni-oversized-48;
+			}
+			.blockRight{
+				.one,.two{
+					font-size:$uni-oversized-36;
+				}
+			}
+		}
+		.positionBtn{
+			font-size:$uni-oversized-30;
+		}
+		.nowPositionTimer{
+			font-size:$uni-oversized-28;
+		}
+		.buyMallNum{
+			font-size:$uni-oversized-28;
+		}
+	}
+	.quickOrder{
+		.rise-top{
+			font-size:$uni-oversized-36;
+		}
+		.rise-bottom{
+			font-size:$uni-oversized-36;
+		}
+		.quick-text{
+			font-size:$uni-oversized-28;
+		}
+	}
+	.quick{
+		.model{
+			font-size:$uni-oversized-36;
+		}
+		.hand-num-view,.stop-loop-amount{
+			font-size:$uni-oversized-30;
 		}
 	}
 	// 登陆
@@ -605,10 +802,10 @@
 			font-size:$uni-font-size-lg;
 		}
 		.goReadNameTwo,.goReadName{
-			font-size:30upx;
+			font-size:$uni-oversized-30;
 		}
 		.num{
-			font-size:40upx;
+			font-size:$uni-oversized-40;
 		}
 	}
 	.noLogin{
@@ -655,23 +852,23 @@
 	}
 	.tipView{
 		.title{
-			font-size:42upx;
+			font-size:$uni-oversized-42;
 		}
 		.p1{
-			font-size:34upx;
+			font-size:$uni-oversized-34;
 		}
 	}
 	// 银行卡
 	.tip_box{
 		.sp2{
-			font-size:38upx;
+			font-size:$uni-oversized-38;
 		}
 		.sp3{
-			font-size:34upx;
+			font-size:$uni-oversized-34;
 		}
 	}
 	.titles,.add_text{
-		font-size:34upx;
+		font-size:$uni-oversized-34;
 	}
 	// 添加银行卡
 	.addBank_tip{
@@ -691,7 +888,7 @@
 	// 安全中心
 	.userBindInfo{
 		.bind{
-			font-size:38upx;
+			font-size:$uni-oversized-38;
 		}
 	}
 	// 充值记录
@@ -723,10 +920,10 @@
 	&.withdrawRecordView{
 		.withdrawView{
 			.withdrawTitle{
-				font-size:40upx;
+				font-size:$uni-oversized-40;
 			}
 			.withdrawBox{
-				font-size:32upx;
+				font-size:$uni-oversized-32;
 			}
 		}
 		.selectBtn{
@@ -758,7 +955,7 @@
 		}
 		.setting{
 			button{
-				font-size:28upx;
+				font-size:$uni-oversized-28;
 			}
 		}
 		.submits{

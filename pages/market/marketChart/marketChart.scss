@@ -25,51 +25,9 @@
 		}
 	}
 	.right_btn{
-		font-size:26rpx;
 		display:block;
 		text-align:center;
 		width:100%;
 		color:#f8f8f8;
-	}
-}
-.marketChartInfo{
-	display:flex;
-	flex-direction: row;
-	padding:0 30upx;
-	.marketInfo{
-		flex:1;
-		&.marketInfo_left{
-			.marketName{
-				font-size:34upx;
-				margin-top:20upx;
-				.code{
-					font-size:28upx;
-					padding-left:10upx;
-				}
-			}
-			.marketPrice_ratio{
-				display:flex;
-				flex-direction: row;
-				margin-top:20upx;
-				.b{
-					flex:1;
-					&.blockLeft{
-						font-size:38upx;
-						line-height:70upx;
-						text-align:center;
-						flex:0 0 60%;
-						width:60%;
-					}
-					&.blockRight{
-						flex:0 0 40%;
-						width:40%;
-						.one,.two{
-							font-size:26upx;
-							display:block;
-						}
-					}
-				}
-			}
-		}
 	}
 }
