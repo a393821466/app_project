@@ -3,20 +3,30 @@
 		<view class="quick">
 			<view class="selectModel" v-if="openQuick">
 				<view class="model">
-					<label>
-						<checkbox value="cb" style="transform:scale(0.8)" class="checkBoxModel" />
-						<text class="selectText">元模式</text>
-					</label>
+					<checkbox-group class="uni-list" @change="changeCheckout">
+						<label>
+							<checkbox :checked="model.type=='0'?false:true" :value="model.type" style="transform:scale(0.8)" class="checkBoxModel"/>
+							<text class="selectText">{{model.title}}</text>
+						</label>
+					</checkbox-group>
 				</view>
 				<view class="handNum">
-					<view class="hand-num-view">手数:1手</view>
+					<view class="hand-num-view">
+						<picker @change="bindPickerChange1" :value="index1" :range="getHandNum">
+							<view class="uni-input">手数:{{getHandNum[index1]}}手</view>
+						</picker>
+					</view>
 				</view>
 				<view class="stopLoopAmount">
-					<view class="stop-loop-amount">止损金额:HK$1400</view>
+					<view class="stop-loop-amount">
+						<picker @change="bindPickerChange2" :value="index2" :range="getStopAmount()">
+							<view class="uni-input">止损金额:{{productionData.currentCurrencySign}}{{getStopAmount()[index2]}}</view>
+						</picker>	
+					</view>
 				</view>
 			</view>
 			<view class="quickOriderView">
-				<view class="q quick-rise">
+				<view class="q quick-rise" @click="goOrder(1)">
 					<view class="rise-top">
 						26674
 					</view>
@@ -27,13 +37,13 @@
 				</view>
 				<view class="open-quick-orider">
 					<view class="quick-center" @click="openQuickOrder">
-						<view class="quickOrderIcon">
+						<view class="quickOrderIcon" :animation="animationData">
 							<fonts-icon type="image" size="44" :color="openQuick?'#ccc':'#f8f8f8'"></fonts-icon>
 						</view>
 						<text class="quick-text" :style="[openQuick?'#ccc':'#f8f8f8']">{{openQuick?'ON':'OFF'}}</text>
 					</view>
 				</view>
-				<view class="q quick-sell">
+				<view class="q quick-sell" @click="goOrder(2)">
 					<view class="rise-top">
 						26672
 					</view>
@@ -51,10 +61,41 @@
 <script>
 export default{
 	name:'quickOrder',
+	props:{
+		marketDetails:{
+			type:[Object,Array],
+			required:true
+		}
+	},
 	data(){
 		return{
 			openQuick:false,
-			animationData: {}
+			animationData: {},
+			productionData:{},
+			handNum: [1, 3, 5, 8,10],
+			stopMoney:[1400,2000,2800,3600,5100],
+			index1: 0,
+			index2: 0,
+			nowHandNum:1,
+			nowStopMoney:0,
+			checks:false,
+			model:{
+				num: 1,
+				title: '元模式',
+				type: '0'
+			}
+		}
+	},
+	watch:{
+		marketDetails(news){
+			if(news){
+				this.productionData=news;
+				let hands=news.tradeHandsUnit.split(',');
+				let gearInfoMoney = typeof news.gearInfo === 'string' ? JSON.parse(news.gearInfo) : [];
+				let num=Object.keys(gearInfoMoney[0])[0];
+				this.nowHandNum=hands[0];
+				this.nowStopMoney=num*this.model.num;
+			}
 		}
 	},
 	created(){
@@ -65,18 +106,121 @@ export default{
 		})
 		this.animation = animation
 	},
+	computed:{
+		// 手数
+		getHandNum(){
+			if(this.productionData.tradeHandsUnit){
+				let tradeHandLimit=this.productionData.tradeHandsUnit.split(',');
+				return tradeHandLimit;
+			}else{
+				return ['-']
+			}
+		}
+	},
 	methods:{
+		// 改变模式
+		changeCheckout(e){
+			let gearInfoMoney = typeof this.productionData.gearInfo === 'string' ? JSON.parse(this.productionData.gearInfo) : '';
+			if(!gearInfoMoney){
+				return;
+			}
+			let num=Object.keys(gearInfoMoney[0])[0];
+			if(e.detail.value=='0'){
+				this.model={
+					num: 0.1,
+					title: '角模式',
+					type: '1'
+				}
+			}else{
+				this.model={
+					num: 1,
+					title: '元模式',
+					type: '0'
+				}
+			}
+			this.index1=0
+			this.index2=0
+			this.nowHandNum=1
+			this.nowStopMoney=(num*this.model.num)*this.nowHandNum;
+		},
+		// 手数选择
+		bindPickerChange1(e) {
+			let v=[];
+			this.index1 = e.target.value
+			this.nowHandNum=this.getHandNum[this.index1]
+			let gearInfo=this.productionData.gearInfo;
+			let gearInfoMoney = typeof gearInfo === 'string' ? JSON.parse(gearInfo) : [];
+			for (let j in gearInfoMoney) {
+			  let nums = Object.keys(gearInfoMoney[j])[0];
+			  let stopMoney=(nums*this.model.num)*this.nowHandNum;
+			  v.push(stopMoney);
+			}
+			this.nowStopMoney=v[0]
+			this.index2=0
+		},
+		// 止损金额选择
+		bindPickerChange2(e) {
+			let amount=this.getStopAmount()
+			this.index2 = e.target.value
+			this.nowStopMoney=amount[this.index2]
+		},
+		// 开启快速下单
 		openQuickOrder(){
 			if (!this.openQuick) {
 				this.rotateAndScale()
 			} else {
 				this.norotateAndScale()
 			}
+			this.getStopAmount()
 			this.openQuick=!this.openQuick;
+		},
+		// 获取止损值
+		getStopAmount(){
+			if(this.productionData.gearInfo){
+				let v=[];
+				let gearInfo=this.productionData.gearInfo;
+				let gearInfoMoney = typeof gearInfo === 'string' ? JSON.parse(gearInfo) : [];
+				for (let j in gearInfoMoney) {
+				  let nums = Object.keys(gearInfoMoney[j])[0];
+				  let stopMoney=(nums*this.model.num)*this.nowHandNum;
+				  v.push(stopMoney);
+				}
+				return v;
+			}
+		},
+		// 下单
+		goOrder(num){
+			if(!this.openQuick){
+				console.log('跳转');
+				return;
+			}
+			if(num==1){
+				this.buyMore(this.productionData.walletType)
+			}else{
+				this.mallNull(this.productionData.walletType)
+			}
+			// _that.nowBuyMuch(walletNum)
+			// console.log(this.nowHandNum,this.nowStopMoney)
+		},
+		// 买多
+		buyMore(n){
+			let data = {
+				orderType: n,
+				tradeModel: typeof this.model.type=='string'?Number(this.model.type):this.model.type,
+				tradeType: 1,
+				price: 1321
+		    }
+			console.log(data)
+		},
+		// 卖空
+		mallNull(){
+			
 		},
 		rotateAndScale() {
 			// 定义动画内容
-			this.animation.scale(1.3, 1.3).step()
+			this.animation.scale(1.7, 1.7).step()
+			.scale(1.0, 1.0).step()
+			.scale(1.2, 1.2).step()
 			// 导出动画数据传递给data层
 			this.animationData = this.animation.export()
 		},
@@ -129,7 +273,7 @@ export default{
 		.hand-num-view,.stop-loop-amount{
 			width:90%;
 			height:50upx;
-			background:#999;
+			background:#888;
 			color:#f8f8f8;
 			text-align:center;
 			margin:0 auto;

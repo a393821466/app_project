@@ -26,7 +26,8 @@
 			</hx-navbar>
 		</view>
 		<dynamic-price></dynamic-price>
-		<quick-order></quick-order>
+		<dynamic-chart></dynamic-chart>
+		<quick-order :marketDetails="marketDetails"></quick-order>
 	</view>
 </template>
 
@@ -34,6 +35,7 @@
 	import hxNavbar from "@/components/customNavigator/hx-navbar.vue"
 	import dynamicPrice from "./dynamicPrice/dynamicPrice.vue"
 	import quickOrder from "./quickOrder/quickOrder.vue"
+	import dynamicChart from './dynamicChart/dynamicChart.vue'
 	import chache from '@/common/utils/storage'
 	import {showUiToast,showUiLoading,hideUiLoading} from '@/common/utils/dialog.config'
 	import {mapActions,mapGetters} from 'vuex'
@@ -42,7 +44,8 @@
 		components: {
 			hxNavbar,
 			dynamicPrice,
-			quickOrder
+			quickOrder,
+			dynamicChart
 		},
 		data() {
 			return {
@@ -50,7 +53,7 @@
 			};
 		},
 		computed:{
-			...mapGetters(['themeFontSize'])
+			...mapGetters(['themeFontSize','marketDetails'])
 		},
 		onLoad(query){
 			this.queryData=query;
