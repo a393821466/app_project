@@ -41,18 +41,13 @@
             "style" : {
 				"navigationStyle":"custom",
 				"disableScroll": true,
+				"navigationBarTitleText": "行情走势",
+				"navigationBarBackgroundColor": "#1b82d1",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
 				"app-plus" : {
 					"bounce" : "none",
 					"titleView":false
-				},
-				"titleNView": {
-					"buttons": [{
-						"text": "规则",
-						"fontSize": "14",
-						"float": "right",
-						"color": "#fff",
-						"width": "60px"
-					}]
 				}
 			}
         },

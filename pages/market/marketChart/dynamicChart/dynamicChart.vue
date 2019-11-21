@@ -116,7 +116,6 @@ DefaultData.GetMinuteOption=function()
             {SplitCount:2},
             {SplitCount:3},
         ],
-		NetworkFilter:function(data, callback) { self.NetworkFilter(data, callback); } ,
         ExtendChart:    //扩展图形
         [
             {Name:'MinuteTooltip' }  //手机端tooltip
@@ -188,7 +187,7 @@ export default{
 	},
 	mounted(){
 		this.OnSize();
-		this.CreateKLineChart(); 
+		this.ChangeMinutePeriod(1,MINUTE_PERIOD_ID.MINUTE_ID); 
 	},
 	methods:{
 		// K线

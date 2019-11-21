@@ -31,8 +31,12 @@
 						26674
 					</view>
 					<view class="rise-bottom">
-						<fonts-icon type="xiajiangxiajiantouxiangxiadiexianxing1" size="28" color="#f8f8f8"></fonts-icon>
-						<text class="buy">{{openQuick?'快速买多':'买多'}}</text>
+						<view class="icon">
+							<fonts-icon type="xiajiangxiajiantouxiangxiadiexianxing1"
+							size="28" 
+							color="#f8f8f8"></fonts-icon>
+						</view>
+						<text class="buy">{{openQuick?'闪电买多':'买多'}}</text>
 					</view>
 				</view>
 				<view class="open-quick-orider">
@@ -48,8 +52,10 @@
 						26672
 					</view>
 					<view class="rise-bottom">
-						<fonts-icon type="xiajiangxiajiantouxiangxiadiexianxing" size="28" color="#f8f8f8"></fonts-icon>
-						<text class="buy">{{openQuick?'快速卖空':'卖空'}}</text>
+						<view class="icon">
+							<fonts-icon type="xiajiangxiajiantouxiangxiadiexianxing" size="28" color="#f8f8f8"></fonts-icon>
+						</view>
+						<text class="buy">{{openQuick?'闪电卖空':'卖空'}}</text>
 					</view>
 				</view>
 			</view>
@@ -305,8 +311,21 @@ export default{
 			}
 			.rise-bottom{
 				color:#f8f8f8;
-				text-align:center;
+				/* text-align:center; */
+				display:flex;
+				flex-direction:row;
+				.icon{
+					flex:0 0 38%;
+					width:38%;
+					/*#ifdef APP-PLUS */
+					padding-top:10upx;
+					/*#endif */
+					text-align:right;
+				}
 				.buy{
+					flex:0 0 62%;
+					width:62%;
+					text-align:left;
 					padding-left:6upx;
 				}
 			}

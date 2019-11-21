@@ -195,8 +195,8 @@
 				}
 			},
 			backNextRoute(){
-				this.$mRouter.reLaunch({
-				    route:this.$routers.market
+				this.$mRouter.switchTab({
+					route:this.$routers.market
 				})
 			},
 			// 高度

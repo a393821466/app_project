@@ -57,9 +57,9 @@
 		},
 		onLoad(query){
 			this.queryData=query;
-			uni.setNavigationBarTitle({
-				title:`${query.CommodityName}(${query.commodityCode})`
-			})
+			// uni.setNavigationBarTitle({
+			// 	title:`${query.CommodityName}(${query.commodityCode})`
+			// })
 			let das={
 				commodityCode:query.commodityCode,
 				contractCode:query.contractCode
@@ -75,10 +75,11 @@
 			...mapActions(['getMarketGoodsDetails','getSingleMarketDetails','getHistoryChartDas']),
 			backNextRoute(){
 				let das=chache.get('selectTemName')
-				this.$mRouter.push({
-				    route:this.$routers.marketList,
-					query:das
-				})
+				// this.$mRouter.reLaunch({
+				//     route:this.$routers.marketList,
+				// 	query:das
+				// })
+				this.$mRouter.back(1)
 			},
 			// 获取单个品种信息, 价格数据
 			getMarketGoods(data){
