@@ -23,8 +23,8 @@
 							size='24' 
 							color='#f8f8f8'></fonts-icon>
 						</view>
-						<text v-if="item.status!==2">{{getUpPrice(item.upDropSpeed)}}</text>
-						<text v-else>{{getLowerPirce(item.lastPrice, item.openPrice)}}</text>
+						<text v-if="item.status!==2" class="upDropSpeedText">{{getUpPrice(item.upDropSpeed)}}</text>
+						<text v-else class="upDropSpeedText">{{getLowerPirce(item.lastPrice, item.openPrice)}}</text>
 					</view>
 					<view class="b xs">
 						<!-- <text v-show="item.status==2">休市</text> -->

@@ -259,8 +259,8 @@ export default{
 			this.idx=n;
 			if (!g_KLine.JSChart)    //不存在创建
 			{
-				this.KLine.Option.Period=period;
-				this.CreateKLineChart_h5();
+					this.KLine.Option.Period=period;
+					this.CreateKLineChart()
 			}else{
 				g_KLine.JSChart.ChangePeriod(period);
 			}

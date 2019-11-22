@@ -14,7 +14,7 @@
 		</view>
 		<view class="service">
 			<view class="service-input" @click="goService">
-				<fonts-icon type="kefu"></fonts-icon>
+				<view class="icon"><fonts-icon type="kefu"></fonts-icon></view>
 				<text class="service-text">联系客服</text>
 			</view>
 		</view>
@@ -134,22 +134,22 @@
 		  }
 		  /* 客服 */
 		  .service {
-		  	display: flex;
-		  	flex-direction: row-reverse;
 		  	height: 80rpx;
 			flex:0 0 30%;
 			width:30%;
-			text-algin:right;
+			text-algin:center;
 		  	.service-input {
-		  		align-self: center;
+		  		/* align-self: center; */
 		  		display: flex;
-				text-indent:5rpx;
-				.uni-icon{
-					margin-top:5rpx;
+				flex-direction: row;
+				line-height: 80rpx;
+				.icon{
+					flex: 0 0 20%;
+					width:20%;
 				}
 		  		.service-text {
-		  			flex: 1;
-		  			line-height: 45rpx;
+		  			flex: 0 0 80%;
+					width:80%;
 					text-indent:5rpx;
 		  		}
 		  	}

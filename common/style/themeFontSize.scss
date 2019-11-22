@@ -67,6 +67,9 @@ $uni-standard-40:40upx;
 		.market_Timer{
 			font-size:$uni-standard-24;
 		}
+		.upDropSpeedText{
+			font-size:$uni-standard-24;
+		}
 	}
 	// 行情图页面
 	.marketHeader{
@@ -398,6 +401,9 @@ $uni-addBig-42:42upx;
 			margin-bottom:5upx;
 		}
 		.market_Timer{
+			font-size:$uni-addBig-26;
+		}
+		.upDropSpeedText{
 			font-size:$uni-addBig-26;
 		}
 	}
@@ -733,6 +739,9 @@ $uni-oversized-48:48upx;
 		}
 		.market_Timer{
 			font-size:$uni-oversized-30;
+		}
+		.upDropSpeedText{
+			font-size:$uni-oversized-28;
 		}
 	}
 	// 行情图页面
