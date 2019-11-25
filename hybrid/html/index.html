@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>行情</title>
+  <!-- Fix for iOS Safari zooming bug -->
+  <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <script src="./js/zepto.min.js"></script>
+  <script src="./js/portView.js"></script>
+  <script src="./js/tpl.js"></script>
+  <!--封装了一个发布订阅模式-->
+  <script src="./js/event.js"></script>
+  <!--图表库js-->
+  <script src="./charting_library/charting_library.min.js"></script>
+  <!--websocket-->
+  <script src="./js/websocket.js"></script>
+  <!--图表数据获取-->
+  <script src="./js/datafeed.js"></script>
+  <!--图表配置-->
+  <script src="./js/chartConfig.js"></script>
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/iconfont.css">
+</head>
+<body>
+  <!--头部-->
+  <div class="header">
+    <div class="chartHeader">
+        <div class="headerRow backArrow">
+          <span class="iconfont back">&#xe607;</span>
+        </div>
+        <div class="headerRow centerSelect">
+            <div class="chartTitle">
+              美原油<span class="isType">(实盘)</span>
+            </div>
+            <div class="arrow">
+                <span class="iconfont nextArrow">&#xe501;</span>
+            </div>
+        </div>
+        <div class="headerRow rule">
+          <span>规则</span>
+        </div>
+    </div>
+    <div class="chartHeaderPlaceHolder">
+    </div>
+  </div>
+  <!--动态行情价格-->
+  <div class="marketChartInfo">
+    <div class="marketInfo marketInfo_left">
+      <div class="marketName">
+        <span class="name">恒生指数</span>
+        <span class="code">HSI1911</span>
+      </div>
+      <div class="marketClear"></div>
+      <div class="marketPrice_ratio">
+        <span class="b blockLeft">27078</span>
+        <div class="b blockRight">
+          <span class="one">0</span>
+          <span class="two">0.00%</span>
+        </div>
+      </div>
+    </div>
+    <div class="marketInfo marketInfo_right">
+      <div class="goTradeBtn">
+        <button class="positionBtn">持仓</button>
+      </div>
+      <div class="nowPositionTimer">
+        <span class="timer1">本时段持仓时间至</span>
+        <span class="timer2">11:58:00</span>
+      </div>
+      <div class="nowBuyMallNum">
+        <div class="c buyMallView">
+          <div class="c1 buyView"></div>
+          <div class="c1 mallView"></div>
+        </div>
+        <div class="c buyMallNum">
+          <div class="buy">64买量</div>
+          <div class="mall">123卖量</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--图表-->
+  <div class="chart">
+    <div class="timeSelect">
+      <div class="times" id="interval">
+        <span class="active" data-value="1">分时</span>
+        <span data-value="5">5分钟</span>
+        <!-- <span data-value="15">15分钟</span> -->
+        <span data-value="30">30分钟</span>
+        <span data-value="60">1小时</span>
+        <span data-value="240">4小时</span>
+        <span data-value="1440">日线</span>
+      </div>
+    </div>
+    <div id="tv_chart_container"></div>
+  </div>
+  <!--购买按钮-->
+  <div class="quickOrder">
+    <div class="quick">
+      <div class="quickOriderView">
+        <div class="q quick-rise">
+            <div class="rise-top">
+              26674
+            </div>
+            <div class="rise-bottom">
+              <div class="icon">
+                  <span class="iconfont upIcon">&#xe502;</span>
+              </div>
+              <span class="buy">买多</span>
+            </div>
+        </div>
+        <div class="open-quick-orider">
+            <div class="quick-center">
+              <div class="quickOrderIcon">
+              </div>
+              <span class="quick-text">ON</span>
+            </div>
+          </div>
+          <div class="q quick-sell">
+            <div class="rise-top">
+              26672
+            </div>
+            <div class="rise-bottom">
+              <div class="icon">
+                  <span class="iconfont downIcon">&#xe502;</span>
+              </div>
+              <span class="buy">卖空</span>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="quickOrider-placeholder"></div>
+  </div>
+  <!--页面总统js 初始化图表库 绑定点击事件等-->
+  <script src="./js/index.js"></script>
+</body>
+</html>

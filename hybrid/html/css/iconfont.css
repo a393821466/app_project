@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('iconfont.eot');
+  src: url('iconfont.eot?#iefix') format('embedded-opentype'),
+      url('iconfont.woff2') format('woff2'),
+      url('iconfont.woff') format('woff'),
+      url('iconfont.ttf') format('truetype'),
+      url('iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 0.1rem;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-up:before {
+  content: "\e501";
+}
+
+.icon-shangjiantou:before {
+  content: "\e502";
+}
+
+.icon-wenhaocopy:before {
+  content: "\e6b2";
+}
+
+.icon-fanhui:before {
+  content: "\e607";
+}
+
+.icon-shandian:before {
+  content: "\e6f8";
+}
+

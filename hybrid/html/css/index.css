@@ -1,0 +1,319 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.header{
+  display: block;
+  box-sizing: border-box;
+}
+.header .chartHeader{
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 0.8rem;
+  padding: 0.16rem 0.2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  overflow: hidden;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  box-sizing: border-box;
+  z-index: 998;
+  color: #fff;
+  background:rgb(20, 152, 237);
+  background: linear-gradient(45deg, rgb(20, 152, 237), rgb(53, 91, 236));
+  background: -webkit-linear-gradient(45deg, rgb(20, 152, 237), rgb(53, 91, 236));
+  background: -moz-linear-gradient(45deg, rgb(20, 152, 237), rgb(53, 91, 236));
+  -webkit-transition-property: all;
+  transition-property: all;
+}
+.chartHeader .headerRow{
+  flex:1;
+}
+.chartHeader .backArrow,.chartHeader .rule{
+  flex:0 0 15%;
+  width:15%;
+  font-size:0.25rem;
+  line-height:0.5rem;
+}
+.chartHeader .backArrow .back{
+  font-size:0.3rem;
+  color:#f8f8f8;
+}
+.chartHeader .rule{
+  text-align:center;
+}
+.header .chartHeaderPlaceHolder{
+  width: 100%;
+  height: 0.8rem;
+}
+.centerSelect{
+  font-size:0.3rem;
+  text-align:center;
+}
+.centerSelect .chartTitle{
+  display:inline-block;
+  line-height:0.5rem;
+}
+.centerSelect .arrow{
+  width:0.4rem;
+  display:inline-block;
+  height:0.4rem;
+  position:relative;
+}
+/*动态行情价格*/
+.marketChartInfo{
+  display:flex;
+	flex-direction: row;
+  padding:0 0.2rem;
+}
+.marketChartInfo .marketInfo{
+  flex:1;
+}
+.marketChartInfo .marketName{
+  padding-top:0.2rem;
+  padding-bottom:0.2rem;
+  line-height:0.3rem;
+}
+.marketChartInfo .marketName .name{
+  display:inline-block;
+  text-align:center;
+  font-size:0.38rem;
+}
+.marketChartInfo .marketName .code{
+  display:inline-block;
+  line-height:0.5rem;
+  padding-left:0.1rem;
+  font-size:0.32rem;
+}
+.marketClear{
+  width:100%;
+  height:0.32rem;
+}
+.marketChartInfo .marketPrice_ratio .b{
+  float:left;
+}
+.marketChartInfo .marketPrice_ratio .blockLeft{
+  text-align:center;
+  line-height:0.8rem;
+  font-size: 0.5rem;
+}
+.marketChartInfo .marketPrice_ratio .blockRight{
+  padding-left:0.3rem;
+  line-height:0.4rem;
+  font-size: 0.28rem;
+}
+.marketChartInfo .blockRight .one,.marketChartInfo .blockRight .two{
+  display:block;
+}
+.marketChartInfo .marketInfo_right .goTradeBtn{
+  padding-top:0.2rem;
+  padding-bottom:0.2rem;
+  display:flex;
+  flex-direction:row-reverse;
+}
+.marketChartInfo .marketInfo_right .goTradeBtn .positionBtn{
+  width:1.6rem;
+  height:0.5rem;
+  border:none;
+  line-height:0.5rem;
+  border-radius:0.5rem;
+  background:#1b82d1;
+  margin-left:0;
+  margin-right:0.1rem;
+  color:#fff;
+}
+.marketChartInfo .marketInfo_right .nowPositionTimer{
+  text-align:right;
+  margin:0.1rem 0;
+  font-size:0.26rem;
+}
+.marketChartInfo .marketInfo_right .timer2{
+  color:#ed1818
+}
+.marketChartInfo .nowBuyMallNum{
+  display:flex;
+  flex-direction:row;
+}
+.marketChartInfo .nowBuyMallNum .buyMallView{
+  flex:0 0 65%;
+  width:65%;
+  height:0.22rem;
+}
+.marketChartInfo .nowBuyMallNum .buyMallView .c1{
+  height:100%;
+  float:right;
+}
+.marketChartInfo .nowBuyMallNum .buyMallView .buyView{
+  width:100%;
+  background:#ec2e2e;
+  margin-top:0.1rem;
+}
+.marketChartInfo .nowBuyMallNum .buyMallView .mallView{
+  width:90%;
+  background:#08b831;
+  margin-top:0.12rem;
+}
+.marketChartInfo .nowBuyMallNum .buyMallNum{
+  flex:0 0 35%;
+  width:35%;
+  text-align:right;
+  line-height:0.38rem;
+  font-size:0.24rem;
+}
+
+/*图表样式*/
+.timeSelect{
+  position: relative;
+  height:0.8rem;
+  padding:0 0.1rem;
+}
+.times {
+  display: flex;
+  width:100%;
+  justify-content: space-between;
+  margin-top:0.3rem;
+  border-top:1px solid #f3f3f3;
+}
+.times span {
+  flex:1;
+  color: #7c8bac;
+  font-size: 0.28rem;
+  line-height:0.8rem;
+  text-align: center;
+  display:block;
+}
+.times span.active {
+  position: relative;
+  color: #157fd5;
+  font-weight: 500;
+}
+.times span.active:before {
+  content: " ";
+  position: absolute;
+  bottom: -2px;
+  left: 10%;
+  z-index: 1;
+  width: 80%;
+  height: 3px;
+  background-color: #157fd5;
+  border-radius: 3px;
+}
+/* 这个下面的css重点关注，和k线图与关 */
+#tv_chart_container {
+  padding:0 0.2rem;
+  height: 7rem;
+}
+iframe {
+  width: 100%;
+  height: 100% !important;
+}
+/*下单tabbar*/
+.quickOrder,.quickOriderView{
+	box-sizing: border-box;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 998;
+}
+.quick{
+	background:#f8f8f8;
+  border-top:1px solid #e8e8e8;
+}
+.quick .selectModel{
+  display:flex;
+  flex-direction: row;
+  padding:0 0.2rem;
+}
+.quick .selectModel .model{
+  color:#666;
+  flex:0 0 25%;
+  width:25%;
+}
+.quick .selectModel .model .label{
+  display:flex;
+  flex-direction:row;
+}
+.quick .selectModel .model .selectText{
+  display:block;
+  line-height:0.5rem;
+  flex:1;
+}
+.quick .handNum{
+  flex:0 0 30%;
+  width:30%;
+}
+.quick .stopLoopAmount{
+  flex:0 0 45%;
+  width:45%;
+}
+.quick .hand-num-view,.quick .stop-loop-amount{
+  width:90%;
+  height:0.5rem;
+  background:#888;
+  color:#f8f8f8;
+  text-align:center;
+  margin:0 auto;
+  line-height:0.5rem;
+  border-radius:0.1rem;
+}
+
+.quickOrder .quickOriderView{
+  display: flex;
+  padding-bottom: 0;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.quickOrder .quickOriderView .q{
+  flex:1;
+  height:1.3rem;
+}
+.quickOrder .quickOriderView .quick-rise{
+  background:#ec2e2e;
+}
+.quickOrder .quickOriderView .quick-sell{
+  background:#08b831;
+}
+.quickOrder .quickOriderView .rise-top{
+  color:#f8f8f8;
+  text-align:center;
+  padding-top:0.2rem;
+  font-size:0.32rem;
+}
+.quickOrder .quickOriderView .rise-bottom{
+  color:#f8f8f8;
+  /* text-align:center; */
+  display:flex;
+  flex-direction:row;
+  font-size:0.32rem;
+}
+.quickOrder .quickOriderView .icon{
+  flex:0 0 38%;
+  width:38%;
+  text-align:right;
+}
+.quickOrder .quickOriderView .upIcon, .quickOrder .quickOriderView .downIcon{
+  display: inline-block;
+  font-size:0.32rem;
+}
+.quickOrder .quickOriderView .downIcon{
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+}
+.quickOrder .buy{
+  flex:0 0 62%;
+  width:62%;
+  text-align:left;
+  padding-left:0.06rem;
+}
+.quickOrder .quickOrider-placeholder{
+  width: 100%;
+  height:1.3rem;
+  margin-bottom: 0;
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}

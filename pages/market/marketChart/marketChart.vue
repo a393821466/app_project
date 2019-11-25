@@ -1,6 +1,6 @@
 <template>
 	<view class="marketChartView" :class="themeFontSize">
-		<view class="marketHeader">
+		<!-- <view class="marketHeader">
 			<hx-navbar
 			    :back="false" 
 				:background-color="[[20, 152, 237],[53, 91, 236]]"
@@ -24,9 +24,10 @@
 				    </view>
 				</block>
 			</hx-navbar>
-		</view>
+		</view> -->
+		<!-- <web-view  src="/hybrid/html/index.html" @message="msg"></web-view> -->
 		<dynamic-price></dynamic-price>
-		<dynamic-chart></dynamic-chart>
+		<!-- <dynamic-chart></dynamic-chart> -->
 		<quick-order :marketDetails="marketDetails"></quick-order>
 	</view>
 </template>
@@ -49,7 +50,12 @@
 		},
 		data() {
 			return {
-				queryData:{}
+				queryData:{},
+				msg:{
+					id:1,
+					msg:'这是APP传递过来的数据',
+					code:12
+				}
 			};
 		},
 		computed:{
