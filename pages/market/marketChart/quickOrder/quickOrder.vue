@@ -287,7 +287,6 @@ export default{
 			border-radius:5upx;
 		}
 	}
-	
 }
 .quickOrder{
 	.quickOriderView{

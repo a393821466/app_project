@@ -59,7 +59,7 @@ var chartConfig = {
     'mainSeriesProperties.areaStyle.color2': '#fff',
     'timeScale.barSpacing': 2, // 设置每个格子的宽度，可以用来改变显示的时间区间
     'mainSeriesProperties.areaStyle.linecolor': '#6F87C7',
-    'mainSeriesProperties.areaStyle.linewidth': 3,
+    'mainSeriesProperties.areaStyle.linewidth': 2,
 		// 蜡烛样式
 		// "mainSeriesProperties.candleStyle.upColor": "#48b451",
 		// "mainSeriesProperties.candleStyle.downColor": "#db000c",

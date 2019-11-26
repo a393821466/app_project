@@ -6,19 +6,6 @@
   <!-- Fix for iOS Safari zooming bug -->
   <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
   <meta charset="utf-8" />
-  <script src="./js/zepto.min.js"></script>
-  <script src="./js/portView.js"></script>
-  <script src="./js/tpl.js"></script>
-  <!--封装了一个发布订阅模式-->
-  <script src="./js/event.js"></script>
-  <!--图表库js-->
-  <script src="./charting_library/charting_library.min.js"></script>
-  <!--websocket-->
-  <script src="./js/websocket.js"></script>
-  <!--图表数据获取-->
-  <script src="./js/datafeed.js"></script>
-  <!--图表配置-->
-  <script src="./js/chartConfig.js"></script>
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/iconfont.css">
 </head>
@@ -48,15 +35,15 @@
   <div class="marketChartInfo">
     <div class="marketInfo marketInfo_left">
       <div class="marketName">
-        <span class="name">恒生指数</span>
-        <span class="code">HSI1911</span>
+        <span class="name">-</span>
+        <span class="code">-</span>
       </div>
       <div class="marketClear"></div>
       <div class="marketPrice_ratio">
-        <span class="b blockLeft">27078</span>
+        <span class="b blockLeft">1.10265</span>
         <div class="b blockRight">
-          <span class="one">0</span>
-          <span class="two">0.00%</span>
+          <span class="one">0.00030</span>
+          <span class="two">0.03%</span>
         </div>
       </div>
     </div>
@@ -98,40 +85,108 @@
   <!--购买按钮-->
   <div class="quickOrder">
     <div class="quick">
+      <div class="quicktTollBar">
+        <div class="quickList">
+          <div class="q model">
+            <input class="inp-cbx" id="models" type="checkbox" checked style="display: none;"/>
+            <label class="cbx" for="models">
+              <span>
+                <svg width="12px" height="10px">
+                  <use xlink:href="#check"></use>
+                </svg>
+              </span>
+              <span class="modelText">元模式</span>
+            </label>
+            <svg class="inline-svg">
+              <symbol id="check" viewbox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </symbol>
+            </svg>
+          </div>
+          <div class="q handNum">
+            <div class="hand-num-view">
+              <span>手数:</span>
+              <span class="num">1</span>
+              <span>手</span>
+            </div>
+          </div>
+          <div class="q stopLoopAmount">
+            <div class="stop-loop-amount">
+              <span>止损金额:</span>
+              <span class="num">500000</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="quickOriderView">
         <div class="q quick-rise">
             <div class="rise-top">
-              26674
+              1.10265
             </div>
             <div class="rise-bottom">
               <div class="icon">
                   <span class="iconfont upIcon">&#xe502;</span>
               </div>
-              <span class="buy">买多</span>
+              <span class="buy b">买多</span>
             </div>
         </div>
         <div class="open-quick-orider">
             <div class="quick-center">
-              <div class="quickOrderIcon">
-              </div>
+                <span class="iconfont quickIcon">&#xe6f8;</span>
               <span class="quick-text">ON</span>
             </div>
           </div>
           <div class="q quick-sell">
             <div class="rise-top">
-              26672
+              1.10265
             </div>
             <div class="rise-bottom">
               <div class="icon">
                   <span class="iconfont downIcon">&#xe502;</span>
               </div>
-              <span class="buy">卖空</span>
+              <span class="buy m">卖空</span>
             </div>
           </div>
       </div>
     </div>
-    <div class="quickOrider-placeholder"></div>
+    <div class="quickOrider-placeholder">
+    </div>
+    <!--手数-->
+    <div id="quickBuyHandNum">
+      <div class="quickHandNumView"></div>
+      <div id="getHandNum" class="handView">
+        <div class="handNumUp">
+          <div class="title left"></div>
+          <div class="title center">选择手数</div>
+          <div class="title right">关闭</div>
+        </div>
+        <div class="handNumContent">
+          <ul>
+            <li class="active">1手</li>
+            <li>3手</li>
+            <li>5手</li>
+            <li>8手</li>
+            <li>10手</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
+  <script src="./js/zepto.min.js"></script>
+  <script src="./js/portView.js"></script>
+  <script src="./js/tpl.js"></script>
+  <!--封装了一个发布订阅模式-->
+  <script src="./js/event.js"></script>
+  <!--图表库js-->
+  <script src="./charting_library/charting_library.min.js"></script>
+  <!--websocket-->
+  <script src="./js/websocket.js"></script>
+  <!--图表数据获取-->
+  <script src="./js/datafeed.js"></script>
+  <!--图表配置-->
+  <script src="./js/chartConfig.js"></script>
+  <script src="./js/aes.js"></script>
+  <script src="./js/service.js"></script>
   <!--页面总统js 初始化图表库 绑定点击事件等-->
   <script src="./js/index.js"></script>
 </body>

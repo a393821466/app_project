@@ -6,7 +6,7 @@ var index_market = 'BTC/USDT'
 var index_activeCycle = 1
 
 $(function(){
-  // chartConfig 在chartConfig.js里面
+  // 行情图表事件
   // 给chartConfig添加展示周期
   chartConfig.interval = index_activeCycle
   // 给chartConfig添加展示产品
@@ -30,6 +30,93 @@ $(function(){
     widget.chart().setChartType(e.target.dataset.value == '1' ? 3 : 1)
     widget.chart().setResolution(e.target.dataset.value)
     $(this).addClass('active').siblings().removeClass('active')
+  })
+  // 行情页面及购买逻辑
+  // 所有的变量
+  var getParams=$init.queryMeter()
+  var marketData='';
+  var model={
+    num: 1,
+    title: '元模式',
+    type: '0'
+  }
+  var isOpenHandView=true;
+  var das={
+    templateCode:getParams.tpCode,
+    CommodityName:getParams.CommodityName,
+    commodityCode:getParams.commodityCode,
+    contractCode:getParams.getParams,
+    priceDecimalPlaces:getParams.priceDecimalPlaces,
+    productTypeCode:getParams.productTypeCode
+  }
+  // 闪电下单开启关闭
+  var quickFlat=true;
+  var $quickBar=$('.quicktTollBar');
+  var $parentBar=$('.quickOriderView');
+  $(".quick-center").off('click').on('click',function(){
+    var that=$(this);
+    if(quickFlat){
+      that.css('color','#ccc');
+      that.find('.quick-text').text('OFF');
+      $parentBar.find('.b').text('闪电买多');
+      $parentBar.find('.m').text('闪电卖多');
+      $quickBar.show(100);
+      quickFlat=false;
+    }else{
+      that.css('color','#fff');
+      that.find('.quick-text').text('ON');
+      $parentBar.find('.b').text('买多');
+      $parentBar.find('.m').text('卖多');
+      $quickBar.hide(100);
+      quickFlat=true;
+    }
+  });
+  // 存储token
+  localStorage.setItem("token",getParams.token);
+  // 获取单个行情
+  $init.get('/apis/business/getQuotaInfo',{templateCode:das.templateCode,commodityCode:das.commodityCode},function(res){
+    if(res.status){
+      marketData=res.data;
+      $(".marketName").find('.name').text(marketData.CommodityName);
+      $(".marketName").find('.code').text(marketData.commodityCode+marketData.contractCode);
+      return;
+    }
+    $init.info({
+      message:res.msg,
+      type:'error'
+    });
+  },function(err){
+    $init.info({
+      message:err.msg,
+      type:'error'
+    });
+    return;
+  },getParams.token)
+
+  // 圆角模式处理
+  $('#models').off('click').on('click',function(){
+    if($(this).prop("checked")){
+      model={
+        num: 1,
+        title: '元模式',
+        type: '0'
+      }
+    }else{
+      model={
+        num: 0.1,
+        title: '角模式',
+        type: '1'
+      }
+    }
+    $(".modelText").text(model.title);
+  })
+  // 打开选择手数
+  $(".handNum").off('click').on('click',function(){
+    var $handView=$("#quickBuyHandNum");
+    $handView.show()
+    setTimeout(function(){  
+      $("#getHandNum").addClass('active');
+    },10)
   })
 });
 

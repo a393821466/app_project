@@ -1,6 +1,6 @@
 <template>
 	<view class="marketChartView" :class="themeFontSize">
-		<!-- <view class="marketHeader">
+		<view class="marketHeader">
 			<hx-navbar
 			    :back="false" 
 				:background-color="[[20, 152, 237],[53, 91, 236]]"
@@ -24,11 +24,11 @@
 				    </view>
 				</block>
 			</hx-navbar>
-		</view> -->
-		<!-- <web-view  src="/hybrid/html/index.html" @message="msg"></web-view> -->
-		<dynamic-price></dynamic-price>
+		</view>
+		<web-view  :src="url" @message="handleMessage"></web-view>
+		<!-- <dynamic-price></dynamic-price> -->
 		<!-- <dynamic-chart></dynamic-chart> -->
-		<quick-order :marketDetails="marketDetails"></quick-order>
+		<!-- <quick-order :marketDetails="marketDetails"></quick-order> -->
 	</view>
 </template>
 
@@ -51,18 +51,23 @@
 		data() {
 			return {
 				queryData:{},
-				msg:{
-					id:1,
-					msg:'这是APP传递过来的数据',
-					code:12
-				}
+				url:''
+				
 			};
 		},
 		computed:{
-			...mapGetters(['themeFontSize','marketDetails'])
+			...mapGetters(['themeFontSize','marketDetails','token'])
 		},
 		onLoad(query){
 			this.queryData=query;
+			this.url=`/hybrid/html/index.html?tpCode=${query.tpCode}&
+			CommodityName=${query.CommodityName}&
+			commodityCode=${query.commodityCode}&
+			contractCode=${query.contractCode}&
+			productTypeCode=${query.productTypeCode}&
+			priceDecimalPlaces=${query.priceDecimalPlaces}&
+			token=${this.token}
+			`
 			// uni.setNavigationBarTitle({
 			// 	title:`${query.CommodityName}(${query.commodityCode})`
 			// })
@@ -81,11 +86,10 @@
 			...mapActions(['getMarketGoodsDetails','getSingleMarketDetails','getHistoryChartDas']),
 			backNextRoute(){
 				let das=chache.get('selectTemName')
-				// this.$mRouter.reLaunch({
-				//     route:this.$routers.marketList,
-				// 	query:das
-				// })
-				this.$mRouter.back(1)
+				this.$mRouter.reLaunch({
+				    route:this.$routers.marketList,
+					query:das
+				})
 			},
 			// 获取单个品种信息, 价格数据
 			getMarketGoods(data){
