@@ -65,16 +65,13 @@ FeedBase.prototype.getApiTime = function (resolution) {
 
 FeedBase.prototype.getBars = function (symbolInfo, resolution, rangeStartDate, rangeEndDate, onResult, onError) {
   // 切换产品周期 或者 切换产品 会执行这个函数
-
   // 是历史数据 
   var history = true
-
   /*
     !detafeed_historyTime 如果没请请求过这个产品或者这个周期的历史数据
     resolution !== detafeed_lastResolution 是否更换了产品周期
     detafeed_lastSymbol !== symbolInfo.name 是否切换了产品
   */
-
   if (!detafeed_historyTime || (resolution !== detafeed_lastResolution) || detafeed_lastSymbol !== symbolInfo.name) {
     // 那就不是历史数据
     history = false
@@ -97,11 +94,11 @@ FeedBase.prototype.getBars = function (symbolInfo, resolution, rangeStartDate, r
     id: '0a0493f7-80d4-4d1a-9d98-6da9ae9d399e'
   }, `candle.${this.getApiTime(resolution)}.${this.getSendSymbolName(symbolInfo.name)}`, history)
   Event.off('data')
-
   Event.on('data', data => {
     if (data.data && Array.isArray(data.data)) {
       // 记录这次请求的时间周期
       detafeed_lastResolution = resolution
+      console.log(data)
       var meta = {noData: false}
       var bars = []
       if (data.data.length) {

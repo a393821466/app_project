@@ -38,6 +38,7 @@
 	import quickOrder from "./quickOrder/quickOrder.vue"
 	import dynamicChart from './dynamicChart/dynamicChart.vue'
 	import chache from '@/common/utils/storage'
+	import config from '@/common/utils/config'
 	import {showUiToast,showUiLoading,hideUiLoading} from '@/common/utils/dialog.config'
 	import {mapActions,mapGetters} from 'vuex'
 	export default {
@@ -56,31 +57,31 @@
 			};
 		},
 		computed:{
-			...mapGetters(['themeFontSize','marketDetails','token'])
+			...mapGetters(['themeFontSize','marketDetails'])
 		},
 		onLoad(query){
 			this.queryData=query;
+			console.log(config.domain)
 			this.url=`/hybrid/html/index.html?tpCode=${query.tpCode}&
 			CommodityName=${query.CommodityName}&
 			commodityCode=${query.commodityCode}&
 			contractCode=${query.contractCode}&
 			productTypeCode=${query.productTypeCode}&
 			priceDecimalPlaces=${query.priceDecimalPlaces}&
-			token=${this.token}
-			`
+			token=${query.token}`
 			// uni.setNavigationBarTitle({
 			// 	title:`${query.CommodityName}(${query.commodityCode})`
 			// })
-			let das={
-				commodityCode:query.commodityCode,
-				contractCode:query.contractCode
-			}
-			this.getMarketDetail({
-				templateCode:query.tpCode,
-				commodityCode:query.commodityCode
-			})
-			this.getMarketGoods(das)
-			this.getHistoryChart(das)
+			// let das={
+			// 	commodityCode:query.commodityCode,
+			// 	contractCode:query.contractCode
+			// }
+			// this.getMarketDetail({
+			// 	templateCode:query.tpCode,
+			// 	commodityCode:query.commodityCode
+			// })
+			// this.getMarketGoods(das)
+			// this.getHistoryChart(das)
 		},
 		methods:{
 			...mapActions(['getMarketGoodsDetails','getSingleMarketDetails','getHistoryChartDas']),

@@ -35,15 +35,15 @@
   <div class="marketChartInfo">
     <div class="marketInfo marketInfo_left">
       <div class="marketName">
-        <span class="name">-</span>
+        <span class="name">load..</span>
         <span class="code">-</span>
       </div>
       <div class="marketClear"></div>
-      <div class="marketPrice_ratio">
-        <span class="b blockLeft">1.10265</span>
+      <div class="marketPrice_ratio" id="decimalPrice">
+        <span class="b blockLeft rise">load..</span>
         <div class="b blockRight">
-          <span class="one">0.00030</span>
-          <span class="two">0.03%</span>
+          <span class="one">-</span>
+          <span class="two">-%</span>
         </div>
       </div>
     </div>
@@ -51,11 +51,12 @@
       <div class="goTradeBtn">
         <button class="positionBtn">持仓</button>
       </div>
-      <div class="nowPositionTimer">
-        <span class="timer1">本时段持仓时间至</span>
-        <span class="timer2">11:58:00</span>
+      <div class="nowPositionTimer" id="timer">
+        <span class="timer1">
+          持仓时间加载中..
+        </span>
       </div>
-      <div class="nowBuyMallNum">
+      <div class="nowBuyMallNum" id="buyMallNum">
         <div class="c buyMallView">
           <div class="c1 buyView"></div>
           <div class="c1 mallView"></div>
@@ -106,22 +107,23 @@
           <div class="q handNum">
             <div class="hand-num-view">
               <span>手数:</span>
-              <span class="num">1</span>
+              <span class="num">-</span>
               <span>手</span>
             </div>
           </div>
           <div class="q stopLoopAmount">
             <div class="stop-loop-amount">
               <span>止损金额:</span>
-              <span class="num">500000</span>
+              <span class="types">-</span>
+              <span class="num">-</span>
             </div>
           </div>
         </div>
       </div>
       <div class="quickOriderView">
         <div class="q quick-rise">
-            <div class="rise-top">
-              1.10265
+            <div class="rise-top r">
+              -
             </div>
             <div class="rise-bottom">
               <div class="icon">
@@ -137,8 +139,8 @@
             </div>
           </div>
           <div class="q quick-sell">
-            <div class="rise-top">
-              1.10265
+            <div class="rise-top f">
+              -
             </div>
             <div class="rise-bottom">
               <div class="icon">
@@ -154,20 +156,26 @@
     <!--手数-->
     <div id="quickBuyHandNum">
       <div class="quickHandNumView"></div>
-      <div id="getHandNum" class="handView">
+      <div class="handView" id="getHandNum">
         <div class="handNumUp">
           <div class="title left"></div>
           <div class="title center">选择手数</div>
           <div class="title right">关闭</div>
         </div>
-        <div class="handNumContent">
-          <ul>
-            <li class="active">1手</li>
-            <li>3手</li>
-            <li>5手</li>
-            <li>8手</li>
-            <li>10手</li>
-          </ul>
+        <div class="handNumContent" id="handNums">
+        </div>
+      </div>
+    </div>
+    <!--止盈-->
+    <div id="quickTakeProfit">
+      <div class="quickTakeProfitView"></div>
+      <div class="profitView" id="profit">
+        <div class="profitViewUp">
+          <div class="title left"></div>
+          <div class="title center">选择止盈金额</div>
+          <div class="title right">关闭</div>
+        </div>
+        <div class="profitContent" id="profits">
         </div>
       </div>
     </div>
@@ -175,6 +183,7 @@
   <script src="./js/zepto.min.js"></script>
   <script src="./js/portView.js"></script>
   <script src="./js/tpl.js"></script>
+  <script src="./js/marketMq.js"></script>
   <!--封装了一个发布订阅模式-->
   <script src="./js/event.js"></script>
   <!--图表库js-->
@@ -189,5 +198,48 @@
   <script src="./js/service.js"></script>
   <!--页面总统js 初始化图表库 绑定点击事件等-->
   <script src="./js/index.js"></script>
+  <!-- 手数 -->
+  <script id="getHandNums" type="text/html">
+    <%if(splitHands.length>0){%>
+      <ul>
+        <%for(var i=0;i<splitHands.length;i++){%>
+            <li><span><%=splitHands[i]%></span>手</li>
+        <%}%>
+      </ul>
+      <%}else{%>
+      <p style="font-size:20px;text-align:center;
+      line-height:80px;color:#ccc;">没有手数</p>
+    <%}%>
+  </script>
+  <!-- 止盈金额 -->
+  <script id="getProfits" type="text/html">
+    <%if(profitMoney.length>0){%>
+      <ul>
+        <%for(var i=0;i<profitMoney.length;i++){%>
+            <li><span><%=profitMoney[i]%></span></li>
+        <%}%>
+      </ul>
+      <%}else{%>
+        <p style="font-size:20px;text-align:center;
+        line-height:80px;color:#ccc;">没有止盈金额</p>
+    <%}%>
+  </script>
+  <!-- 持仓事件 -->
+  <script id="getTimer" type="text/html">
+    <%if(time){%>
+      <span class="timer1">本时段持仓时间至</span>
+      <span class="timer2"><%=time%></span>
+    <%}else{%>
+      <span class="timer1">休市中</span>
+    <%}%>
+  </script>
+  <!-- 动态价格 -->
+  <script id="getDymicPrice" type="text/html">
+    <span class="b blockLeft <%=data.upDropSpeed>0?'rise':'fall'%>" ><%=data.lastPrice%></span>
+    <div class="b blockRight <%=data.upDropSpeed>0?'rise':'fall'%>">
+      <span class="one"><%=data.upDropPrice%></span>
+      <span class="two"><%=data.upDropSpeed.toFixed(2)%>%</span>
+    </div>
+  </script>
 </body>
 </html>

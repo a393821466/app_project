@@ -11,7 +11,7 @@ var $init = {
   get: function (url, query, successfn, errorfn,token, dataType) {
     var queryParams = '';
     var dataTypes = (dataType == null || dataType == "" || typeof (dataType) == "undefined") ? "json" : dataType;
-    var userToken=!localStorage.getItem('token')?token:localStorage.getItem('token');
+    // var userToken=!localStorage.getItem('token')?token:localStorage.getItem('token');
     if (query) {
       queryParams = url + '?' + $init.parseQuery(query)
     } else {
@@ -24,7 +24,7 @@ var $init = {
       beforeSend: function (xhr) {
         // 需要设置请求报文
         xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-        xhr.setRequestHeader("Authorization", userToken);
+        xhr.setRequestHeader("Authorization", token);
       },
       success: function (response) {
         successfn(response)
@@ -154,71 +154,16 @@ var $init = {
         },defaults.time)
     }
   },
+  formatPoint: function(price,point) {
+    if (price && point) {
+      price = parseFloat(price)
+      return price.toFixed(point)
+    } else {
+      return price
+    }
+  },
   ramdomString: function (len) {
-    const data = [
-      '0',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
-      'a',
-      'b',
-      'c',
-      'd',
-      'e',
-      'f',
-      'g',
-      'h',
-      'i',
-      'j',
-      'k',
-      'l',
-      'm',
-      'n',
-      'o',
-      'p',
-      'q',
-      'r',
-      's',
-      't',
-      'u',
-      'v',
-      'w',
-      'x',
-      'y',
-      'z'
-    ]
+    const data = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
     let nums = ''
     for (let i = 0; i < len; i++) {
       const r = parseInt(Math.random() * 61)

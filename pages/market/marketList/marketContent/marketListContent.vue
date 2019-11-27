@@ -66,7 +66,7 @@
 			}
 		},
 		computed:{
-			...mapGetters(['socketTask'])
+			...mapGetters(['socketTask','token'])
 		},
 		methods:{
 			...mapActions(['closeSocket']),
@@ -86,7 +86,8 @@
 						commodityCode: item.commodityCode,
 						contractCode: item.contractCode,
 						productTypeCode: item.productTypeCode,
-						priceDecimalPlaces: item.priceDecimalPlaces
+						priceDecimalPlaces: item.priceDecimalPlaces,
+						token:this.token
 					}
 				})
 			},

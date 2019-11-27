@@ -35,17 +35,19 @@ $(function(){
   // 所有的变量
   var getParams=$init.queryMeter()
   var marketData='';
+  var marketPrice='';
   var model={
     num: 1,
     title: '元模式',
     type: '0'
   }
-  var isOpenHandView=true;
+  var tradeHands=1;
+  var stopMoney=0;
   var das={
     templateCode:getParams.tpCode,
     CommodityName:getParams.CommodityName,
     commodityCode:getParams.commodityCode,
-    contractCode:getParams.getParams,
+    contractCode:getParams.contractCode,
     priceDecimalPlaces:getParams.priceDecimalPlaces,
     productTypeCode:getParams.productTypeCode
   }
@@ -56,14 +58,16 @@ $(function(){
   $(".quick-center").off('click').on('click',function(){
     var that=$(this);
     if(quickFlat){
-      that.css('color','#ccc');
+      that.find('.quickIcon').css('color','#ccc');
+	  that.find('.quick-text').css('color','#ccc');
       that.find('.quick-text').text('OFF');
       $parentBar.find('.b').text('闪电买多');
       $parentBar.find('.m').text('闪电卖多');
       $quickBar.show(100);
       quickFlat=false;
     }else{
-      that.css('color','#fff');
+      that.find('.quickIcon').css('color','#fff');
+      that.find('.quick-text').css('color','#fff');
       that.find('.quick-text').text('ON');
       $parentBar.find('.b').text('买多');
       $parentBar.find('.m').text('卖多');
@@ -72,13 +76,18 @@ $(function(){
     }
   });
   // 存储token
-  localStorage.setItem("token",getParams.token);
+  // localStorage.setItem("token",getParams.token);
   // 获取单个行情
   $init.get('/apis/business/getQuotaInfo',{templateCode:das.templateCode,commodityCode:das.commodityCode},function(res){
     if(res.status){
       marketData=res.data;
+      closeTimer()
       $(".marketName").find('.name').text(marketData.CommodityName);
-      $(".marketName").find('.code').text(marketData.commodityCode+marketData.contractCode);
+      if(das.productTypeCode=='DIGICCY'){
+        $(".marketName").find('.code').text(marketData.commodityCode);
+      }else{
+        $(".marketName").find('.code').text(marketData.commodityCode+marketData.contractCode);
+      }
       return;
     }
     $init.info({
@@ -92,7 +101,28 @@ $(function(){
     });
     return;
   },getParams.token)
-
+  $init.get('/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode,'',function(res){
+    if(res.status){
+      marketPrice=res.data;
+      marketPrice.lastPrice = $init.formatPoint(res.data.lastPrice)
+      marketPrice.buyNumber = res.data.askSize
+      marketPrice.sellNumber = res.data.bidSize
+      var m = new Decimal(res.data.lastPrice).sub(res.data.openPrice).toNumber()
+      marketPrice.upDropPrice = $init.formatPoint(m)
+      var n = new Decimal(m).div(res.data.openPrice).toNumber()
+      var x = new Decimal(n).mul(100).toNumber()
+      marketPrice.upDropSpeed = x
+      marketPrice.buyPrice = res.data.askPrice
+      marketPrice.sellPrice = res.data.bidPrice
+      renderPrice()
+    }
+  },function(err){
+    $init.info({
+      message:err.msg,
+      type:'error'
+    });
+    return;
+  },getParams.token)
   // 圆角模式处理
   $('#models').off('click').on('click',function(){
     if($(this).prop("checked")){
@@ -109,15 +139,116 @@ $(function(){
       }
     }
     $(".modelText").text(model.title);
+    getDataAndMaps();
   })
-  // 打开选择手数
+  // 持仓时间
+  function closeTimer(){
+    var closeTimes=marketData.closeTime;
+    var data1=!closeTimes?{time:''}:{time:closeTimes}
+    var bt1=baidu.template;
+    var timerHtml=bt1('getTimer',data1);
+    $("#timer").html(timerHtml);
+    getDataAndMaps()
+  }
+  // 渲染价格
+  function renderPrice(){
+    var prices=marketPrice.askPrice
+    if(!prices){
+      return
+    }
+    var bt1=baidu.template;
+    var timerHtml=bt1('getDymicPrice',{data:marketPrice});
+    $("#decimalPrice").html(timerHtml);
+    $(".quick-rise").find('.r').text(marketPrice.buyPrice);
+    $(".quick-sell").find('.f').text(marketPrice.sellPrice);
+  }
+  // 获取所有的历史数据
+  function getHistoryList(){
+    
+  }
+  // 获取手数及遍历全部手数
+  function getDataAndMaps(){
+    var allTradeHands=marketData.tradeHandsUnit;
+    if(!allTradeHands){
+      return
+    }
+    var d=allTradeHands.split(',');
+    var data1={splitHands:d}
+    var bt1=baidu.template;
+    var handsHtml=bt1('getHandNums',data1);
+    $("#handNums").html(handsHtml);
+    var aLi=$(".handNumContent ul li");
+    aLi.eq(0).addClass('active');
+    tradeHands=aLi.eq(0).find('span').text();
+    $(".hand-num-view .num").text(tradeHands);
+    aLi.off('click').on('click',function(){
+      var n=$(this).find('span').text();
+      tradeHands=n;
+      $(".hand-num-view .num").text(n);
+      profit(marketData);
+      $(this).addClass('active').siblings().removeClass('active');
+      closeMaskView($(".handView"),$handView,'active');
+    })
+    profit(marketData);
+  }
+  // 选择止盈及数据渲染
+  function profit(marketData){
+    var gearInfo=marketData.gearInfo;
+    if(!gearInfo){
+      return
+    }
+    let v=[];
+    let gearInfoMoney = typeof gearInfo === 'string' ? JSON.parse(gearInfo) : [];
+    for (let j in gearInfoMoney) {
+      let nums = Object.keys(gearInfoMoney[j])[0];
+      let stopMoney=(nums*model.num)*tradeHands;
+      v.push(stopMoney);
+    }
+    var data2={profitMoney:v,types:marketData.currentCurrencySign}
+    var bt2=baidu.template;
+    var profitHtml=bt2('getProfits',data2);
+    $("#profits").html(profitHtml);
+    var aLis=$(".profitContent ul li");
+    aLis.eq(0).addClass('active');
+    stopMoney=aLis.eq(0).find('span').text();
+    $(".stop-loop-amount .types").text(marketData.currentCurrencySign);
+    $(".stop-loop-amount .num").text(stopMoney);
+    aLis.off('click').on('click',function(){
+      var n=$(this).find('span').text();
+      stopMoney=n;
+      $(".stop-loop-amount .num").text(stopMoney);
+      $(this).addClass('active').siblings().removeClass('active');
+      closeMaskView($(".profitView"),$profitView,'active');
+    })
+  }
+  // 选择手数及止盈弹窗
+  var $handView=$("#quickBuyHandNum");
+  var $profitView=$("#quickTakeProfit");
   $(".handNum").off('click').on('click',function(){
-    var $handView=$("#quickBuyHandNum");
-    $handView.show()
+    openMaskView($handView,$(".handView"),'active');
+  });
+  $(".handNumUp .right,.quickHandNumView").off('click').on('click',function(){
+    closeMaskView($(".handView"),$handView,'active');
+  });
+
+  $(".stopLoopAmount").off('click').on('click',function(){
+    openMaskView($profitView,$(".profitView"),'active');
+  });
+  $(".profitViewUp .right,.quickTakeProfitView").off('click').on('click',function(){
+    closeMaskView($(".profitView"),$profitView,'active');
+  });
+  function openMaskView(node1,node2,className){
+    node1.show();
     setTimeout(function(){  
-      $("#getHandNum").addClass('active');
-    },10)
-  })
+      node2.addClass(className);
+    },1);
+  };
+  function closeMaskView(node1,node2,className){
+    node1.removeClass(className);
+    setTimeout(function(){  
+      node2.hide();
+    },200);
+  };
 });
 
 
