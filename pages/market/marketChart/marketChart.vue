@@ -1,6 +1,6 @@
 <template>
 	<view class="marketChartView" :class="themeFontSize">
-		<view class="marketHeader">
+		<!-- <view class="marketHeader"> 
 			<hx-navbar
 			    :back="false" 
 				:background-color="[[20, 152, 237],[53, 91, 236]]"
@@ -24,8 +24,8 @@
 				    </view>
 				</block>
 			</hx-navbar>
-		</view>
-		<web-view  :src="url" @message="handleMessage"></web-view>
+		</view> -->
+		<web-view :webview-styles="webviewStyles" :src="url"></web-view>
 		<!-- <dynamic-price></dynamic-price> -->
 		<!-- <dynamic-chart></dynamic-chart> -->
 		<!-- <quick-order :marketDetails="marketDetails"></quick-order> -->
@@ -52,23 +52,25 @@
 		data() {
 			return {
 				queryData:{},
-				url:''
-				
+				url:'',
+				webviewStyles: {
+					progress: {
+						color: '#FF3333'
+					}
+				}
 			};
 		},
 		computed:{
-			...mapGetters(['themeFontSize','marketDetails'])
+			...mapGetters(['themeFontSize','marketDetails','token'])
 		},
 		onLoad(query){
 			this.queryData=query;
-			console.log(config.domain)
-			this.url=`/hybrid/html/index.html?tpCode=${query.tpCode}&
-			CommodityName=${query.CommodityName}&
-			commodityCode=${query.commodityCode}&
-			contractCode=${query.contractCode}&
-			productTypeCode=${query.productTypeCode}&
-			priceDecimalPlaces=${query.priceDecimalPlaces}&
-			token=${query.token}`
+			// var options = {
+			//     'CommodityName': query.CommodityName
+			// }
+			// browser.init(options)
+			// browser.show('/hybrid/html/index.html')
+			this.url=`/hybrid/html/index.html?tpCode=${query.tpCode}&CommodityName=${query.CommodityName}&commodityCode=${query.commodityCode}&contractCode=${query.contractCode}&domain=${query.domain}&productTypeCode=${query.productTypeCode}&priceDecimalPlaces=${query.priceDecimalPlaces}&token=${this.token}`
 			// uni.setNavigationBarTitle({
 			// 	title:`${query.CommodityName}(${query.commodityCode})`
 			// })

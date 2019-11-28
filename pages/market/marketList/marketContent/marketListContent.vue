@@ -51,6 +51,7 @@
 <script>
 	import {showUiToast} from '@/common/utils/dialog.config'
 	import {mapActions,mapGetters} from 'vuex'
+	import config from '@/common/utils/config'
 	export default {
 		name:'marketListContent',
 		props:{
@@ -78,17 +79,20 @@
 				if(this.socketTask!=null){
 				  	this.closeSocket()
 				}
+				var options = {
+				    tpCode:this.marketCode.code,
+				    CommodityName: item.CommodityName,
+				    commodityCode: item.commodityCode,
+				    contractCode: item.contractCode,
+				    productTypeCode: item.productTypeCode,
+				    priceDecimalPlaces: item.priceDecimalPlaces
+				}
+				//#ifdef APP-PLUS
+					options.domain=config.domain
+				//#endif
 				this.$mRouter.push({
 					route:this.$routers.marketDetail,
-					query:{
-						tpCode:this.marketCode.code,
-						CommodityName: item.CommodityName,
-						commodityCode: item.commodityCode,
-						contractCode: item.contractCode,
-						productTypeCode: item.productTypeCode,
-						priceDecimalPlaces: item.priceDecimalPlaces,
-						token:this.token
-					}
+					query:options
 				})
 			},
 			getUpPrice(upDropSpeed) {

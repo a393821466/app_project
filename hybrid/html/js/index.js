@@ -36,6 +36,7 @@ $(function(){
   var getParams=$init.queryMeter()
   var marketData='';
   var marketPrice='';
+  var domain='';
   var model={
     num: 1,
     title: '元模式',
@@ -51,6 +52,7 @@ $(function(){
     priceDecimalPlaces:getParams.priceDecimalPlaces,
     productTypeCode:getParams.productTypeCode
   }
+  domain=!getParams.domain?'':getParams.domain
   // 闪电下单开启关闭
   var quickFlat=true;
   var $quickBar=$('.quicktTollBar');
@@ -78,10 +80,10 @@ $(function(){
   // 存储token
   // localStorage.setItem("token",getParams.token);
   // 获取单个行情
-  $init.get('/apis/business/getQuotaInfo',{templateCode:das.templateCode,commodityCode:das.commodityCode},function(res){
-    if(res.status){
+  $init.get(domain+'/apis/business/getQuotaInfo',{templateCode:das.templateCode,commodityCode:das.commodityCode},function(res){
+	if(res.status){
       marketData=res.data;
-      closeTimer()
+      closeTimer() 
       $(".marketName").find('.name').text(marketData.CommodityName);
       if(das.productTypeCode=='DIGICCY'){
         $(".marketName").find('.code').text(marketData.commodityCode);
@@ -101,7 +103,7 @@ $(function(){
     });
     return;
   },getParams.token)
-  $init.get('/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode,'',function(res){
+  $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode,'',function(res){
     if(res.status){
       marketPrice=res.data;
       marketPrice.lastPrice = $init.formatPoint(res.data.lastPrice)

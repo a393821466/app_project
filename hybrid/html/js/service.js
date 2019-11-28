@@ -65,6 +65,9 @@ var $init = {
       var aa = arr[i].split('=')
       obj[aa[0]] = aa[1]
     }
+	// console.log('----------------')
+	// console.log(JSON.stringify(obj))
+	// console.log('----------------')
     return obj
   },
   encrypt: function (data, key) {
