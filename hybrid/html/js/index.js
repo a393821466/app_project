@@ -1,16 +1,42 @@
 // 图表库实例化后储存的函数
 var widget = null 
 // 进入页面 默认展示的产品
-var index_market = 'BTC/USDT'
+var index_market = ''
 // 进入页面 默认展示的产品周期
 var index_activeCycle = 1
-
+// 商户信息
+var merchantInfo='';
+// 域名
+var domain='';
+// 历史数据
+var historyData=[];
 $(function(){
   // 行情图表事件
   // 给chartConfig添加展示周期
   chartConfig.interval = index_activeCycle
+  // 所有的变量
+  var getParams=$init.queryMeter()
+  var marketData='';
+  var marketPrice='';
+  var model={
+    num: 1,
+    title: '元模式',
+    type: '0'
+  }
+  var tradeHands=1;
+  var stopMoney=0;
+  var das={
+    templateCode:getParams.tpCode,
+    CommodityName:decodeURI(getParams.CommodityName),
+    commodityCode:getParams.commodityCode,
+    contractCode:getParams.contractCode,
+    priceDecimalPlaces:getParams.priceDecimalPlaces,
+    productTypeCode:getParams.productTypeCode
+  }
+  domain=!getParams.domain?'':getParams.domain
   // 给chartConfig添加展示产品
-  chartConfig.symbol = index_market
+  chartConfig.symbol = das.CommodityName
+  var quickFlat=true;
   // 初始化 TradingView
   widget = new window.TradingView.widget(chartConfig)
 
@@ -32,29 +58,7 @@ $(function(){
     $(this).addClass('active').siblings().removeClass('active')
   })
   // 行情页面及购买逻辑
-  // 所有的变量
-  var getParams=$init.queryMeter()
-  var marketData='';
-  var marketPrice='';
-  var domain='';
-  var model={
-    num: 1,
-    title: '元模式',
-    type: '0'
-  }
-  var tradeHands=1;
-  var stopMoney=0;
-  var das={
-    templateCode:getParams.tpCode,
-    CommodityName:getParams.CommodityName,
-    commodityCode:getParams.commodityCode,
-    contractCode:getParams.contractCode,
-    priceDecimalPlaces:getParams.priceDecimalPlaces,
-    productTypeCode:getParams.productTypeCode
-  }
-  domain=!getParams.domain?'':getParams.domain
   // 闪电下单开启关闭
-  var quickFlat=true;
   var $quickBar=$('.quicktTollBar');
   var $parentBar=$('.quickOriderView');
   $(".quick-center").off('click').on('click',function(){
@@ -77,14 +81,22 @@ $(function(){
       quickFlat=true;
     }
   });
-  // 存储token
-  // localStorage.setItem("token",getParams.token);
+  // 获取商户信息
+  $init.get('/apis/console/subsystem/merchant','',function(res){
+    merchantInfo=res.data
+  },function(err){
+    $init.info({
+      message:err.msg,
+      type:'error'
+    });
+    return;
+  },getParams.token);
   // 获取单个行情
   $init.get(domain+'/apis/business/getQuotaInfo',{templateCode:das.templateCode,commodityCode:das.commodityCode},function(res){
 	if(res.status){
       marketData=res.data;
       closeTimer() 
-      $(".marketName").find('.name').text(marketData.CommodityName);
+      $(".marketName .name").find('span').text(marketData.CommodityName);
       if(das.productTypeCode=='DIGICCY'){
         $(".marketName").find('.code').text(marketData.commodityCode);
       }else{
@@ -106,17 +118,18 @@ $(function(){
   $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode,'',function(res){
     if(res.status){
       marketPrice=res.data;
-      marketPrice.lastPrice = $init.formatPoint(res.data.lastPrice)
-      marketPrice.buyNumber = res.data.askSize
-      marketPrice.sellNumber = res.data.bidSize
-      var m = new Decimal(res.data.lastPrice).sub(res.data.openPrice).toNumber()
-      marketPrice.upDropPrice = $init.formatPoint(m)
-      var n = new Decimal(m).div(res.data.openPrice).toNumber()
-      var x = new Decimal(n).mul(100).toNumber()
-      marketPrice.upDropSpeed = x
-      marketPrice.buyPrice = res.data.askPrice
-      marketPrice.sellPrice = res.data.bidPrice
-      renderPrice()
+      marketPrice.lastPrice = $init.formatPoint(res.data.lastPrice);
+      marketPrice.buyNumber = res.data.askSize;
+      marketPrice.sellNumber = res.data.bidSize;
+      var m = new Decimal(res.data.lastPrice).sub(res.data.openPrice).toNumber();
+      marketPrice.upDropPrice = $init.formatPoint(m);
+      var n = new Decimal(m).div(res.data.openPrice).toNumber();
+      var x = new Decimal(n).mul(100).toNumber();
+      marketPrice.upDropSpeed = x;
+      marketPrice.buyPrice = res.data.askPrice;
+      marketPrice.sellPrice = res.data.bidPrice;
+      renderPrice();
+      getHistoryList();
     }
   },function(err){
     $init.info({
@@ -125,6 +138,37 @@ $(function(){
     });
     return;
   },getParams.token)
+  // 获取所有的历史数据
+  function getHistoryList(){
+    $init.get('/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode+'/minsline','',function(res){
+      if(res.status){
+        var data=res.data;
+        if(data&&data.length){
+          data.forEach(e => {
+            var date = new Date(e.timeStr.replace(/\-/g, '/'));
+            var time = new Date(date).getTime();
+            historyData.push({
+              time: time,
+              totalVolume: e.endTotalQty,
+              close: e.closePrice,
+              open: e.openPrice,
+              high: e.highPrice,
+              low: e.lowPrice,
+              volume: e.volume
+            })
+          })
+        }else{
+          historyData=[]
+        }
+      }
+    },function(err){
+      $init.info({
+        message:err.msg,
+        type:'error'
+      });
+      return;
+    },getParams.token);
+  }
   // 圆角模式处理
   $('#models').off('click').on('click',function(){
     if($(this).prop("checked")){
@@ -155,7 +199,7 @@ $(function(){
   // 渲染价格
   function renderPrice(){
     var prices=marketPrice.askPrice
-    if(!prices){
+    if(prices==undefined){
       return
     }
     var bt1=baidu.template;
@@ -163,10 +207,6 @@ $(function(){
     $("#decimalPrice").html(timerHtml);
     $(".quick-rise").find('.r').text(marketPrice.buyPrice);
     $(".quick-sell").find('.f').text(marketPrice.sellPrice);
-  }
-  // 获取所有的历史数据
-  function getHistoryList(){
-    
   }
   // 获取手数及遍历全部手数
   function getDataAndMaps(){

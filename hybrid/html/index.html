@@ -35,12 +35,12 @@
   <div class="marketChartInfo">
     <div class="marketInfo marketInfo_left">
       <div class="marketName">
-        <span class="name">load..</span>
+        <p class="name"><span>-</span><i class="iconfont backs">&#xe601;</i></p>
         <span class="code">-</span>
       </div>
       <div class="marketClear"></div>
       <div class="marketPrice_ratio" id="decimalPrice">
-        <span class="b blockLeft rise">load..</span>
+        <span class="b blockLeft rise">-</span>
         <div class="b blockRight">
           <span class="one">-</span>
           <span class="two">-%</span>
@@ -49,6 +49,7 @@
     </div>
     <div class="marketInfo marketInfo_right">
       <div class="goTradeBtn">
+        <button class="rule">规则</button>
         <button class="positionBtn">持仓</button>
       </div>
       <div class="nowPositionTimer" id="timer">
@@ -127,7 +128,7 @@
             </div>
             <div class="rise-bottom">
               <div class="icon">
-                  <span class="iconfont upIcon">&#xe502;</span>
+                  <span class="iconfont upIcon">&#xe602;</span>
               </div>
               <span class="buy b">买多</span>
             </div>
@@ -144,7 +145,7 @@
             </div>
             <div class="rise-bottom">
               <div class="icon">
-                  <span class="iconfont downIcon">&#xe502;</span>
+                  <span class="iconfont downIcon">&#xe602;</span>
               </div>
               <span class="buy m">卖空</span>
             </div>
@@ -188,14 +189,14 @@
   <script src="./js/event.js"></script>
   <!--图表库js-->
   <script src="./charting_library/charting_library.min.js"></script>
+  <script src="./js/aes.js"></script>
+  <script src="./js/service.js"></script>
   <!--websocket-->
   <script src="./js/websocket.js"></script>
   <!--图表数据获取-->
   <script src="./js/datafeed.js"></script>
   <!--图表配置-->
   <script src="./js/chartConfig.js"></script>
-  <script src="./js/aes.js"></script>
-  <script src="./js/service.js"></script>
   <!--页面总统js 初始化图表库 绑定点击事件等-->
   <script src="./js/index.js"></script>
   <!-- 手数 -->
@@ -208,7 +209,7 @@
       </ul>
       <%}else{%>
       <p style="font-size:20px;text-align:center;
-      line-height:80px;color:#ccc;">没有手数</p>
+      line-height:80px;color:#ccc;">没有手数</i>
     <%}%>
   </script>
   <!-- 止盈金额 -->

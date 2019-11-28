@@ -11,7 +11,7 @@ var $init = {
   get: function (url, query, successfn, errorfn,token, dataType) {
     var queryParams = '';
     var dataTypes = (dataType == null || dataType == "" || typeof (dataType) == "undefined") ? "json" : dataType;
-    // var userToken=!localStorage.getItem('token')?token:localStorage.getItem('token');
+    // var getParams=$init.queryMeter()
     if (query) {
       queryParams = url + '?' + $init.parseQuery(query)
     } else {
@@ -24,6 +24,11 @@ var $init = {
       beforeSend: function (xhr) {
         // 需要设置请求报文
         xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+        // if(getParams.domain){
+        //   var u=$init.formatUrl(getParams.domain)
+        //   console.log(u)
+        //   xhr.setRequestHeader("merchantCode", u.toUpperCase());
+        // }
         xhr.setRequestHeader("Authorization", token);
       },
       success: function (response) {
@@ -163,6 +168,37 @@ var $init = {
       return price.toFixed(point)
     } else {
       return price
+    }
+  },
+  formatUrl:function(url){
+    if(!url){
+      return
+    }
+    if(url.indexOf('http')>=-1||url.indexOf('https')>=-1){
+      var u=url.split('//');
+      var getOrigin=u[u.length-1];
+      var getCode=getOrigin.split('.');
+      return getCode[0];
+    }
+  },
+  getProtocol:function(url){
+    var u=url.split('//');
+    return u[0];
+  },
+  getApiTimer:function(resolution){
+    switch (resolution) {
+      case '1':
+        return 'M1'
+      case '3':
+        return 'M3'
+      case '5':
+        return 'M5'
+      case '15':
+        return 'M15'
+      case '30':
+        return 'M30'
+      case '60':
+        return 'H1'
     }
   },
   ramdomString: function (len) {

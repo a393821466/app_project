@@ -6,11 +6,10 @@ var socket = {
   intervalObj: null, // 定时器的名字
   lastRealTimeData: null, // 上一次请求的产品
 
-  sendData(historyData, realTimeDatas, history) {
+  sendData(historyData, realTimeDatas, history,webSocketUrl) {
     // 储存历史数据
     this.historyData = historyData
     this.realTimeData = realTimeDatas
-
     // 如果上一次订阅过产品
     if (this.lastRealTimeData) {
       // 如果不是订阅历史产品 那么肯定就是切换周期咯 或者切换产品咯
@@ -22,7 +21,6 @@ var socket = {
 
       // 请求这一次的历史
       this.sendWsRequest(this.historyData)
-
       // 如果不是订阅历史产品 那么肯定就是切换周期咯 或者切换产品咯 
       // 那么就订阅一下 这次产品的或者周期的 实时数据
       !history && this.sendWsRequest({
@@ -36,18 +34,21 @@ var socket = {
       // 先存起来这一次请求的产品 作为历史产品
       this.lastRealTimeData = this.realTimeData
       // 然后 初始化一下websocket
-      this.initWs(historyData)
+      this.initWs(webSocketUrl,historyData)
     }
   },
-  initWs () {
-    this.socket = new WebSocket('wss://api.ifukang.com/v2/ws')
+  initWs (url,bytes) {
+    //'wss://api.ifukang.com/v2/ws'
+    this.socket = new WebSocket(url)
+    console.log(this.socket)
+    this.socket.binaryType='arraybuffer'
     this.socket.onopen = () => {
-      this.sendWsRequest(this.historyData)
-      this.sendWsRequest({
-        args: [this.realTimeData],
-        cmd: 'sub',
-        id : 'fd0823a5-e16b-4f46-8b68-3fd723beb321'
-      })
+      this.sendWsRequest(bytes)
+      // this.sendWsRequest({
+      //   args: [this.realTimeData],
+      //   cmd: 'sub',
+      //   id : 'fd0823a5-e16b-4f46-8b68-3fd723beb321'
+      // })
     }
     this.socket.onmessage = resp => {
       this.message(resp)
@@ -70,8 +71,9 @@ var socket = {
   message (resp) {
     // 拿到数据。
     // 吧这次请求的产品 储存成历史产品
-    this.lastRealTimeData = this.realTimeData
-    var data = JSON.parse(resp.data.replace(/\r/g, '').replace(/\n/g, ''))
+    // this.lastRealTimeData = this.realTimeData
+    // var data = JSON.parse(resp.data.replace(/\r/g, '').replace(/\n/g, ''))
+    var data = proto.MessageBase.deserializeBinary(resp.data).array[5]
     Event.emit('realTime', data)
     Event.emit('data', data)
   },
@@ -96,10 +98,10 @@ var socket = {
   sendWsRequest (options) {
     switch (this.socket.readyState) {
       case 0:
-        this.checkSendMessage(JSON.stringify(options))
+        this.checkSendMessage(options)
         break
       case 1:
-        this.socket.send(JSON.stringify(options))
+        this.socket.send(options)
         break
       case 2:
         console.log('ws关闭状态')

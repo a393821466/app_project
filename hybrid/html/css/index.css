@@ -76,23 +76,39 @@ ul,ol,li{
   flex:1;
 }
 .marketChartInfo .marketName{
-  padding-top:0.2rem;
-  padding-bottom:0.2rem;
+  padding-top:0.26rem;
+  padding-bottom:0.26rem;
   line-height:0.3rem;
+  display:flex;
+  flex-direction: row;
 }
 .marketChartInfo .marketName .name{
-  display:inline-block;
+  flex:0 0 65%;
   text-align:center;
-  font-size:0.38rem;
+  font-size:0.42rem;
+  color:#777;
+}
+.marketChartInfo .marketName .name span{
+  line-height:0.5rem;
+  display:inline-block;
+}
+.marketChartInfo .marketName .backs{
+  display:inline-block;
+  vertical-align: middle;
+  color:#999;
+  font-size:0.3rem;
 }
 .marketChartInfo .marketName .code{
+  flex:0 0 35%;
   display:inline-block;
-  line-height:0.5rem;
-  font-size:0.32rem;
+  line-height:0.56rem;
+  font-size:0.26rem;
+  text-align:left;
+  color:#777;
 }
 .marketClear{
   width:100%;
-  height:0.32rem;
+  height:0.38rem;
 }
 .marketChartInfo .marketPrice_ratio .b{
   float:left;
@@ -118,21 +134,26 @@ ul,ol,li{
   display:block;
 }
 .marketChartInfo .marketInfo_right .goTradeBtn{
-  padding-top:0.2rem;
-  padding-bottom:0.2rem;
+  padding-top:0.25rem;
+  padding-bottom:0.25rem;
   display:flex;
   flex-direction:row-reverse;
 }
-.marketChartInfo .marketInfo_right .goTradeBtn .positionBtn{
-  width:1.6rem;
+.marketChartInfo .marketInfo_right .goTradeBtn .positionBtn,.marketChartInfo .marketInfo_right .goTradeBtn .rule{
+  padding:0 0.3rem;
   height:0.5rem;
   border:none;
   line-height:0.5rem;
-  border-radius:0.5rem;
-  background:#1b82d1;
+  border-radius:5px;
   margin-left:0;
-  margin-right:0.1rem;
+  margin-right:0.2rem;
   color:#fff;
+}
+.marketChartInfo .marketInfo_right .goTradeBtn .positionBtn{
+  background:#1b82d1;
+}
+.marketChartInfo .marketInfo_right .goTradeBtn .rule{
+  background:#e74848;
 }
 .marketChartInfo .marketInfo_right .nowPositionTimer{
   text-align:right;
@@ -276,12 +297,13 @@ iframe {
   /* text-align:center; */
   display:flex;
   flex-direction:row;
-  font-size:0.34rem;
+  font-size:0.3rem;
 }
 .quickOrder .quickOriderView .icon{
-  flex:0 0 37%;
-  width:37%;
+  flex:0 0 38%;
+  width:38%;
   text-align:right;
+  line-height:0.46rem;
 }
 .quickOrder .quickOriderView .upIcon, .quickOrder .quickOriderView .downIcon{
   display: inline-block;
@@ -293,8 +315,8 @@ iframe {
   -moz-transform: rotate(180deg);
 }
 .quickOrder .buy{
-  flex:0 0 63%;
-  width:63%;
+  flex:0 0 62%;
+  width:62%;
   text-align:left;
   padding-left:0.06rem;
 }

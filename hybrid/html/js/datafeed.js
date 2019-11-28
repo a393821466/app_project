@@ -88,31 +88,37 @@ FeedBase.prototype.getBars = function (symbolInfo, resolution, rangeStartDate, r
     第二个参数订阅实时数据
     第三个参数 是  是否是历史数据
   */
-  socket.sendData({
-    args: [`candle.${this.getApiTime(resolution)}.${this.getSendSymbolName(symbolInfo.name)}`, 1441, detafeed_historyTime],
-    cmd: 'req',
-    id: '0a0493f7-80d4-4d1a-9d98-6da9ae9d399e'
-  }, `candle.${this.getApiTime(resolution)}.${this.getSendSymbolName(symbolInfo.name)}`, history)
+  var webSocketUrl='';
+  var getParams=$init.queryMeter()
+  if(!merchantInfo.merchantCode){
+    return;
+  }
+  var d=!domain?'https://tmk.eanjee.com':domain
+  var us=$init.getProtocol(d);
+  webSocketUrl=(us === 'https:' ? 'wss://' : 'ws://') + merchantInfo.merchantSetting.publishDomain + '/ws'
+  var message = new proto.MessageBase();
+  message.setClientid('0a0493f7-80d4-4d1a-9d98-6da9ae9d399e');
+  message.setCmd(proto.CommandType.PUSH_DATA)
+  message.setRequesttype(1)
+  message.setData(`${getParams.contractCode}&${getParams.commodityCode}`)
+  let bytes = message.serializeBinary()
+  socket.sendData(bytes, `candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, history,webSocketUrl)
+  // socket.sendData({
+  //   args: [`candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, 1441, detafeed_historyTime],
+  //   cmd: 'req',
+  //   id: '0a0493f7-80d4-4d1a-9d98-6da9ae9d399e'
+  // }, `candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, history,webSocketUrl,bytes)
   Event.off('data')
+
   Event.on('data', data => {
     if (data.data && Array.isArray(data.data)) {
       // 记录这次请求的时间周期
       detafeed_lastResolution = resolution
-      console.log(data)
       var meta = {noData: false}
       var bars = []
-      if (data.data.length) {
-        detafeed_historyTime = data.data[0].id - 1
-        for (var i = 0; i < data.data.length; i += 1) {
-          bars.push({
-            time: data.data[i].id * 1000,
-            close: data.data[i].close,
-            open: data.data[i].open,
-            high: data.data[i].high,
-            low: data.data[i].low,
-            volume: data.data[i].base_vol
-          })
-        }
+      if (historyData.length) {
+        detafeed_historyTime = historyData[0].time/1000 - 1
+        bars=historyData;
       } else {
         meta = {noData: true}
       }
@@ -126,18 +132,18 @@ FeedBase.prototype.subscribeBars = function (symbolInfo, resolution, onTick, lis
   Event.off('realTime')
 
   // 拿到实时数据 在这里画
-  Event.on('realTime', data => {
-    if (Object.prototype.toString.call(data) === '[object Object]' && data.hasOwnProperty('open')) {
-      onTick({
-        time: data.id * 1000,
-        close: data.close,
-        open: data.open,
-        high: data.high,
-        low: data.low,
-        volume: data.base_vol
-      })
-    }
-  })
+  // Event.on('realTime', data => {
+  //   if (Object.prototype.toString.call(data) === '[object Object]' && data.hasOwnProperty('open')) {
+  //     onTick({
+  //       time: data.id * 1000,
+  //       close: data.close,
+  //       open: data.open,
+  //       high: data.high,
+  //       low: data.low,
+  //       volume: data.base_vol
+  //     })
+  //   }
+  // })
 }
 
 FeedBase.prototype.unsubscribeBars = function (listenerGuid) {
