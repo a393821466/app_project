@@ -140,7 +140,7 @@ $(function(){
   },getParams.token)
   // 获取所有的历史数据
   function getHistoryList(){
-    $init.get('/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode+'/minsline','',function(res){
+    $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode+'/minsline','',function(res){
       if(res.status){
         var data=res.data;
         if(data&&data.length){

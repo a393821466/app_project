@@ -12,7 +12,7 @@
 			    </block>
 			    <view class="input-view">
 			        <view class="chartTitle">
-						{{queryData.CommodityName?queryData.CommodityName:'-----'}}<text class="isType">(实盘)</text>
+						{{queryData.CommodityName?queryData.CommodityName:'-'}}<text class="isType">(实盘)</text>
 					</view>
 			        <view class="arrow">
 						<image src="../../../static/images/triangle12.svg" class="triangle"></image>
@@ -26,7 +26,7 @@
 			</hx-navbar>
 		</view> -->
 		<web-view :webview-styles="webviewStyles" :src="url"></web-view>
-		<!-- <dynamic-price></dynamic-price> -->
+		<!-- <dynamic-price></dynamic-price> --> 
 		<!-- <dynamic-chart></dynamic-chart> -->
 		<!-- <quick-order :marketDetails="marketDetails"></quick-order> -->
 	</view>

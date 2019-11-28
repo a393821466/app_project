@@ -5,7 +5,8 @@ var socket = {
   realTimeData: null, // 请求实时数据的参数
   intervalObj: null, // 定时器的名字
   lastRealTimeData: null, // 上一次请求的产品
-
+  socketUrl:'',
+  bytesData:[],
   sendData(historyData, realTimeDatas, history,webSocketUrl) {
     // 储存历史数据
     this.historyData = historyData
@@ -40,7 +41,8 @@ var socket = {
   initWs (url,bytes) {
     //'wss://api.ifukang.com/v2/ws'
     this.socket = new WebSocket(url)
-    console.log(this.socket)
+    socketUrl = url
+	bytesData = bytes
     this.socket.binaryType='arraybuffer'
     this.socket.onopen = () => {
       this.sendWsRequest(bytes)
@@ -65,7 +67,7 @@ var socket = {
   },
   close () {
     // 如果websocket关闭的话，就从新打开一下。
-    this.initWs()
+    this.initWs(socketUrl,bytesData)
     console.log('depth-socket::close')
   },
   message (resp) {
