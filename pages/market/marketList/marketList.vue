@@ -40,7 +40,10 @@
 				:down="downOption" 
 				@down="downCallback" 
 				:up="upOption"
-				@init="mescrollInit">
+				@init="mescrollInit"
+				scroll-with-animation 
+				scroll-y
+				>
 					<!-- 数据列表 -->
 					<market-list-content :itemData="item" :marketCode='marketCode'></market-list-content>
 				</mescroll-uni>

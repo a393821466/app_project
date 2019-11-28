@@ -7,7 +7,10 @@
 				@down="downCallback" 
 				:up="upOption" 
 				@up="upCallback"
-				@init="mescrollInit">
+				@init="mescrollInit"
+				scroll-with-animation
+				scroll-y
+				>
 					<view class="withdrawList" v-for="(it,index) in withdrawList" :key="index">
 						<view class="withdrawTitle">
 							{{!it.remark?'-':it.remark}}

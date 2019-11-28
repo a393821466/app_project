@@ -26,7 +26,10 @@
 					@down="downCallback" 
 					:up="upOption" 
 					@up="upCallback"
-					@init="mescrollInit">
+					@init="mescrollInit" 
+					scroll-with-animation 
+					scroll-y
+					>
 					<view class="rechargeList" v-for="(it,index) in rechargeList" :key="index">
 						<view class="rechargeTitle">
 							{{!it.remark?'-':it.remark}}

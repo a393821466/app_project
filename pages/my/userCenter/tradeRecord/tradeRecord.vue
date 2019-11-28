@@ -37,7 +37,9 @@
 					:up="upOption" 
 					@up="upCallback" 
 					top="110" 
-					@init="mescrollInit">
+					@init="mescrollInit"
+					scroll-with-animation 
+					scroll-y>
 					<view class="tradeList" v-for="(item,idx) in tradeMxList" :key="item.id">
 						<view class="tradeTitle">
 							<view class="title p1">
