@@ -14,6 +14,7 @@ var detafeed_lastResolution = null
 // 上一次的产品 切换产品的时候 需要从websock 取消订阅这个
 var detafeed_lastSymbol = null
 
+var tmpLineData=-1
 
 function FeedBase () {}
 
@@ -27,39 +28,43 @@ FeedBase.prototype.getSendSymbolName = function (symbolName) {
 }
 
 FeedBase.prototype.resolveSymbol = function (symbolName, onResolve, onError) {
-  onResolve({
-    "name": symbolName,
-    "timezone": "Asia/Shanghai",
-    "pricescale": 100,
-    "minmov": 1,
-    "minmov2": 0,
-    "ticker": symbolName,
-    "description": "",
-    "session": "24x7",
-    "type": "bitcoin",
-    "volume_precision": 10,
-    "has_intraday": true,
-    "intraday_multipliers": ['1', '3', '5', '15', '30', '60'], // 时间
-    "has_weekly_and_monthly": false,
-    "has_no_volume": false,
-    "regular_session": "24x7"
-  })
+  var getParams=$init.queryMeter();
+  var num=!getParams.priceDecimalPlaces?10000:getParams.priceDecimalPlaces;
+  var foint=Math.pow(10, num)
+  onResolve(
+    {
+      "name": symbolName,
+      "timezone": "Asia/Shanghai",
+      "pricescale": foint,
+      "minmov": 1,
+      "minmov2": 0,
+      "ticker": symbolName,
+      "description": "",
+      "session": "24x7",
+      "type": "bitcoin",
+      "volume_precision": 10,
+      "has_intraday": true,
+      "intraday_multipliers": ['1', '5', '15', '30', '1D','1W','1M'], // 时间
+      "has_weekly_and_monthly": false,
+      "has_no_volume": false,
+      "regular_session": "24x7"
+    }
+  )
 }
-
 FeedBase.prototype.getApiTime = function (resolution) {
   switch (resolution) {
     case '1':
-      return 'M1'
-    case '3':
-      return 'M3'
+      return '1'
     case '5':
-      return 'M5'
+      return '5'
     case '15':
-      return 'M15'
-    case '30':
-      return 'M30'
-    case '60':
-      return 'H1'
+      return '15'
+    case 'day':
+      return '1D'
+    case 'week':
+      return '1W'
+    case 'month':
+      return '1M'  
   }
 }
 
@@ -102,7 +107,6 @@ FeedBase.prototype.getBars = function (symbolInfo, resolution, rangeStartDate, r
   message.setRequesttype(1)
   message.setData(`${getParams.contractCode}&${getParams.commodityCode}`)
   let bytes = message.serializeBinary()
-  socket.sendData(bytes, `candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, history,webSocketUrl)
   // socket.sendData({
   //   args: [`candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, 1441, detafeed_historyTime],
   //   cmd: 'req',
@@ -111,18 +115,22 @@ FeedBase.prototype.getBars = function (symbolInfo, resolution, rangeStartDate, r
   Event.off('data')
 
   Event.on('data', data => {
-    if (data.data && Array.isArray(data.data)) {
-      // 记录这次请求的时间周期
-      detafeed_lastResolution = resolution
-      var meta = {noData: false}
-      var bars = []
-      if (historyData.length) {
-        detafeed_historyTime = historyData[0].time/1000 - 1
-        bars=historyData;
-      } else {
-        meta = {noData: true}
-      }
-      onResult(bars, meta)
+    // 记录这次请求的时间周期
+    detafeed_lastResolution = resolution
+    var meta = {noData: false}
+    var bars = []
+    console.log(Array.isArray(data))
+    if (data.length && Array.isArray(data)) {
+      detafeed_historyTime = historyData[0].time/1000 - 1
+      bars=historyData;
+    } else {
+      meta = {noData: true}
+    }
+    onResult(bars, meta)
+    if(ws.socket!==null){
+      ws.close();
+    }else{
+      ws.sendData(bytes, `candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, history,webSocketUrl)
     }
   })
 }
@@ -132,18 +140,48 @@ FeedBase.prototype.subscribeBars = function (symbolInfo, resolution, onTick, lis
   Event.off('realTime')
 
   // 拿到实时数据 在这里画
-  // Event.on('realTime', data => {
-  //   if (Object.prototype.toString.call(data) === '[object Object]' && data.hasOwnProperty('open')) {
-  //     onTick({
-  //       time: data.id * 1000,
-  //       close: data.close,
-  //       open: data.open,
-  //       high: data.high,
-  //       low: data.low,
-  //       volume: data.base_vol
-  //     })
-  //   }
-  // })
+  Event.on('realTime', data => {
+    if(data){
+      if (historyData.length) {
+        var socketDas = historyData[historyData.length - 1]
+        var date = new Date(data[0].replace(/\-/g, '/'))
+        var t=new Date(date).getTime();
+        let r = {
+          time: t,
+          close: data[23] * 1,
+          open: socketDas.close,
+          high: socketDas.low,
+          low: socketDas.high,
+          volume: 0,
+          totalVolume: data[30] * 1,
+        }
+        if (r.high < data[23] * 1) {
+          r.high = data[23] * 1
+        }
+        if (r.low > data[23] * 1) {
+          r.low = data[23] * 1
+        }
+        let scoketDate = socketDas.time
+        let chartDate = date.getTime()
+        if (tmpLineData === -1) {
+          tmpLineData = socketDas.totalVolume
+        }
+        if (chartDate - scoketDate >= 60 * 1000) {
+          r.volume = data[30] * 1 - tmpLineData
+          tmpLineData = data[30] * 1
+          historyData.push(r)
+          onTick(r)
+        } else{
+          r.time = socketDas.time
+          r.volume = data[30] * 1 - tmpLineData
+          historyData.pop()
+          historyData.push(r)
+          onTick(r)
+        }
+        // historyData[historyData.length-1]
+      }
+    }
+  })
 }
 
 FeedBase.prototype.unsubscribeBars = function (listenerGuid) {

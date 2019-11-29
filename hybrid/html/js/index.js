@@ -11,6 +11,10 @@ var domain='';
 // 历史数据
 var historyData=[];
 $(function(){
+  $init.initFontSize();
+  window.onresize=function(){
+    $init.initFontSize()
+  };
   // 行情图表事件
   // 给chartConfig添加展示周期
   chartConfig.interval = index_activeCycle
@@ -42,21 +46,13 @@ $(function(){
 
   widget && widget.onChartReady && widget.onChartReady(function () {
     // 这是k线图 展示的 7日均线和30日均线。
-    widget.chart().createStudy('Moving Average', false, false, [7], null, {'Plot.linewidth': 2, 'Plot.color': '#2ba7d6'})
-    widget.chart().createStudy('Moving Average', false, false, [30], null, {'Plot.linewidth': 2, 'Plot.color': '#de9f66'})
+    widget.chart().createStudy('Moving Average', false, false, [5], null, {'Plot.linewidth': 2, 'Plot.color': '#2ba7d6'})
+    widget.chart().createStudy('Moving Average', false, false, [15], null, {'Plot.linewidth': 2, 'Plot.color': '#de9f66'})
 		setTimeout(() => {
 			widget.chart().resetData()
 		}, 1000)
   })
-  var marketDom = document.getElementById('symbol')
-  var intervalDom = $("#interval").find('span')
-  intervalDom.off('click').on('click',function(e){
-    console.log(e.target.dataset.value)
-    // 3 为平均K线； 1 为面积图
-    widget.chart().setChartType(e.target.dataset.value == '1' ? 3 : 1)
-    widget.chart().setResolution(e.target.dataset.value)
-    $(this).addClass('active').siblings().removeClass('active')
-  })
+  
   // 行情页面及购买逻辑
   // 闪电下单开启关闭
   var $quickBar=$('.quicktTollBar');
@@ -96,11 +92,11 @@ $(function(){
 	if(res.status){
       marketData=res.data;
       closeTimer() 
-      $(".marketName .name").find('span').text(marketData.CommodityName);
+      $(".marketName .nameAndCode").find('.name').text(marketData.CommodityName);
       if(das.productTypeCode=='DIGICCY'){
-        $(".marketName").find('.code').text(marketData.commodityCode);
+        $(".marketName .nameAndCode").find('.code').text(marketData.commodityCode);
       }else{
-        $(".marketName").find('.code').text(marketData.commodityCode+marketData.contractCode);
+        $(".marketName .nameAndCode").find('.code').text(marketData.commodityCode+marketData.contractCode);
       }
       return;
     }
@@ -139,8 +135,11 @@ $(function(){
     return;
   },getParams.token)
   // 获取所有的历史数据
-  function getHistoryList(){
-    $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode+'/minsline','',function(res){
+  function getHistoryList(data){
+    var query=!data?'':{
+      mins:data
+    };
+    $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode+'/minsline',query,function(res){
       if(res.status){
         var data=res.data;
         if(data&&data.length){
@@ -157,6 +156,7 @@ $(function(){
               volume: e.volume
             })
           })
+          Event.emit('data', historyData)
         }else{
           historyData=[]
         }
@@ -168,6 +168,12 @@ $(function(){
       });
       return;
     },getParams.token);
+  }
+
+  function socketData(){
+    Event.on('realTime', data => {
+      console.log(data)
+    })
   }
   // 圆角模式处理
   $('#models').off('click').on('click',function(){
@@ -291,6 +297,25 @@ $(function(){
       node2.hide();
     },200);
   };
+  // 切换产品周期
+  var marketDom = document.getElementById('symbol')
+  var intervalDom = $("#interval").find('span')
+  intervalDom.off('click').on('click',function(e){
+    var val=e.target.dataset.value;
+    $(this).addClass('active').siblings().removeClass('active')
+    if(val=='handicap'){
+      console.log('盘口')
+      return;
+    }
+    if(val=='day'){
+      console.log('日线')
+      return;
+    }
+    // 3 为平均K线； 1 为走势图
+    widget.chart().setChartType(!val ? 3 : 1)
+    widget.chart().setResolution(!val?'1':val)
+    getHistoryList(val)
+  })
 });
 
 
@@ -324,9 +349,9 @@ $(function(){
 
 
 // 单纯的写一个添加class的函数，这个不用看 没用
-function addClass (fatherDom, dom) {
-  [...fatherDom.getElementsByTagName('span')].forEach(function(item){
-    item.className = ''
-  })
-  dom.className = 'active'
-}
+// function addClass (fatherDom, dom) {
+//   [...fatherDom.getElementsByTagName('span')].forEach(function(item){
+//     item.className = ''
+//   })
+//   dom.className = 'active'
+// }

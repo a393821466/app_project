@@ -79,31 +79,31 @@ ul,ol,li{
   padding-top:0.26rem;
   padding-bottom:0.26rem;
   line-height:0.3rem;
-  display:flex;
-  flex-direction: row;
 }
-.marketChartInfo .marketName .name{
-  flex:0 0 65%;
-  text-align:center;
-  font-size:0.42rem;
+.marketChartInfo .marketName .nameAndCode{
+  text-align:left;
+  font-size:0.38rem;
   color:#777;
 }
-.marketChartInfo .marketName .name span{
+.marketChartInfo .marketName .nameAndCode span{
   line-height:0.5rem;
-  display:inline-block;
+  float:left;
+}
+.marketChartInfo .marketName .clearfloat{
+  clear:both;
 }
 .marketChartInfo .marketName .backs{
-  display:inline-block;
-  vertical-align: middle;
   color:#999;
-  font-size:0.36rem;
+  font-size:0.32rem;
+  line-height:0.56rem;
+  float:left;
 }
 .marketChartInfo .marketName .code{
   flex:0 0 35%;
-  display:inline-block;
   line-height:0.56rem;
   font-size:0.26rem;
   text-align:left;
+  text-indent:0.1rem;
   color:#777;
 }
 .marketClear{

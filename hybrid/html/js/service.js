@@ -162,6 +162,7 @@ var $init = {
         },defaults.time)
     }
   },
+  // 精度
   formatPoint: function(price,point) {
     if (price && point) {
       price = parseFloat(price)
@@ -170,6 +171,7 @@ var $init = {
       return price
     }
   },
+  // 截取code
   formatUrl:function(url){
     if(!url){
       return
@@ -181,26 +183,12 @@ var $init = {
       return getCode[0];
     }
   },
+  // 截取域名前缀
   getProtocol:function(url){
     var u=url.split('//');
     return u[0];
   },
-  getApiTimer:function(resolution){
-    switch (resolution) {
-      case '1':
-        return 'M1'
-      case '3':
-        return 'M3'
-      case '5':
-        return 'M5'
-      case '15':
-        return 'M15'
-      case '30':
-        return 'M30'
-      case '60':
-        return 'H1'
-    }
-  },
+  // 随机生成字符串
   ramdomString: function (len) {
     const data = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
     let nums = ''
@@ -209,5 +197,25 @@ var $init = {
       nums += data[r]
     }
     return nums
+  },
+  // 自适应
+  IsPC:function(){
+    var userAgentInfo =  navigator.userAgent;
+    var reg = new RegExp("(Android|iPhone|SymbianOS|Windows Phone|iPad|iPod)","ig");
+    var isPC =  !reg.test(userAgentInfo);
+    return isPC
+  },
+  initFontSize:function(){
+    var n=document.getElementsByTagName("html")[0],
+      e=document.documentElement.clientWidth;
+    if(this.IsPC()){
+        if(e>750){
+            n.style.fontSize = "100px"
+        }else{
+            n.style.fontSize = e/750*100+"px"
+        }
+    }else{
+        n.style.fontSize=e/750*100+"px";
+    }
   }
 }

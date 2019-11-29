@@ -1,6 +1,6 @@
 // import Event from './event.js'
 
-var socket = {
+var ws = {
   socket: null, // socket name
   realTimeData: null, // 请求实时数据的参数
   intervalObj: null, // 定时器的名字
@@ -40,12 +40,13 @@ var socket = {
   },
   initWs (url,bytes) {
     //'wss://api.ifukang.com/v2/ws'
-    this.socket = new WebSocket(url)
     socketUrl = url
-	bytesData = bytes
+	  bytesData = bytes
+    this.socket = new WebSocket(url)
     this.socket.binaryType='arraybuffer'
     this.socket.onopen = () => {
       this.sendWsRequest(bytes)
+      console.log('open & link socket');
       // this.sendWsRequest({
       //   args: [this.realTimeData],
       //   cmd: 'sub',
@@ -73,11 +74,10 @@ var socket = {
   message (resp) {
     // 拿到数据。
     // 吧这次请求的产品 储存成历史产品
-    // this.lastRealTimeData = this.realTimeData
+    this.lastRealTimeData = this.realTimeData
     // var data = JSON.parse(resp.data.replace(/\r/g, '').replace(/\n/g, ''))
     var data = proto.MessageBase.deserializeBinary(resp.data).array[5]
     Event.emit('realTime', data)
-    Event.emit('data', data)
   },
   checkSendMessage(options) {
     // 这里处理websocket 连接不上的问题
@@ -95,7 +95,7 @@ var socket = {
         clearInterval(this.intervalObj)
         console.log('send post_data_str timeout.')
       }
-    }, 500)
+    }, 3000)
   },
   sendWsRequest (options) {
     switch (this.socket.readyState) {
