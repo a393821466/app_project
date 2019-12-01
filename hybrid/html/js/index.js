@@ -11,10 +11,6 @@ var domain='';
 // 历史数据
 var historyData=[];
 $(function(){
-  $init.initFontSize();
-  window.onresize=function(){
-    $init.initFontSize()
-  };
   // 行情图表事件
   // 给chartConfig添加展示周期
   chartConfig.interval = index_activeCycle
@@ -29,6 +25,8 @@ $(function(){
   }
   var tradeHands=1;
   var stopMoney=0;
+  var buyPrices=0;
+  var sellPrices=0;
   var das={
     templateCode:getParams.tpCode,
     CommodityName:decodeURI(getParams.CommodityName),
@@ -54,32 +52,10 @@ $(function(){
   })
   
   // 行情页面及购买逻辑
-  // 闪电下单开启关闭
-  var $quickBar=$('.quicktTollBar');
-  var $parentBar=$('.quickOriderView');
-  $(".quick-center").off('click').on('click',function(){
-    var that=$(this);
-    if(quickFlat){
-      that.find('.quickIcon').css('color','#ccc');
-	  that.find('.quick-text').css('color','#ccc');
-      that.find('.quick-text').text('OFF');
-      $parentBar.find('.b').text('闪电买多');
-      $parentBar.find('.m').text('闪电卖多');
-      $quickBar.show(100);
-      quickFlat=false;
-    }else{
-      that.find('.quickIcon').css('color','#fff');
-      that.find('.quick-text').css('color','#fff');
-      that.find('.quick-text').text('ON');
-      $parentBar.find('.b').text('买多');
-      $parentBar.find('.m').text('卖多');
-      $quickBar.hide(100);
-      quickFlat=true;
-    }
-  });
   // 获取商户信息
-  $init.get('/apis/console/subsystem/merchant','',function(res){
+  $init.get(domain+'/apis/console/subsystem/merchant','',function(res){
     merchantInfo=res.data
+    getHistoryList();
   },function(err){
     $init.info({
       message:err.msg,
@@ -97,7 +73,8 @@ $(function(){
         $(".marketName .nameAndCode").find('.code').text(marketData.commodityCode);
       }else{
         $(".marketName .nameAndCode").find('.code').text(marketData.commodityCode+marketData.contractCode);
-      }
+      };
+      singleMarketFun(marketData);
       return;
     }
     $init.info({
@@ -111,29 +88,32 @@ $(function(){
     });
     return;
   },getParams.token)
-  $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode,'',function(res){
-    if(res.status){
-      marketPrice=res.data;
-      marketPrice.lastPrice = $init.formatPoint(res.data.lastPrice);
-      marketPrice.buyNumber = res.data.askSize;
-      marketPrice.sellNumber = res.data.bidSize;
-      var m = new Decimal(res.data.lastPrice).sub(res.data.openPrice).toNumber();
-      marketPrice.upDropPrice = $init.formatPoint(m);
-      var n = new Decimal(m).div(res.data.openPrice).toNumber();
-      var x = new Decimal(n).mul(100).toNumber();
-      marketPrice.upDropSpeed = x;
-      marketPrice.buyPrice = res.data.askPrice;
-      marketPrice.sellPrice = res.data.bidPrice;
-      renderPrice();
-      getHistoryList();
-    }
-  },function(err){
-    $init.info({
-      message:err.msg,
-      type:'error'
-    });
-    return;
-  },getParams.token)
+  function singleMarketFun(das){
+    $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode,'',function(res){
+      if(res.status){
+        marketPrice=res.data;
+        marketPrice.lastPrice = $init.formatPoint(res.data.lastPrice);
+        marketPrice.buyNumber = res.data.askSize;
+        marketPrice.sellNumber = res.data.bidSize;
+        var m = new Decimal(res.data.lastPrice).sub(res.data.openPrice).toNumber();
+        marketPrice.upDropPrice = $init.formatPoint(m);
+        var n = new Decimal(m).div(res.data.openPrice).toNumber();
+        var x = new Decimal(n).mul(100).toNumber();
+        marketPrice.upDropSpeed = x;
+        marketPrice.buyPrice = res.data.askPrice;
+        marketPrice.sellPrice = res.data.bidPrice;
+        marketPrice.status=das.status;
+        renderPrice(marketPrice);
+        order(marketPrice)
+      }
+    },function(err){
+      $init.info({
+        message:err.msg,
+        type:'error'
+      });
+      return;
+    },getParams.token)
+  }
   // 获取所有的历史数据
   function getHistoryList(data){
     var query=!data?'':{
@@ -155,8 +135,13 @@ $(function(){
               low: e.lowPrice,
               volume: e.volume
             })
-          })
-          Event.emit('data', historyData)
+          });
+          var das={
+            merchantData:merchantInfo,
+            marketData:historyData
+          }
+          hub.emit('data', das);
+          socketData()
         }else{
           historyData=[]
         }
@@ -169,11 +154,80 @@ $(function(){
       return;
     },getParams.token);
   }
-
   function socketData(){
-    Event.on('realTime', data => {
-      console.log(data)
+    var $buyMall=$("#buyMallNum");
+    hub.on('realTime', data => {
+      buyPrices=Number(data[13]);
+      sellPrices=Number(data[3]);
+      data[8]>=100?$buyMall.find('.buyView').css('width',100+'%'):$buyMall.find('.buyView').css('width',data[8]+'%');
+      data[18]>=100?$buyMall.find('.mallView').css('width',100+'%'):$buyMall.find('.mallView').css('width',data[18]+'%');
+      $(".buyMallNum .buy").find("span").text(data[8]);
+      $(".buyMallNum .mall").find("span").text(data[18]);
+      var m = new Decimal(data[23]).sub(data[28]).toNumber()
+      var n = new Decimal(m).div(data[28]).toNumber()
+      var x = new Decimal(n).mul(100).toNumber()
+      var d={
+        lastPrice:$init.formatPoint(data[23],das.priceDecimalPlaces),
+        upDropSpeed:x,
+        upDropPrice:m,
+        buyPrice:$init.formatPoint(buyPrices,das.priceDecimalPlaces),
+        sellPrice:$init.formatPoint(sellPrices,das.priceDecimalPlaces),
+        status:marketData.status,
+        openPrice:$init.formatPoint(data[25],das.priceDecimalPlaces),
+        highPrice:$init.formatPoint(data[26],das.priceDecimalPlaces),
+        lowPrice:$init.formatPoint(data[27],das.priceDecimalPlaces),
+        closePrice:$init.formatPoint(data[28],das.priceDecimalPlaces)
+      }
+      renderPrice(d);
+      order(d);
     })
+  }
+
+  // 底部下单导航
+  function order(data){
+    if(data=='close') return;
+    var bt1=baidu.template;
+    var order=bt1('toOrder',data);
+    $("#bottom_order").html(order);
+    // 闪电下单开启关闭
+    var $quickBar=$('.quicktTollBar');
+    var $parentBar=$('.quickOriderView');
+    $(".quick-center").off('click').on('click',function(){
+      var that=$(this);
+      if(quickFlat){
+        that.find('.quickIcon').css('color','#ccc');
+      that.find('.quick-text').css('color','#ccc');
+        that.find('.quick-text').text('OFF');
+        $parentBar.find('.b').text('闪电买多');
+        $parentBar.find('.m').text('闪电卖多');
+        $quickBar.show(100);
+        quickFlat=false;
+      }else{
+        that.find('.quickIcon').css('color','#fff');
+        that.find('.quick-text').css('color','#fff');
+        that.find('.quick-text').text('ON');
+        $parentBar.find('.b').text('买多');
+        $parentBar.find('.m').text('卖多');
+        $quickBar.hide(100);
+        quickFlat=true;
+      }
+    });
+    // 选择手数及止盈弹窗
+    var $handView=$("#quickBuyHandNum");
+    var $profitView=$("#quickTakeProfit");
+    $(".handNum").off('click').on('click',function(){
+      openMaskView($handView,$(".handView"),'active');
+    });
+    $(".handNumUp .right,.quickHandNumView").off('click').on('click',function(){
+      closeMaskView($(".handView"),$handView,'active');
+    });
+
+    $(".stopLoopAmount").off('click').on('click',function(){
+      openMaskView($profitView,$(".profitView"),'active');
+    });
+    $(".profitViewUp .right,.quickTakeProfitView").off('click').on('click',function(){
+      closeMaskView($(".profitView"),$profitView,'active');
+    });
   }
   // 圆角模式处理
   $('#models').off('click').on('click',function(){
@@ -203,16 +257,18 @@ $(function(){
     getDataAndMaps()
   }
   // 渲染价格
-  function renderPrice(){
-    var prices=marketPrice.askPrice
-    if(prices==undefined){
-      return
-    }
+  function renderPrice(marketPrice){
     var bt1=baidu.template;
     var timerHtml=bt1('getDymicPrice',{data:marketPrice});
     $("#decimalPrice").html(timerHtml);
-    $(".quick-rise").find('.r').text(marketPrice.buyPrice);
-    $(".quick-sell").find('.f').text(marketPrice.sellPrice);
+    $("#handicap .higt").find('b').text(marketPrice.highPrice);
+    $("#handicap .low").find('b').text(marketPrice.lowPrice);
+    $("#handicap .open").find('b').text(marketPrice.openPrice);
+    $("#handicap .yesterdaySettlement").find('b').text(marketPrice.closePrice);
+    $("#handicap .riseFall").find('b').text(marketPrice.upDropPrice);
+    $("#handicap .bd").find('b').text(marketPrice.upDropSpeed.toFixed(2));
+    // $(".quick-rise").find('.r').text(marketPrice.buyPrice);
+    // $(".quick-sell").find('.f').text(marketPrice.sellPrice);
   }
   // 获取手数及遍历全部手数
   function getDataAndMaps(){
@@ -269,27 +325,11 @@ $(function(){
       closeMaskView($(".profitView"),$profitView,'active');
     })
   }
-  // 选择手数及止盈弹窗
-  var $handView=$("#quickBuyHandNum");
-  var $profitView=$("#quickTakeProfit");
-  $(".handNum").off('click').on('click',function(){
-    openMaskView($handView,$(".handView"),'active');
-  });
-  $(".handNumUp .right,.quickHandNumView").off('click').on('click',function(){
-    closeMaskView($(".handView"),$handView,'active');
-  });
-
-  $(".stopLoopAmount").off('click').on('click',function(){
-    openMaskView($profitView,$(".profitView"),'active');
-  });
-  $(".profitViewUp .right,.quickTakeProfitView").off('click').on('click',function(){
-    closeMaskView($(".profitView"),$profitView,'active');
-  });
   function openMaskView(node1,node2,className){
     node1.show();
     setTimeout(function(){  
       node2.addClass(className);
-    },1);
+    },10);
   };
   function closeMaskView(node1,node2,className){
     node1.removeClass(className);
@@ -302,15 +342,21 @@ $(function(){
   var intervalDom = $("#interval").find('span')
   intervalDom.off('click').on('click',function(e){
     var val=e.target.dataset.value;
+    if(e.target.className=='active'){
+      return;
+    }
     $(this).addClass('active').siblings().removeClass('active')
     if(val=='handicap'){
-      console.log('盘口')
+      $("#tv_chart_container").hide();
+      $("#handicap").show();
       return;
     }
     if(val=='day'){
       console.log('日线')
       return;
     }
+    $("#handicap").hide();
+    $("#tv_chart_container").show();
     // 3 为平均K线； 1 为走势图
     widget.chart().setChartType(!val ? 3 : 1)
     widget.chart().setResolution(!val?'1':val)

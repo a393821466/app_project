@@ -93,54 +93,53 @@ FeedBase.prototype.getBars = function (symbolInfo, resolution, rangeStartDate, r
     第二个参数订阅实时数据
     第三个参数 是  是否是历史数据
   */
+  var that=this;
   var webSocketUrl='';
   var getParams=$init.queryMeter()
-  if(!merchantInfo.merchantCode){
-    return;
-  }
   var d=!domain?'https://tmk.eanjee.com':domain
   var us=$init.getProtocol(d);
-  webSocketUrl=(us === 'https:' ? 'wss://' : 'ws://') + merchantInfo.merchantSetting.publishDomain + '/ws'
-  var message = new proto.MessageBase();
-  message.setClientid('0a0493f7-80d4-4d1a-9d98-6da9ae9d399e');
-  message.setCmd(proto.CommandType.PUSH_DATA)
-  message.setRequesttype(1)
-  message.setData(`${getParams.contractCode}&${getParams.commodityCode}`)
-  let bytes = message.serializeBinary()
+  hub.off('data')
+  hub.on('data',function(data){
+    var getUrl=data.merchantData.merchantSetting.publishDomain;
+    webSocketUrl=(us === 'https:' ? 'wss://' : 'ws://') + getUrl + '/ws'
+    var message = new proto.MessageBase();
+    message.setClientid('0a0493f7-80d4-4d1a-9d98-6da9ae9d399e');
+    message.setCmd(proto.CommandType.PUSH_DATA)
+    message.setRequesttype(1)
+    message.setData(`${getParams.contractCode}&${getParams.commodityCode}`)
+    let bytes = message.serializeBinary()
+    // 记录这次请求的时间周期
+    detafeed_lastResolution = resolution
+    var meta = {noData: false}
+    var bars = []
+    if (data.marketData.length && Array.isArray(data.marketData)) {
+      detafeed_historyTime = data.marketData[0].time/1000 - 1
+      bars=data.marketData;
+    } else {
+      meta = {noData: true}
+    }
+    onResult(bars, meta)
+    if(resolution=='1'){
+      if(ws.socket!==null){
+        ws.close();
+      }else{
+        ws.sendData(bytes, 'candle.this.'+that.getApiTime(resolution)+'.'+symbolInfo.name, history,webSocketUrl)
+      }
+    }
+  })
   // socket.sendData({
   //   args: [`candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, 1441, detafeed_historyTime],
   //   cmd: 'req',
   //   id: '0a0493f7-80d4-4d1a-9d98-6da9ae9d399e'
   // }, `candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, history,webSocketUrl,bytes)
-  Event.off('data')
-
-  Event.on('data', data => {
-    // 记录这次请求的时间周期
-    detafeed_lastResolution = resolution
-    var meta = {noData: false}
-    var bars = []
-    console.log(Array.isArray(data))
-    if (data.length && Array.isArray(data)) {
-      detafeed_historyTime = historyData[0].time/1000 - 1
-      bars=historyData;
-    } else {
-      meta = {noData: true}
-    }
-    onResult(bars, meta)
-    if(ws.socket!==null){
-      ws.close();
-    }else{
-      ws.sendData(bytes, `candle.${this.getApiTime(resolution)}.${symbolInfo.name}`, history,webSocketUrl)
-    }
-  })
 }
 
 
 FeedBase.prototype.subscribeBars = function (symbolInfo, resolution, onTick, listenerGuid, onResetCacheNeededCallback) {
-  Event.off('realTime')
+  // Event.off('realTime')
 
   // 拿到实时数据 在这里画
-  Event.on('realTime', data => {
+  hub.on('realTime',function(data){
     if(data){
       if (historyData.length) {
         var socketDas = historyData[historyData.length - 1]
@@ -155,11 +154,11 @@ FeedBase.prototype.subscribeBars = function (symbolInfo, resolution, onTick, lis
           volume: 0,
           totalVolume: data[30] * 1,
         }
-        if (r.high < data[23] * 1) {
+        if (data[23] * 1 > r.high) {
           r.high = data[23] * 1
         }
-        if (r.low > data[23] * 1) {
-          r.low = data[23] * 1
+        if (data[27] * 1 < r.low) {
+          r.low = data[27] * 1
         }
         let scoketDate = socketDas.time
         let chartDate = date.getTime()
@@ -170,15 +169,15 @@ FeedBase.prototype.subscribeBars = function (symbolInfo, resolution, onTick, lis
           r.volume = data[30] * 1 - tmpLineData
           tmpLineData = data[30] * 1
           historyData.push(r)
-          onTick(r)
-        } else{
+        }else{
           r.time = socketDas.time
           r.volume = data[30] * 1 - tmpLineData
           historyData.pop()
           historyData.push(r)
-          onTick(r)
         }
-        // historyData[historyData.length-1]
+        if(resolution=='1'){
+          onTick(historyData[historyData.length-1])
+        }
       }
     }
   })

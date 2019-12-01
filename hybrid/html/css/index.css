@@ -176,14 +176,13 @@ ul,ol,li{
 .marketChartInfo .nowBuyMallNum .buyMallView .c1{
   height:100%;
   float:right;
+  clear:both;
 }
 .marketChartInfo .nowBuyMallNum .buyMallView .buyView{
-  width:100%;
   background:#ec2e2e;
   margin-top:0.1rem;
 }
 .marketChartInfo .nowBuyMallNum .buyMallView .mallView{
-  width:90%;
   background:#08b831;
   margin-top:0.12rem;
 }
@@ -314,6 +313,15 @@ iframe {
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
+}
+#bottom_order .xiushi{
+  width:100%;
+  height:1.3rem;
+  font-size:0.36rem;
+  color:#f8f8f8;
+  text-align:center;
+  line-height:1.3rem;
+  background: #677382;
 }
 .quickOrder .buy{
   flex:0 0 62%;
@@ -659,4 +667,52 @@ iframe {
 #getHandNum .handNumContent ul li.active,#profit .profitContent ul li.active{
   border:solid 1px #1b82d1;
   color:#1b82d1;
+}
+/* 盘口样式 */
+#handicap{
+  display:none;
+}
+#handicap ul,#handicap ul li{
+  display: flex;
+}
+#handicap ul{
+  width: 100%;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+#handicap ul li{
+  flex: 0 0 50%;
+  width: 50%;
+  border-bottom: 1px solid #f8f8f8;
+  position: relative;
+  line-height:1.6rem;
+}
+#handicap ul li:nth-child(odd):before{
+  content: "";
+  height: 100%;
+  width: .026667rem;
+  background: #f8f8f8;
+  position: absolute;
+  right: 0;
+}
+#handicap ul li p {
+  font-size: 0.34rem;
+  width: 40%;
+  text-align: center;
+  -ms-flex: 0 0 40%;
+  flex: 0 0 40%;
+  color: #777;
+}
+#handicap ul li b {
+  width: 60%;
+  font-size: 0.34rem;
+  -ms-flex: 0 0 60%;
+  flex: 0 0 60%;
+  color: #666;
+}
+#handicap ul li b.red {
+  color: #ea3826;
+}
+#handicap ul li b.green {
+  color: #7ed321;
 }

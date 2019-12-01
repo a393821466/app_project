@@ -77,7 +77,7 @@ var ws = {
     this.lastRealTimeData = this.realTimeData
     // var data = JSON.parse(resp.data.replace(/\r/g, '').replace(/\n/g, ''))
     var data = proto.MessageBase.deserializeBinary(resp.data).array[5]
-    Event.emit('realTime', data)
+    hub.emit('realTime', data)
   },
   checkSendMessage(options) {
     // 这里处理websocket 连接不上的问题
@@ -95,7 +95,7 @@ var ws = {
         clearInterval(this.intervalObj)
         console.log('send post_data_str timeout.')
       }
-    }, 3000)
+    }, 500)
   },
   sendWsRequest (options) {
     switch (this.socket.readyState) {
@@ -109,7 +109,7 @@ var ws = {
         console.log('ws关闭状态')
         break
       case 3:
-        this.initWs()
+        this.initWs(socketUrl,bytesData)
         break
       default:
         console.log('ws未知错误')

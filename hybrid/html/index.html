@@ -67,8 +67,8 @@
           <div class="c1 mallView"></div>
         </div>
         <div class="c buyMallNum">
-          <div class="buy">64买量</div>
-          <div class="mall">123卖量</div>
+          <div class="buy"><span>0</span>买量</div>
+          <div class="mall"><span>0</span>卖量</div>
         </div>
       </div>
     </div>
@@ -87,6 +87,34 @@
       </div>
     </div>
     <div id="tv_chart_container"></div>
+    <div id="handicap">
+      <ul>
+        <li class="higt">
+          <p>最高</p> 
+          <b class="red">0</b>
+        </li> 
+        <li class="low">
+          <p>最低</p> 
+          <b class="green">0</b>
+        </li> 
+        <li class="open">
+          <p>开盘</p>
+          <b class="green">0</b>
+        </li> 
+        <li class="yesterdaySettlement">
+          <p>昨结</p> 
+          <b>0</b>
+        </li> 
+        <li class="riseFall">
+          <p>涨跌</p> 
+          <b class="green">0</b>
+        </li> 
+        <li class="bd">
+          <p>幅度</p>
+          <b class="green">0.00%</b>
+        </li>
+      </ul>
+    </div>
   </div>
   <!--购买按钮-->
   <div class="quickOrder">
@@ -125,35 +153,8 @@
           </div>
         </div>
       </div>
-      <div class="quickOriderView">
-        <div class="q quick-rise">
-            <div class="rise-top r">
-              -
-            </div>
-            <div class="rise-bottom">
-              <div class="icon">
-                  <span class="iconfont upIcon">&#xe602;</span>
-              </div>
-              <span class="buy b">买多</span>
-            </div>
-        </div>
-        <div class="open-quick-orider">
-            <div class="quick-center">
-                <span class="iconfont quickIcon">&#xe6f8;</span>
-              <span class="quick-text">ON</span>
-            </div>
-          </div>
-          <div class="q quick-sell">
-            <div class="rise-top f">
-              -
-            </div>
-            <div class="rise-bottom">
-              <div class="icon">
-                  <span class="iconfont downIcon">&#xe602;</span>
-              </div>
-              <span class="buy m">卖空</span>
-            </div>
-          </div>
+      <div class="quickOriderView" id="bottom_order">
+        <div class="xiushi">正在载入..</div>
       </div>
     </div>
     <div class="quickOrider-placeholder">
@@ -194,14 +195,14 @@
   <script src="./js/event.js"></script>
   <!--图表库js-->
   <script src="./charting_library/charting_library.min.js"></script>
+  <!--页面总统js 初始化图表库 绑定点击事件等-->
+  <script src="./js/index.js"></script>
   <!--websocket-->
   <script src="./js/websocket.js"></script>
   <!--图表数据获取-->
   <script src="./js/datafeed.js"></script>
   <!--图表配置-->
   <script src="./js/chartConfig.js"></script>
-  <!--页面总统js 初始化图表库 绑定点击事件等-->
-  <script src="./js/index.js"></script>
   <!-- 手数 -->
   <script id="getHandNums" type="text/html">
     <%if(splitHands.length>0){%>
@@ -245,5 +246,45 @@
       <span class="two"><%=data.upDropSpeed.toFixed(2)%>%</span>
     </div>
   </script>
+  <script id="toOrder" type="text/html">
+    <%if(status==1){%>
+      <div class="q quick-rise">
+        <div class="rise-top r">
+          <%=buyPrice%>
+        </div>
+      <div class="rise-bottom">
+        <div class="icon">
+            <span class="iconfont upIcon">&#xe602;</span>
+        </div>
+        <span class="buy b">买多</span>
+      </div>
+      </div>
+      <div class="open-quick-orider">
+        <div class="quick-center">
+            <span class="iconfont quickIcon">&#xe6f8;</span>
+          <span class="quick-text">ON</span>
+        </div>
+      </div>
+      <div class="q quick-sell">
+        <div class="rise-top f">
+          <%=sellPrice%>
+        </div>
+        <div class="rise-bottom">
+          <div class="icon">
+              <span class="iconfont downIcon">&#xe602;</span>
+          </div>
+          <span class="buy m">卖空</span>
+        </div>
+      </div>
+    <%}else{%>
+      <div class="xiushi">商品休市中</div>
+    <%}%>
+  </script>
 </body>
+<script>
+  $init.initFontSize();
+  window.onresize=function(){
+    $init.initFontSize()
+  };
+</script>
 </html>
