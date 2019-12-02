@@ -5,10 +5,10 @@ function Pubsub(){
 Pubsub.prototype={
   //传入事件类型type和事件处理handle
   on: function (type, handle) {
-      if(!this.handles[type]){
-          this.handles[type] = [];
-      }
-      this.handles[type].push(handle);
+    if(!this.handles[type]){
+        this.handles[type] = [];
+    }
+    this.handles[type].push(handle);
   },
   emit: function () {
       //通过传入参数获取事件类型

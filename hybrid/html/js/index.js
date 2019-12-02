@@ -18,6 +18,7 @@ $(function(){
   var getParams=$init.queryMeter()
   var marketData='';
   var marketPrice='';
+  var marketNavigator=[];
   var model={
     num: 1,
     title: '元模式',
@@ -33,28 +34,34 @@ $(function(){
     commodityCode:getParams.commodityCode,
     contractCode:getParams.contractCode,
     priceDecimalPlaces:getParams.priceDecimalPlaces,
-    productTypeCode:getParams.productTypeCode
+    productTypeCode:getParams.productTypeCode,
+    token:getParams.token
   }
   domain=!getParams.domain?'':getParams.domain
   // 给chartConfig添加展示产品
   chartConfig.symbol = das.CommodityName
   var quickFlat=true;
+  // 屏幕高度
+  var screenHeight=window.screen.height;
+  $("#tv_chart_container").css('height',screenHeight-(141+45+120)+'px');
+  $("#handicap").css('height',screenHeight-(141+45+120)+'px');
   // 初始化 TradingView
   widget = new window.TradingView.widget(chartConfig)
-
   widget && widget.onChartReady && widget.onChartReady(function () {
     // 这是k线图 展示的 7日均线和30日均线。
     widget.chart().createStudy('Moving Average', false, false, [5], null, {'Plot.linewidth': 2, 'Plot.color': '#2ba7d6'})
     widget.chart().createStudy('Moving Average', false, false, [15], null, {'Plot.linewidth': 2, 'Plot.color': '#de9f66'})
 		setTimeout(() => {
-			widget.chart().resetData()
-		}, 1000)
+      widget.chart().resetData();
+    }, 1000)
   })
   
   // 行情页面及购买逻辑
   // 获取商户信息
   $init.get(domain+'/apis/console/subsystem/merchant','',function(res){
     merchantInfo=res.data
+    getProductNavigator();
+    getSinleMarket();
     getHistoryList();
   },function(err){
     $init.info({
@@ -64,32 +71,34 @@ $(function(){
     return;
   },getParams.token);
   // 获取单个行情
-  $init.get(domain+'/apis/business/getQuotaInfo',{templateCode:das.templateCode,commodityCode:das.commodityCode},function(res){
-	if(res.status){
-      marketData=res.data;
-      closeTimer() 
-      $(".marketName .nameAndCode").find('.name').text(marketData.CommodityName);
-      if(das.productTypeCode=='DIGICCY'){
-        $(".marketName .nameAndCode").find('.code').text(marketData.commodityCode);
-      }else{
-        $(".marketName .nameAndCode").find('.code').text(marketData.commodityCode+marketData.contractCode);
-      };
-      singleMarketFun(marketData);
+  function getSinleMarket(){
+    $init.get(domain+'/apis/business/getQuotaInfo',{templateCode:das.templateCode,commodityCode:das.commodityCode},function(res){
+      if(res.status){
+        marketData=res.data;
+        closeTimer() 
+        $(".marketName .nameAndCode").find('.name').text(marketData.CommodityName);
+        if(das.productTypeCode=='DIGICCY'){
+          $(".marketName .nameAndCode").find('.code').text(marketData.commodityCode);
+        }else{
+          $(".marketName .nameAndCode").find('.code').text(marketData.commodityCode+marketData.contractCode);
+        };
+        singleMarketFun(marketData);
+        return;
+      }
+      $init.info({
+        message:res.msg,
+        type:'error'
+      });
+    },function(err){
+      $init.info({
+        message:err.msg,
+        type:'error'
+      });
       return;
-    }
-    $init.info({
-      message:res.msg,
-      type:'error'
-    });
-  },function(err){
-    $init.info({
-      message:err.msg,
-      type:'error'
-    });
-    return;
-  },getParams.token)
-  function singleMarketFun(das){
-    $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode,'',function(res){
+    },getParams.token)
+  }
+  function singleMarketFun(dast){
+    $init.get(domain+'/apis/futures/v2/market/'+dast.commodityCode+'/'+dast.contractCode,'',function(res){
       if(res.status){
         marketPrice=res.data;
         marketPrice.lastPrice = $init.formatPoint(res.data.lastPrice);
@@ -102,9 +111,56 @@ $(function(){
         marketPrice.upDropSpeed = x;
         marketPrice.buyPrice = res.data.askPrice;
         marketPrice.sellPrice = res.data.bidPrice;
-        marketPrice.status=das.status;
+        marketPrice.status=dast.status;
         renderPrice(marketPrice);
         order(marketPrice)
+      }
+    },function(err){
+      $init.info({
+        message:err.msg,
+        type:'error'
+      });
+      return;
+    },getParams.token)
+  }
+  // 获取产品导航
+  function getProductNavigator(){
+    $init.get(domain+'/apis/business/getQuotaList',{templateCode:das.templateCode},function(res){
+      if(res.status){
+        var map = {}
+        var dest = []
+        var list=res.data;
+        if (!list) return
+        if (list.length !== 0) {
+          for (var i = 0; i < list.length; i++) {
+            var c = list[i]
+            if (!map[c.productType]) {
+              dest.push({
+                title: c.productType,
+                list: [c]
+              })
+              map[c.productType] = c
+            } else {
+              for (var j = 0; j < dest.length; j++) {
+                var dj = dest[j]
+                if (dj.title === c.productType) {
+                  dj.list.push(c)
+                  break
+                }
+              }
+            }
+          }
+          var d={
+            name:das.CommodityName,
+            templateCode:das.templateCode,
+            tl:dest,
+            token:das.token
+          }
+          var bt=baidu.template;
+          var productHtml=bt('getProduct',d);
+          $("#product").html(productHtml);
+          changeProduction();
+        }
       }
     },function(err){
       $init.info({
@@ -119,6 +175,7 @@ $(function(){
     var query=!data?'':{
       mins:data
     };
+    historyData=[];
     $init.get(domain+'/apis/futures/v2/market/'+das.commodityCode+'/'+das.contractCode+'/minsline',query,function(res){
       if(res.status){
         var data=res.data;
@@ -154,6 +211,7 @@ $(function(){
       return;
     },getParams.token);
   }
+  // 实时渲染数据
   function socketData(){
     var $buyMall=$("#buyMallNum");
     hub.on('realTime', data => {
@@ -182,8 +240,9 @@ $(function(){
       order(d);
     })
   }
-
   // 底部下单导航
+  var $handView=$("#quickBuyHandNum");
+  var $profitView=$("#quickTakeProfit");
   function order(data){
     if(data=='close') return;
     var bt1=baidu.template;
@@ -213,8 +272,6 @@ $(function(){
       }
     });
     // 选择手数及止盈弹窗
-    var $handView=$("#quickBuyHandNum");
-    var $profitView=$("#quickTakeProfit");
     $(".handNum").off('click').on('click',function(){
       openMaskView($handView,$(".handView"),'active');
     });
@@ -293,7 +350,7 @@ $(function(){
       $(this).addClass('active').siblings().removeClass('active');
       closeMaskView($(".handView"),$handView,'active');
     })
-    profit(marketData);
+    profit(marketData); 
   }
   // 选择止盈及数据渲染
   function profit(marketData){
@@ -337,9 +394,33 @@ $(function(){
       node2.hide();
     },200);
   };
+  // 显示产品切换
+  function changeProduction(){
+    $(".marketName").off('click').on('click',function(){
+      $(".backs").css('transform','rotate(180deg)');
+      $("#product").show();
+    });
+    $(".productRight,.productMask").off('click').on('click',function(e){
+      e.stopPropagation();
+      $(".backs").css('transform','rotate(0deg)');
+      $("#product").hide();
+    });
+    $(".productContent ul li").off('click').on('click',function(){
+      $(this).addClass('active').siblings().removeClass('active');
+      var jsons=$(this).data('item');
+      das.commodityCode=jsons.commodityCode;
+      das.contractCode=jsons.contractCode;
+      das.commodityCode=jsons.commodityCode;
+      getSinleMarket();
+      getProductNavigator()
+      getHistoryList()
+      // var listData=$init.queryMeter(jsons);
+      // location.href="/hybrid/html/index.html?tpCode="+das.templateCode+"&CommodityName="+jsons.CommodityName+"&commodityCode="+jsons.commodityCode+"&contractCode="+jsons.contractCode+"&priceDecimalPlaces"+jsons.priceDecimalPlaces+"&productTypeCode="+jsons.productTypeCode+"&token="+das.token;
+    });
+  }
   // 切换产品周期
-  var marketDom = document.getElementById('symbol')
-  var intervalDom = $("#interval").find('span')
+  var marketDom = document.getElementById('symbol');
+  var intervalDom = $("#interval").find('span');
   intervalDom.off('click').on('click',function(e){
     var val=e.target.dataset.value;
     if(e.target.className=='active'){
@@ -357,10 +438,11 @@ $(function(){
     }
     $("#handicap").hide();
     $("#tv_chart_container").show();
+    getHistoryList(val)
+    
     // 3 为平均K线； 1 为走势图
     widget.chart().setChartType(!val ? 3 : 1)
     widget.chart().setResolution(!val?'1':val)
-    getHistoryList(val)
   })
 });
 

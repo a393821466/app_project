@@ -93,13 +93,15 @@ FeedBase.prototype.getBars = function (symbolInfo, resolution, rangeStartDate, r
     第二个参数订阅实时数据
     第三个参数 是  是否是历史数据
   */
+  console.log(1321)
   var that=this;
   var webSocketUrl='';
   var getParams=$init.queryMeter()
-  var d=!domain?'https://tmk.eanjee.com':domain
-  var us=$init.getProtocol(d);
   hub.off('data')
   hub.on('data',function(data){
+    console.log(1321)
+    var d=!domain?'https://tmk.eanjee.com':domain
+    var us=$init.getProtocol(d);
     var getUrl=data.merchantData.merchantSetting.publishDomain;
     webSocketUrl=(us === 'https:' ? 'wss://' : 'ws://') + getUrl + '/ws'
     var message = new proto.MessageBase();
@@ -149,16 +151,16 @@ FeedBase.prototype.subscribeBars = function (symbolInfo, resolution, onTick, lis
           time: t,
           close: data[23] * 1,
           open: socketDas.close,
-          high: socketDas.low,
-          low: socketDas.high,
+          high: socketDas.high,
+          low: socketDas.low,
           volume: 0,
           totalVolume: data[30] * 1,
         }
         if (data[23] * 1 > r.high) {
           r.high = data[23] * 1
         }
-        if (data[27] * 1 < r.low) {
-          r.low = data[27] * 1
+        if (data[23] * 1 < r.low) {
+          r.low = data[23] * 1
         }
         let scoketDate = socketDas.time
         let chartDate = date.getTime()

@@ -8,6 +8,14 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/iconfont.css">
+  <script src="./js/service.js"></script>
+  <script>
+    $init.initFontSize();
+    window.onresize=function(){
+      $init.initFontSize()
+    };
+    
+  </script>
 </head>
 <body>
   <!--头部-->
@@ -186,10 +194,11 @@
       </div>
     </div>
   </div>
+  <!--显示切换产品-->
+  <div id="product" class="productView"></div>
   <script src="./js/zepto.min.js"></script>
   <script src="./js/tpl.js"></script>
   <script src="./js/aes.js"></script>
-  <script src="./js/service.js"></script>
   <script src="./js/marketMq.js"></script>
   <!--封装了一个发布订阅模式-->
   <script src="./js/event.js"></script>
@@ -280,11 +289,33 @@
       <div class="xiushi">商品休市中</div>
     <%}%>
   </script>
+  <script id="getProduct" type="text/html">
+    <div class="productMask"></div>
+    <div class="productBody">
+      <div class="productTitle">
+        <div class="p productLeft"></div>
+        <div class="p productCenter">产品列表</div>
+        <div class="p productRight">关闭</div>
+      </div>
+      <div class="productContent">
+        <%if(tl.length>0){%>
+          <%for(var i=0;i<tl.length;i++){%>
+            <div class="productTitleList">
+              <p><%=tl[i].title%></p>
+            </div>
+            <ul>
+            <%for(var j=0;j<tl[i].list.length;j++){%>
+              <li class="<%=tl[i].list[j].CommodityName==name?'active':''%>" data-item="<%=JSON.stringify(tl[i].list[j])%>" class="<%=tl[i].list[j].CommodityName==name?'active':''%>">
+                <%=tl[i].list[j].CommodityName%>
+              </li> 
+            <%}%>
+            </ul>
+          <%}%>
+        <%}else{%>
+          <div class="noData">暂无内容..</div>
+        <%}%>
+      </div>
+    </div>
+  </script>
 </body>
-<script>
-  $init.initFontSize();
-  window.onresize=function(){
-    $init.initFontSize()
-  };
-</script>
 </html>

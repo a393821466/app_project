@@ -25,7 +25,7 @@
 				</block>
 			</hx-navbar>
 		</view> -->
-		<web-view :webview-styles="webviewStyles" :src="url"></web-view>
+		<web-view :webview-styles="webviewStyles" :src="url" @message="getMessage"></web-view>
 		<!-- <dynamic-price></dynamic-price> --> 
 		<!-- <dynamic-chart></dynamic-chart> -->
 		<!-- <quick-order :marketDetails="marketDetails"></quick-order> -->
@@ -87,6 +87,11 @@
 		},
 		methods:{
 			...mapActions(['getMarketGoodsDetails','getSingleMarketDetails','getHistoryChartDas']),
+			getMessage(data){
+				console.log('--------------------------------------')
+				console.log(data.detail)
+				console.log('--------------------------------------')
+			},
 			backNextRoute(){
 				let das=chache.get('selectTemName')
 				this.$mRouter.reLaunch({
