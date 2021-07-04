@@ -1,2 +1,2 @@
-setCssToHead([".",[1],"banner{ width:100%; height:",[0,440],"; }\n",])();
+setCssToHead([".",[1],"banner{ width:100%; height:",[0,440],"; }\n",],undefined,{path:"./pages/index/index.wxss"})();
 document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/index/index.wxml') } }));

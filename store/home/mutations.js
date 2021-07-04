@@ -5,7 +5,10 @@ export const state={
 
 export const mutations={
 	['ANNOUNT'](state,val){
-		console.log(val);
+		state.annountData=val.data.data.content;
 	}
 }
 
+export const getters={
+	annountData:state=>state.annountData
+}

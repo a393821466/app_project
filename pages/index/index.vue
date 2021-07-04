@@ -8,6 +8,9 @@
 				<image src="../../static/carousel/spiderman.png" mode="" class="banner"></image>
 			</swiper-item>
 		</swiper>
+		<view>
+			<block v-for="(item,idx) in annountData" :key="idx" v-html="item.cnContent"></block>
+		</view>
 	</view>
 </template>
 
@@ -19,8 +22,11 @@
 				names:'dada'
 			}
 		},
+		computed:{
+				...mapGetters(['annountData'])
+		},
 		onLoad(){
-			this.$store.dispatch('getAnnount')
+			this.getAnnount();
 		},
 		methods:{
 			...mapActions(['getAnnount'])
