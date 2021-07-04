@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>行情</title>
+  <!-- Fix for iOS Safari zooming bug -->
+  <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/iconfont.css">
+  <script src="./js/service.js"></script>
+  <script>
+    $init.initFontSize();
+    window.onresize=function(){
+      $init.initFontSize()
+    };
+    
+  </script>
+</head>
+<body>
+  <!--头部-->
+  <!-- <div class="header">
+    <div class="chartHeader">
+        <div class="headerRow backArrow">
+          <span class="iconfont back">&#xe607;</span>
+        </div>
+        <div class="headerRow centerSelect">
+            <div class="chartTitle">
+              美原油<span class="isType">(实盘)</span>
+            </div>
+            <div class="arrow">
+                <span class="iconfont nextArrow">&#xe501;</span>
+            </div>
+        </div>
+        <div class="headerRow rule">
+          <span>规则</span>
+        </div>
+    </div>
+    <div class="chartHeaderPlaceHolder">
+    </div>
+  </div> -->
+  <!--动态行情价格-->
+  <div class="marketChartInfo">
+    <div class="marketInfo marketInfo_left">
+      <div class="marketName">
+        <p class="nameAndCode">
+          <span class="name">-</span>
+          <span class="code">-</span>
+          <i class="iconfont backs">&#xe601;</i>
+          <p class="clearfloat"></p>
+        </p>
+      </div>
+      <div class="marketClear"></div>
+      <div class="marketPrice_ratio" id="decimalPrice">
+        <span class="b blockLeft rise">-</span>
+        <div class="b blockRight">
+          <span class="one">-</span>
+          <span class="two">-%</span>
+        </div>
+      </div>
+    </div>
+    <div class="marketInfo marketInfo_right">
+      <div class="goTradeBtn">
+        <button class="rule">规则</button>
+        <button class="positionBtn">持仓</button>
+      </div>
+      <div class="nowPositionTimer" id="timer">
+        <span class="timer1">
+          持仓时间加载中..
+        </span>
+      </div>
+      <div class="nowBuyMallNum" id="buyMallNum">
+        <div class="c buyMallView">
+          <div class="c1 buyView"></div>
+          <div class="c1 mallView"></div>
+        </div>
+        <div class="c buyMallNum">
+          <div class="buy"><span>0</span>买量</div>
+          <div class="mall"><span>0</span>卖量</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--图表-->
+  <div class="chart">
+    <div class="timeSelect">
+      <div class="times" id="interval">
+        <span class="active" data-value="">分时</span>
+        <span data-value="handicap">盘口</span>
+        <!-- <span data-value="15">15分钟</span> -->
+        <span data-value="day">日线</span>
+        <span data-value="1">1分钟</span>
+        <span data-value="5">5分钟</span>
+        <span data-value="15">15分钟</span>
+      </div>
+    </div>
+    <div id="tv_chart_container"></div>
+    <div id="handicap">
+      <ul>
+        <li class="higt">
+          <p>最高</p> 
+          <b class="red">0</b>
+        </li> 
+        <li class="low">
+          <p>最低</p> 
+          <b class="green">0</b>
+        </li> 
+        <li class="open">
+          <p>开盘</p>
+          <b class="green">0</b>
+        </li> 
+        <li class="yesterdaySettlement">
+          <p>昨结</p> 
+          <b>0</b>
+        </li> 
+        <li class="riseFall">
+          <p>涨跌</p> 
+          <b class="green">0</b>
+        </li> 
+        <li class="bd">
+          <p>幅度</p>
+          <b class="green">0.00%</b>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--购买按钮-->
+  <div class="quickOrder">
+    <div class="quick">
+      <div class="quicktTollBar">
+        <div class="quickList">
+          <div class="q model">
+            <input class="inp-cbx" id="models" type="checkbox" checked style="display: none;"/>
+            <label class="cbx" for="models">
+              <span>
+                <svg width="12px" height="10px">
+                  <use xlink:href="#check"></use>
+                </svg>
+              </span>
+              <span class="modelText">元模式</span>
+            </label>
+            <svg class="inline-svg">
+              <symbol id="check" viewbox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </symbol>
+            </svg>
+          </div>
+          <div class="q handNum">
+            <div class="hand-num-view">
+              <span>手数:</span>
+              <span class="num">-</span>
+              <span>手</span>
+            </div>
+          </div>
+          <div class="q stopLoopAmount">
+            <div class="stop-loop-amount">
+              <span>止损金额:</span>
+              <span class="types">-</span>
+              <span class="num">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="quickOriderView" id="bottom_order">
+        <div class="xiushi">正在载入..</div>
+      </div>
+    </div>
+    <div class="quickOrider-placeholder">
+    </div>
+    <!--手数-->
+    <div id="quickBuyHandNum">
+      <div class="quickHandNumView"></div>
+      <div class="handView" id="getHandNum">
+        <div class="handNumUp">
+          <div class="title left"></div>
+          <div class="title center">选择手数</div>
+          <div class="title right">关闭</div>
+        </div>
+        <div class="handNumContent" id="handNums">
+        </div>
+      </div>
+    </div>
+    <!--止盈-->
+    <div id="quickTakeProfit">
+      <div class="quickTakeProfitView"></div>
+      <div class="profitView" id="profit">
+        <div class="profitViewUp">
+          <div class="title left"></div>
+          <div class="title center">选择止盈金额</div>
+          <div class="title right">关闭</div>
+        </div>
+        <div class="profitContent" id="profits">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--显示切换产品-->
+  <div id="product" class="productView"></div>
+  <script src="./js/zepto.min.js"></script>
+  <script src="./js/tpl.js"></script>
+  <script src="./js/aes.js"></script>
+  <script src="./js/marketMq.js"></script>
+  <!--封装了一个发布订阅模式-->
+  <script src="./js/event.js"></script>
+  <!--图表库js-->
+  <script src="./charting_library/charting_library.min.js"></script>
+  <!--页面总统js 初始化图表库 绑定点击事件等-->
+  <script src="./js/index.js"></script>
+  <!--websocket-->
+  <script src="./js/websocket.js"></script>
+  <!--图表数据获取-->
+  <script src="./js/datafeed.js"></script>
+  <!--图表配置-->
+  <script src="./js/chartConfig.js"></script>
+  <!-- 手数 -->
+  <script id="getHandNums" type="text/html">
+    <%if(splitHands.length>0){%>
+      <ul>
+        <%for(var i=0;i<splitHands.length;i++){%>
+            <li><span><%=splitHands[i]%></span>手</li>
+        <%}%>
+      </ul>
+      <%}else{%>
+      <p style="font-size:20px;text-align:center;
+      line-height:80px;color:#ccc;">没有手数</i>
+    <%}%>
+  </script>
+  <!-- 止盈金额 -->
+  <script id="getProfits" type="text/html">
+    <%if(profitMoney.length>0){%>
+      <ul>
+        <%for(var i=0;i<profitMoney.length;i++){%>
+            <li><span><%=profitMoney[i]%></span></li>
+        <%}%>
+      </ul>
+      <%}else{%>
+        <p style="font-size:20px;text-align:center;
+        line-height:80px;color:#ccc;">没有止盈金额</p>
+    <%}%>
+  </script>
+  <!-- 持仓事件 -->
+  <script id="getTimer" type="text/html">
+    <%if(time){%>
+      <span class="timer1">本时段持仓时间至</span>
+      <span class="timer2"><%=time%></span>
+    <%}else{%>
+      <span class="timer1">休市中</span>
+    <%}%>
+  </script>
+  <!-- 动态价格 -->
+  <script id="getDymicPrice" type="text/html">
+    <span class="b blockLeft <%=data.upDropSpeed>0?'rise':'fall'%>" ><%=data.lastPrice%></span>
+    <div class="b blockRight <%=data.upDropSpeed>0?'rise':'fall'%>">
+      <span class="one"><%=data.upDropPrice%></span>
+      <span class="two"><%=data.upDropSpeed.toFixed(2)%>%</span>
+    </div>
+  </script>
+  <script id="toOrder" type="text/html">
+    <%if(status==1){%>
+      <div class="q quick-rise">
+        <div class="rise-top r">
+          <%=buyPrice%>
+        </div>
+      <div class="rise-bottom">
+        <div class="icon">
+            <span class="iconfont upIcon">&#xe602;</span>
+        </div>
+        <span class="buy b">买多</span>
+      </div>
+      </div>
+      <div class="open-quick-orider">
+        <div class="quick-center">
+            <span class="iconfont quickIcon">&#xe6f8;</span>
+          <span class="quick-text">ON</span>
+        </div>
+      </div>
+      <div class="q quick-sell">
+        <div class="rise-top f">
+          <%=sellPrice%>
+        </div>
+        <div class="rise-bottom">
+          <div class="icon">
+              <span class="iconfont downIcon">&#xe602;</span>
+          </div>
+          <span class="buy m">卖空</span>
+        </div>
+      </div>
+    <%}else{%>
+      <div class="xiushi">商品休市中</div>
+    <%}%>
+  </script>
+  <script id="getProduct" type="text/html">
+    <div class="productMask"></div>
+    <div class="productBody">
+      <div class="productTitle">
+        <div class="p productLeft"></div>
+        <div class="p productCenter">产品列表</div>
+        <div class="p productRight">关闭</div>
+      </div>
+      <div class="productContent">
+        <%if(tl.length>0){%>
+          <%for(var i=0;i<tl.length;i++){%>
+            <div class="productTitleList">
+              <p><%=tl[i].title%></p>
+            </div>
+            <ul>
+            <%for(var j=0;j<tl[i].list.length;j++){%>
+              <li class="<%=tl[i].list[j].CommodityName==name?'active':''%>" data-item="<%=JSON.stringify(tl[i].list[j])%>" class="<%=tl[i].list[j].CommodityName==name?'active':''%>">
+                <%=tl[i].list[j].CommodityName%>
+              </li> 
+            <%}%>
+            </ul>
+          <%}%>
+        <%}else{%>
+          <div class="noData">暂无内容..</div>
+        <%}%>
+      </div>
+    </div>
+  </script>
+</body>
+</html>

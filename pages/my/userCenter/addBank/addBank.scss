@@ -1,0 +1,67 @@
+.addBank{
+	padding:24rpx 0;
+	.addBank_tip{
+		padding:0 32rpx;
+		display:flex;
+		flex-direction:row;
+		.uni-icon-wenti{
+			flex:0 0 40rpx;
+			height:40rpx;
+		}
+		.meBankTip{
+			flex:1;
+			text-indent:10rpx;
+			color:#888;
+		}
+	}
+	.bankInput{
+		background:#fff;
+		margin-top:20rpx;
+		.bankCartName{
+			display:flex;
+			flex-direction:row;
+			width:680rpx;
+			margin:12rpx auto 0;
+			padding:0 10rpx;
+			border-bottom:1px solid #f8f8f8;
+			.flexBankView{
+				flex:0 0 1;
+				line-height:96rpx;
+				color:#777;
+				&.title{
+					width:200rpx;
+					display:block;
+					color:#333;
+				}
+				&.input{
+					flex:0 0 460rpx;
+					.bankNumber{
+						height:52rpx;
+						line-height:52rpx;
+						margin-top:22rpx;
+					}
+				}
+				&.iconRight{
+					.uni-icon-wenti{
+						display:block;
+						line-height:95rpx;
+					}
+				}
+			}
+			&.bankCartName:nth-last-child(1){
+				border-bottom:none;
+			}
+		}
+	}
+	.submit_cartNumber{
+		margin-top:36rpx;
+		padding:0 30rpx;
+		button{
+			background:#1b82d1
+		}
+	}
+}
+page{
+	background:#f8f8f8;
+	border-top:1rpx #EFEFEF solid;
+}

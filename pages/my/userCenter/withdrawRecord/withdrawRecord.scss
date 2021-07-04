@@ -1,0 +1,111 @@
+page{
+	overflow-y: hidden;
+} 
+.withdrawRecordView{
+	.clearView{
+		height:1rpx;
+		background:#f9f9f9;
+	}
+	.withdrawRecord{
+		padding:0 22rpx;
+		.withdrawList{
+			padding:10rpx 22rpx;
+			box-shadow:0rpx 1rpx 6rpx #ccc;
+			border-radius:8rpx;
+			margin:20rpx auto 30rpx;
+			background:#f9f9f9;
+			width:90%;
+			.withdrawTitle{
+				font-size:32rpx;
+				line-height:70rpx;
+				border-bottom:solid 1px #eee;
+				color:#777;
+			}
+			.withdrawBox{
+				display:flex;
+				flex-direction: row;
+				padding:14rpx 10rpx;
+				line-height:55rpx;
+				.withdrawDetail{
+					color:#666;
+					.type{
+						color:rgb(245, 166, 35);
+					}
+					&.left{
+						flex:0 0 60%;
+					}
+					&.right{
+						flex:0 0 40%;
+						.right_money{
+							color:#e75a39;
+							display:block;
+							padding-top:30rpx;
+							text-align:center;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+// .noDataImg{
+// 	width:280rpx;
+// 	height:180rpx;
+// 	margin:180rpx auto 0;
+// 	.img{
+// 		width:100%;
+// 		height:100%;
+// 	}
+// 	.noDataText{
+// 		display:block;
+// 		color:#999;
+// 		font-size:34rpx;
+// 		text-align:center;
+// 	}
+// }
+.typeTerm{
+	.typeTermTitle{
+		text-align:left;
+		line-height:76rpx;
+		text-indent:20rpx;
+		border-bottom:1px solid #eee;
+		color:#555;
+	}
+	.typeTermBox{
+		margin:24rpx 0 10rpx;
+		display:flex;
+		flex-direction:row;
+		flex-wrap:wrap;
+		.typeList,.typeTimer{
+			text-align:center;
+			background:#f4f4f4;
+			color:#999;
+			padding:25rpx 40rpx;
+			margin:0rpx 15rpx 20rpx;
+			border-radius:10rpx;
+			&.active{
+				background:#1b82d1;
+				color:#f8f8f8;
+			}
+		}
+	}
+}
+.selectBtn{
+	display:flex;
+	flex-direction: row;
+	margin-top:60rpx;
+	.btn{
+		flex:1;
+		margin:0 15rpx;
+		font-size:28rpx;
+		&.reset{
+			background:#999;
+		}
+		&.confirm{
+			background:#1b82d1;
+		}
+	}
+}
+.mescroll-empty .empty-tip{
+	font-size:24upx;
+}

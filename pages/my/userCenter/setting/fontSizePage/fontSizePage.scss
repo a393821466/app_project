@@ -1,0 +1,74 @@
+page{
+	background:#f8f8f8;
+}
+.fontSizeView{
+	height:1px;
+	background:#f3f3f3;
+	.bindInfo{
+		padding:20rpx;
+		border-bottom:1rpx solid #eee;
+		display:flex;
+		flex-direction: row;
+		.bindIconView{
+			flex:0 0 100rpx;
+			width:100rpx;
+			.bindIcon{
+				width:80rpx;
+				height:80rpx;
+				border-radius:80rpx;
+				background:#f6f6f6;
+				border:dashed rgba(27, 130, 209,0.5) 1rpx;
+				text-align:center;
+				line-height:80rpx;
+				margin:0 auto;
+			}
+		}
+		.bindTitle{
+			flex:0 0 100%;
+			width:100%;
+			color:#666;
+			line-height:80rpx;
+			text-indent:10rpx;
+		}
+	}
+	.slider_fontSize_view{
+		height:200upx;
+		position:fixed;
+		border-top:1px solid #f4f4f4;
+		bottom:0;
+		left:0;
+		width:100%;
+		background:#fff;
+		.fontSize_view{
+			font-size:36upx;
+			color:#666;
+			padding:0upx 80upx 0;
+			margin:34upx 0;
+			display:flex;
+			flex-direction:row;
+			.fontSize_view_fontSize{
+				flex:1;
+				text-align:center;
+				&.view1{
+					text-align:left;
+				}
+				&.view3{
+					text-align:right;
+				}
+			}
+		}
+		.slider_button{
+			padding:28upx 20upx 0;
+			button{
+				font-size:32upx;
+				background:#1b82d1;
+			}
+		}
+		.fontSize_slider{
+			padding:0 60upx;
+		}
+		.uni-slider-track{
+			background:#1b82d1;
+		}
+	}
+}

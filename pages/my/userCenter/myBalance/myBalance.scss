@@ -1,0 +1,136 @@
+.balance_list{
+	padding:0 20rpx;
+	.balance_case{
+		margin-top:20rpx;
+		.balance_top_row{
+			display:flex;
+			flex-direction:row;
+			padding:20rpx;
+			background:#f5a623;
+			border-top-left-radius:20rpx;
+			border-top-right-radius:20rpx;
+			.balance_flex{
+				flex:0 0 1;
+				&.balance_icon{
+					flex:0 0 30%;
+					width:30%;
+					line-height:140rpx;
+					text-indent:15rpx;
+					.icons{
+						float:left;
+						&.title{
+							color:#fff;
+							padding:5rpx 0rpx 0;
+							font-size:38rpx;
+						}
+					}
+				}
+				&.balance_money{
+					flex:0 0 40%;
+					width:40%;
+					text-align:center;
+					color:#f8f8f8;
+					line-height:50rpx;
+					position:relative;
+					.money_title{
+						font-size:36rpx;
+						padding-top:26rpx;
+					}
+					.money_line{
+						position:absolute;
+						right:0;
+						width:2rpx;
+						height:100%;
+						background:#eee;
+						top:0;
+					}
+				}
+				&.balance_outher_money{
+					flex:0 0 30%;
+					width:30%;
+					font-size:28rpx;
+					text-align:center;
+					color:#f8f8f8;
+					.frozen_balance{
+						margin-bottom:10rpx;
+					}
+				}
+			}
+		}
+		.blance_bottom_row{
+			background:#fff;
+			width:100%;
+			height:100rpx;
+			box-shadow:2rpx 3rpx 12rpx #ccc;
+			border-bottom-left-radius:20rpx;
+			border-bottom-right-radius:20rpx;
+			display:flex;
+			flex-direction:row;
+			.btns{
+				flex:1;
+				.btn{
+					text-align:center;
+					border:solid 1px #f5a623;
+					height:60rpx;
+					width:160rpx;
+					border-radius:10rpx;
+					line-height:60rpx;
+					color:#f5a623;
+					margin:18rpx auto 0;
+				}
+			}
+		}
+	}
+}
+.balance_skeleton{
+	.balance_case{
+		background:#eee;
+		border-radius:20rpx;
+		.balance_top_row{
+			background:none;
+			.i{
+				width:70rpx;
+				height:70rpx;
+				border-radius:70rpx;
+				background:#ccc;
+				margin:36rpx 6rpx 36rpx 20rpx;
+			}
+			.title,.money_title,.money_num{
+				height:30rpx;
+			}
+			.title{
+				width:70rpx;
+				background:#ccc;
+				margin:55rpx 0 0 10rpx;
+			}
+			.money_title{
+				width:100%;
+				margin-top:30rpx;
+				background:#ccc;
+				padding-top:0 !important;
+			}
+			.money_num{
+				margin:20rpx auto 0;
+				background:#ccc;
+				width:100%;
+			}
+			.common_skeleton{
+				width:80%;
+				height:25rpx;
+				background:#ccc;
+				margin:5rpx auto 12rpx;
+			}
+		}
+	}
+	.blance_bottom_skeleton{
+		background:#eee !important;
+		box-shadow:none !important;
+		.btn{
+			background:#ccc;
+			border:none !important;
+			border-radius:0 !important;
+			margin:18rpx auto 0;
+			height:50rpx !important;
+		}
+	}
+}

@@ -1,0 +1,40 @@
+page{
+	background:#fff
+}
+.withdrawSuccessView{
+	border-top:1px solid #f8f8f8;
+	padding:0 20rpx;
+	.step_view{
+		margin:30rpx 0rpx 0rpx 0rpx;
+		border-bottom: 1px solid #f8f8f8;
+	}
+	.withdrawInfo{
+		padding:20rpx 20rpx;
+		.withdrawView{
+			display:flex;
+			flex-direction: row;
+			.info{
+				flex:1;
+				color:#666;
+				line-height:70rpx;
+				&:nth-last-child(1){
+					text-align:right;
+				}
+			}
+		}
+	}
+	.clearBox{
+		height:300rpx;
+	}
+	.success_btn{
+		padding:0 200rpx;
+		.success{
+			color:#1b82d1;
+			border:solid 1px #1b82d1;
+		}
+	}
+}
+
+.info,.success{
+	font-size:28rpx;
+}

@@ -1,0 +1,15 @@
+import {
+	state
+} from './mutations'
+const getters = {
+	themeFontSize: state => state.themeFontSize,
+	token: state => state.token,
+	merchantInfo: state => state.merchantInfo,
+	loginKey: state => state.loginKey,
+	userInfo: state => state.userInfo,
+	stateText: state => state.stateText,
+	verifyImg: state => state.verifyImg,
+	timeList: state => state.timeList
+}
+
+export default getters

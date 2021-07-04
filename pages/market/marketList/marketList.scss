@@ -1,0 +1,77 @@
+page{
+	overflow-y: hidden;
+} 
+.top-warp{
+	z-index: 999;
+	position: fixed;
+	top: --window-top; /* css变量 */
+	left: 0;
+	width:100%;
+	text-align:left;
+	background-color: white;
+	border-bottom: 1upx solid #ddd;
+	background:#f5f5f5;
+}
+.top-warp .tabs{
+	display: inline-block;
+	padding:0 30upx;
+	line-height: 60upx;
+	margin-left:20upx;
+	margin-top:10upx;
+	// border:solid 1px #ccc;
+	// border-radius:8upx;
+	color:#999;
+}
+.top-warp .active{
+	border-bottom: 2upx solid rgb(27, 130, 209);
+	color: rgb(27, 130, 209);
+	// border:solid 1px rgb(27, 130, 209);
+	// color:#f8f8f8;
+	// border-radius:8upx;
+	// color:rgb(27, 130, 209);
+}
+.top-warp .navTitle{
+	display:flex;
+	flex-direction: row;
+	padding:0 20upx;
+	border-top:1px solid #eee;
+	.nav{
+		flex:1;
+		font-size:28upx;
+		line-height:70upx;
+		height:70upx;
+		text-align:center;
+		color:#888;
+		&.nav1{
+			width:120upx;
+			flex:0 0 120upx;
+		}
+		&.nav2{
+			width:160upx;
+			flex:0 0 160upx;
+		}
+		&.nav3{
+			width:160upx;
+			flex:0 0 160upx;
+		}
+	}
+}
+.marketHeader{
+	.back{
+		width:100%;
+		text-indent:15upx;
+		color:#f8f8f8;
+	}
+	.input-view{
+		color:#f8f8f8;
+		width:100%;
+		text-align:center;
+	}
+	.right_btn{
+		font-size:26rpx;
+		display:block;
+		text-align:center;
+		width:100%;
+		color:#f8f8f8;
+	}
+}

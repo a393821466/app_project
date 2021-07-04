@@ -1,0 +1,190 @@
+<template>
+	<view class="settingView" :class="themeFontSize">
+		<view class="setting_box">
+			<view class="setting_top">
+				<view class="setting_list" v-for="(item,idx) in userArr" :key="item.id" @click="goUserLink(item)">
+					<view class="setting_title">{{item.title}}</view>
+					<view class="setting_icon">
+						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
+					</view>
+				</view>
+			</view>
+			<view class="setting_middle">
+				<!-- #ifdef APP-PLUS-->
+				<view class="setting_list" v-for="(item,idx) in commonUse" :key="item.id" @click="goUserLink(item)">
+					<view class="setting_title">{{item.title}}</view>
+					<view class="setting_icon">
+						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
+					</view>
+				</view>
+				<!-- <view class="setting_list">
+					<view class="setting_title">夜间模式</view>
+					<view class="setting_icon">
+						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
+					</view>
+				</view> -->
+				<!-- #endif -->
+				<view class="setting_list" @click="clearStorage">
+					<view class="setting_title">清理APP缓存</view>
+					<view class="setting_icon">
+						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
+					</view>
+				</view>
+			</view>
+			<view class="setting_middle2">
+				<view class="setting_list" v-for="(item,idx) in helpArr" :key="item.id">
+					<view class="setting_title">{{item.title}}</view>
+					<view class="setting_icon">
+						<fonts-icon type="fanhui" size='26' color='#999'></fonts-icon>
+					</view>
+				</view>
+			</view>
+			<view class="setting_logout" @click="logoutActions">
+				<view class="setting_list">
+					<view class="setting_title" style="text-align:center;">退出</view>
+				</view>
+			</view>
+			<!-- <view class="lookUserRisk">
+				查看<text class="goUserRisk">《用户须知以及风险提示》</text>
+			</view>
+			<button type="primary" class="logout_user" @click="logoutActions">退出当前账号</button> -->
+		</view>
+	</view>
+</template>
+
+<script>
+	import {
+		mapActions,
+		mapGetters
+	} from 'vuex'
+	import {
+		showUiToast,
+		showUiModel
+	} from '@/common/utils/dialog.config'
+	import chache from '@/common/utils/storage'
+	export default {
+		data() {
+			return {
+				userArr: [{
+						id: 0,
+						title: '个人设置',
+						link: this.$routers.setUser
+					},
+					{
+						id: 1,
+						title: '登陆密码',
+						link: this.$routers.setLoginPassword
+					},
+					{
+						id: 2,
+						title: '资金密码',
+						link: this.$routers.setFundsPassword
+					},
+					{
+						id: 3,
+						title: '安全设置',
+						link: ''
+					},
+				],
+				commonUse: [
+					// {
+					// 	id:1,
+					// 	title:'隐私',
+					// 	link:''
+					// },
+					{
+						id: 2,
+						title: '字体大小',
+						link: this.$routers.fontSizePage
+					}
+				],
+				helpArr: [{
+						id: 3,
+						title: '查看须知以及风险提示',
+						link: ''
+					},
+					{
+						id: 4,
+						title: '联系客服',
+						link: ''
+					},
+					{
+						id: 5,
+						title: '关于',
+						link: ''
+					}
+				]
+			};
+		},
+		computed:{
+			...mapGetters(['themeFontSize'])
+		},
+		methods: {
+			...mapActions(['logout', 'resetCommonState', 'resetHomeState', 'resetMy']),
+			// 登出
+			logoutActions() {
+				const that = this;
+				showUiModel({
+					'content': '您确认退出么?',
+					'showCancel': true
+				}, (e) => {
+					if (e.confirm) {
+						uni.showLoading({
+							title: '请稍后...'
+						});
+						that.logout().then(res => {
+							uni.hideLoading();
+							if (res.status) {
+								chache.delete('token');
+								chache.delete('userInfo');
+								that.$mRouter.reLaunch({
+									route: that.$routers.index,
+									query: {
+										id: 1
+									}
+								})
+
+							}
+						}).catch(err => {
+							uni.hideLoading();
+						})
+					}
+				})
+
+			},
+			// 清理缓存
+			clearStorage(){
+				const that = this;
+				showUiModel({
+					'content': '清理缓存将会登出,您确定这样做吗?',
+					'showCancel': true
+				}, (e) => {
+					if (e.confirm) {
+						that.resetCommonState()
+						that.resetHomeState()
+						that.resetMy()
+						chache.clear()
+						showUiToast('清理完成')
+						setTimeout(()=>{
+							that.$mRouter.reLaunch({
+								route: that.$routers.index,
+								query: {
+									id: 1
+								}
+							})
+						}, 1000);
+					}
+				})
+			},
+			goUserLink(item) {
+				this.$mRouter.push({
+					route: item.link
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	@import './setting.scss';
+</style>

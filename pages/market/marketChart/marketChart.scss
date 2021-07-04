@@ -1,0 +1,33 @@
+.marketHeader{
+	.back{
+		width:100%;
+		text-indent:15upx;
+		color:#f8f8f8;
+	}
+	.input-view{
+		color:#f8f8f8;
+		width:100%;
+		text-align:center;
+		.chartTitle{
+			display:inline-block;
+			line-height:20upx;
+		}
+		.arrow{
+			width:40upx;
+			display:inline-block;
+			height:40upx;
+			position:relative;
+			top:13upx;
+			.triangle{
+				width:100%;
+				height:100%;
+			}
+		}
+	}
+	.right_btn{
+		display:block;
+		text-align:center;
+		width:100%;
+		color:#f8f8f8;
+	}
+}
