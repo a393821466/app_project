@@ -1,4 +1,7 @@
 {
-  "titleNView": false,
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "fonts-icon": "/components/ui-font/index",
+    "activity": "/pages/index/homeComponent/activity"
+  }
 }
